@@ -639,7 +639,7 @@ pygments_style = 'sphinx'
 
 # -- The settings below this line are not specific to nbsphinx ------------
 
-master_doc = 'index'
+master_doc = 'toc-page'
 
 
 
@@ -896,11 +896,11 @@ def setup(app):
                     'overlay/_static/project-template',
                     patterns=[(r"^(jm-templates)/project-(.*)", "/\\2")])
         
-        # check home.ipynb 
+        # check index.ipynb 
         from pathlib import Path
         ref = "https://github.com/DavidLeoni/jupman/issues/11"
-        if not Path('home.ipynb').exists():  # the file pointed to
-            raise Exception("MISSING home.ipynb ! For more info about Jupman layout, see %s" % ref)         
+        if not Path('index.ipynb').exists():  # the file pointed to
+            raise Exception("MISSING index.ipynb ! For more info about Jupman layout, see %s" % ref)         
 
 
 exclude_patterns.extend(MANUALS[manual]['exclude_patterns'])
