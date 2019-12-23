@@ -23,7 +23,7 @@ on_rtd = os.environ.get('READTHEDOCS') == 'True'
 
 course = "TODO CHANGE COURSE" 
 degree = "TODO CHANGE DEGREE"
-author = 'TODO CHANGE NAME' 
+author = 'TODO CHANGE AUTHOR NAME' 
 copyright = '# TODO FIRST YEAR - %s, %s' % (datetime.datetime.now().year, author)
 
 #####    'filename' IS *VERY* IMPORTANT !!!!
@@ -37,9 +37,14 @@ filename = 'jupman'   # The filename without the extension
 
 exercise_common_files = ['jupman.py', 'my_lib.py', 'img/cc-by.png', 
                          
-                         'overlay/_static/js/jupman.js',  # these files are injected when you call jupman.init()
-                         'overlay/_static/css/jupman.css', 
-                         'overlay/_static/js/toc.js']
+                         '_static/js/jupman.js',  # these files are injected when you call jupman.init()
+                         '_static/css/jupman.css', 
+                         '_static/js/toc.js']
+
+exercises_patterns =  ['*/']
+exercises_exclude_patterns =  ['[^_]*/','exams/', 'project/']
+
+jm_subtitle = "A template manager for Jupyter course websites."""
 
 
 # words used in ipynb files - you might want to translate these in your language. Use plural.
@@ -70,24 +75,21 @@ IPYNB_TITLE_PATTERN = re.compile(r"(\s*#.*)(" + IPYNB_SOLUTION + r")")
 zip_ignored = ['__pycache__', '.ipynb_checkpoints', '.pyc', '.cache', '.pytest_cache', '.vscode']
 
 FORMATS = ["html", "epub", "latex"]
-SYSTEMS = {
-    "default" : {
-        "name" : "Default system",
-        "outdir":"_build/",
-        "exclude_patterns": ["_build/*", "jm-templates/exam/server/*", "private/*",  '**.ipynb_checkpoints']
-    }
-}
+
+system_name = "Default system"
+system_outdir = "_build/"
+
+
 MANUALS = {
     "student": {
         "name" : "Jupman",  # TODO put manual name, like "Scientific Programming"
         "audience" : "studenti",
         "args" : "",
-        "output" : "",
-        "exclude_patterns" : []
+        "output" : ""
     }
 }
 manual = 'student'
-system = 'default'
+
 
 project = MANUALS[manual]['name']
 
@@ -174,6 +176,17 @@ def parse_date_str(ld):
     """
     return str(parse_date(ld)).replace(' 00:00:00','')
     
+def get_exercise_folders():
+    ret = []
+    for p in exercises_patterns:
+        for r in glob.glob(p):
+            if r not in ret:
+                ret.append(r)
+    for p in exercises_exclude_patterns:
+        for r in glob.glob(p):
+            if r in ret:
+                ret.remove(r)
+    return ret
 
 def get_exam_student_folder(ld):
     parse_date(ld)
@@ -267,47 +280,35 @@ class FileKinds(Enum):
 
 def check_paths(path, path_check):
     if not isinstance(path, str):
-        raise Exception("Path to delete must be a string! Found instead: " + str(type(path)))
+        raise ValueError("Path to delete must be a string! Found instead: %s " % type(path))
     if len(path.strip()) == 0:
-        raise Exception("Provided an empty path !")
+        raise ValueError("Provided an empty path !")
     if not isinstance(path_check, str):
-        raise Exception("Path check to delete must be a string! Found instead: " + str(type(path_check)))
+        raise ValueError("Path check to delete must be a string! Found instead: %s" % type(path_check))
     if len(path_check.strip()) == 0:
-        raise Exception("Provided an empty path check!")
+        raise ValueError("Provided an empty path check!")
+    if not path.startswith(path_check):        
+        fatal("FAILED SAFETY CHECK FOR DELETING DIRECTORY %s ! \n REASON: PATH DOES NOT BEGIN WITH %s" % (path, path_check) )
 
 
 def delete_tree(path, path_check):
     """ Deletes a directory, checking you are deleting what you really want
 
         path: the path to delete as a string
-        path_check: the end of the path to delete, as a string
+        path_check: the beginning of the path to delete, as a string
     """
+    print("Cleaning %s  ..." % path)
     check_paths(path, path_check)
 
     if not os.path.isdir(path):
         raise Exception("Provided path is not a directory: %s" % path)
 
-    if path.endswith(path_check):
+    #duplicated check (it's already in check_paths, but just to be sure)
+    if path.startswith(path_check):
         shutil.rmtree(path)
     else:
-        fatal("FAILED SAFETY CHECK FOR DELETING DIRECTORY " + path + " ! \n REASON: PATH DOES NOT END IN " + path_check)
+        fatal("FAILED SAFETY CHECK FOR DELETING DIRECTORY %s ! \n REASON: PATH DOES NOT START WITH %s" % (path, path_check) )
 
-def delete_file(path, path_check):
-    """ Deletes a file, checking you are deleting what you really want
-
-        path: the path to delete as a string
-        path_check: the end of the path to delete, as a string
-    """
-    check_paths(path, path_check)
-
-    if not os.path.isfile(path):
-        raise Exception("Provided path is not a file: %s" % path)
-    
-    
-    if path.endswith(path_check):
-        os.remove(path)
-    else:
-        fatal("FAILED SAFETY CHECK FOR DELETING FILE " + path + " ! \n REASON: PATH DOES NOT END IN " + path_check)
 
     
 def validate_tags(text, fname):
@@ -476,7 +477,7 @@ def copy_code(source_dir, dest_dir, copy_test=True, copy_solutions=False):
 
 def zip_paths(rel_paths, zip_path, patterns=[]):
     """ zips provided rel_folder to file zip_path (WITHOUT .zip) !
-        rel_folder MUST be relative to project root
+        rel_paths MUST be relative to project root
         
         This function was needed as default python zipping machinery created weird zips 
         people couldn't open in Windows
@@ -489,13 +490,13 @@ def zip_paths(rel_paths, zip_path, patterns=[]):
     
     
     if zip_path.endswith('.zip'):
-        raise Exception("zip_path must not end with .zip ! Found instead: " + zip_path)
+        raise ValueError("zip_path must not end with .zip ! Found instead: " + zip_path)
 
     for rel_path in rel_paths:
         abs_path = super_doc_dir() + '/' + rel_path
 
         if not(os.path.exists(abs_path)):
-            raise Exception("Expected an existing file or folder relative to project root ! Found instead: " + rel_path)
+            raise ValueError("Expected an existing file or folder relative to project root ! Found instead: " + rel_path)
 
       
     def write_file(fname):
@@ -543,46 +544,65 @@ def zip_paths(rel_paths, zip_path, patterns=[]):
             info('Writing %s' % rel_path)
             write_file(rel_path)
         else:
-            raise Exception("Don't know how to handle " + rel_path)
+            raise ValueError("Don't know how to handle " + rel_path)
     archive.close()
         
     info("Wrote " + zip_path)
-            
-def zip_folders(folder, prefix='', suffix=''):
-    global exercise_common_files
-    source_folders =  glob.glob(folder + "/*/")
-    
-    if folder.startswith('..'):
-        fatal("BAD FOLDER TO ZIP ! IT STARTS WITH '..'")
-    if len(folder.strip()) == 0:
+
+
+
+def zip_folder(source_folder, prefix='', suffix='', outdir='_static/generated/'):
+    """ Takes source folder and creates a zip with processed files
+    """
+    if source_folder.startswith('..'):
+        fatal("BAD FOLDER TO ZIP ! STARTS WITH '..'=%s" % source_folder)
+    if len(source_folder.strip()) == 0:
         fatal("BAD FOLDER TO ZIP ! BLANK STRING")
 
     build_jupman = '_build/jupman/'
-    build_folder = build_jupman + folder
+    build_folder = build_jupman + source_folder
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
     if os.path.exists(build_folder):
-        info('Cleaning %s' % build_folder)
-        delete_tree(build_folder, '_build/jupman/' + folder)
+        delete_tree(build_folder, '_build/jupman/' + source_folder)
     
-    copy_code(folder, build_folder, copy_test=True, copy_solutions=True)
-    
-    build_folders =   glob.glob(build_folder + "/*/")
-    
+    copy_code(source_folder, build_folder, copy_test=True, copy_solutions=True)
+
     deglobbed_common_files = []
+    deglobbed_common_files_patterns = []
     for common_path in exercise_common_files:                
         cur_deglobbed = glob.glob(common_path, recursive=True)       
-        deglobbed_common_files.extend(cur_deglobbed)                
+        deglobbed_common_files.extend(cur_deglobbed)
+        deglobbed_common_files_patterns.extend(
+            [("^(%s)$" % x, "%s/%s" % (source_folder, x)) for x in cur_deglobbed])
 
+    dir_name= os.path.basename(os.path.normpath(source_folder))
+    info("dir_name = " + dir_name)
+    zip_name = prefix + dir_name + suffix
+    zip_path = outdir + zip_name
+    zip_paths(deglobbed_common_files + [source_folder], 
+              zip_path,
+              patterns= deglobbed_common_files_patterns + [("^(%s)" % build_jupman,"")])
+    info("Done zipping %s" % source_folder ) 
+
+def zip_folders(source_folder, prefix='', suffix='', outdir='_static/generated'):
+    """ Takes source folder and creates a zip for each subfolder 
+        filling it with processed files
+    """
+    source_folders =  glob.glob(source_folder + "/*/")
     
-    if len(source_folders) > 0:
-        outdir = 'overlay/_static/'
-        info("Found stuff in %s , zipping them to %s" % (folder, outdir))
-        for d in build_folders:
-            dir_name= d[len(build_folder + '/'):].strip('/')
-            #info("dir_name = " + dir_name)
-            zip_name = prefix + dir_name + suffix
-            zip_path = outdir + zip_name
-            zip_paths(deglobbed_common_files + [d], zip_path, patterns= [("^(%s)" % build_jupman,"")])
-        info("Done zipping " + folder ) 
+    if source_folder.startswith('..'):
+        fatal("BAD FOLDER TO ZIP ! STARTS WITH '..'=%s" % source_folder)
+    if len(source_folder.strip()) == 0:
+        fatal("BAD FOLDER TO ZIP ! BLANK STRING")
+    if len(source_folders) == 0:
+        warn("Nothing to zip for %s!" % source_folder)
+        return
+    info("Found stuff in %s , zipping them to %s" % (source_folder, outdir))
+    
+    for d in source_folders:
+        zip_folder(d, prefix, suffix, outdir)
+    info("Done zipping subfolders of %s" % source_folder ) 
 
 
 # Use sphinx-quickstart to create your own conf.py file!
@@ -599,7 +619,14 @@ extensions = [
 ]
 
 # Exclude build directory and Jupyter backup files:
-exclude_patterns = ['_build', '**.ipynb_checkpoints', '/README.md', '/readme.md']
+exclude_patterns = ['_build', 
+                    '**.ipynb_checkpoints', 
+                    "_templates/exam-server",
+                     "_private",
+                     '**.ipynb_checkpoints', 
+                     '_static/generated', 
+                     'README.md', 
+                     'readme.md']
 
 # Default language for syntax highlighting in reST and Markdown cells
 highlight_language = 'none'
@@ -673,7 +700,9 @@ language = None
 # -- Options for HTML output ----------------------------------------------
 
 html_title = project # + ' version ' + release
-
+# canonical url for documentation
+# since sphinx 1.8
+html_baseurl = 'https://jupman.readthedocs.io'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
@@ -692,14 +721,14 @@ if not on_rtd:
     html_theme = 'sphinx_rtd_theme'
     html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]    
 
-    
+# TODO 2019-12 FIX THIS
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-# DAVID: THE html_static_path SETTING WITH '_static' IS CRAP, IT JUST MARGES INSIDE _STATIC ALL THE FILES IGNORING THE SUBDIRECTORIES ! THE 'html_extra_path' IS MUCH BETTER.
+# DAVID: THE html_static_path SETTING WITH '_static' IS CRAP, IT JUST MERGES INSIDE _STATIC ALL THE FILES IGNORING THE SUBDIRECTORIES ! THE 'html_extra_path' IS MUCH BETTER.
 
-html_static_path = [] 
-html_extra_path = ['overlay'] 
+html_static_path = ['_static/'] 
+#html_extra_path = [] 
 
 
 # -- Options for HTMLHelp output ------------------------------------------
@@ -712,8 +741,7 @@ htmlhelp_basename = project + 'doc'
 # see https://github.com/DavidLeoni/jupman/issues/10
 templates_path = ['_templates']
 
-#JUPMAN: you can use html_additional_pages for directly copying html files from _templates
-#       to the project root
+#JUPMAN: you can use html_additional_pages for directly copying html files from _templates to the project root
 
 # For example, it could be useful for copying Google Search Console files. 
 # Just put the google file in the _templates directory, 
@@ -727,9 +755,70 @@ templates_path = ['_templates']
 #    'google3dea3b29336ca0e5': 'google3dea3b29336ca0e5.html',
 #}
 
+# - see this: https://tex.stackexchange.com/questions/409677/edit-1st-page-only
+# - ALSO ADDED THE SUPER IMPORTANT \makeatletter according to
+#    https://groups.google.com/d/msg/sphinx-users/S_ip2b-lrRs/62zkfWcODwAJ
+latex_maketitle = r'''
+\makeatletter
+\pagestyle{empty}
+\thispagestyle{empty}
+  \noindent\rule{\textwidth}{1pt}\par
+    \begingroup % for PDF information dictionary
+       \def\endgraf{ }\def\and{\& }%
+       \pdfstringdefDisableCommands{\def\\{, }}% overwrite hyperref setup
+       \hypersetup{pdfauthor={\@author}, pdftitle={\@title}}%
+    \endgroup
+  \begin{flushright}
+    \sphinxlogo
+    \py@HeaderFamily
+    {\Huge \@title }\par
+''' + (r"{\itshape\large %s}\par" % jm_subtitle) + \
+r'''
+    \vspace{25pt}
+    {\Large
+      \begin{tabular}[t]{c}
+        \@author
+      \end{tabular}}\par
+    \vspace{25pt}
+    \@date \par
+    \py@authoraddress \par
+  \end{flushright}
+  \@thanks
+  \setcounter{footnote}{0}
+  \let\thanks\relax\let\maketitle\relax
+  %\gdef\@thanks{}\gdef\@author{}\gdef\@title{}
+    \vfill
+    \noindent Copyright \copyright\ \the\year\ by \@author.
+    \vskip 10pt
+    \noindent \@title\ is available under the Creative Commons Attribution 4.0
+    International License, granting you the right to copy, redistribute, modify, and
+    sell it, so long as you attribute the original to \@author\ and identify any
+    changes that you have made. Full terms of the license are available at:
+    \vskip 10pt
+    \noindent \url{http://creativecommons.org/licenses/by/4.0/}
+    \vskip 10pt
+    \noindent The complete book can be found online for free at:
+    \vskip 10pt''' + (r'''
+    \noindent \url{%s}''' % html_baseurl)
 
-# -- Options for LaTeX output ---------------------------------------------# -- Options for LaTeX output ---------------------------------------------
+latex_engine='xelatex'
 
+# allow utf8 characters
+latex_elements = {
+    'preamble' : r'''
+\usepackage{newunicodechar}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{graphicx}
+
+\makeatletter
+% Actually APLlog is a a thin star against white circle, could't find anything better
+\newunicodechar{✪}{\APLlog}    
+\newunicodechar{✓}{\checkmark}    
+
+    ''',
+    'maketitle': latex_maketitle,
+}
 #latex_elements = {
 #    'papersize': 'a4paper',
 #    'preamble': r"""
@@ -889,19 +978,16 @@ def setup(app):
             'enable_eval_rst':True
         }, True)
         app.add_transform(AutoStructify)
-        app.add_javascript('js/jupman.js')
-        app.add_stylesheet('css/jupman.css')
-        zip_folders('exercises', suffix='-exercises')
+        app.add_javascript('_static/js/jupman.js')
+        app.add_stylesheet('_static/css/jupman.css')
+        for folder in get_exercise_folders():
+            zip_folder(folder)
         zip_folders('exams', prefix=filename + '-', suffix='-exam')
-        zip_paths(['jm-templates/project-NAME-SURNAME-ID'], 
-                    'overlay/_static/project-template',
-                    patterns=[(r"^(jm-templates)/project-(.*)", "/\\2")])
+        zip_paths(['project'], '_static/generated/project-template')
         
 
 
-exclude_patterns.extend(MANUALS[manual]['exclude_patterns'])
-exclude_patterns.extend(SYSTEMS[system]['exclude_patterns'])
-
+exclude_patterns.extend(zip_ignored)
 
 
 source_parsers = {

@@ -5,7 +5,6 @@
     :maxdepth: 2
     :glob:
 
-
     Home <index.ipynb>
     usage.md
     jupman-tests.ipynb
@@ -16,22 +15,21 @@
 .. |space| unicode:: U+0020 .. space
 
 
-Exercise examples
+Chapter examples
 =================
 
 .. toctree::
-
     :maxdepth: 2
     :glob:
 
-    exercises/python-intro/python-intro.ipynb
-    Jupyter introduction <exercises/jupyter-intro/jupyter-intro-solution.ipynb>
+    python-intro/python-intro.ipynb
+    Jupyter introduction <jupyter-intro/jupyter-intro-solution.ipynb>
+    Tools introduction <tools-intro/tools-intro-solution.ipynb>
 
 Templates
 ==========
 
 .. toctree::
-
     :maxdepth: 2
     :glob:
 
@@ -39,10 +37,13 @@ Templates
     past-exams.ipynb
     exam-project.ipynb
     project-ideas.ipynb
-    jm-templates/project-NAME-SURNAME-ID/markdown.ipynb
-    jm-templates/project-NAME-SURNAME-ID/requirements.txt
-    changelog.md
+    project/project.ipynb
+    project/markdown.ipynb
 
+.. toctree::
+   :hidden:
+
+   changelog.md
 
 Index
 -----------

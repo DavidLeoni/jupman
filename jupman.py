@@ -38,9 +38,9 @@ def init(root='', toc=False):
     else:
         # Hacky stuff, because Jupyter only allows to set a per user custom js, we want per project js
         
-        css = open(root + "overlay/_static/css/jupman.css", "r").read()
-        tocjs = open(root + "overlay/_static/js/toc.js", "r").read()
-        js = open(root + "overlay/_static/js/jupman.js", "r").read()
+        css = open(root + "_static/css/jupman.css", "r").read()
+        tocjs = open(root + "_static/js/toc.js", "r").read()
+        js = open(root + "_static/js/jupman.js", "r").read()
 
         ret = "<style>\n" 
         ret += css

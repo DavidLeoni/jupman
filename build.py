@@ -17,7 +17,9 @@ import fileinput
 import string
 from pathlib import Path
 
-from conf import *
+import conf
+
+from conf import info, warn, fatal
 
 def help():
 
@@ -33,7 +35,7 @@ def help():
     print("")
     print("        --quick   -q     Quick build that just generates student manual, only in html format")
     print("")
-    print("        --formats  -f    " + ' | '.join(FORMATS) + "       separate with comma to build more than one")
+    print("        --formats  -f    " + ' | '.join(conf.FORMATS) + "       separate with comma to build more than one")
     print("")
     print("    EXAMPLE USAGE:")
     print("")
@@ -47,44 +49,33 @@ sphinxcmd = "./sphinx3-build"
 # sphinxcmd = "sphinx-build"
 
 
-    
-def detect_system():
-    print("")
-    print("Trying to detect system ...")
-    import os.path
-
-    print("Defaulting to 'default'")
-    system = "default"
-    print("")
-    return system
 
 def print_generated_banner(manual, format):
-    tinfo = MANUALS[manual]
-    print("\n\n    Generated " + tinfo['name'] + " " +  format + "!"
-                                + "\n\n\n       This manual is intended for " + tinfo['audience'])
+    tinfo = conf.MANUALS[manual]
+    print("\n\n    Generated %s %s !\n\n\n       This manual is intended for %s audience" % (manual, format, tinfo['name'])) 
     print("\n\n       You can now find it at\n\n")
 
 def get_path(manual, format):
-    tinfo = MANUALS[manual]
+    tinfo = conf.MANUALS[conf.manual]
     if format == "html":
-        return "file://" + os.path.abspath(SYSTEMS[system]['outdir'] + tinfo['output']  + "/html/index.html")
+        return "file://" + os.path.abspath(conf.system_outdir + tinfo['output']  + "/html/index.html")
     else:
-        return "file://" + os.path.abspath(SYSTEMS[system]['outdir'] + tinfo['output']  + "/" + format + "/")
+        return "file://" + os.path.abspath(conf.system_outdir + tinfo['output']  + "/" + format + "/")
 
 
 def outdir(manual, format):
     """ Returns the output directory given a manual and format
     """
-    return SYSTEMS[system]['outdir'] + MANUALS[manual]['output']  + "/" + format
+    return os.path.join(conf.system_outdir, conf.MANUALS[conf.manual]['output'], format)
 
 
 
 new_python_path = None
 
 if 'PYTHONPATH' in os.environ:
-    new_python_path = os.environ['PYTHONPATH'] + os.pathsep + super_doc_dir()
+    new_python_path = os.path.join(os.environ['PYTHONPATH'],  conf.super_doc_dir())
 else:
-    new_python_path = super_doc_dir()
+    new_python_path = conf.super_doc_dir()
 my_env = os.environ.copy()
 my_env['PYTHONPATH'] = new_python_path
 
@@ -104,31 +95,28 @@ def run_sphinx(manuals, formats):
     built = {}
     failed = {}
 
+    jupman_out = os.path.join(conf.system_outdir, 'jupman')
+    if os.path.isdir(jupman_out):
+        conf.delete_tree(jupman_out, '_build')
+
     for manual in manuals: 
         for format in formats:
 
-            tinfo = MANUALS[manual]
+            format_out = os.path.join(conf.system_outdir, '_build', format)
+            if os.path.isdir(format_out):
+                conf.delete_tree(format_out, '_build')
+
+            tinfo = conf.MANUALS[manual]
 
             relout = outdir(manual, format)
-            print("Building " + tinfo['name'] + " "  + format +  " in " + relout)
+            print("Building %s %s in %s" % (tinfo['name'], format, relout))
 
             # sphinx-build -b  html doc _build/student/html 
 
             try:
-                print("Cleaning " + str(relout) + "  ")
-                
-                if "_build/" in relout:
-                    res = subprocess.check_output("rm -rf " + relout,
-                                                   shell=True,
-                                                   env=my_env
-                                                  )
-                else:
-                    raise Exception("ERROR: FAILED SECURITY CHECK BEFORE CLEANING DIRECTORY: " + str(relout))
-                    
                 cmd = (sphinxcmd + " -j 4 -b " + format + " . " + relout + " " + tinfo['args'] )
                 res = run(cmd)
-                
-                
+                    
 
                 if format == 'html':
 
@@ -170,7 +158,7 @@ def run_sphinx(manuals, formats):
                     replace_html('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML',  '_static/js/MathJax.js')
 
                 elif format == 'latex':                  
-                    run('latexmk -r latexmkrc -pdf -f -dvi- -ps- -jobname=' + filename + ' -interaction=nonstopmode', cwd=relout)
+                    run('latexmk -r latexmkrc -pdf -f -dvi- -ps- -jobname=' + conf.filename + ' -interaction=nonstopmode', cwd=relout)
                 
                 print_generated_banner(manual, format)                                                
                 print("          "  + get_path(manual, format)  + "\n\n");
@@ -179,7 +167,7 @@ def run_sphinx(manuals, formats):
 
             except  subprocess.CalledProcessError as err:
                 failed[(manual, format)] = {'err': err}
-                print("ERROR: FAILED BUILDING " + manual + " " + format + ", SKIPPING IT !!")
+                print("ERROR: FAILED BUILDING %s %s  SKIPPING IT !!" % (manual, format))
                 print(err.output)
     
 
@@ -187,15 +175,15 @@ def run_sphinx(manuals, formats):
         print("\n\n  GENERATED MANUALS: \n\n")
         maxpad = 0
         for (manual, format) in sorted(built.keys()):
-            maxpad = max(maxpad, len("      " + manual + " " + format + ":   "))
+            maxpad = max(maxpad, len("     %s %s  :   " % (manual, format)))
         for (manual, format) in sorted(built.keys()):
-            print(("      " + manual + " " + format + ":   ").rjust(maxpad) + get_path(manual, format))
+            print(("      %s %s :   " % (manual, format)).rjust(maxpad) + get_path(manual, format))
         print("")
         print("")
     if len(failed) > 0:
         print("\n\n   THERE WERE ERRORS WHILE BUILDING:\n\n")
         for (manual, format) in failed.keys():
-            print("       " + manual + " " + format + ":   ")
+            print("       %s %s :   " % (manual, format))
             print("             " + str(failed[(manual, format)]['err']) + "   \n\n" )
         exit(1)
     
@@ -215,7 +203,7 @@ def replace_html(stext, rtext):
 
     path = "_build/html/**/*.html"
 
-    info("finding: " + stext + " replacing with: " + rtext + " in: " + path)
+    info("finding %s: replacing with:  %s in: %s " % (stext, rtext, path))
 
     files = glob.glob(path, recursive=True)  # recursive since python 3.5 https://stackoverflow.com/a/2186565
     
@@ -237,7 +225,7 @@ def replace_html(stext, rtext):
 
 #  MAIN
 
-manuals=MANUALS.keys()
+manuals=conf.MANUALS.keys()
 formats = ['latex', 'epub', 'html'] #html must be at the end because we need to copy pdfs !
 draft = False
 
@@ -252,8 +240,8 @@ while i < len(sys.argv):
             wrongarg("Missing parameter !")        
         formats = sys.argv[i+1].split(",")
         for format in formats:
-            if not format in FORMATS:
-                wrongarg("Expected format to be one of " + str(FORMATS) + " , found instead '" + format + "'");
+            if not format in conf.FORMATS:
+                wrongarg("Expected format to be one of %s found instead '%s' "  %(conf.FORMATS, format))
         i += 2
     elif sys.argv[i] == '-q' or sys.argv[i] == '--quick':
         draft = True
@@ -261,11 +249,8 @@ while i < len(sys.argv):
         formats=['html']
         i += 1
     else:
-        wrongarg("Unrecognized parameter '" + sys.argv[i] + "'")
+        wrongarg("Unrecognized parameter '%s'" % sys.argv[i])
         i += 1
-
-if system == None:
-    system = detect_system()
 
 run_sphinx(manuals, formats)
 

@@ -54,7 +54,11 @@ def arg_date(parser, args):
 @subcmd(help="Initializes a new exam")
 def init(parser,context,args):
         
-    ld = arg_date(parser, args)
+    
+    parser.add_argument('date', help="date in format 'yyyy-mm-dd'" )
+    #TODO parser.add_argument('--edit-notebook-mode')
+    ld = conf.parse_date_str(vars(parser.parse_args(args))['date'])    
+
     eld_admin = "private/" + ld + "-admin"
     eld_solutions = "private/" + ld + "-solutions"
     pubeld = "exams/" + ld 
@@ -70,7 +74,7 @@ def init(parser,context,args):
         fatal("PUBLIC EXAM ALREADY EXISTS: " + pubeld)
 
     shutil.copytree("jm-templates/exam-admin", eld_admin)
-    shutil.copytree("jm-templates/exam-solutions", eld_solutions, ignore=shutil.ignore_patterns('exam-yyyy-mm-dd.ipynb'))
+    shutil.copytree("jm-templates/exam-solutions", eld_solutions, ignore=shutil.ignore_patterns('exam-yyyy-mm-dd*.ipynb'))
     
     expand_JM('jm-templates/exam-solutions/exam-yyyy-mm-dd.ipynb', exam_ipynb, ld)
 
