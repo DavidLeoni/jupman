@@ -58,15 +58,15 @@ def print_generated_banner(manual, format):
 def get_path(manual, format):
     tinfo = conf.MANUALS[conf.manual]
     if format == "html":
-        return "file://" + os.path.abspath(conf.system_outdir + tinfo['output']  + "/html/index.html")
+        return "file://" + os.path.abspath(conf.jm_outdir + tinfo['output']  + "/html/index.html")
     else:
-        return "file://" + os.path.abspath(conf.system_outdir + tinfo['output']  + "/" + format + "/")
+        return "file://" + os.path.abspath(conf.jm_outdir + tinfo['output']  + "/" + format + "/")
 
 
 def outdir(manual, format):
     """ Returns the output directory given a manual and format
     """
-    return os.path.join(conf.system_outdir, conf.MANUALS[conf.manual]['output'], format)
+    return os.path.join(conf.jm_outdir, conf.MANUALS[conf.manual]['output'], format)
 
 
 
@@ -95,14 +95,14 @@ def run_sphinx(manuals, formats):
     built = {}
     failed = {}
 
-    jupman_out = os.path.join(conf.system_outdir, 'jupman')
+    jupman_out = os.path.join(conf.jm_outdir, 'jupman')
     if os.path.isdir(jupman_out):
         conf.delete_tree(jupman_out, '_build')
 
     for manual in manuals: 
         for format in formats:
 
-            format_out = os.path.join(conf.system_outdir, '_build', format)
+            format_out = os.path.join(conf.jm_outdir, '_build', format)
             if os.path.isdir(format_out):
                 conf.delete_tree(format_out, '_build')
 

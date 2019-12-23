@@ -14,6 +14,7 @@ import sys
 import re
 import types
 import shutil
+from pylatexenc.latexencode import unicode_to_latex
 from enum import Enum
 
 
@@ -21,10 +22,10 @@ on_rtd = os.environ.get('READTHEDOCS') == 'True'
 
 ###################   TODO EDIT AS NEEDED !!  ####################
 
-jm_subtitle = "A template manager for Jupyter jm_course websites."""
+jm_subtitle = "A template manager for Jupyter course websites."""
 jm_course = "TODO CHANGE jm_course" 
 jm_degree = "TODO CHANGE jm_degree"
-author = 'TODO CHANGE AUTHOR NAME' 
+author = 'TODO CHANGE author' 
 copyright = '# TODO FIRST YEAR - %s, %s' % (datetime.datetime.now().year, author)
 
 #####    'jm_filename' IS *VERY* IMPORTANT !!!!
@@ -73,12 +74,12 @@ MARKDOWN_ANSWER = "**ANSWER**:"
 IPYNB_TITLE_PATTERN = re.compile(r"(\s*#.*)(" + IPYNB_SOLUTION + r")")
 
 
-zip_ignored = ['__pycache__', '.ipynb_checkpoints', '.pyc', '.cache', '.pytest_cache', '.vscode']
+jm_zip_ignored = ['__pycache__', '.ipynb_checkpoints', '.pyc', '.cache', '.pytest_cache', '.vscode']
 
 FORMATS = ["html", "epub", "latex"]
 
-system_name = "Default system"
-system_outdir = "_build/"
+
+jm_outdir = "_build/"
 
 
 MANUALS = {
@@ -206,7 +207,7 @@ def get_version(release):
 
 def zip_ignored_file(fname):
     
-    for i in zip_ignored:
+    for i in jm_zip_ignored:
         if fname.find(i) != -1:
             return True
 
@@ -773,7 +774,7 @@ latex_maketitle = r'''
     \sphinxlogo
     \py@HeaderFamily
     {\Huge \@title }\par
-''' + (r"{\itshape\large %s}\par" % jm_subtitle) + \
+''' + unicode_to_latex(r"{\itshape\large %s}\par" % jm_subtitle) + \
 r'''
     \vspace{25pt}
     {\Large
@@ -799,7 +800,7 @@ r'''
     \noindent \url{http://creativecommons.org/licenses/by/4.0/}
     \vskip 10pt
     \noindent The complete book can be found online for free at:
-    \vskip 10pt''' + (r'''
+    \vskip 10pt''' + unicode_to_latex(r'''
     \noindent \url{%s}''' % html_baseurl)
 
 latex_engine='xelatex'
@@ -988,7 +989,7 @@ def setup(app):
         
 
 
-exclude_patterns.extend(zip_ignored)
+exclude_patterns.extend(jm_zip_ignored)
 
 
 source_parsers = {
