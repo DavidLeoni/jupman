@@ -158,7 +158,7 @@ def run_sphinx(manuals, formats):
                     replace_html('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML',  '_static/js/MathJax.js')
 
                 elif format == 'latex':                  
-                    run('latexmk -r latexmkrc -pdf -f -dvi- -ps- -jobname=' + conf.filename + ' -interaction=nonstopmode', cwd=relout)
+                    run('latexmk -r latexmkrc -pdf -f -dvi- -ps- -jobname=' + conf.jm_filename + ' -interaction=nonstopmode', cwd=relout)
                 
                 print_generated_banner(manual, format)                                                
                 print("          "  + get_path(manual, format)  + "\n\n");

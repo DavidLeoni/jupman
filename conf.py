@@ -21,17 +21,18 @@ on_rtd = os.environ.get('READTHEDOCS') == 'True'
 
 ###################   TODO EDIT AS NEEDED !!  ####################
 
-course = "TODO CHANGE COURSE" 
-degree = "TODO CHANGE DEGREE"
+jm_subtitle = "A template manager for Jupyter jm_course websites."""
+jm_course = "TODO CHANGE jm_course" 
+jm_degree = "TODO CHANGE jm_degree"
 author = 'TODO CHANGE AUTHOR NAME' 
 copyright = '# TODO FIRST YEAR - %s, %s' % (datetime.datetime.now().year, author)
 
-#####    'filename' IS *VERY* IMPORTANT !!!!
+#####    'jm_filename' IS *VERY* IMPORTANT !!!!
 #####     IT IS PREPENDED IN MANY GENERATED FILES
 #####     AND IT SHOULD ALSO BE THE SAME NAME ON READTHEDOCS 
 #####     (like i.e. jupman.readthedocs.org)
 
-filename = 'jupman'   # The filename without the extension
+jm_filename = 'jupman'   # The filename without the extension
 
 # common files for exercise and exams as paths. Paths are intended relative to the project root. Globs like /**/* are allowed.
 
@@ -44,7 +45,7 @@ exercise_common_files = ['jupman.py', 'my_lib.py', 'img/cc-by.png',
 exercises_patterns =  ['*/']
 exercises_exclude_patterns =  ['[^_]*/','exams/', 'project/']
 
-jm_subtitle = "A template manager for Jupyter course websites."""
+
 
 
 # words used in ipynb files - you might want to translate these in your language. Use plural.
@@ -190,7 +191,7 @@ def get_exercise_folders():
 
 def get_exam_student_folder(ld):
     parse_date(ld)
-    return filename + '-' + ld + '-FIRSTNAME-LASTNAME-ID'    
+    return jm_filename + '-' + ld + '-FIRSTNAME-LASTNAME-ID'    
 
     
 def super_doc_dir():
@@ -841,7 +842,7 @@ latex_show_urls = 'footnote'
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, filename + '.tex', project,
+    (master_doc, jm_filename + '.tex', project,
      author, 'manual'),
 ]
 
@@ -851,7 +852,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, filename, project,
+    (master_doc, jm_filename, project,
      [author], 1)
 ]
 
@@ -862,7 +863,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, filename, project,
+    (master_doc, jm_filename, project,
      author, project, '',
      'Miscellaneous'),
 ]
@@ -872,7 +873,7 @@ texinfo_documents = [
 # -- Options for Epub output ----------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_basename = filename
+epub_basename = jm_filename
 epub_title = project
 epub_author = author
 epub_publisher = author
@@ -913,7 +914,7 @@ intersphinx_mapping = {'https://docs.python.org/': None}
 
 
 pdf_documents = [
-   ('index', filename, project, author.replace(",","\\"))
+   ('index', jm_filename, project, author.replace(",","\\"))
 ]
 # A comma-separated list of custom stylesheets. Example:
 pdf_stylesheets = ['sphinx','kerning','a4']
@@ -982,7 +983,7 @@ def setup(app):
         app.add_stylesheet('_static/css/jupman.css')
         for folder in get_exercise_folders():
             zip_folder(folder)
-        zip_folders('exams', prefix=filename + '-', suffix='-exam')
+        zip_folders('exams', prefix=jm_filename + '-', suffix='-exam')
         zip_paths(['project'], '_static/generated/project-template')
         
 
