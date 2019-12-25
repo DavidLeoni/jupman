@@ -11,10 +11,12 @@ _private/*
 !/_static/generated/README.md
 
 .cache
+.hypothesis
 
 ##### PYTHON
 *.pyc
 __pycache__
+.pytest_cache
 nbsphinx.egg-info/
 .ipynb_checkpoints
 

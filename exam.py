@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 
-# David Leoni Sept 2017
 # This script allows initialization and management of exams.
+
+__author__ = "David Leoni"
+__status__ = "Development"
 
 import conf
 import sys
@@ -10,36 +12,25 @@ import shutil
 import datetime
 import glob
 import re
-from arghandler import *
+import arghandler
+from arghandler import ArgumentHandler
+from arghandler import subcmd
 
+import jupman_tools as jt
 
-from conf import info
-from conf import fatal
-from conf import warn
+from jupman_tools import info
+from jupman_tools import fatal
+from jupman_tools import warn
+
+jm = conf.jm
 
 def get_target_student(ld):
-    return "private/" + ld + "-student-zip/" + conf.get_exam_student_folder(ld) + '/exams/' + ld 
+    return "private/" + ld + "-student-zip/" + jm.get_exam_student_folder(ld) + '/exams/' + ld 
 
 def get_exam_text_filename(ld, extension):
     return 'exam-' + ld + '-text' + '.' + extension
     
 
-def expand_JM(source, target, exam_date):
-    d = conf.parse_date(exam_date)
-    sourcef = open(source, "r")
-    s = sourcef.read()
-    s = s.replace('_JM_{exam.date}', exam_date )
-    s = s.replace('_JM_{exam.date_human}', d.strftime('%A %d, %B %Y') )
-    for k in conf.__dict__:
-        s = s.replace('_JM_{conf.' + k + '}', str(conf.__dict__[k]))
-    p = re.compile(r'_JM_\{[a-zA-Z][\w\.]*\}')
-    if p.search(s):
-        warn("FOUND _JM_ macros which couldn't be expanded!")
-        print("               file: " + source)
-        print("\n                 ".join(p.findall(s)))
-        print("")
-    destf = open(target, 'w')    
-    destf.write(s)
 
 
 cur_dir_names = os.listdir('.')    
@@ -49,7 +40,7 @@ if 'exam.py' not in cur_dir_names:
 
 def arg_date(parser, args):
     parser.add_argument('date', help="date in format 'yyyy-mm-dd'" )
-    return conf.parse_date_str(vars(parser.parse_args(args))['date'])    
+    return jt.parse_date_str(vars(parser.parse_args(args))['date'])    
     
 @subcmd(help="Initializes a new exam")
 def init(parser,context,args):
@@ -57,10 +48,10 @@ def init(parser,context,args):
     
     parser.add_argument('date', help="date in format 'yyyy-mm-dd'" )
     #TODO parser.add_argument('--edit-notebook-mode')
-    ld = conf.parse_date_str(vars(parser.parse_args(args))['date'])    
+    ld = jt.parse_date_str(vars(parser.parse_args(args))['date'])    
 
-    eld_admin = "private/" + ld + "-admin"
-    eld_solutions = "private/" + ld + "-solutions"
+    eld_admin = "private/" + ld
+    eld_solutions = "private/" + ld + "/solutions"
     pubeld = "exams/" + ld 
     exam_ipynb = eld_solutions + '/exam-' + ld + '.ipynb'
 
@@ -73,19 +64,22 @@ def init(parser,context,args):
     if os.path.exists(pubeld):
         fatal("PUBLIC EXAM ALREADY EXISTS: " + pubeld)
 
-    shutil.copytree("jm-templates/exam-admin", eld_admin)
-    shutil.copytree("jm-templates/exam-solutions", eld_solutions, ignore=shutil.ignore_patterns('exam-yyyy-mm-dd*.ipynb'))
+    shutil.copytree("_templates/exam", 
+                    eld_admin,
+                    ignore=shutil.ignore_patterns('solutions/exam-yyyy-mm-dd*.ipynb'))
     
-    expand_JM('jm-templates/exam-solutions/exam-yyyy-mm-dd.ipynb', exam_ipynb, ld)
+    jt.expand_JM(   '_templates/exam/solutions/exam-yyyy-mm-dd.ipynb', 
+                    exam_ipynb,
+                    ld,
+                    conf)
 
-    os.rename(eld_admin + "/" + "jupman-yyyy-mm-dd-grades.ods", eld_admin + "/" + conf.filename + "-" + ld + "-grades.ods")
+    os.rename(eld_admin + "/" + "jupman-yyyy-mm-dd-grades.ods", eld_admin + "/" + conf.jm.filename + "-" + ld + "-grades.ods")
     
     info()
     info("You can now edit Python solutions, tests, exercises and exam notebook here  : " )
     print()
     info("   " + eld_solutions)
 
-    
 
                         
 """
@@ -108,8 +102,8 @@ def package(parser,context,args):
     # no pdf as hiding cells is too boring, have still 
     # to properly review cells filtering https://github.com/DavidLeoni/jupman/issues/4
     # target_student_pdf = target_student + '/' + 'exam-' + ld + '.pdf'
-    target_student_zip = eld_admin +"/server/" + conf.filename + "-" + ld + "-exam" # without '.zip'
-    target_server_zip = eld_admin +"/" + conf.filename + "-" + ld + "-server"    # without '.zip'
+    target_student_zip = eld_admin +"/server/" + jm.filename + "-" + ld + "-exam" # without '.zip'
+    target_server_zip = eld_admin +"/" + jm.filename + "-" + ld + "-server"    # without '.zip'
 
     built_site_dir = "_build/"
 
@@ -131,11 +125,11 @@ def package(parser,context,args):
     if len(dir_names) == 0:
         fatal("SITE DIRECTORY AT " + built_site_dir + " WAS NOT BUILT !")
 
-    server_jupman = eld_admin + "/server/" + conf.filename
+    server_jupman = eld_admin + "/server/" + jm.filename
 
     if os.path.exists(server_jupman):
         info("Cleaning " + server_jupman + " ...")
-        conf.delete_tree(server_jupman, "server/" + conf.filename)
+        jt.delete_tree(server_jupman, "server/" + jm.filename)
 
     info("Copying built website ...")        
     shutil.copytree(built_site_dir, server_jupman)
@@ -161,7 +155,7 @@ def package(parser,context,args):
             
             
     info("Copying exercises to " + str(target_student))
-    conf.copy_code(eld_solutions, target_student)
+    jm.copy_code(eld_solutions, target_student)
 
     
     info("Creating student exercises zip:  " + target_student_zip + ".zip" )        
@@ -170,15 +164,15 @@ def package(parser,context,args):
         if fname.startswith('private/'):                    
             return fname[len('private/YYYY-MM-DD-student-zip/'):]
         else:
-            return '/' + conf.get_exam_student_folder(ld) + '/' + fname
+            return '/' + jm.get_exam_student_folder(ld) + '/' + fname
             
     
-    conf.zip_paths([target_student] + conf.exercise_common_files, target_student_zip,  mysub)
+    jm.zip_paths([target_student] + jm.chapter_common_files, target_student_zip,  mysub)
     #shutil.make_archive(target_student_zip, 'zip', target_student_zip)
     info("Creating server zip: " + target_server_zip + ".zip")            
     shutil.make_archive(target_server_zip, 'zip', eld_admin + "/server")
     print("")    
-    info("You can now browse the website at:  " + os.path.abspath(eld_admin + "/server/" + conf.filename + "/html/index.html"))
+    info("You can now browse the website at:  " + os.path.abspath(eld_admin + "/server/" + jm.filename + "/html/index.html"))
     print("")
 
 @subcmd(help='Set up grading for the provided exam')
@@ -250,7 +244,7 @@ def publish(parser,context,args):
         fatal("SOURCE PRIVATE EXAM FOLDER " + source_solutions + " DOES NOT EXISTS !")
 
     dest = "exams/" + ld + "/"
-    dest_zip = "overlay/_static/" + conf.filename + '-'+ld + '-exam'  
+    dest_zip = "_static/generated/" + jm.filename + '-'+ld + '-exam'  
 
     if os.path.exists(dest):
         fatal("TARGET PUBLIC EXAM FOLDER " + dest + " ALREADY EXISTS !")
@@ -285,7 +279,7 @@ def delete_exam(parser,context,args):
     eld_student_zip = "private/" + ld + '-student-zip' 
     
     pubeld = "exams/" + ld 
-    pubeldzip = "overlay/_static/" + conf.filename + "-" + ld + "-exam.zip" 
+    pubeldzip = "_static/generated/" + jm.filename + "-" + ld + "-exam.zip" 
 
     deleted = []
 
@@ -306,9 +300,9 @@ def delete_exam(parser,context,args):
         if os.path.exists(path):
             info("Deleting " + path + " ...")
             if os.path.isfile(path): 
-                conf.delete_file(path, confirm_path)
+                jt.delete_file(path, confirm_path)
             elif os.path.isdir(path):
-                conf.delete_tree(path, confirm_path)
+                jt.delete_tree(path, confirm_path)
             else:
                 raise Exception("File is neither a directory nor a file: %s" % path)
             deleted.append(path)
@@ -317,12 +311,12 @@ def delete_exam(parser,context,args):
     delete_stuff(eld_solutions, "private/" + ld + '-solutions')
     delete_stuff(eld_student_zip, "private/" + ld + '-student-zip')
     delete_stuff(pubeld, "exams/" + ld)
-    delete_stuff(pubeldzip, "overlay/_static/" + conf.filename + "-" + ld + "-exam.zip" )
+    delete_stuff(pubeldzip, "_static/generated/" + jm.filename + "-" + ld + "-exam.zip" )
 
     if len(deleted) == 0:
         fatal("COULDN'T FIND ANY EXAM FILE TO DELETE FOR DATE: " + ld)
 
-handler = ArgumentHandler(description='Manages ' + conf.filename + ' exams.',
+handler = ArgumentHandler(description='Manages ' + jm.filename + ' exams.',
                          use_subcommand_help=True)
 handler.run()
 
