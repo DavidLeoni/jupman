@@ -23,8 +23,8 @@ Chapter examples
     :glob:
 
     python-intro/python-intro.ipynb
-    Jupyter introduction <jupyter-intro/jupyter-intro-solution.ipynb>
-    Tools introduction <tools-intro/tools-intro-solution.ipynb>
+    Jupyter introduction <jupyter-intro/jupyter-intro-sol.ipynb>
+    Tools introduction <tools-intro/tools-intro-sol.ipynb>
 
 Templates
 ==========
@@ -41,9 +41,9 @@ Templates
     project/markdown.ipynb
 
 .. toctree::
-   :hidden:
+    :hidden:
 
-   changelog.md
+    changelog.md
 
 Index
------------
+========

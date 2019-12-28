@@ -1,6 +1,6 @@
-import sys;
-sys.path.append('../'); 
-import jupman;
+import sys
+sys.path.append('../')
+import jupman
 import my_local_lib
 
 

@@ -60,7 +60,7 @@ jm.solution = jmt.ignore_spaces("# SOLUTION")
 #   when building the exercises removes the content after it in the markdown cell
 #   it is contained in
 
-jm.markdown_answer = "**ANSWER**:"
+jm.markdown_answer = r"(?s)(^\s*\*\*ANSWER\*\*:)(.*)"
 #################################################################
 
 #pattern as in ipynb json file - note markdown has no output in ipynb

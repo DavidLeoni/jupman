@@ -94,11 +94,24 @@ def expand_JM(source, target, exam_date, conf):
     p = re.compile(r'_JM_\{[a-zA-Z][\w\.]*\}')
     if p.search(s):
         warn("FOUND _JM_ macros which couldn't be expanded!")
-        print("               file: %s" % source)
-        print("\n                 ".join(p.findall(s)))
-        print("")
+        warn("               file: %s" % source)
+        warn("\n                 ".join(p.findall(s)))
+        warn("")
     destf = open(target, 'w')    
     destf.write(s)
+
+def _cancel_tags(text, tags):
+    """ Removes Jupman tags from solution WITHOUT stripping content within tags!!
+        
+        WARNING: in other words, this function IS *NOT* SUFFICIENT 
+                 to clean exercises from solutions !!!
+    """
+    ret = text
+    for tag in tags:
+        ret = ret \
+              .replace(tag_start(tag), '') \
+              .replace(tag_end(tag), '')    
+    return ret
 
 class FileKinds(Enum):
     SOLUTION = 1
@@ -122,15 +135,15 @@ class FileKinds(Enum):
     
     @staticmethod
     def detect(fname):
+        """ TODO can't detect EXERCISE 
+        """
         l = fname.split(".")
         if len(l) > 0:
             ext = l[-1]
         else:
             ext = ''
-        if fname.endswith(FileKinds.sep(ext) + "solution" + '.' + ext):
+        if fname.endswith('%ssol.%s' % (FileKinds.sep(ext), ext)):
             return FileKinds.SOLUTION            
-        elif fname.endswith(FileKinds.sep(ext) + "exercise" + '.' + ext):
-            return FileKinds.EXERCISE 
         elif fname.endswith("_test.py") :
             return FileKinds.TEST        
         else:
@@ -144,19 +157,19 @@ class FileKinds(Enum):
     @staticmethod        
     def exercise(radix, ext, supp_ext):      
         FileKinds.check_ext(ext,supp_ext)
-        return radix + FileKinds.sep(ext) + 'exercise.' + ext
+        return radix + "." + ext
 
     @staticmethod
     def exercise_from_solution(fname, supp_ext):
         FileKinds.check_ext(fname, supp_ext)
         ext = fname.split(".")[-1]
                
-        return fname.replace(FileKinds.sep(ext) + "solution." + ext, FileKinds.sep(ext) + "exercise." + ext)
+        return fname.replace(FileKinds.sep(ext) + "sol." + ext, "." + ext)
         
     @staticmethod
     def solution(radix, ext, supp_ext):
         FileKinds.check_ext(ext, supp_ext)
-        return radix + FileKinds.sep(ext) + 'solution.' + ext
+        return radix + FileKinds.sep(ext) + 'sol.' + ext
 
     @staticmethod
     def test(radix):
@@ -177,6 +190,25 @@ def check_paths(path, path_check):
     if not path.startswith(path_check):        
         fatal("FAILED SAFETY CHECK FOR DELETING DIRECTORY %s ! \n REASON: PATH DOES NOT BEGIN WITH %s" % (path, path_check) )
 
+def uproot(path):
+    """ Returns a relative path from input path to root.
+        Example:
+        >>> uproot('_static/img/cc-by.png')
+        >>>  '../../'
+        >>> uproot('_static')
+        >>>  '../'
+    """
+    if not path:
+        raise ValueError('Invalid filepath=%s' % path)
+
+    ret = os.path.relpath(os.path.abspath(os.getcwd()),
+                              os.path.abspath(path))
+    if os.path.isfile(path) and ret.endswith('..'):
+        ret = ret[:-2]
+    if ret.endswith('..'):
+        ret = ret + '/'
+    return ret
+
 
 def delete_tree(path, path_check):
     """ Deletes a directory, checking you are deleting what you really want
@@ -184,7 +216,7 @@ def delete_tree(path, path_check):
         path: the path to delete as a string
         path_check: the beginning of the path to delete, as a string
     """
-    print("Cleaning %s  ..." % path)
+    info("Cleaning %s  ..." % path)
     check_paths(path, path_check)
 
     if not os.path.isdir(path):
@@ -203,7 +235,7 @@ def delete_file(path, path_check):
         path: the path to delete as a string
         path_check: the beginning of the path to delete, as a string
     """
-    print("Cleaning %s  ..." % path)
+    info("Cleaning %s  ..." % path)
     check_paths(path, path_check)
 
     if not os.path.isfile(path):
@@ -227,8 +259,71 @@ def ignore_spaces(pattern):
     if len(pattern) == 0:
         raise ValueError("Expect a non-empty string !")
     removed_spaces = r'\s+'.join(pattern.split())
-    return r"(?s)\s*(%s)(.*)" % removed_spaces
+    return r"(?s)(\s*%s)(.*)" % removed_spaces
 
+def multi_replace(text, d):
+    """ Takes a dictionary pattern -> substitution and applies all substitutions to text
+    """
+    s = text
+    for key in d:
+        s = re.sub(key, d[key], s) 
+    return s
+
+def replace_py_rel(code, filepath):
+    """ Takes code to be copied into zips and removes unneeded relative imports
+    """
+    upr = uproot(filepath).replace('.',r'\.')     
+    if len(re.findall(r'sys\..+', code)) > 1:
+        repl = r'import sys\n'
+    else:
+        repl = ''
+    
+    return re.sub(r'import\s+sys\s*\nsys\.path.append\([\'|\"]((%s))[\'|\"]\)\s*' % upr,               repl,
+                  code)
+
+def replace_md_rel(code, filepath):
+    """ Takes markdown to be copied into zips and removes relative paths
+    """
+    upr = uproot(filepath).replace('.',r'\.')     
+    
+    ret =  re.sub(r'(\[.*?\]\()(%s)(.*?\))' % upr,               
+                  r"\1\3",
+                  code)
+    
+    ret = replace_html_rel(ret, filepath)
+    return ret
+
+def replace_html_rel(code, filepath):
+    
+    upr = uproot(filepath).replace('.',r'\.')
+
+    ret =  re.sub(r'(<a\s+href=\")(%s)(.*?\"(\s+.*?=\".*?\")*>)' % upr,               
+                  r"\1\3",
+                  code)
+
+    ret =  re.sub(r'(<img\s+src=\")(%s)(.*?\"(\s+.*?=\".*?\")*>)' % upr,
+                  r"\1\3",
+                  ret)    
+    return ret
+
+def replace_ipynb_rel(nb_node, filepath):
+    """ MODIFIES nb_node without returning it !
+    """
+
+    for cell in nb_node.cells:
+            
+        if cell.cell_type == "code":    
+            cell.source = replace_py_rel(cell.source, filepath)
+        elif cell.cell_type == "markdown":
+            # markdown cells: fix rel urls
+            cell.source = replace_md_rel(cell.source, filepath)
+        elif cell.cell_type == "raw" and \
+                cell.metadata['raw_mimetype'] == 'text/html':
+            cell.source = replace_html_rel(cell.source, filepath)             
+        else:
+            #TODO latex ?
+            pass
+    
 class Jupman:
     """ Holds Jupman-specific configuration for Sphinx build
     """
@@ -273,7 +368,7 @@ class Jupman:
             it is contained in (solution comment included). If the user inserts extra spaces the phrase will be recognized anyway"""
 
 
-        self.markdown_answer = ignore_spaces("**ANSWER**:")
+        self.markdown_answer = r"(?s)(^\s*\*\*ANSWER\*\*:)(.*)"
         """NOTE: the following string is not just a translation, it's also a command that   when building the exercises
               removes the content after it in the markdown cell it is contained in
         """
@@ -312,15 +407,20 @@ class Jupman:
         """
 
         self.tags = [self.raise_exc, self.strip]
+        """ Jupman tags
+        """
 
-        self.supported_distib_ext = ['py', 'ipynb']
+        self.distrib_ext = ['py', 'ipynb']
+        """ Supported distribution extensions
+        """
 
-    def zip_ignored_file(self, fname):
-        
-        for i in self.zip_ignored:
-            if fname.find(i) != -1:
-                return True
 
+
+
+    def is_zip_ignored(self, fname):
+        import pathspec
+        spec = pathspec.PathSpec.from_lines('gitwildmatch', self.zip_ignored)
+        return spec.match_file(fname)
 
     def raise_exc_pattern(self):
         return re.compile(tag_start(self.raise_exc) + '.*?' + tag_end(self.raise_exc), flags=re.DOTALL)
@@ -345,12 +445,19 @@ class Jupman:
         return '%s-%s-FIRSTNAME-LASTNAME-ID' % (self.filename,ld)    
 
 
-    def solution_to_exercise_text(self, solution_text):
-                            
-        formatted_text = re.sub(self.raise_exc_pattern(), self.raise_exc_code, solution_text)                    
-        formatted_text = re.sub(self.strip_pattern(), '', formatted_text)
-        formatted_text = re.sub(self.write_solution_here, r'\1\n\n', formatted_text)
-        return formatted_text            
+    def sol_to_ex_code(self, solution_text, filepath):
+
+        
+        if re.match(self.solution, solution_text.strip()):
+            return ""
+
+        ret = re.sub(self.raise_exc_pattern(), 
+                                self.raise_exc_code, 
+                                solution_text)                    
+        ret = re.sub(self.strip_pattern(), '', ret)
+        ret = re.sub(self.write_solution_here, r'\1\n\n', ret)
+        ret = replace_py_rel(ret, filepath)
+        return ret            
 
         
     def validate_tags(self, text, fname):
@@ -375,138 +482,180 @@ class Jupman:
         return sum(tag_starts.values()) + write_solution_here_count + solution_count > 0
 
 
-
-    def copy_sols(self, source_filename, source_abs_filename, dest_filename):
-        if FileKinds.is_supported_ext(source_filename, self.supported_distib_ext):
-            info("Stripping jupman tags from %s " % source_filename)
-            with open(source_abs_filename) as sol_source_f:
-                text = sol_source_f.read()
-                stripped_text = text
-                for tag in self.tags:
-
-                    stripped_text = stripped_text \
-                                    .replace(tag_start(tag), '') \
-                                    .replace(tag_end(tag), '')
-
-                with open(dest_filename, 'w') as solution_dest_f:
-                    solution_dest_f.write(stripped_text)
-
-        else: # solution format not supported                           
-            info("Writing %s" % source_filename)
-            shutil.copy(source_abs_filename, dest_filename)
+    def _copy_test(self, source_abs_fn, source_fn,  dest_fn):
+        with open(source_abs_fn, encoding='utf-8') as source_f:
+                                                          
+            data= multi_replace(source_f.read(), {
+                r'from\s+(.+)_sol\s+import\s+(.*)' : r'from \1 import \2',
+                r'import\s+(.+)_sol((\s*)|,)':r'import \1\2', 
+                
+            })
+            data = replace_py_rel(data, source_abs_fn)
             
+            info('  Writing (patched) %s' % dest_fn) 
+            with open(dest_fn, 'w', encoding='utf-8') as dest_f:
+                dest_f.write(data)        
+    
+    def _copy_other(self, source_abs_fn, source_fn, dest_fn, new_root = ''):
+        
+        if source_abs_fn.endswith('.py') :
+            with open(source_abs_fn, encoding='utf-8') as source_f:
+                data = source_f.read()
+                data = replace_py_rel(data, source_abs_fn)
+                info('  Writing (patched) %s' % dest_fn) 
+            with open(dest_fn, 'w', encoding='utf-8') as dest_f:
+                dest_f.write(data)             
+        elif source_abs_fn.endswith('.ipynb') :
+            import nbformat
+            # note: for weird reasons nbformat does not like the sol_source_f 
+            nb_node = nbformat.read(source_abs_fn, nbformat.NO_CONVERT)
+                                                        
+            replace_ipynb_rel(nb_node, source_abs_fn)
+            info('  Writing (patched) %s' % dest_fn) 
+            nbformat.write(nb_node, dest_fn)
+        else:
+            info("  Writing %s " % dest_fn)
+            shutil.copy(source_abs_fn, dest_fn)        
+                 
+    def _copy_sols(self, source_fn, source_abs_fn, dest_fn):
+        if source_fn.endswith('.py'):
+            
+            with open(source_abs_fn) as sol_source_f:
+                text = sol_source_f.read()
+                text = replace_py_rel(text, source_abs_fn)
+                text = _cancel_tags(text, self.tags)
+                with open(dest_fn, 'w') as solution_dest_f:
+                    info("  Writing (patched) %s " % dest_fn)
+                    solution_dest_f.write(text)
+        elif source_fn.endswith('.ipynb'):
+            # py cells: strip jupman tags, fix rel urls
+            import nbformat
+            # note: for weird reasons nbformat does not like the sol_source_f 
+            nb_node = nbformat.read(source_abs_fn, nbformat.NO_CONVERT)
+            replace_ipynb_rel(nb_node, source_abs_fn)
+            for cell in nb_node.cells:            
+                if cell.cell_type == "code":    
+                    cell.source = _cancel_tags(cell.source, self.tags)
 
-    def generate_exercise(self, source_filename, source_abs_filename, dirpath, structure):
-        exercise_fname = FileKinds.exercise_from_solution(source_filename, self.supported_distib_ext)
+            nbformat.write(nb_node, dest_fn)
+            
+        else: # solution format not supported                           
+            info("Writing %s" % source_fn)
+            shutil.copy(source_abs_fn, dest_fn)
+            
+    def _replace_title(self, nb_node, source_abs_fn):
+        found_title = False
+        # look for title
+        for cell in nb_node.cells:
+            if cell.cell_type == "markdown":
+                if re.compile(self.ipynb_title).search(cell.source):
+                    found_title = True
+                    cell.source = re.sub(re.compile(self.ipynb_title), 
+                                r"\1" + self.ipynb_exercise, cell.source) 
+                    break
+        
+        if not found_title:
+            error("Couldn't find title in file: \n   %s\nThere should be a markdown cell beginning with text (note string '%s' is mandatory)\n# bla bla %s" % (source_abs_fn, self.ipynb_solution, self.ipynb_solution))        
+
+    def generate_exercise(self, source_fn, source_abs_fn, dirpath, structure):
+
+        if not FileKinds.is_supported_ext(source_fn, self.distrib_ext):
+            raise ValueError("Exercise generation from solution not supported for file type %s" % source_fn)
+
+        exercise_fname = FileKinds.exercise_from_solution(source_fn, self.distrib_ext)
         exercise_abs_filename = os.path.join(dirpath, exercise_fname)
-        exercise_dest_filename = os.path.join(structure , exercise_fname)
+        exercise_dest_fn = os.path.join(structure , exercise_fname)
 
+        info("  Generating %s" % exercise_dest_fn)
 
-        if FileKinds.is_supported_ext(source_filename, self.supported_distib_ext):
+        with open(source_abs_fn) as sol_source_f:
+            solution_text = sol_source_f.read()                                
 
-            with open(source_abs_filename) as sol_source_f:
-                solution_text = sol_source_f.read()                                
+            found_tag = self.validate_tags(solution_text, source_abs_fn)                      
+            if not found_tag and not os.path.isfile(exercise_abs_filename) :
+                error("There is no exercise file and couldn't find any jupman tag in solution file for generating exercise !" +\
+                    "\n  solution: %s\n  exercise: %s" % (source_abs_fn, exercise_abs_filename))                                                                      
+            if found_tag and os.path.isfile(exercise_abs_filename) :
+                error("Found jupman tags in solution file but an exercise file exists already !\n  solution: %s\n  exercise: %s" % (source_abs_fn, exercise_abs_filename))
+                                
+            with open(exercise_dest_fn, 'w') as exercise_dest_f:
+                
+                if source_abs_fn.endswith('.ipynb'):
+                    
+                    import nbformat
+                    
+                    # note: for weird reasons nbformat does not like the sol_source_f 
+                    nb_node = nbformat.read(source_abs_fn, nbformat.NO_CONVERT)
+                    replace_ipynb_rel(nb_node, source_abs_fn)                                                
+                    self._replace_title(nb_node, source_abs_fn)
+                    
+                    # look for tags
+                    for cell in nb_node.cells:
+                        if cell.cell_type == "code":                            
+                            cell.source = self.sol_to_ex_code(cell.source, source_abs_fn)
 
-                found_tag = self.validate_tags(solution_text, source_abs_filename)                                                                                
-
-                if found_tag:
-
-                    if os.path.isfile(exercise_abs_filename) :
-                        raise Exception("Found jupman tags in solution file but an exercise file exists already !\n  solution: %s\n  exercise: %s" % (source_abs_filename, exercise_abs_filename))
-
-                    info('Found jupman tags in solution file, going to derive from solution exercise file %s' % exercise_fname )                                    
-
-                                                            
-                    with open(exercise_dest_filename, 'w') as exercise_dest_f:
-                        
-                        
-                        if source_abs_filename.endswith('.ipynb'):
+                        if cell.cell_type == "markdown":
+                             # substitues with newline, otherwise it shows 'Type markdown or latex'   
+                            cell.source = re.sub(   self.markdown_answer, 
+                                                    r"\1\n",  
+                                                    cell.source.strip())
+                                                             
                             
-                            import nbformat
-                            # note: for weird reasons nbformat does not like the sol_source_f 
-                            nb_ex = nbformat.read(source_abs_filename, nbformat.NO_CONVERT)
-                                                                            
-                            found_title = False
-                            # look for title
-                            for cell in nb_ex.cells:
-                                if cell.cell_type == "markdown":
-                                    if re.compile(self.ipynb_title).search(cell.source):
-                                        found_title = True
-                                        cell.source = re.sub(re.compile(self.ipynb_title), 
-                                                    r"\1" + self.ipynb_exercise, cell.source) 
-                                        break
-                            
-                            if not found_title:
-                                error("Couldn't find title in file: \n   %s\nThere should be a markdown cell beginning with text (note string '%s' is mandatory)\n# bla bla %s" % (source_abs_filename, self.ipynb_solution, self.ipynb_solution))
-        
-        
-                            # look for tags
-                            for cell in nb_ex.cells:
-                                if cell.cell_type == "code":
-                                    if cell.source.strip().startswith(self.solution):
-                                        cell.source = " " 
-                                    else:
-                                        cell.source = self.solution_to_exercise_text(cell.source)
-                                if cell.cell_type == "markdown":
-                                    if cell.source.strip().startswith(self.markdown_answer):                                  
-                                        cell.source = " " # space, otherwise it shows 'Type markdown or latex'                               
-                                    
-                            nbformat.write(nb_ex, exercise_dest_f)
-                        
-                        else:
-                            
-                            exercise_text = self.solution_to_exercise_text(solution_text)
-                            #debug("FORMATTED TEXT=\n%s" % exercise_text)
-                            exercise_dest_f.write(exercise_text)                    
-                                                                    
+                    nbformat.write(nb_node, exercise_dest_f)
+                
+                
+                elif source_abs_fn.endswith('.py'):                    
+                    exercise_text = self.sol_to_ex_code(solution_text, source_abs_fn)
+                    #debug("FORMATTED TEXT=\n%s" % exercise_text)
+                    exercise_dest_f.write(exercise_text)                    
                 else:
-                    if not os.path.isfile(exercise_abs_filename) :
-                        error("There is no exercise file and couldn't find any jupman tag in solution file for generating exercise !" +\
-                            "\n  solution: %s\n  exercise: %s" % (source_abs_filename, exercise_abs_filename))
-                        
-    def copy_code(self, source_dir, dest_dir, copy_test=True, copy_solutions=False):
+                    raise ValueError("Don't know how to translate solution to exercise for source file %s" % source_abs_fn)
+   
+    def copy_code(self, source_dir, dest_dir, copy_solutions=False):
         
         
-        info("  Copying exercises %s \n      from  %s \n      to    %s" % ('and solutions' if copy_solutions else '', source_dir, dest_dir))
+        info("Copying code %s \n    from  %s \n    to    %s" % ('and solutions' if copy_solutions else '', source_dir, dest_dir))
+
         # creating folders
         for dirpath, dirnames, filenames in os.walk(source_dir):
-            structure = os.path.join(dest_dir, dirpath[len(source_dir):])
+            compath = os.path.commonpath([dirpath, source_dir])
+            structure = os.path.join(dest_dir, dirpath[len(compath)+1:])
             
-            if not self.zip_ignored_file(structure):
+            if not self.is_zip_ignored(structure):
                 if not os.path.isdir(structure) :
-                    print("Creating dir %s" % structure)
+                    info("Creating dir %s" % structure)
                     os.makedirs(structure)
 
-                for source_filename in filenames:
+                for source_fn in filenames:
                                     
-                    if not self.zip_ignored_file(source_filename):
+                    if not self.is_zip_ignored(source_fn):
                         
-                        source_abs_filename = os.path.join(dirpath,source_filename)
-                        dest_filename = os.path.join(structure , source_filename) 
-
-                        
-
-                        fileKind = FileKinds.detect(source_filename)
+                        source_abs_fn = os.path.join(dirpath,source_fn)
+                        dest_fn = os.path.join(structure , source_fn)                           
+                        fileKind = FileKinds.detect(source_fn)
                         
                         if fileKind == FileKinds.SOLUTION:                  
-                            
                             if copy_solutions:                                           
-                                self.copy_sols(source_filename, source_abs_filename, dest_filename)
+                                self._copy_sols(source_fn, 
+                                                source_abs_fn,
+                                                dest_fn)
                             
-                            if FileKinds.is_supported_ext(  source_filename,      
-                                                            self.supported_distib_ext):
-                                self.generate_exercise(source_filename, source_abs_filename, dirpath, structure)    
+                            if FileKinds.is_supported_ext(  source_fn,      
+                                                            self.distrib_ext):
+                                self.generate_exercise( source_fn, 
+                                                        source_abs_fn,
+                                                        dirpath,
+                                                        structure)    
                                             
                                 
-                        elif fileKind == FileKinds.TEST:
-                            with open(source_abs_filename, encoding='utf-8') as source_f:
-                                data=source_f.read().replace('_solution ', '_exercise ')
-                                info('Writing patched test %s' % source_filename) 
-                                with open(dest_filename, 'w', encoding='utf-8') as dest_f:
-                                    dest_f.write(data)                         
+                        elif fileKind == FileKinds.TEST:                            
+                            self._copy_test(source_abs_fn,
+                                            source_fn,
+                                            dest_fn)
                         else:  # EXERCISE and OTHER
-                            info("  Writing %s " % source_filename)
-                            shutil.copy(source_abs_filename, dest_filename)
+                            self._copy_other(source_abs_fn,
+                                             source_fn,
+                                             dest_fn)
 
 
     def zip_folder(self, source_folder, prefix='', suffix=''):
@@ -524,7 +673,7 @@ class Jupman:
         if os.path.exists(build_folder):
             delete_tree(build_folder, '_build')
         
-        self.copy_code(source_folder, build_folder, copy_test=True, copy_solutions=True)
+        self.copy_code(source_folder, build_folder, copy_solutions=True)
 
         deglobbed_common_files = []
         deglobbed_common_files_patterns = []
@@ -538,7 +687,7 @@ class Jupman:
         info("dir_name = %s" % dir_name)
         zip_name = prefix + dir_name + suffix
         zip_path = os.path.join(self.generated, zip_name)
-        self.zip_paths( deglobbed_common_files + [source_folder], 
+        self.zip_paths( deglobbed_common_files + [build_folder], 
                         zip_path,
                         patterns= deglobbed_common_files_patterns + [("^(%s)" % build_jupman,"")])
         info("Done zipping %s" % source_folder ) 
@@ -639,7 +788,7 @@ class Jupman:
         def write_file(fname):
             
             
-            if not self.zip_ignored_file(fname) :
+            if not self.is_zip_ignored(fname) :
                 #info('Zipping: %s' % fname)            
                 
                 

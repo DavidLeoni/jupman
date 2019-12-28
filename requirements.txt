@@ -1,9 +1,5 @@
-sphinx==1.7.6
-tornado==4.5.3
-ipykernel==4.6.1
-nbsphinx==0.3.4
-networkx==2.0
-arghandler==1.2.0
-recommonmark==0.4.0
-sphinx_rtd_theme==0.2.5b1
-pylatexenc==2.1
+# here go packages needed by users to execute the exercises
+#
+# for packages required during documentation build, see requirements-build.txt
+
+

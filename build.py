@@ -100,7 +100,7 @@ def run_sphinx(manuals, formats):
     jupman_out = os.path.join(jm.build, 'jupman')
     if os.path.isdir(jupman_out):
         jt.delete_tree(jupman_out, '_build')
-
+    
     for manual in manuals: 
         for fmt in formats:
 
