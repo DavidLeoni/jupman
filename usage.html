@@ -1,0 +1,1325 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Jupman Usage &mdash; Jupman</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="_static/js/jupman.js"></script>
+        <script type="text/javascript" src="_static/js/pytutor-embed.bundle.min.js"></script>
+        <script async="async" type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-doc-embed.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/jupman.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/jupman-rtd.css" type="text/css" />
+  <link rel="stylesheet" href="https://assets.readthedocs.org/static/css/badge_only.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Jupman Tests" href="jupman-tests.html" />
+    <link rel="prev" title="Jupman" href="index.html" /> 
+
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="usage.html" />
+
+<link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="text/javascript" src="_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = "usage"
+READTHEDOCS_DATA['source_suffix'] = ".ipynb"
+</script>
+
+<script type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="toc-page.html" class="icon icon-home"> Jupman
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Revisions">Revisions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Course-description">Course description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Who-can-participate">Who can participate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Contents">Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Evaluation-and-exams">Evaluation and exams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Teaching-methodology">Teaching methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Timetable">Timetable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Enrollment">Enrollment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Office-hours">Office hours</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Intro-survey">Intro survey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Course-forum">Course forum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Teachers">Teachers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Credits">Credits</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Jupman Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Optional---Running-tests">Optional - Running tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Optional---Install-Jupyter-contrib-extensions">Optional - Install Jupyter contrib extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Getting-Started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Building-the-manual">Building the manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Publishing">Publishing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Editing-the-worksheets">Editing the worksheets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Common-files">Common files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Running-Jupyter">Running Jupyter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Source-code-for-chapters">Source code for chapters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Type-of-exercises">Type of exercises</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Exercises-in-python-files">Exercises in python files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Exercises-in-Jupyter-files">Exercises in Jupyter files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Tags-to-strip">Tags to strip</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#jupman-raise">jupman-raise</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jupman-strip">jupman-strip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#write-here">write here</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#SOLUTION">SOLUTION</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#QUESTION---ANSWER">QUESTION - ANSWER</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Utilities-and-custom-js-and-css">Utilities and custom js and css</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Hiding-cells">Hiding cells</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Implications-of-hiding-'import-jupman'">Implications of hiding ‘import jupman’</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Launch-unit-tests">Launch unit tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Python-Tutor">Python Tutor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Website">Website</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Changing-site-colors">Changing site colors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Warning-about-old-versions">Warning about old versions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Exams">Exams</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#What-is-an-exam">What is an exam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Exam-commands">Exam commands</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Developer-notes">Developer notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Fix-nbsphinx-to-create-rst-files">Fix nbsphinx to create rst files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="jupman-tests.html">Jupman Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Sezione-1">Sezione 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Sezione-2">Sezione 2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#Subsection-1">Subsection 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#Subsection-2">Subsection 2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Download-links">Download links</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Info/Warning-Boxes">Info/Warning Boxes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Math">Math</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Unicode">Unicode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Image">Image</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#SVG-Images">SVG Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#PNG-Images">PNG Images</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Expressions-list">Expressions list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Toggable-cells">Toggable cells</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#Toggling-with-Javascript-(PREFERRED)">Toggling with Javascript (PREFERRED)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#HTML-details-in-Markdown,-code-tag">HTML details in Markdown, code tag</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#HTML-details-in-Markdown,-Markdown-mixed-code">HTML details in Markdown, Markdown mixed code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#HTML-details-in-HTML,-raw-NBConvert-Format">HTML details in HTML, raw NBConvert Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Files-in-templates">Files in templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Python-tutor">Python tutor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#jupman.pytut">jupman.pytut</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#HTML-magics">HTML magics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#NBTutor">NBTutor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Stripping-answers">Stripping answers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Formatting-problems">Formatting problems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#Very-large-input">Very large input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#Very-long-output">Very long output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="toc.html"> </a></li>
+<li class="toctree-l1"><a class="reference internal" href="toc.html#chapter-examples">Chapter examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python-intro/python-intro.html">Python introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python-intro/python-intro.html#Download-exercises-zip">Download exercises zip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python-intro/python-intro.html#What-to-do">What to do</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python-intro/python-intro.html#Let's-begin">Let’s begin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python-intro/python-intro.html#Global-image">Global image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python-intro/python-intro.html#Local-exercise-image">Local exercise image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python-intro/python-intro.html#Python-tutor">Python tutor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python-intro/python-intro.html#add">add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python-intro/python-intro.html#sub">sub</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html">Jupyter introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html#Download-exercises-zip">Download exercises zip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html#What-to-do">What to do</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html#Exercise-1">Exercise 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html#Exercise-2">Exercise 2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html#Exercise-3">Exercise 3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html#Exercise-4">Exercise 4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html#Exercise-5">Exercise 5</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html#Conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tools-intro/tools-intro-sol.html">Tools introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tools-intro/tools-intro-sol.html#Download-exercises-zip">Download exercises zip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools-intro/tools-intro-sol.html#What-to-do">What to do</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tools-intro/tools-intro-sol.html#Let's-begin">Let’s begin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tools-intro/tools-intro-sol.html#Global-image">Global image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools-intro/tools-intro-sol.html#Local-exercise-image">Local exercise image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools-intro/tools-intro-sol.html#Python-tutor">Python tutor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tools-intro/tools-intro-sol.html#Exercise-in-Jupyter">Exercise in Jupyter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tools-intro/tools-intro-sol.html#add">add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools-intro/tools-intro-sol.html#sub">sub</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="toc.html#templates">Templates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="past-exams.html">Past Exams</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exam-project.html">Exam project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exam-project.html#What-to-do">What to do</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exam-project.html#Technical-requirements">Technical requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="exam-project.html#Python-code">Python code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="exam-project.html#requirements.txt-file"><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="exam-project.html#Graphical-interfaces">Graphical interfaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="exam-project.html#Be-careful-to">Be careful to</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project-ideas.html">Project ideas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project-ideas.html#TODO">TODO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project-ideas.html#Introduction">Introduction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project/project.html">Jupman Project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project/project.html#Introduzione">Introduzione</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/project.html#Sorgenti-dati">Sorgenti dati</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/project.html#Pulizia-e-integrazione-dati">Pulizia e integrazione dati</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/project.html#Analisi">Analisi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/project.html#Problematiche-riscontrate">Problematiche riscontrate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/project.html#Conclusioni">Conclusioni</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project/markdown.html">Markdown</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project/markdown.html#Celle-Markdown">Celle Markdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/markdown.html#Paragrafi">Paragrafi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/markdown.html#Link">Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/markdown.html#Liste">Liste</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/markdown.html#Immagini">Immagini</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/markdown.html#Variabili-e-nomi-tecnici">Variabili e nomi tecnici</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/markdown.html#Codice-JSON-/-XML-/-Python">Codice JSON / XML / Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/markdown.html#Formule-matematiche">Formule matematiche</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="project/markdown.html#Tabelle">Tabelle</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#january-16th-2020-3-1">January 16th 2020 - 3.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#december-29th-2019-3-0">December 29th 2019 - 3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#september-24th-2018-2-0">September 24th 2018 - 2.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#september-19th-2018-1-0">September 19th 2018 - 1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#august-26th-2018-0-9">August 26th 2018 - 0.9</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#august-12th-2018-0-8">August 12th 2018 - 0.8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#august-3rd-2018-0-7">August 3rd 2018 - 0.7</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="toc.html#index">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="toc-page.html">Jupman</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+     <!-- <li> <h2 style="background-color:red; color:yellow">WARNING! THIS VERSION IS OLD !  <br/>
+    <a style=" text-decoration: underline;" href="https://jupman.readthedocs.io/en/latest">GOT TO LATEST VERSION</a></li>
+ </h2></li>-->
+    <!-- Commented because doesn't work with sections,
+         see https://github.com/DavidLeoni/jupman/issues/39
+    <li><a href="toc-page.html">Docs</a> &raquo;</li>
+    
+        <li><a href="toc.html"> </a> &raquo;</li>
+    
+    <li>Jupman Usage</li>
+    -->
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    min-width: 5ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Jupman-Usage">
+<h1>Jupman Usage<a class="headerlink" href="#Jupman-Usage" title="Permalink to this headline">¶</a></h1>
+<p>Jupyter Python 3 worksheets build system and exam manager. See Jupman manual at <a class="reference external" href="http://jupman.readthedocs.io">jupman.readthedocs.io</a></p>
+<p>Jupman uses <a class="reference external" href="http://nbsphinx.readthedocs.io/">NbSphinx</a> and <a class="reference external" href="https://readthedocs.org">ReadTheDocs</a>.</p>
+<div class="section" id="Installation">
+<h2>Installation<a class="headerlink" href="#Installation" title="Permalink to this headline">¶</a></h2>
+<p>(Instructions are for Ubuntu, on Windows may differ)</p>
+<ol class="arabic">
+<li><p>On Github, fork <a class="reference external" href="https://github.com/DavidLeoni/jupman">jupman project</a> to create yours, for example <code class="docutils literal notranslate"><span class="pre">my-project</span></code>. <strong>IMPORTANT: choose a name which is NOT already on</strong> <a class="reference external" href="http://readthedocs.org">ReadTheDocs</a></p></li>
+<li><p>Create a <a class="reference external" href="http://readthedocs.org">ReadTheDocs account</a> <strong>using the same name as in Github</strong> so the address in readthedocs will be something like <em>my-project.readthedocs.org</em>.</p>
+<ul class="simple">
+<li><p>Use ReadTheDocs panels to link the project to your Github repository.</p></li>
+<li><p>In <em>Admin-&gt; Advanced settings panel</em>, set:</p>
+<ul>
+<li><p><em>Python interpreter</em> to <em>CPython 3.x</em></p></li>
+<li><p><em>Requirements</em> to <code class="docutils literal notranslate"><span class="pre">requirements-build.txt</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>On your computer, clone the <code class="docutils literal notranslate"><span class="pre">my-project</span></code> from Github</p></li>
+<li><p>Install Python 3.5+</p></li>
+<li><p><a class="reference external" href="http://jupyter.org/install.html">Install Jupyter</a></p></li>
+<li><p>Install Python modules -from the root of the project, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m pip install --user -r requirements-build.txt
+</pre></div>
+</div>
+<p>This will install required modules in your home directory</p>
+</li>
+</ol>
+<div class="section" id="Optional---Running-tests">
+<h3>Optional - Running tests<a class="headerlink" href="#Optional---Running-tests" title="Permalink to this headline">¶</a></h3>
+<p>To check everything is working, you may want to run the tests.</p>
+<ol class="arabic simple">
+<li><p>Install test dependencies:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m pip install --user -r _test/requirements-test.txt
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Run the tests:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m pytest _test/*_test.py
+</pre></div>
+</div>
+</div>
+<div class="section" id="Optional---Install-Jupyter-contrib-extensions">
+<h3>Optional - Install Jupyter contrib extensions<a class="headerlink" href="#Optional---Install-Jupyter-contrib-extensions" title="Permalink to this headline">¶</a></h3>
+<p>For a better editing experience like having Table of contents and other things, do the following:</p>
+<ol class="arabic simple">
+<li><p>install the <a class="reference external" href="https://github.com/ipython-contrib/jupyter_contrib_nbextensions">Jupyter contrib extensions</a> package:</p></li>
+</ol>
+<p>If you have Anaconda:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge jupyter_contrib_nbextensions
+</pre></div>
+</div>
+<p>If you don’t have Anaconda:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m pip install --user jupyter_contrib_nbextensions
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Install it in Jupyter:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter contrib nbextension install --user
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Enable extensions (putting here recommended ones):</p></li>
+</ol>
+<p>For being able to view table of contents while editing notebooks, install <code class="docutils literal notranslate"><span class="pre">toc2</span></code> extension:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter nbextension <span class="nb">enable</span> toc2/main
+</pre></div>
+</div>
+<p>To see tocs when in a document you will need to press a list button at the right-end of the toolbar).</p>
+<p>(since Jupman 0.8 custom injected tocs are disabled by default)</p>
+<ol class="arabic simple" start="4">
+<li><p>For a nice GUI to install extensions, install the <a class="reference external" href="https://github.com/Jupyter-contrib/jupyter_nbextensions_configurator">Jupyter Nbextensions configurator</a>:</p></li>
+</ol>
+<p>If you have Anaconda:</p>
+<p>From Anaconda Prompt:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge jupyter_nbextensions_configurator
+</pre></div>
+</div>
+<p>If you don’t have Anaconda:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m pip install --user jupyter_nbextensions_configurator
+</pre></div>
+</div>
+<p>After installing, enable it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter nbextensions_configurator <span class="nb">enable</span> --user
+</pre></div>
+</div>
+<p>and then start Jupyter, in file browser look for a <code class="docutils literal notranslate"><span class="pre">Nbextensions</span></code> tab</p>
+</div>
+</div>
+<div class="section" id="Getting-Started">
+<h2>Getting Started<a class="headerlink" href="#Getting-Started" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Edit as needed <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/conf.py">conf.py</a>, which is the configuration file for Sphinx. In particular, you <strong>MUST</strong> edit the sections marked with <code class="docutils literal notranslate"><span class="pre">TODO</span></code></p></li>
+<li><p>Try to launch a build</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 build.py
+</pre></div>
+</div>
+<p>For more info, see <a class="reference external" href="#building-the-manual">related section</a></p>
+</li>
+<li><p>If everything works fine on your computer, push changes back to Github</p></li>
+<li><p>Go back to ReadTheDocs and try to run a build. Hopefully your project will become available on something like <em>my-project.readthedocs.org</em></p></li>
+<li><p>If you want to grade exams, see <a class="reference external" href="#Exams">Exams</a> section.</p></li>
+</ol>
+<p>You should now be ready to create your notebooks by launching from the project root:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter notebook
+</pre></div>
+</div>
+<ol class="arabic" start="6">
+<li><p>If you wish your notebooks to appear in the generated manual, you have to add them in the <code class="docutils literal notranslate"><span class="pre">toc.rst</span></code> file.</p>
+<p><strong>NOTE</strong>: the page <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/toc-page.rst">toc-page.rst</a>, which is set to be the <code class="docutils literal notranslate"><span class="pre">master_doc</span></code> of Sphinx, will just load the actual Table of Contents which is in <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/toc.rst">toc.rst</a>. It looks a bit convoluted because when it comes to indexes Sphinx is not much reliable, <a class="reference external" href="https://github.com/DavidLeoni/jupman/issues/11">see this issue</a> . We strongly advise <em>not</em> to change these settings !</p>
+</li>
+<li><p>edit the home, which is in the <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/index.ipynb">index.ipynb</a> file</p></li>
+</ol>
+</div>
+<div class="section" id="Building-the-manual">
+<h2>Building the manual<a class="headerlink" href="#Building-the-manual" title="Permalink to this headline">¶</a></h2>
+<p>For quick build that only produces html:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 build.py -q
+</pre></div>
+</div>
+<p>Site will be created in <code class="docutils literal notranslate"><span class="pre">_build/</span></code> folder.</p>
+<p>For help:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 build.py -h
+</pre></div>
+</div>
+<p>To build everything (html + pdf + epub), go to console and from the root of the directory run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 build.py
+</pre></div>
+</div>
+<p><strong>NOTE: to also generate PDF you will need to install Latex environment</strong></p>
+</div>
+<div class="section" id="Publishing">
+<h2>Publishing<a class="headerlink" href="#Publishing" title="Permalink to this headline">¶</a></h2>
+<p>For publishing, the system uses ReadTheDocs so it is enough to push to master and ReadTheDocs will do the rest (for example, for jupman it is at address <a class="reference external" href="http://jupman.readthedocs.io">jupman.readthedocs.io</a></p>
+<p><strong>IMPORTANT: ReadTheDocs WILL *NOT* execute Jupyter notebooks because of</strong> <a class="reference external" href="https://github.com/DavidLeoni/softpython/issues/2">this bug</a></p>
+</div>
+<div class="section" id="Editing-the-worksheets">
+<h2>Editing the worksheets<a class="headerlink" href="#Editing-the-worksheets" title="Permalink to this headline">¶</a></h2>
+<p>Here we give an overview of how to edit worksheets. More info can be found in <a class="reference internal" href="jupman-tests.html"><span class="doc">Jupman tests notebook</span></a></p>
+<div class="section" id="Common-files">
+<h3>Common files<a class="headerlink" href="#Common-files" title="Permalink to this headline">¶</a></h3>
+<p>There are a bunch of files common to all worksheets and possibly ReadTheDocs website</p>
+<p><em>You do not need to change them (except maybe my_lib.py)</em></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 57%" />
+<col style="width: 31%" />
+<col style="width: 6%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Jupyter</p></th>
+<th class="head"><p>ReadTheDocs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/jupman.py">jupman.py</a></p></td>
+<td><p>utilities for worksheets</p></td>
+<td><p>X</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/jupman.py">my_lib.py</a></p></td>
+<td><p>custom utilities for worksheets (you can change the name)</p></td>
+<td><p>X</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/_static/js/jupman.js">_static/js/jupman.js</a></p></td>
+<td><p>Javascript code</p></td>
+<td><p>X</p></td>
+<td><p>X</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/_static/css/jupman.css">_static/css/jupman.css</a></p></td>
+<td><p>CSS</p></td>
+<td><p>X</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/_static/css/jupman-rtd.css">_static/css/jupman-rtd.css</a></p></td>
+<td><p>CSS</p></td>
+<td></td>
+<td><p>X</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="Running-Jupyter">
+<h3>Running Jupyter<a class="headerlink" href="#Running-Jupyter" title="Permalink to this headline">¶</a></h3>
+<p>First of all, run Jupyter from the root of the directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter notebook
+</pre></div>
+</div>
+</div>
+<div class="section" id="Source-code-for-chapters">
+<h3>Source code for chapters<a class="headerlink" href="#Source-code-for-chapters" title="Permalink to this headline">¶</a></h3>
+<p>Put chapters one per folder, in the root. Any folder which does not starts with underscore <code class="docutils literal notranslate"><span class="pre">_</span></code> or <code class="docutils literal notranslate"><span class="pre">exam/</span></code> will be considered a chapter.</p>
+<p>During build, each chapter gets automatically zipped and zip goes to <code class="docutils literal notranslate"><span class="pre">_static/generated</span></code>. So for example, <code class="docutils literal notranslate"><span class="pre">python-intro/</span></code> produces a zip called <code class="docutils literal notranslate"><span class="pre">_static/generated/python-intro.zip</span></code>, which will have these contents:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python-intro
+    _static
+       js
+          jupman.js
+          toc.js
+       css
+          jupman.css
+       img
+          cc-by.png
+    python-intro.ipynb
+    python_intro.py
+    python_intro_test.py
+    python_intro_sol.py
+    jupman.py
+    my_lib.py
+</pre></div>
+</div>
+<p>The zip folder structure will be a merge of chapter files and files shared by all chapters which are specified in <code class="docutils literal notranslate"><span class="pre">exercises_common_files</span></code> variable in <a class="reference external" href="conf.py">conf.py</a>. Since the root in the zip becomes the chapter itself, jupman will process <code class="docutils literal notranslate"><span class="pre">.py</span></code> and <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> files for fixing eventual relative imports. Markdown and HTML links in ipynb will also be adjusted.</p>
+<p>Exercise files can be automatically generated from solutions, as we will see next.</p>
+</div>
+<div class="section" id="Type-of-exercises">
+<h3>Type of exercises<a class="headerlink" href="#Type-of-exercises" title="Permalink to this headline">¶</a></h3>
+<p>There can be two kinds of exercises, exercises in python files and exercises in jupyter files.</p>
+<p>It is possible to automatically generate an exercise from a solution file by stripping text marked with special tags. You can inspect generated files in <code class="docutils literal notranslate"><span class="pre">_build/jupman/</span></code> directory</p>
+<p><strong>Note</strong>: in the zips for the students containing solutions, tag comments are automatically removed from solution as well.</p>
+<div class="section" id="Exercises-in-python-files">
+<h4>Exercises in python files<a class="headerlink" href="#Exercises-in-python-files" title="Permalink to this headline">¶</a></h4>
+<p>See example: <a class="reference internal" href="python-intro/python-intro.html"><span class="doc">python-intro/python-intro.ipynb</span></a></p>
+<p>In this type of exercises, typically you have a Jupyter file (like <code class="docutils literal notranslate"><span class="pre">python-intro.ipynb</span></code>) that describes the exercise and then the actual exercises are in python files.</p>
+<p>If there is a solution file <code class="docutils literal notranslate"><span class="pre">FILE_sol.py</span></code> ending in <code class="docutils literal notranslate"><span class="pre">_sol.py</span></code> but no corresponding exercise file <code class="docutils literal notranslate"><span class="pre">FILE.py</span></code> without the <code class="docutils literal notranslate"><span class="pre">_sol</span></code>:</p>
+<p>then Jupman will try to generate <code class="docutils literal notranslate"><span class="pre">FILE.py</span></code> one from <code class="docutils literal notranslate"><span class="pre">FILE_sol.py</span></code>. To do so, it will look for tags to strip inside the solution file.</p>
+<p>If there is already an exercise file like this:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">python_intro.py</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python_intro_sol.py</span></code></p></li>
+</ul>
+<p>Jupman will just copy the existing file.</p>
+</div>
+<div class="section" id="Exercises-in-Jupyter-files">
+<h4>Exercises in Jupyter files<a class="headerlink" href="#Exercises-in-Jupyter-files" title="Permalink to this headline">¶</a></h4>
+<p>See example: <a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html"><span class="doc">jupyter-intro/jupyter-intro-sol.ipynb</span></a></p>
+<p>This type of exercises stay in a jupyter notebook itself.</p>
+<p>If there is a notebook ending in <code class="docutils literal notranslate"><span class="pre">-sol.ipynb</span></code>, the following applies (<strong>WARNING</strong>: for <code class="docutils literal notranslate"><span class="pre">ipynb</span></code> files we use dash <code class="docutils literal notranslate"><span class="pre">-</span></code>, <em>not</em> the underscore <code class="docutils literal notranslate"><span class="pre">_</span></code>):</p>
+<ul class="simple">
+<li><p>the notebook must contain tags to strip</p></li>
+<li><p>exercises derived will have ‘EXERCISES’ appended to the title (the word can be customized in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> - you might need to translate it)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="Tags-to-strip">
+<h3>Tags to strip<a class="headerlink" href="#Tags-to-strip" title="Permalink to this headline">¶</a></h3>
+<p>Start tags begin with a <code class="docutils literal notranslate"><span class="pre">#</span></code> while end tags begin with a <code class="docutils literal notranslate"><span class="pre">#\</span></code></p>
+<div class="section" id="jupman-raise">
+<h4>jupman-raise<a class="headerlink" href="#jupman-raise" title="Permalink to this headline">¶</a></h4>
+<p>Replaces code inside with an Exception (text is customizable in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>). Be careful to position the comment exactly with the indentation yuoi want the raise to appear. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="c1">#jupman-raise</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="c1">#/jupman-raise</span>
+</pre></div>
+</div>
+<p>becomes</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;TODO IMPLEMENT ME !&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="jupman-strip">
+<h4>jupman-strip<a class="headerlink" href="#jupman-strip" title="Permalink to this headline">¶</a></h4>
+<p>Just strips code inside</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1">#jupman-strip</span>
+<span class="k">def</span> <span class="nf">help_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span>
+<span class="c1">#/jupman-strip</span>
+
+<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">y</span>
+</pre></div>
+</div>
+<p>becomes</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="write-here">
+<h4>write here<a class="headerlink" href="#write-here" title="Permalink to this headline">¶</a></h4>
+<p>This special tag for python code erases whatever is found afterwards the <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">write</span> <span class="pre">here</span></code> comment</p>
+<ul class="simple">
+<li><p>you can put how many spaces you want in the comment</p></li>
+<li><p>phrase can be customized in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1">#  write  here</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">+</span> <span class="n">w</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>becomes</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1">#  write  here</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="SOLUTION">
+<h4>SOLUTION<a class="headerlink" href="#SOLUTION" title="Permalink to this headline">¶</a></h4>
+<p>In a code cell, if you put <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">SOLUTION</span></code> at the beginning the whole cell cell content gets deleted (<code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">SOLUTION</span></code> string included).</p>
+<ul class="simple">
+<li><p>Word can be customized in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code></p></li>
+</ul>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># SOLUTION
+
+def f():
+    print(&#39;hello&#39;)
+</pre></div>
+</div>
+<p>becomes nothing:</p>
+</div>
+<div class="section" id="QUESTION---ANSWER">
+<h4>QUESTION - ANSWER<a class="headerlink" href="#QUESTION---ANSWER" title="Permalink to this headline">¶</a></h4>
+<p>In a markdown cell, everything in ‘<strong>ANSWER</strong>:’ cell will be stripped.</p>
+<ul class="simple">
+<li><p>Markdown can be customized in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code></p></li>
+</ul>
+<p><strong>QUESTION</strong>: Describe why iPhone 8 is better than 7</p>
+<p><strong>ANSWER</strong>: it costs more</p>
+<p>becomes:</p>
+<p><strong>QUESTION</strong>: Describe why iPhone 8 is better than 7</p>
+</div>
+</div>
+<div class="section" id="Utilities-and-custom-js-and-css">
+<h3>Utilities and custom js and css<a class="headerlink" href="#Utilities-and-custom-js-and-css" title="Permalink to this headline">¶</a></h3>
+<p>If you need custom js and/or css in a notebook, you can inject it by running <code class="docutils literal notranslate"><span class="pre">jupman.init()</span></code> in the first cell</p>
+<p><strong>NOTE</strong>: it is not really mandatory, it’s mostly intended to tweak way notebooks on the website. It should be avoided for notebooks meant for students, as it is more likely it will mess their configurations - also, they might copy the notebooks without knowing they contain the custom js and use weird extensions which could generate conflicts (such as double toc)</p>
+<p>For notebooks in the root folder:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jupman</span>
+<span class="n">jupman</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Worksheets in in subfolders can use <code class="docutils literal notranslate"><span class="pre">sys.path</span></code> to locate the module</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">jupman</span>
+<span class="n">jupman</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If you think it looks ugly, see <a class="reference external" href="https://github.com/DavidLeoni/jupman/issues/12">this issue</a> for why we don’t use alternatives such as modules and relative imports.</p>
+<p><strong>Show table of contents</strong>: Since 0.8, toc is disabled. If you want it, try to <a class="reference external" href="#Optional---Install-Jupyter-contrib-extensions">install toc2 extension</a>, otherwise you can still enable jupman toc with <code class="docutils literal notranslate"><span class="pre">jupman_init(toc=True)</span></code>. Running it will create the sidebar even when editing in Jupyter. If you want to refresh the sidebar, just run again the cell. It is not recommended, though, especially in notebooks meant to be shipped to students (see considerations above).</p>
+</div>
+<div class="section" id="Hiding-cells">
+<h3>Hiding cells<a class="headerlink" href="#Hiding-cells" title="Permalink to this headline">¶</a></h3>
+<p>To hide cells (like for example the <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">jupman</span></code> code), click <code class="docutils literal notranslate"><span class="pre">View-&gt;Cell</span> <span class="pre">toolbar</span> <span class="pre">-&gt;</span> <span class="pre">Edit</span> <span class="pre">metadata</span></code> and add <code class="docutils literal notranslate"><span class="pre">&quot;nbsphinx&quot;:</span> <span class="pre">&quot;hidden&quot;</span></code> to the JSON (see also original <a class="reference external" href="https://nbsphinx.readthedocs.io/en/0.2.14/hidden-cells.html#Hidden-Cells">NBSphinx docs</a> and <a class="reference internal" href="jupman-tests.html#Toggable-cells"><span class="std std-ref">Toggable cells in Jupman tests</span></a> ).</p>
+<p><strong>NOTE</strong>: As of NBSphinx 2.17, it is not possible to hide only cell text but not the output.</p>
+<p>(Before porting to NBSphinx some cell hiding for Jupman stuff was automated using Javascript, maybe we will reintroduce the automation in the future)</p>
+<div class="section" id="Implications-of-hiding-'import-jupman'">
+<h4>Implications of hiding ‘import jupman’<a class="headerlink" href="#Implications-of-hiding-'import-jupman'" title="Permalink to this headline">¶</a></h4>
+<p>Only in the HTML version, hiding the <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">jupman</span></code> code, will also prevent <code class="docutils literal notranslate"><span class="pre">jupman.py</span></code> to embed inside the page the Javascript file <code class="docutils literal notranslate"><span class="pre">jupman.js</span></code>: this is perfectly fine as it is fetched separately thanks to the <code class="docutils literal notranslate"><span class="pre">app.add_javascript('js/jupman.js')</span></code> command in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code></p>
+</div>
+</div>
+<div class="section" id="Launch-unit-tests">
+<h3>Launch unit tests<a class="headerlink" href="#Launch-unit-tests" title="Permalink to this headline">¶</a></h3>
+<p>Inside worksheets you can run <code class="docutils literal notranslate"><span class="pre">unittest</span></code> tests.</p>
+<p>To run all the tests of a test class, write like this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jupman</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">NameOfTheTestClass</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To run a single method, write like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jupman</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">NameOfTheTestClass</span><span class="o">.</span><span class="n">nameOfTheMethod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Python-Tutor">
+<h3>Python Tutor<a class="headerlink" href="#Python-Tutor" title="Permalink to this headline">¶</a></h3>
+<p>Among the various ways to embed Python Tutor, we decided to implement a special <code class="docutils literal notranslate"><span class="pre">jupman.pytut()</span></code> method. First you need to import the jupman module:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">jupman</span>
+</pre></div>
+</div>
+</div>
+<p>Then you can put a call to <code class="docutils literal notranslate"><span class="pre">jupman.pytut()</span></code> at the end of a cell, and the cell code will magically appear in python tutor in the output (except the call to <code class="docutils literal notranslate"><span class="pre">pytut()</span></code> of course). To see Python Tutor you don’t need to be online</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">y</span><span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">:</span><span class="mi">9</span><span class="p">}</span>
+<span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+
+<span class="n">jupman</span><span class="o">.</span><span class="n">pytut</span><span class="p">()</span>
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<script src="_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
+
+<script id="json-jm1b1d94c8-e5c6-4fd9-9d74-44b2d17b6106" type="application/json" >
+    {"code": " \nx = [5,8,4]\ny= {3:9}\nz = [x]", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 3, "event": "step_line", "func_name": "<module>", "globals": {"x": ["REF", 1]}, "ordered_globals": ["x"], "stack_to_render": [], "heap": {"1": ["LIST", 5, 8, 4]}, "stdout": ""}, {"line": 4, "event": "step_line", "func_name": "<module>", "globals": {"x": ["REF", 1], "y": ["REF", 2]}, "ordered_globals": ["x", "y"], "stack_to_render": [], "heap": {"1": ["LIST", 5, 8, 4], "2": ["DICT", [3, 9]]}, "stdout": ""}, {"line": 4, "event": "return", "func_name": "<module>", "globals": {"x": ["REF", 1], "y": ["REF", 2], "z": ["REF", 3]}, "ordered_globals": ["x", "y", "z"], "stack_to_render": [], "heap": {"1": ["LIST", 5, 8, 4], "2": ["DICT", [3, 9]], "3": ["LIST", ["REF", 1]]}, "stdout": ""}]}
+</script>
+<div id="jm1b1d94c8-e5c6-4fd9-9d74-44b2d17b6106" class="pytutorVisualizer"> </div>
+
+<style>
+.vizLayoutTd {
+    background-color: #fff !important;
+}
+
+
+/* 'Edit this code' link, hiding because replaces browser tab !!!*/
+#editCodeLinkDiv {
+    display:none;
+}
+</style>
+
+<script>
+(function(){
+
+    var trace = JSON.parse(document.getElementById('json-jm1b1d94c8-e5c6-4fd9-9d74-44b2d17b6106').innerHTML);
+    // NOTE 1: id without #
+    // NOTE 2 - maybe there are more predictable ways, but this will work anyway
+    //        - id should be number
+    visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
+    addVisualizerToPage(trace, 'jm1b1d94c8-e5c6-4fd9-9d74-44b2d17b6106',{'embeddedMode' : false,
+                                        'visualizerIdOverride':visualizerIdOverride})
+
+
+    // set overflow for pytuts - need to do in python as css
+    // does not allow parent selection
+    var pytuts = $('.pytutorVisualizer')
+    pytuts.closest('div.output_html.rendered_html.output_result')
+            .css('overflow-x', 'visible')
+
+    //pytuts.closest('div.output_html.rendered_html.output_result')
+    //      .css('background-color','red')
+
+})()
+</script></div>
+</div>
+<p>Beware of variables which were initialized in previous cells, they won’t be available in Python Tutor and you will get an error:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">w</span> <span class="o">=</span> <span class="mi">8</span>
+
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">x</span> <span class="o">=</span>  <span class="n">w</span> <span class="o">+</span> <span class="mi">5</span>
+<span class="n">jupman</span><span class="o">.</span><span class="n">pytut</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Traceback (most recent call last):
+  File &#34;/home/da/Da/prj/jupman/prj/jupman.py&#34;, line 2305, in _runscript
+    self.run(script_str, user_globals, user_globals)
+  File &#34;/home/da/Da/bin/anaconda3/lib/python3.7/bdb.py&#34;, line 585, in run
+    exec(cmd, globals, locals)
+  File &#34;&lt;string&gt;&#34;, line 2, in &lt;module&gt;
+NameError: name &#39;w&#39; is not defined
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<script src="_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
+
+<script id="json-jm524af54a-ca89-4c26-94e7-5b535c0ac1ba" type="application/json" >
+    {"code": " \nx =  w + 5", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 2, "event": "exception", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": "", "exception_msg": "NameError: name 'w' is not defined"}]}
+</script>
+<div id="jm524af54a-ca89-4c26-94e7-5b535c0ac1ba" class="pytutorVisualizer"> </div>
+
+<style>
+.vizLayoutTd {
+    background-color: #fff !important;
+}
+
+
+/* 'Edit this code' link, hiding because replaces browser tab !!!*/
+#editCodeLinkDiv {
+    display:none;
+}
+</style>
+
+<script>
+(function(){
+
+    var trace = JSON.parse(document.getElementById('json-jm524af54a-ca89-4c26-94e7-5b535c0ac1ba').innerHTML);
+    // NOTE 1: id without #
+    // NOTE 2 - maybe there are more predictable ways, but this will work anyway
+    //        - id should be number
+    visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
+    addVisualizerToPage(trace, 'jm524af54a-ca89-4c26-94e7-5b535c0ac1ba',{'embeddedMode' : false,
+                                        'visualizerIdOverride':visualizerIdOverride})
+
+
+    // set overflow for pytuts - need to do in python as css
+    // does not allow parent selection
+    var pytuts = $('.pytutorVisualizer')
+    pytuts.closest('div.output_html.rendered_html.output_result')
+            .css('overflow-x', 'visible')
+
+    //pytuts.closest('div.output_html.rendered_html.output_result')
+    //      .css('background-color','red')
+
+})()
+</script></div>
+</div>
+</div>
+</div>
+<div class="section" id="Website">
+<h2>Website<a class="headerlink" href="#Website" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Changing-site-colors">
+<h3>Changing site colors<a class="headerlink" href="#Changing-site-colors" title="Permalink to this headline">¶</a></h3>
+<p>If you want to change site colors and do other changes, edit <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/_static/css/jupman-rtd.css">_static/css/jupman-rtd.css</a></p>
+</div>
+<div class="section" id="Warning-about-old-versions">
+<h3>Warning about old versions<a class="headerlink" href="#Warning-about-old-versions" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://docs.readthedocs.io/en/latest/versions.html">ReadTheDocs has a mechanism</a> to warn the user if he’s looking at an old version of the site, but we found it doesn’t work much for course-based documentation. So for versioning we think it’s better to adopt a mixed git branch / tags devlopment model, and we added a template warning to show in old branches. To enable it in an old branch, just rename <a class="reference external" href="_templates/breadcrumbs.html.bak">_templates/breadcrumbs.html.bak</a> into
+<code class="docutils literal notranslate"><span class="pre">_templates/breadcrumbs.html</span></code> and edit as needed.</p>
+</div>
+</div>
+<div class="section" id="Exams">
+<h2>Exams<a class="headerlink" href="#Exams" title="Permalink to this headline">¶</a></h2>
+<p>Jupman comes with a script to manage exams called <a class="reference external" href="exam.py">exam.py</a>, which allows to manage the full cycle of an exam.</p>
+<div class="section" id="What-is-an-exam">
+<h3>What is an exam<a class="headerlink" href="#What-is-an-exam" title="Permalink to this headline">¶</a></h3>
+<p><strong>Exam text</strong> is represented as Jupyter notebooks, which are taken from <a class="reference external" href="_templates/exam/solutions/exam-yyyy-mm-dd.ipynb">_templates/exam/solutions/exam-yyyy-mm-dd.ipynb</a></p>
+<p><strong>Exercises for students</strong>: they are supposed to be the exam notebook itself and / or plain python files (or the notebook itself) plus unittests and relative solutions.</p>
+<p><strong>Marks spreadsheet</strong>: By default there is also an LibreOffice spreadsheet to give marks, in case you need it.</p>
+<p>When you initialize an exam with the <code class="docutils literal notranslate"><span class="pre">init</span></code> command, for example for date <code class="docutils literal notranslate"><span class="pre">2000-12-31</span></code>, all the presets in <code class="docutils literal notranslate"><span class="pre">_templates/exam/</span></code> are copied to <code class="docutils literal notranslate"><span class="pre">private/2000-12-31/</span></code> and <code class="docutils literal notranslate"><span class="pre">private/2000-12-31/solutions</span></code>. Presets can be changed at will to suit your needs. When packaging, student zip is assembled in <code class="docutils literal notranslate"><span class="pre">private/2000-12-31/student-zip</span></code></p>
+<p>System is flexible enough so you can privately work on next exams in <code class="docutils literal notranslate"><span class="pre">private/</span></code> folder and still being able to publish modifications to main website. After an exam, you can copy the private exam to the public folders in <code class="docutils literal notranslate"><span class="pre">past-exams/</span></code>.</p>
+</div>
+<div class="section" id="Exam-commands">
+<h3>Exam commands<a class="headerlink" href="#Exam-commands" title="Permalink to this headline">¶</a></h3>
+<p>To see the help:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 exam.py -h
+</pre></div>
+</div>
+<p>To see help for a particular subcommand, like i.e. <code class="docutils literal notranslate"><span class="pre">init</span></code>, type the subcommand followed by <code class="docutils literal notranslate"><span class="pre">-h</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 exam.py init -h
+</pre></div>
+</div>
+<p>Running commands should be quite self-explanatory.</p>
+<p>NOTE: as of today (Dec 2019) software may contain bugs, but at least we check for major misuses (like trying to overwrite existing exams).</p>
+<p>In the file <a class="reference external" href="create-exam-example.sh">create-exam-example.sh</a> there is a typical run of the script, which creates the example exam for date <code class="docutils literal notranslate"><span class="pre">2000-12-31</span></code>. Notice it might ask you to delete the existing 2000-12-31 exam, if it does just follow the instructions. Here is the output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./create-exam-example.sh
+python3 exam.py init <span class="m">2000</span>-12-31
+
+  You can now edit Python solutions, tests, exercises and exam notebook here  :
+
+     _private/2000-12-31/solutions
+
+  DONE.
+
+python3 exam.py package <span class="m">2000</span>-12-31
+  Cleaning _private/2000-12-31/server/jupman  ...
+  Copying built website ...
+  Building pdf ..
+  Copying exercises to _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/
+  Copying code
+    from  _private/2000-12-31/solutions
+    to    _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/
+    Writing <span class="o">(</span>patched<span class="o">)</span> _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/exam-2000-12-31.ipynb
+    Generating _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/trees.py
+    Writing _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/example.txt
+    Generating _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/lists.py
+    Writing <span class="o">(</span>patched<span class="o">)</span> _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/trees_test.py
+    Writing <span class="o">(</span>patched<span class="o">)</span> _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/lists_test.py
+  Creating dir _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/img
+    Writing _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/img/mountains.jpg
+  Creating student exercises zip:  _private/2000-12-31/server/jupman-2000-12-31-exam.zip
+  Writing jupman.py
+  Writing my_lib.py
+  Writing _static/img/cc-by.png
+  Writing _static/js/jupman.js
+  Writing _static/css/jupman.css
+  Writing _static/js/toc.js
+  Wrote _private/2000-12-31/server/jupman-2000-12-31-exam
+  Creating server zip: _private/2000-12-31/jupman-2000-12-31-server.zip
+
+  You can now browse the website at:  /home/da/Da/prj/jupman/prj/_private/2000-12-31/server/jupman/html/index.html
+
+
+  DONE.
+
+
+------- Simulating some shipped exams...
+mkdir -p _private/2000-12-31/shipped/john-doe-112233
+cp _templates/exam/solutions/lists_sol.py _templates/exam/solutions/lists_test.py _templates/exam/solutions/trees_sol.py _templates/exam/solutions/trees_test.py _private/2000-12-31/shipped/john-doe-112233
+mkdir -p _private/2000-12-31/shipped/jane-doe-445566
+cp _templates/exam/solutions/lists_sol.py _templates/exam/solutions/lists_test.py _templates/exam/solutions/trees_sol.py _templates/exam/solutions/trees_test.py _private/2000-12-31/shipped/jane-doe-445566
+------- Done with shipped exams simulation, <span class="nb">time</span> to grade ...
+
+python3 exam.py grade <span class="m">2000</span>-12-31
+  Copying Python files to execute and eventually grade in _private/2000-12-31/graded/john-doe-112233/graded
+  Copying original shipped files <span class="o">(</span>don<span class="s1">&#39;t touch them!) in _private/2000-12-31/graded/john-doe-112233/shipped</span>
+<span class="s1">  Copying Python files to execute and eventually grade in _private/2000-12-31/graded/jane-doe-445566/graded</span>
+<span class="s1">  Copying original shipped files (don&#39;</span>t touch them!<span class="o">)</span> in _private/2000-12-31/graded/jane-doe-445566/shipped
+
+  DONE.
+
+python3 exam.py zip-grades <span class="m">2000</span>-12-31
+
+  You can now find zips to send to students in _private/2000-12-31/graded
+
+
+  DONE.
+
+python3 exam.py publish <span class="m">2000</span>-12-31
+  Copying solutions to exams/2000-12-31/solutions
+  Copying exam PDF text
+
+  Exam Python files copied.
+
+  You can now manually build and run the following git instructions to publish the exam.
+    ./build.py
+    git status  <span class="c1"># just to check everything is ok</span>
+    git add .
+    git commit -m <span class="s1">&#39;published 2000-12-31 exam&#39;</span>
+    git push
+
+
+  DONE.
+
+
+  Finished example exam run !!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Developer-notes">
+<h2>Developer notes<a class="headerlink" href="#Developer-notes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Fix-nbsphinx-to-create-rst-files">
+<h3>Fix nbsphinx to create rst files<a class="headerlink" href="#Fix-nbsphinx-to-create-rst-files" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes nbsphinx does not report properly RST conversion errors (<a class="reference external" href="https://github.com/DavidLeoni/jupman/issues/9">see bug</a>). As a hacky workaround, you might take the <code class="docutils literal notranslate"><span class="pre">nbsphinx.py</span></code> from <code class="docutils literal notranslate"><span class="pre">~/.local/lib/python3.5/site-packages/</span></code> , make a copy of it in your project home and patch it <a class="reference external" href="https://github.com/DavidLeoni/jupman/commit/0f332629ce4e2b0186c954c55aea7fa67992ace9#diff-bd3d9c4d2e80ed83fd2443d1301aa65bR649">like this</a> When you call sphinx, it will generate RST files in
+<code class="docutils literal notranslate"><span class="pre">_build/jupman-rst/</span></code>.</p>
+<p>Of course, things can be cleaner using a virtual env <a class="reference external" href="https://docs.python.org/3/library/venv.html">with venv</a></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="jupman-tests.html" class="btn btn-neutral float-right" title="Jupman Tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Jupman" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright # TODO FIRST YEAR - 2020, TODO CHANGE author
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
