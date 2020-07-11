@@ -113,7 +113,7 @@ var jupman = {
     },
     
     /**
-     *  Code common to both jupman in jupyter and ReadTheDocs
+     *  Code common to both jupman in jupyter and Website
     */
     initCommon : function(){
         
@@ -226,9 +226,9 @@ var jupman = {
     /**
     * RTD only instructions
     */
-    initReadTheDocs : function(){  
+    initWebsite : function(){  
         
-        console.log("initializing jupman.js in ReadTheDocs ...")
+        console.log("initializing jupman.js in Website ...")
         
         console.log("Fixing menu clicks for https://github.com/DavidLeoni/jupman/issues/38")
 
@@ -275,7 +275,7 @@ var jupman = {
         pytuts.closest('div.output_area.rendered_html.docutils.container')
               .css('overflow', 'visible')
 
-        console.log("Finished initializing jupman.js in ReadTheDocs")    
+        console.log("Finished initializing jupman.js in Website")    
     },
     
     /**
@@ -286,7 +286,7 @@ var jupman = {
        jupman.initCommon();
         
        if (typeof JUPMAN_IN_JUPYTER === "undefined" || !JUPMAN_IN_JUPYTER ){            
-           jupman.initReadTheDocs();
+           jupman.initWebsite();
        } else {
            jupman.initJupyter();
        }
