@@ -112,7 +112,7 @@ extensions = [
     'sphinx.ext.ifconfig',
     'recommonmark',    
      # note: also needed for github actions, see https://github.com/DavidLeoni/jupman/issues/46
-    'readthedocs_ext.readthedocs'
+    #'readthedocs_ext.readthedocs'
     #, 'rst2pdf.pdfbuilder'
 ]
 
@@ -187,7 +187,7 @@ language = None
 html_title = project # + ' version ' + release
 # canonical url for documentation
 # since sphinx 1.8
-html_baseurl = 'https://jupman.readthedocs.io'
+html_baseurl = 'https://jupman.softpython.org'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
