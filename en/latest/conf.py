@@ -13,17 +13,20 @@ import sys
 sys.path.append('.') # for rtd 
 import jupman_tools as jmt
 
+
 on_rtd = os.environ.get('READTHEDOCS') == 'True'
 
 ###################   TODO EDIT AS NEEDED !!  ####################
 
 jm = jmt.Jupman()
 
-jm.subtitle = "TODO CHANGE jm.subtitle A template manager for Jupyter course websites."""
-jm.course = "TODO CHANGE jm.course" 
-jm.degree = "TODO CHANGE jm.degree"
-author = 'TODO CHANGE author' 
-copyright = '# TODO FIRST YEAR - %s, %s' % (datetime.datetime.now().year, author)
+# TODO CHANGE
+jm.subtitle = "A template manager for online books made with Jupyter notebooks and NBSphinx doc generator""" 
+jm.course = "Applied Pythonics" # TODO CHANGE
+jm.degree = "Nuclear Templates Engineering" # TODO CHANGE
+author = 'People That Write a Lot' # TODO CHANGE
+# TODO FIRST YEAR
+copyright = '# 2020 - %s, %s' % (datetime.datetime.now().year, author)
 
 #####    'jm_filename' IS *VERY* IMPORTANT !!!!
 #####     IT IS PREPENDED IN MANY GENERATED FILES
@@ -110,8 +113,10 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.ifconfig',
-    'recommonmark',    
-     # note: also needed for github actions, see https://github.com/DavidLeoni/jupman/issues/46
+    'recommonmark',
+     # July 2020: does not work, see https://github.com/DavidLeoni/jupman/issues/48
+     #'sphinxcontrib.googleanalytics'
+     # note: might be needed also for github actions, see https://github.com/DavidLeoni/jupman/issues/46
     #'readthedocs_ext.readthedocs'
     #, 'rst2pdf.pdfbuilder'
 ]
@@ -126,6 +131,7 @@ exclude_patterns = [jm.build,
                      'readme.md']
 
 exclude_patterns.extend(jm.zip_ignored)
+
 
 # Default language for syntax highlighting in reST and Markdown cells
 highlight_language = 'none'
@@ -187,7 +193,7 @@ language = None
 html_title = project # + ' version ' + release
 # canonical url for documentation
 # since sphinx 1.8
-html_baseurl = 'https://jupman.softpython.org'
+html_baseurl = 'https://jupman.softpython.org/en/latest/'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
@@ -251,8 +257,8 @@ templates_path = ['_templates']
 #    'google3dea3b29336ca0e5': 'google3dea3b29336ca0e5.html',
 #}
 
-
-
+#'sphinxcontrib.googleanalytics'
+googleanalytics_id = os.environ.get('GOOGLE_ANALYTICS')
 
 latex_engine='xelatex'
 
@@ -412,31 +418,36 @@ pdf_use_numbered_links = False
 # Background images fitting mode
 pdf_fit_background_mode = 'scale'
 
-def setup(app):    
+def setup(app):
+    if 'googleanalytics_id' in globals() and globals()['googleanalytics_id']:
+        print("Found googleanalytics_id")
+        import googleanalytics
+        googleanalytics.setup(app)
+    else:
+        print('No valid googleanalytics_id was found, skipping it')
 
-        app.add_config_value(   'recommonmark_config', {
-                                    'auto_toc_tree_section': 'Contents',
-                                    'enable_eval_rst':True
-                                }, True)
-        app.add_transform(AutoStructify)
-        for folder in jm.get_exercise_folders():
-            jm.zip_folder(folder)
-        jm.zip_folders('exams/*/solutions', 
-                        lambda x:  '%s-%s-exam' % (jm.filename, x.split('/')[-2]))
-        # Build Project
-        def sub(x):
-            if x == 'requirements.txt':
-                return 'NAME-SURNAME-ID/requirements.txt'
-            elif x.startswith('project/'):
-                return 'NAME-SURNAME-ID/%s' % x[len('project/'):]
-            else:
-                return x
+    app.add_config_value(   'recommonmark_config', {
+                                'auto_toc_tree_section': 'Contents',
+                                'enable_eval_rst':True
+                            }, True)
+    app.add_transform(AutoStructify)
+    for folder in jm.get_exercise_folders():
+        jm.zip_folder(folder)
+    jm.zip_folders('exams/*/solutions', 
+                    lambda x:  '%s-%s-exam' % (jm.filename, x.split('/')[-2]))
+    # Build Project
+    def sub(x):
+        if x == 'requirements.txt':
+            return 'NAME-SURNAME-ID/requirements.txt'
+        elif x.startswith('project/'):
+            return 'NAME-SURNAME-ID/%s' % x[len('project/'):]
+        else:
+            return x
 
-        jm.zip_paths(['project', 'requirements.txt'], 
-                     '_static/generated/project-template',
-                     patterns = sub)
-        
-
+    jm.zip_paths(['project', 'requirements.txt'], 
+                    '_static/generated/project-template',
+                    patterns = sub)
+    
 
 source_suffix = {
     '.rst': 'restructuredtext',
