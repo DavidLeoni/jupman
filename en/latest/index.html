@@ -33,7 +33,6 @@
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script type="text/javascript" src="_static/js/jupman.js"></script>
         <script type="text/javascript" src="_static/js/pytutor-embed.bundle.min.js"></script>
-        <script async="async" type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-doc-embed.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
@@ -46,33 +45,10 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/jupman.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/jupman-rtd.css" type="text/css" />
-  <link rel="stylesheet" href="https://assets.readthedocs.org/static/css/badge_only.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Jupman Usage" href="usage.html" />
     <link rel="prev" title="" href="toc.html" /> 
-
-<!-- RTD Extra Head -->
-
-<!-- 
-Always link to the latest version, as canonical.
-http://docs.readthedocs.org/en/latest/canonical.html
--->
-<link rel="canonical" href="" />
-
-<link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
-
-<script type="text/javascript" src="_static/readthedocs-data.js"></script>
-
-<!-- Add page-specific data, which must exist in the page js, not global -->
-<script type="text/javascript">
-READTHEDOCS_DATA['page'] = "index"
-READTHEDOCS_DATA['source_suffix'] = ".ipynb"
-</script>
-
-<script type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-analytics.js" async="async"></script>
-
-<!-- end RTD <extrahead> -->
 </head>
 
 <body class="wy-body-for-nav">
@@ -401,15 +377,16 @@ READTHEDOCS_DATA['source_suffix'] = ".ipynb"
 <h1>Jupman<a class="headerlink" href="#Jupman" title="Permalink to this headline">¶</a></h1>
 <!-- HTML download links -->
 
- Download: &nbsp;&nbsp; <a href="http://readthedocs.org/projects/jupman/downloads/pdf/latest/" target="_blank">PDF</a>
-           &nbsp;&nbsp; <a href="http://readthedocs.org/projects/jupman/downloads/epub/latest/" target="_blank"> EPUB </a>
-           &nbsp;&nbsp; <a href="http://readthedocs.org/projects/jupman/downloads/htmlzip/latest/" target="_blank"> HTML </a>
+ Download: &nbsp;&nbsp; <a href="https://jupman.softpython.org/en/latest/jupman.pdf" target="_blank">PDF</a>
+           &nbsp;&nbsp; <a href="https://jupman.softpython.org/en/latest/jupman.epub" target="_blank"> EPUB </a>
+           &nbsp;&nbsp; <a href="https://github.com/DavidLeoni/jupman/archive/gh-pages.zip" target="_blank"> HTML </a>
            &nbsp;&nbsp; <a href="https://github.com/DavidLeoni/jupman" target="_blank"> Github </a>
  <br/>
  <br/><p><strong>Jupman is a template manager for course websites made with</strong> <a class="reference external" href="http://jupyter.org">Jupyter</a> <strong>notebooks and</strong> <a class="reference external" href="http://nbsphinx.readthedocs.io/">NBSphinx</a> <strong>doc generator</strong>.</p>
 <p><strong>Features</strong>:</p>
 <ul class="simple">
-<li><p>Based on <a class="reference external" href="http://nbsphinx.readthedocs.io/">NBSphinx</a> which produces website made of static files, easy to host on ReadTheDocs or any webserver</p></li>
+<li><p>Based on <a class="reference external" href="http://nbsphinx.readthedocs.io/">NBSphinx</a> which produces website made of static files</p></li>
+<li><p>Supports build with ReadTheDocs or <a class="reference external" href="https://github.com/DavidLeoni/readthedocs-to-actions">Github Actions</a> (or local Docker emulating ReadTheDocs)</p></li>
 <li><p>decent PDF layout</p></li>
 <li><p>builds exercises from solution templates (both .ipynb and .py)</p></li>
 <li><p>builds chapter zips</p></li>
@@ -425,8 +402,7 @@ READTHEDOCS_DATA['source_suffix'] = ".ipynb"
 <p><strong>Currently lacking:</strong></p>
 <ul class="simple">
 <li><p>Python Tutor doesn’t work in JupyterLab</p></li>
-<li><p>decent EPUB support</p></li>
-<li><p>more testing, especially for exam management</p></li>
+<li><p>more testing, especially for EPUB support and exam management</p></li>
 </ul>
 <p><strong>Used by:</strong></p>
 <ul class="simple">
