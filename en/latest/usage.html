@@ -111,6 +111,9 @@
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Jupman Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#Installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#To-build-with-ReadTheDocs:">To build with ReadTheDocs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#To-build-with-Github-Actions:">To build with Github Actions:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Local-build-with-Sphinx">Local build with Sphinx</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Optional---Running-tests">Optional - Running tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Optional---Install-Jupyter-contrib-extensions">Optional - Install Jupyter contrib extensions</a></li>
 </ul>
@@ -571,13 +574,24 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Jupman-Usage">
 <h1>Jupman Usage<a class="headerlink" href="#Jupman-Usage" title="Permalink to this headline">¶</a></h1>
 <p>Jupyter Python 3 worksheets build system and exam manager. See Jupman manual at <a class="reference external" href="http://jupman.readthedocs.io">jupman.readthedocs.io</a></p>
-<p>Jupman uses <a class="reference external" href="http://nbsphinx.readthedocs.io/">NbSphinx</a> and <a class="reference external" href="https://readthedocs.org">ReadTheDocs</a>.</p>
+<p>Jupman uses <a class="reference external" href="http://nbsphinx.readthedocs.io/">NbSphinx</a> and either <a class="reference external" href="https://readthedocs.org">ReadTheDocs</a> or <a class="reference external" href="https://github.com/features/actions">Github Actions</a></p>
 <div class="section" id="Installation">
 <h2>Installation<a class="headerlink" href="#Installation" title="Permalink to this headline">¶</a></h2>
 <p>(Instructions are for Ubuntu, on Windows may differ)</p>
-<ol class="arabic">
-<li><p>On Github, fork <a class="reference external" href="https://github.com/DavidLeoni/jupman">jupman project</a> to create yours, for example <code class="docutils literal notranslate"><span class="pre">my-project</span></code>. <strong>IMPORTANT: choose a name which is NOT already on</strong> <a class="reference external" href="http://readthedocs.org">ReadTheDocs</a></p></li>
-<li><p>Create a <a class="reference external" href="http://readthedocs.org">ReadTheDocs account</a> <strong>using the same name as in Github</strong> so the address in readthedocs will be something like <em>my-project.readthedocs.org</em>.</p>
+<p>First, on Github, fork as a template <a class="reference external" href="https://github.com/DavidLeoni/jupman">jupman project</a> to create yours, for example <code class="docutils literal notranslate"><span class="pre">my-project</span></code>.</p>
+<p>Then, on your computer, clone the <code class="docutils literal notranslate"><span class="pre">my-project</span></code> from Github</p>
+<p>You can choose to build either on:</p>
+<ul class="simple">
+<li><p>ReadTheDocs</p></li>
+<li><p>Github Actions</p></li>
+<li><p>locally with plain Sphinx</p></li>
+<li><p>locally with <a class="reference external" href="https://github.com/DavidLeoni/readthedocs-to-actions">RTD Docker</a></p></li>
+</ul>
+<p>(Note Jupman itself is building on both ReadTheDocs and Github Actions only for testing purposes, one is enough)</p>
+<div class="section" id="To-build-with-ReadTheDocs:">
+<h3>To build with ReadTheDocs:<a class="headerlink" href="#To-build-with-ReadTheDocs:" title="Permalink to this headline">¶</a></h3>
+<p><strong>IMPORTANT: choose a name which is NOT already on</strong> <a class="reference external" href="http://readthedocs.org">ReadTheDocs</a></p>
+<p>Create a <a class="reference external" href="http://readthedocs.org">ReadTheDocs account</a> <strong>using the same name as in Github</strong> so the address in readthedocs will be something like <em>my-project.readthedocs.org</em>.</p>
 <ul class="simple">
 <li><p>Use ReadTheDocs panels to link the project to your Github repository.</p></li>
 <li><p>In <em>Admin-&gt; Advanced settings panel</em>, set:</p>
@@ -587,8 +601,19 @@ div.rendered_html tbody tr:hover {
 </ul>
 </li>
 </ul>
-</li>
-<li><p>On your computer, clone the <code class="docutils literal notranslate"><span class="pre">my-project</span></code> from Github</p></li>
+</div>
+<div class="section" id="To-build-with-Github-Actions:">
+<h3>To build with Github Actions:<a class="headerlink" href="#To-build-with-Github-Actions:" title="Permalink to this headline">¶</a></h3>
+<p>Configure <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/.github/workflows/main.yml">.github/workflows/main.yml</a> on your computer to your needs - most likely you need to:</p>
+<ol class="arabic simple">
+<li><p>set RTD_PRJ_NAME</p></li>
+<li><p>remove <code class="docutils literal notranslate"><span class="pre">GOOGLE_ANALYTICS</span></code> entry (if you don’t plan to use it)</p></li>
+<li><p>If you want to publish to <a class="reference external" href="https://pages.github.com/">Github Pages</a>: everything is set, just create an empty branch <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> prior of committing</p></li>
+</ol>
+</div>
+<div class="section" id="Local-build-with-Sphinx">
+<h3>Local build with Sphinx<a class="headerlink" href="#Local-build-with-Sphinx" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
 <li><p>Install Python 3.5+</p></li>
 <li><p><a class="reference external" href="http://jupyter.org/install.html">Install Jupyter</a></p></li>
 <li><p>Install Python modules -from the root of the project, run:</p>
@@ -598,6 +623,7 @@ div.rendered_html tbody tr:hover {
 <p>This will install required modules in your home directory</p>
 </li>
 </ol>
+</div>
 <div class="section" id="Optional---Running-tests">
 <h3>Optional - Running tests<a class="headerlink" href="#Optional---Running-tests" title="Permalink to this headline">¶</a></h3>
 <p>To check everything is working, you may want to run the tests.</p>

@@ -38,5 +38,6 @@ div.output_area.docutils.container:not(.rendered_html){
 }
 
 #jupman-langs {
-    float:right
+    float : right;
+    padding-right : 8px;
 }
