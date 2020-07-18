@@ -3,7 +3,7 @@
 
 Jupman Jupyter Manager 
 
-http://jupman.readthedocs.com
+https://jupman.softpython.org
 
 ## January 16th 2020 - 3.1
 

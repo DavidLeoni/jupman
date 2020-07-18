@@ -205,8 +205,15 @@ todo_include_todos = True
 #
 html_theme_options = {
     # fix for https://github.com/DavidLeoni/jupman/issues/38
-    'collapse_navigation': False,
+    'collapse_navigation': False    
 }
+
+if os.environ.get('GOOGLE_ANALYTICS'):
+    print("Found GOOGLE_ANALYTICS environment variable")
+    html_theme_options['analytics_id'] = os.environ.get('GOOGLE_ANALYTICS')        
+else:
+    print('No GOOGLE_ANALYTICS environment variable was found, skipping it')
+    
 
 # NOTE: in order to have complete collapsible menu, 
 #       IT IS *FUNDAMENTAL* FOR html_theme to be defined
@@ -229,8 +236,9 @@ html_js_files = [
 ]
 
 html_css_files = [
-    'css/jupman.css',      # shared among jupyter and ReadTheDocs
-    'css/jupman-rtd.css',  # only for ReadTheDocs
+    'css/jupman.css',      # shared among jupyter and website
+    'css/jupman-web.css',  # only on website
+    #'css/softpython-theme.css',  
 ]
 
 # -- Options for HTMLHelp output ------------------------------------------
@@ -258,7 +266,8 @@ templates_path = ['_templates']
 #}
 
 #'sphinxcontrib.googleanalytics'
-googleanalytics_id = os.environ.get('GOOGLE_ANALYTICS')
+#googleanalytics_id = os.environ.get('GOOGLE_ANALYTICS')
+
 
 latex_engine='xelatex'
 
@@ -419,13 +428,7 @@ pdf_use_numbered_links = False
 pdf_fit_background_mode = 'scale'
 
 def setup(app):
-    if 'googleanalytics_id' in globals() and globals()['googleanalytics_id']:
-        print("Found googleanalytics_id")
-        import googleanalytics
-        googleanalytics.setup(app)
-    else:
-        print('No valid googleanalytics_id was found, skipping it')
-
+    
     app.add_config_value(   'recommonmark_config', {
                                 'auto_toc_tree_section': 'Contents',
                                 'enable_eval_rst':True

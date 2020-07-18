@@ -5,18 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-125857337-3']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Jupman Tests &mdash; Jupman</title>
@@ -50,7 +39,7 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/jupman.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/jupman-rtd.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/jupman-web.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Python introduction" href="python-intro/python-intro.html" />
@@ -148,7 +137,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#Website">Website</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#Changing-site-colors">Changing site colors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#customize-theme">customize theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Fonts">Fonts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#font-sizes">font sizes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage.html#Warning-about-old-versions">Warning about old versions</a></li>
 </ul>
 </li>
@@ -177,6 +168,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#Image">Image</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#SVG-Images">SVG Images</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#PNG-Images">PNG Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Inline-images---pure-markdown">Inline images - pure markdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Inline-images---markdown-and-img">Inline images - markdown and img</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#Expressions-list">Expressions list</a></li>
@@ -652,6 +645,20 @@ SVG(filename=&#39;img/cc-by.svg&#39;)
 <div class="section" id="PNG-Images">
 <h3>PNG Images<a class="headerlink" href="#PNG-Images" title="Permalink to this headline">¶</a></h3>
 <p><img alt="A PNG image" src="_images/notebook_icon.png" /></p>
+</div>
+<div class="section" id="Inline-images---pure-markdown">
+<h3>Inline images - pure markdown<a class="headerlink" href="#Inline-images---pure-markdown" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Bla ![A PNG image](_static/img/notebook_icon.png)  bli blo
+</pre></div>
+</div>
+<p>Bla <img alt="A PNG image" src="_images/notebook_icon.png" /> bli blo</p>
+</div>
+<div class="section" id="Inline-images---markdown-and-img">
+<h3>Inline images - markdown and img<a class="headerlink" href="#Inline-images---markdown-and-img" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>bla &lt;img style=&quot;display:inline&quot; src=&quot;_static/img/notebook_icon.png&quot;&gt; bli blo
+</pre></div>
+</div>
+<p>bla bli blo</p>
 </div>
 </div>
 <div class="section" id="Expressions-list">
@@ -1773,6 +1780,18 @@ long output ... 149
 
   
   
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-125857337-3', 'auto');
+    ga('send', 'pageview');
+    </script>
+
     
    
 
