@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Exam project &mdash; Jupman</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script type="text/javascript" src="_static/js/jupman.js"></script>
+        <script type="text/javascript" src="_static/js/pytutor-embed.bundle.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/jupman.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/jupman-web.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/softpython-theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Project ideas" href="project-ideas.html" />
+    <link rel="prev" title="Past Exams" href="past-exams.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="toc-page.html" class="icon icon-home"> Jupman
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Revisions">Revisions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Contents">Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#Credits">Credits</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Jupman Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#Installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#To-build-with-ReadTheDocs:">To build with ReadTheDocs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#To-build-with-Github-Actions:">To build with Github Actions:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Local-build-with-Sphinx">Local build with Sphinx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Optional---Running-tests">Optional - Running tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Optional---Install-Jupyter-contrib-extensions">Optional - Install Jupyter contrib extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#Getting-Started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#Building-the-manual">Building the manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#Publishing">Publishing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#Editing-the-worksheets">Editing the worksheets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Common-files">Common files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Running-Jupyter">Running Jupyter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Source-code-for-chapters">Source code for chapters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Type-of-exercises">Type of exercises</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="usage.html#Exercises-in-python-files">Exercises in python files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="usage.html#Exercises-in-Jupyter-files">Exercises in Jupyter files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Tags-to-strip">Tags to strip</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="usage.html#jupman-raise">jupman-raise</a></li>
+<li class="toctree-l4"><a class="reference internal" href="usage.html#jupman-strip">jupman-strip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="usage.html#write-here">write here</a></li>
+<li class="toctree-l4"><a class="reference internal" href="usage.html#SOLUTION">SOLUTION</a></li>
+<li class="toctree-l4"><a class="reference internal" href="usage.html#QUESTION---ANSWER">QUESTION - ANSWER</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Utilities-and-custom-js-and-css">Utilities and custom js and css</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Hiding-cells">Hiding cells</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="usage.html#Implications-of-hiding-'import-jupman'">Implications of hiding ‘import jupman’</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Launch-unit-tests">Launch unit tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Python-Tutor">Python Tutor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#Website">Website</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#customize-theme">customize theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Fonts">Fonts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#font-sizes">font sizes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Warning-about-old-versions">Warning about old versions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#Exams">Exams</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#What-is-an-exam">What is an exam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Exam-commands">Exam commands</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#Developer-notes">Developer notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#Fix-nbsphinx-to-create-rst-files">Fix nbsphinx to create rst files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="jupman-tests.html">Jupman Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Sezione-1">Sezione 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Sezione-2">Sezione 2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#Subsection-1">Subsection 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#Subsection-2">Subsection 2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Download-links">Download links</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Info/Warning-Boxes">Info/Warning Boxes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Math">Math</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Unicode">Unicode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Image">Image</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#SVG-Images">SVG Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#PNG-Images">PNG Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#Inline-images---pure-markdown">Inline images - pure markdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#Inline-images---markdown-and-img">Inline images - markdown and img</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Expressions-list">Expressions list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Toggable-cells">Toggable cells</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#Toggling-with-Javascript-(PREFERRED)">Toggling with Javascript (PREFERRED)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#HTML-details-in-Markdown,-code-tag">HTML details in Markdown, code tag</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#HTML-details-in-Markdown,-Markdown-mixed-code">HTML details in Markdown, Markdown mixed code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#HTML-details-in-HTML,-raw-NBConvert-Format">HTML details in HTML, raw NBConvert Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Files-in-templates">Files in templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Python-tutor">Python tutor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#jupman.pytut">jupman.pytut</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#HTML-magics">HTML magics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#NBTutor">NBTutor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Stripping-answers">Stripping answers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Formatting-problems">Formatting problems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#Very-large-input">Very large input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#Very-long-output">Very long output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="toc.html"> </a></li>
+<li class="toctree-l1"><a class="reference internal" href="toc.html#chapter-examples">Chapter examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python-intro/python-intro.html">Python introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python-intro/python-intro.html#Download-exercises-zip">Download exercises zip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python-intro/python-intro.html#What-to-do">What to do</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python-intro/python-intro.html#Let's-begin">Let’s begin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python-intro/python-intro.html#Global-image">Global image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python-intro/python-intro.html#Local-exercise-image">Local exercise image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python-intro/python-intro.html#Python-tutor">Python tutor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python-intro/python-intro.html#add">add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python-intro/python-intro.html#sub">sub</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html">Jupyter introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html#Download-exercises-zip">Download exercises zip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html#What-to-do">What to do</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html#Exercise-1">Exercise 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html#Exercise-2">Exercise 2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html#Exercise-3">Exercise 3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html#Exercise-4">Exercise 4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html#Exercise-5">Exercise 5</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="jupyter-intro/jupyter-intro-sol.html#Conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tools-intro/tools-intro-sol.html">Tools introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tools-intro/tools-intro-sol.html#Download-exercises-zip">Download exercises zip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools-intro/tools-intro-sol.html#What-to-do">What to do</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tools-intro/tools-intro-sol.html#Let's-begin">Let’s begin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tools-intro/tools-intro-sol.html#Global-image">Global image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools-intro/tools-intro-sol.html#Local-exercise-image">Local exercise image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools-intro/tools-intro-sol.html#Python-tutor">Python tutor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tools-intro/tools-intro-sol.html#Exercise-in-Jupyter">Exercise in Jupyter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tools-intro/tools-intro-sol.html#add">add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools-intro/tools-intro-sol.html#sub">sub</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="toc.html#templates">Templates</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="past-exams.html">Past Exams</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Exam project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#What-to-do">What to do</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Technical-requirements">Technical requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Python-code">Python code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#requirements.txt-file"><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Graphical-interfaces">Graphical interfaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Be-careful-to">Be careful to</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project-ideas.html">Project ideas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project-ideas.html#TODO">TODO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project-ideas.html#Introduction">Introduction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project/project.html">Jupman Project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project/project.html#Introduzione">Introduzione</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/project.html#Sorgenti-dati">Sorgenti dati</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/project.html#Pulizia-e-integrazione-dati">Pulizia e integrazione dati</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/project.html#Analisi">Analisi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/project.html#Problematiche-riscontrate">Problematiche riscontrate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/project.html#Conclusioni">Conclusioni</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project/markdown.html">Markdown</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project/markdown.html#Celle-Markdown">Celle Markdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/markdown.html#Paragrafi">Paragrafi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/markdown.html#Link">Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/markdown.html#Liste">Liste</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/markdown.html#Immagini">Immagini</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/markdown.html#Variabili-e-nomi-tecnici">Variabili e nomi tecnici</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/markdown.html#Codice-JSON-/-XML-/-Python">Codice JSON / XML / Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project/markdown.html#Formule-matematiche">Formule matematiche</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="project/markdown.html#Tabelle">Tabelle</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#january-16th-2020-3-1">January 16th 2020 - 3.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#december-29th-2019-3-0">December 29th 2019 - 3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#september-24th-2018-2-0">September 24th 2018 - 2.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#september-19th-2018-1-0">September 19th 2018 - 1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#august-26th-2018-0-9">August 26th 2018 - 0.9</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#august-12th-2018-0-8">August 12th 2018 - 0.8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#august-3rd-2018-0-7">August 3rd 2018 - 0.7</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="toc.html#index">Index</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="toc-page.html">Jupman</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+    <div id='jupman-langs'></div>
+
+    <script>
+    var JUPMAN_LANG = 'en'
+    </script>
+    
+    <script>
+        var xhr = new XMLHttpRequest();
+        var page = window.location.pathname;
+        if (window.location.protocol =='file:'){
+            var prefix_pos = page.indexOf('_build/html/');
+            if (prefix_pos != -1){
+                page = page.slice(prefix_pos + '_build/html/'.length);
+            }
+        } 
+        xhr.open("GET", "https://en.softpython.org/cgi-bin/lang.php?page="+page, true);
+        xhr.onload = function (e) {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    var trans = JSON.parse(xhr.responseText);
+                    var the_div = document.getElementById("jupman-langs");
+                    for (var lang in trans) {
+                        if (lang != JUPMAN_LANG){                        
+                            var link_node = document.createElement("A");
+                            link_node.setAttribute('href',trans[lang]);
+                            var img_node = document.createElement('IMG');
+                            img_node.setAttribute('src','_static/img/flags/flat/32/'+lang+'.png')
+                            link_node.appendChild(img_node);
+                            the_div.appendChild(link_node);
+                        }
+                    }
+                } else {
+                    console.error(xhr.statusText);
+                    console.log(xhr.responseText);
+                }
+            }
+        };
+        xhr.onerror = function (e) {
+            console.error(xhr.statusText);
+            console.log(xhr.responseText);
+        };
+        xhr.send(null);    
+    </script>    
+
+     <!-- <li> <h2 style="background-color:red; color:yellow">WARNING! THIS VERSION IS OLD !  <br/>
+    <a style=" text-decoration: underline;" href="https://jupman.readthedocs.io/en/latest">GOT TO LATEST VERSION</a></li>
+ </h2></li>-->
+    <!-- Commented because doesn't work with sections,
+         see https://github.com/DavidLeoni/jupman/issues/39
+    <li><a href="toc-page.html">Docs</a> &raquo;</li>
+    
+        <li><a href="toc.html"> </a> &raquo;</li>
+    
+    <li>Exam project</li>
+    -->
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Exam-project">
+<h1>Exam project<a class="headerlink" href="#Exam-project" title="Permalink to this headline">¶</a></h1>
+<p><strong>For general (credits, attendance), see course description at section</strong> Evaluation and exams</p>
+<p><strong>Delivery times</strong></p>
+<p><strong>Ideas for possible projects</strong>: <a class="reference internal" href="project-ideas.html"><span class="doc">See here</span></a></p>
+<p>Last update: TODO</p>
+<p><strong>In short:</strong></p>
+<div class="section" id="What-to-do">
+<h2>What to do<a class="headerlink" href="#What-to-do" title="Permalink to this headline">¶</a></h2>
+<p><strong>First of all</strong>: send by email to <a class="reference external" href="mailto:TODO&#37;&#52;&#48;TODO&#46;COM">TODO<span>&#64;</span>TODO<span>&#46;</span>COM</a> a brief description of the project, to decide what to do. I will create a Google doc to keep track of progresses and / or problems found.</p>
+<p><strong>Once the project is defined</strong>, go on like this:</p>
+<p>1 - Download <a class="reference external" href="_static/generated/project-template.zip">zip with template</a> (view <a class="reference external" href="https://www.GITHUB.TODO">online files TODO</a> )</p>
+<p>After unzipped, you will find a folder named <code class="docutils literal notranslate"><span class="pre">NAME-SURNAME-ID</span></code>, with these files inside:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- NAME-SURNAME-ID
+    - project.ipynb
+    - markdown.ipynb
+    - requirements.txt
+    - img
+        - example.png
+</pre></div>
+</div>
+<p>2 - Rename the folder <code class="docutils literal notranslate"><span class="pre">NAME-SURNAME-ID</span></code> with your data</p>
+<p>3 - run Jupyter from the folder you just renamed</p>
+<p>4 - edit file <code class="docutils literal notranslate"><span class="pre">project.ipynb</span></code> , <strong>closely following the indications</strong> <a class="reference external" href="#Technical-requirements">in the following technical requirements</a></p>
+<p>5 - Once done, send project by email to <a class="reference external" href="mailto:TODO&#37;&#52;&#48;TODO&#46;COM">TODO<span>&#64;</span>TODO<span>&#46;</span>COM</a></p>
+</div>
+<div class="section" id="Technical-requirements">
+<h2>Technical requirements<a class="headerlink" href="#Technical-requirements" title="Permalink to this headline">¶</a></h2>
+<p>Write in <a class="reference internal" href="project/markdown.html"><span class="doc">Markdown</span></a></p>
+<div class="section" id="Python-code">
+<h3>Python code<a class="headerlink" href="#Python-code" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="requirements.txt-file">
+<h3><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file<a class="headerlink" href="#requirements.txt-file" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="Graphical-interfaces">
+<h3>Graphical interfaces<a class="headerlink" href="#Graphical-interfaces" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="Be-careful-to">
+<h3>Be careful to<a class="headerlink" href="#Be-careful-to" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="project-ideas.html" class="btn btn-neutral float-right" title="Project ideas" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="past-exams.html" class="btn btn-neutral float-left" title="Past Exams" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright # 2020 - 2020, People That Write a Lot
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-125857337-3', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>
