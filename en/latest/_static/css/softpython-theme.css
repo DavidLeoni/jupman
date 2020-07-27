@@ -76,13 +76,14 @@
 
 .wy-nav-content {
     background: #f9f8f3;
+    max-width:920px;
  }
+
 
 
  .wy-side-nav-search, .wy-nav-top {
    background-color: #537326;
  }
-
 
 .wy-nav-side {
    background-color: #705d39;
@@ -126,6 +127,7 @@ h4 {
 
 .wy-side-scroll {
     font-size: 1.22rem;
+    
 }
 
 .wy-nav-content p, .wy-nav-content li, .wy-nav-content div.admonition {
@@ -133,7 +135,7 @@ h4 {
     line-height: 1.7;
 }
 
-/* for Python Tutor */
+/* hack for Python Tutor 'next line to execute' becoming too big */
 #legendDiv p {
     font-size: 9pt;
 }
@@ -146,9 +148,8 @@ pre {
 }
 
 
-div.prompt {
-    opacity: 0;    
-    min-width:16px !important;
+div.nbinput.container div.prompt, div.nboutput.container div.prompt{
+    opacity: 0;        
+    width:5px !important;
 }
-
 
