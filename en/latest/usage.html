@@ -632,12 +632,22 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="section" id="To-build-with-Github-Actions:">
 <h3>To build with Github Actions:<a class="headerlink" href="#To-build-with-Github-Actions:" title="Permalink to this headline">¶</a></h3>
-<p>Configure <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/.github/workflows/main.yml">.github/workflows/main.yml</a> on your computer to your needs - most likely you need to:</p>
+<p>Configure <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/.github/workflows/main.yml">.github/workflows/main.yml</a> on your computer to your needs - you will need to:</p>
 <ol class="arabic simple">
+<li><p>at the beginning there is an <code class="docutils literal notranslate"><span class="pre">if</span></code> which makes the workflow only work in <code class="docutils literal notranslate"><span class="pre">DavidLeoni/jupman</span></code> repository, change it with your names</p></li>
 <li><p>set RTD_PRJ_NAME</p></li>
-<li><p>remove <code class="docutils literal notranslate"><span class="pre">GOOGLE_ANALYTICS</span></code> entry (if you don’t plan to use it)</p></li>
-<li><p>If you want to publish to <a class="reference external" href="https://pages.github.com/">Github Pages</a>: everything is set, just create an empty branch <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> prior of committing</p></li>
+<li><p>If you want to publish to <a class="reference external" href="https://pages.github.com/">Github Pages</a>: everything is set, just create an empty branch <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> in an new HTML_FOLDER <strong>before</strong> committing - from some other folder in your file system:</p></li>
 </ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone  YOUR_REPO_ADDRESS  HTML_FOLDER
+<span class="nb">cd</span> HTML_FOLDER
+git checkout --orphan gh-pages
+git rm -rf .
+touch bla
+git add .
+git commit -m <span class="s2">&quot;init&quot;</span>
+git push origin gh-pages
+</pre></div>
+</div>
 </div>
 <div class="section" id="Local-build-with-Sphinx">
 <h3>Local build with Sphinx<a class="headerlink" href="#Local-build-with-Sphinx" title="Permalink to this headline">¶</a></h3>
