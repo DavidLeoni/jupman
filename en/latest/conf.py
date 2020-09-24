@@ -28,7 +28,7 @@ author = 'People That Write a Lot' # TODO CHANGE
 # TODO FIRST YEAR
 copyright = '# 2020 - %s, %s' % (datetime.datetime.now().year, author)
 
-#####    'jm_filename' IS *VERY* IMPORTANT !!!!
+#####    'jm.filename' IS *VERY* IMPORTANT !!!!
 #####     IT IS PREPENDED IN MANY GENERATED FILES
 #####     AND IT SHOULD ALSO BE THE SAME NAME ON READTHEDOCS 
 #####     (like i.e. jupman.readthedocs.org)
@@ -52,19 +52,19 @@ jm.chapter_exclude_patterns =  ['[^_]*/','exams/', 'project/']
 jm.ipynb_solutions = "SOLUTIONS"
 jm.ipynb_exercises = "EXERCISES"
 
-#NOTE: the following string is not just a translation, it's also a command that   when building the exercises
+#NOTE: this string is not just a translation, it's also a command that when building the exercises
 #      removes the content after it in the Python cell it is contained in
 #      If the user inserts extra spaces the phrase will be recognized anyway
 jm.write_solution_here = jmt.ignore_spaces("# write here", must_begin=False)
 
-#NOTE: the following string is not just a translation, it's also a command that  when building the exercises  completely removes the content of the python cell it is contained in (solution comment included). If the user inserts extra spaces the phrase will be recognized anyway
-
+#NOTE: this string is not just a translation, it's also a command that when building the exercises  
+# completely removes the content of the python cell it is contained in (solution comment included). 
+# If the user inserts extra spaces the phrase will be recognized anyway
 jm.solution = jmt.ignore_spaces("# SOLUTION")
 
-#NOTE: the following string is not just a translation, it's also a command that 
+#NOTE: this string is not just a translation, it's also a command that 
 #   when building the exercises removes the content after it in the markdown cell
 #   it is contained in
-
 jm.markdown_answer = jmt.ignore_spaces('**ANSWER**:')
 #################################################################
 
@@ -246,9 +246,6 @@ html_css_files = [
 # Output file base name for HTML help builder.
 htmlhelp_basename = project + 'doc'
 
-
-#JUPMAN: NOTE: THESE ARE *ONLY* FOR HTML TEMPLATES, WHICH IS DIFFERENT FROM jm-templates
-# see https://github.com/DavidLeoni/jupman/issues/10
 templates_path = ['_templates']
 
 #JUPMAN: you can use html_additional_pages for directly copying html files from _templates to the project root
