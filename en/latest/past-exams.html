@@ -329,6 +329,24 @@
 
     <div id='jupman-langs'></div>
 
+    <!-- SMALL TEMPLATE FOR LANGUAGES (VERY CUSTOM FOR softpython.org !!)
+    <script>
+    var hn = window.location.hostname;
+    var pn = window.location.pathname;
+
+    if (hn.includes('softpython.org')){
+        JUPMAN_LANG = hn.slice(0,window.location.hostname.indexOf('.'));
+    } else if (pn.includes('/_build/html')){
+        var pos = pn.indexOf('/_build/html');
+        JUPMAN_LANG = pn.slice(pos-2, pos);
+    } else {
+        JUPMAN_LANG = 'en';
+    }
+    console.log('JUPMAN_LANG=',JUPMAN_LANG);
+    </script>
+    -->
+    
+    
      <!-- <li> <h2 style="background-color:red; color:yellow">WARNING! THIS VERSION IS OLD !  <br/>
     <a style=" text-decoration: underline;" href="https://jupman.readthedocs.io/en/latest">GOT TO LATEST VERSION</a></li>
  </h2></li>-->

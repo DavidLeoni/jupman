@@ -329,6 +329,24 @@
 
     <div id='jupman-langs'></div>
 
+    <!-- SMALL TEMPLATE FOR LANGUAGES (VERY CUSTOM FOR softpython.org !!)
+    <script>
+    var hn = window.location.hostname;
+    var pn = window.location.pathname;
+
+    if (hn.includes('softpython.org')){
+        JUPMAN_LANG = hn.slice(0,window.location.hostname.indexOf('.'));
+    } else if (pn.includes('/_build/html')){
+        var pos = pn.indexOf('/_build/html');
+        JUPMAN_LANG = pn.slice(pos-2, pos);
+    } else {
+        JUPMAN_LANG = 'en';
+    }
+    console.log('JUPMAN_LANG=',JUPMAN_LANG);
+    </script>
+    -->
+    
+    
      <!-- <li> <h2 style="background-color:red; color:yellow">WARNING! THIS VERSION IS OLD !  <br/>
     <a style=" text-decoration: underline;" href="https://jupman.readthedocs.io/en/latest">GOT TO LATEST VERSION</a></li>
  </h2></li>-->
@@ -693,7 +711,7 @@ SVG(filename=&#39;img/cc-by.svg&#39;)
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>bla &lt;img style=&quot;display:inline&quot; src=&quot;_static/img/notebook_icon.png&quot;&gt; bli blo
 </pre></div>
 </div>
-<p>bla <img alt="82dc899e901a4cf5b72e75a0036c6079" src="_images/notebook_icon.png" /> bli blo</p>
+<p>bla <img alt="ae20c350ef564729a7996bf401d89d04" src="_images/notebook_icon.png" /> bli blo</p>
 </div>
 <div class="section" id="Img-class">
 <h3>Img class<a class="headerlink" href="#Img-class" title="Permalink to this headline">¶</a></h3>
@@ -701,7 +719,7 @@ SVG(filename=&#39;img/cc-by.svg&#39;)
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;img class=&quot;jupman-inline-img&quot; src=&quot;_static/img/notebook_icon.png&quot;&gt;
 </pre></div>
 </div>
-<p>This <img alt="dfbb107380804a49acddbbc2bfd13914" class="jupman-inline-img" src="_images/notebook_icon.png" /> should be inline</p>
+<p>This <img alt="276c970bc1a94502bc1721a8b5868cc6" class="jupman-inline-img" src="_images/notebook_icon.png" /> should be inline</p>
 </div>
 </div>
 <div class="section" id="Expressions-list">
