@@ -1,4 +1,6 @@
 
+/** ONLY AVAILABLE IN THE WEBSITE */
+
 
 /* Makes visible the '+' boxes in menu
   https://github.com/DavidLeoni/jupman/issues/38    
@@ -41,4 +43,36 @@ img {
 */
 .jupman-inline-img {
     display: inline;
+}
+
+.jupman-sol {
+    margin-top: -10px
+}
+
+.jupman-sol-question {
+    margin-bottom: 20px
+}
+
+.jupman-sol-label {
+    background-color:#f3faff  /* lighter than admonition */;
+    
+    padding: 7px;
+    
+    border-style: solid;
+    border-color: #ede4f4;   
+}
+
+.jupman-sol-content {
+    background-color:#f3faff;
+    padding-right:7px;    
+    border-style: solid;
+    border-color: #ede4f4;  
+}
+
+.jupman-sol-hidden {
+    display: 'none';
+}
+
+.jupman-sol-visible {
+    display: block;
 }

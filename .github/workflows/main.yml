@@ -1,9 +1,9 @@
 on: [push]
 
 jobs:
-  build_docs_job:
-    if: (github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/dev') || (github.ref == 'refs/heads/themed')
-    runs-on: ubuntu-latest
+  build_docs_job:     
+    if: (github.repository == 'DavidLeoni/jupman') && ((github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/dev') || (github.ref == 'refs/heads/themed'))
+    runs-on: ubuntu-18.04
     name: Build docs    
     steps:   
     - name: Install deps
@@ -20,7 +20,7 @@ jobs:
     - name: sets WEB_PATH
       run: echo "::set-env name=WEB_PATH::${{env.LANGUAGE}}/${{env.VERSION}}"
     - name: Run Sphinx in RTD docker      
-      uses: DavidLeoni/readthedocs-to-actions@dev
+      uses: DavidLeoni/readthedocs-to-actions@v1.2
       with:
         RTD_PRJ_NAME: jupman        
         GIT_URL: https://github.com/${{ github.repository }}.git
@@ -41,12 +41,15 @@ jobs:
         mkdir -p gh-pages/${{ env.WEB_PATH }}
         cp -r $GITHUB_WORKSPACE/html/* gh-pages/${{ env.WEB_PATH }}
         if compgen -G "$GITHUB_WORKSPACE/latex/*.pdf" > /dev/null; then
-             cp -r $GITHUB_WORKSPACE/latex/*.pdf en.softpython.org/${{ env.WEB_PATH }}
+             cp -r $GITHUB_WORKSPACE/latex/*.pdf gh-pages/${{ env.WEB_PATH }}
+
         else
              echo "ERROR: NO PDF FILES WHERE GENERATED!"
         fi
         if compgen -G "$GITHUB_WORKSPACE/epub/*.epub" > /dev/null; then
-             cp -r $GITHUB_WORKSPACE/epub/*.epub en.softpython.org/${{ env.WEB_PATH }}
+
+        cp -r $GITHUB_WORKSPACE/epub/*.epub gh-pages/${{ env.WEB_PATH }}
+
         else
              echo "ERROR: NO EPUB FILES WHERE GENERATED!"
         fi
@@ -62,7 +65,7 @@ jobs:
         # The above command will fail if no changes were present, so we ignore
         # the return code.
     - name: Push changes
-      uses: ad-m/github-push-action@master
+      uses: ad-m/github-push-action@v0.6.0
       with:
         branch: gh-pages
         directory: gh-pages

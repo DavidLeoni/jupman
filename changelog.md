@@ -3,7 +3,18 @@
 
 Jupman Jupyter Manager 
 
-https://jupman.softpython.org
+[jupman.softpython.org](https://jupman.softpython.org)
+
+
+## October 16 2020 - 3.2
+
+- added optional build on Github Actions
+- solutions are finally hidden on the website, with a click to show button!
+- moved to jupman.softpython.org
+- updated nbsphinx to 0.7.1
+- updated sphinx_rtd_theme to 0.4.3
+- updated sphinx to 2.3.1
+- updated pygments to2.7.1
 
 ## January 16th 2020 - 3.1
 

@@ -1,5 +1,5 @@
 
-from text_sol import *
+from lab1_sol import *
 
 import unittest
 

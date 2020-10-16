@@ -7,7 +7,8 @@ import shutil
 import inspect
 import types
 import glob
-import datetime   
+import datetime 
+from nbconvert.preprocessors import Preprocessor  
 
 def fatal(msg, ex=None):
     """ Prints error and exits (halts program execution immediatly)
@@ -306,6 +307,58 @@ def multi_replace(text, d):
         s = re.sub(key, d[key], s) 
     return s
 
+
+def init(jupman):
+    """Initializes the system, does patching, etc
+
+        Should be called in conf.py at the beginning of setup() 
+    
+        @since 3.2
+    """
+    # hooks into ExecutePreprocessor.preprocess to execute our own filters.
+    # Method as in https://github.com/spatialaudio/nbsphinx/issues/305#issuecomment-506748814
+
+    def _from_notebook_node(self, nb, resources, **kwargs):
+        info('patched preprocessing method')            
+                                
+        for f in jupman.preprocessors:
+            nb, resources = f.preprocess(nb, resources=resources)
+
+        return nbsphinx_from_notebook_node(self, nb, resources=resources, **kwargs)        
+    
+    import nbsphinx
+    nbsphinx_from_notebook_node = nbsphinx.Exporter.from_notebook_node                
+
+    nbsphinx.Exporter.from_notebook_node = _from_notebook_node
+
+
+class JupmanPreprocessor(Preprocessor):
+    """ @since 3.2 """
+
+    def __init__(self, jupman):
+        """ @since 3.2 """
+        super().__init__()
+        self.jupman = jupman
+    
+    def preprocess(self, nb, resources):
+        """ @since 3.2 """
+
+        info("****  Jupman: preprocessing notebook *****")
+        
+        """Careful path *includes* part of docname:
+        {
+            'metadata': {'path': '/home/da/Da/prj/jupman/prj/jupyter-example'},
+                'nbsphinx_docname': 'jupyter-example/jupyter-example-sol',
+                'nbsphinx_save_notebook': '/home/da/Da/prj/jupman/prj/_build/html/.doctrees/nbsphinx/jupyter-example/jupyter-example-sol.ipynb',
+                'output_files_dir': '../_build/html/.doctrees/nbsphinx',
+                'unique_key': 'jupyter-example_jupyter-example-sol'
+        }
+        """
+        rel_dir, partial_fn = os.path.split(resources['nbsphinx_docname'])                
+        source_abs_fn = os.path.join(resources['metadata']['path'], partial_fn + '.ipynb')                
+        return self.jupman._sol_nb_to_ex(nb, source_abs_fn,website=True), resources
+
+
 def replace_py_rel(code, filepath):
     """ Takes code to be copied into zips and removes unneeded relative imports
     """
@@ -345,7 +398,7 @@ def replace_html_rel(code, filepath):
                   ret)    
     return ret
 
-def replace_ipynb_rel(nb_node, filepath):
+def replace_ipynb_rel(nb_node, filepath, website=False):
     """ MODIFIES nb_node without returning it !
     """
 
@@ -355,10 +408,12 @@ def replace_ipynb_rel(nb_node, filepath):
             cell.source = replace_py_rel(cell.source, filepath)
         elif cell.cell_type == "markdown":
             # markdown cells: fix rel urls
-            cell.source = replace_md_rel(cell.source, filepath)
+            if not website:
+                cell.source = replace_md_rel(cell.source, filepath)
         elif cell.cell_type == "raw" and \
                 'raw_mimetype' in cell.metadata and cell.metadata['raw_mimetype'] == 'text/html':
-            cell.source = replace_html_rel(cell.source, filepath)             
+            if not website:
+                cell.source = replace_html_rel(cell.source, filepath)             
         else:
             #TODO latex ?
             pass
@@ -388,8 +443,13 @@ class Jupman:
                             '_static/js/pytutor-embed.bundle.min.js.zip' ]
         """ Common files for exercise and exams as paths. Paths are intended relative to the project root. Globs like /**/* are allowed."""
 
-        self.chapters =  ['*/']
-        self.chapters_exclude =  ['[^_]*/','exams/', 'project/']
+        self.chapter_patterns =  ['*/']
+        self.chapter_exclude_patterns =  ['[^_]*/','exams/', 'project/']
+
+        self.ipynb_show_solution = "Show solution"
+        self.ipynb_hide_solution = "Hide solution"
+        self.ipynb_show_answer = "Show answer"
+        self.ipynb_hide_answer = "Hide answer"
 
         self.ipynb_solutions = "SOLUTIONS"
         self.ipynb_exercises = "EXERCISES"
@@ -450,6 +510,11 @@ class Jupman:
         """
 
 
+        self.preprocessors = [JupmanPreprocessor(self)]
+        """ Notebook preprocessors. Default one is JupmanPreprocessor.
+
+            @since 3.2
+        """
 
 
     def is_zip_ignored(self, fname):
@@ -465,11 +530,11 @@ class Jupman:
 
     def get_exercise_folders(self):
         ret = []
-        for p in self.chapters:
+        for p in self.chapter_patterns:
             for r in glob.glob(p):
                 if r not in ret:
                     ret.append(r)
-        for p in self.chapters_exclude:
+        for p in self.chapter_exclude_patterns:
             for r in glob.glob(p):
                 if r in ret:
                     ret.remove(r)
@@ -480,8 +545,10 @@ class Jupman:
         return '%s-%s-FIRSTNAME-LASTNAME-ID' % (self.filename,ld)    
 
 
-    def sol_to_ex_code(self, solution_text, filepath):
+    def is_code_sol(self, solution_text):
+        return self.sol_to_ex_code(solution_text) != solution_text    
 
+    def sol_to_ex_code(self, solution_text, filepath=None):
         
         if re.match(self.solution, solution_text.strip()):
             return ""
@@ -491,7 +558,8 @@ class Jupman:
                         solution_text)                    
         ret = re.sub(self.strip_pattern(), '', ret)
         ret = re.sub(self.write_solution_here, r'\1\n\n', ret)
-        ret = replace_py_rel(ret, filepath)
+        if filepath:
+            ret = replace_py_rel(ret, filepath)
         return ret            
 
     def validate_tags(self, fname):
@@ -607,6 +675,98 @@ class Jupman:
             shutil.copy(source_abs_fn, dest_fn)
             
     
+    def _sol_nb_to_ex(self, nb, source_abs_fn, website=False ):
+        """ Takes a solution notebook object and modifies it to strip solutions
+
+            strip_all: if True completely removes the solutions
+
+            @since 3.2
+        """    
+        from nbformat.v4 import new_raw_cell
+
+        def before_cell(n, cell_type):
+            
+            sid = "jupman-sol-%s" % n
+
+            if cell_type == 'code': 
+                show = self.ipynb_show_solution
+                hide = self.ipynb_hide_solution
+                sol_class = 'jupman-sol-code'
+            elif cell_type == 'markdown':
+                show = self.ipynb_show_answer
+                hide = self.ipynb_hide_answer
+                sol_class = 'jupman-sol-question'
+            else:
+                warn("NO LABEL FOUND FOR cell_type %s, using default ones!" % cell_type)
+                show = self.ipynb_show_solution
+                show = self.ipynb_show_hide
+                sol_class = 'jupman-sol-code'
+
+            s = """<div id="%s" class="jupman-sol %s" onclick="jupman.toggleSolution('%s');" >""" % (sid,sol_class,sid)
+            s += """\n    <input type="button" class="jupman-sol-label" """
+            s += """        data-jupman-show="%s" data-jupman-hide="%s" value="%s"/>""" % (show, hide, show)
+            s += """\n    <div class="jupman-sol-content" style="display:none">""" 
+            
+            ret = new_raw_cell()
+            ret.metadata.format = "text/html"
+            ret.source = s
+            return ret
+            
+
+        def after_cell():
+            ret = new_raw_cell()
+            ret.metadata.format = "text/html"
+            ret.source = """    </div>\n</div>"""            
+            return ret            
+
+
+        import copy
+        replace_ipynb_rel(nb, source_abs_fn, website)                                                
+        if not website:
+            _replace_title(nb, 
+                           source_abs_fn, 
+                           r"# \2 %s" % self.ipynb_exercises)
+        
+        # look for tags
+        sh_cells = nb.cells[:]
+        nb.cells = []      
+
+        cell_counter = 0
+
+        for cell in sh_cells:
+            stripped_cell = copy.deepcopy(cell)
+            if cell.cell_type == "code":
+                if self.is_code_sol(cell.source):                            
+                    
+                    stripped_cell.source = self.sol_to_ex_code(cell.source,source_abs_fn)
+                    if website:
+                        nb.cells.append(before_cell(cell_counter, cell.cell_type))
+                        cell.source = _cancel_tags(cell.source, self.tags)
+                        nb.cells.append(cell)
+                        nb.cells.append(after_cell())                    
+                    nb.cells.append(stripped_cell)
+                else:
+                    nb.cells.append(cell)
+            elif cell.cell_type == "markdown":                    
+                if re.match(self.markdown_answer, cell.source.strip()):
+                    if website:
+                        nb.cells.append(before_cell(cell_counter, cell.cell_type))
+                        nb.cells.append(cell)
+                        nb.cells.append(after_cell()) 
+                    else:
+                         # substitues with newline, otherwise it shows 'Type markdown or latex'   
+                        stripped_cell.source = re.sub( self.markdown_answer, 
+                                                       r"\1\n",  
+                                                       cell.source.strip())
+                        
+                        nb.cells.append(stripped_cell)                   
+                else:
+                    nb.cells.append(cell)
+            else:
+                nb.cells.append(cell)
+
+            cell_counter += 1
+        return nb                    
 
     def generate_exercise(self, source_fn, source_abs_fn, dirpath, structure):
 
@@ -637,22 +797,7 @@ class Jupman:
                     
                     # note: for weird reasons nbformat does not like the sol_source_f 
                     nb_node = nbformat.read(source_abs_fn, nbformat.NO_CONVERT)
-                    replace_ipynb_rel(nb_node, source_abs_fn)                                                
-                    _replace_title(nb_node, 
-                                   source_abs_fn, 
-                                   r"# \2 %s" % self.ipynb_exercises)
-                    
-                    # look for tags
-                    for cell in nb_node.cells:
-                        if cell.cell_type == "code":                            
-                            cell.source = self.sol_to_ex_code(cell.source, source_abs_fn)
-
-                        if cell.cell_type == "markdown":
-                             # substitues with newline, otherwise it shows 'Type markdown or latex'   
-                            cell.source = re.sub(   self.markdown_answer, 
-                                                    r"\1\n",  
-                                                    cell.source.strip())
-                                                             
+                    self._sol_nb_to_ex(nb_node, source_abs_fn, False)
                             
                     nbformat.write(nb_node, exercise_dest_f)
                 
@@ -896,3 +1041,4 @@ class Jupman:
         archive.close()
             
         info("Wrote %s" % zip_path)
+

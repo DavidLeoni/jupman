@@ -69,7 +69,7 @@ def test_uproot():
 def test_replace_sysrel():
 
     assert jmt.replace_py_rel("""import sys
-sys.do_something()""", 'python-intro').strip() ==  """import sys
+sys.do_something()""", 'python-example').strip() ==  """import sys
 sys.do_something()"""
 
 
@@ -78,7 +78,7 @@ import sys
 sys.path.append('../')
 import jupman
 
-    """, 'python-intro').strip() ==  'import jupman'
+    """, 'python-example').strip() ==  'import jupman'
 
 
     assert jmt.replace_py_rel("""
@@ -86,7 +86,7 @@ import sys
 sys.path.append('../')
 import jupman
 sys.do_something()
-    """, 'python-intro').strip() ==  """import sys
+    """, 'python-example').strip() ==  """import sys
 import jupman
 sys.do_something()"""
 
@@ -190,9 +190,9 @@ def test_setup(tconf):
     mockapp = MockSphinx()
     
     tconf.setup(mockapp)
-    assert os.path.isfile(os.path.join(tconf.jm.generated, 'jupyter-intro.zip'))
-    assert os.path.isfile(os.path.join(tconf.jm.generated, 'python-intro.zip'))
-    assert os.path.isfile(os.path.join(tconf.jm.generated, 'tools-intro.zip'))
+    assert os.path.isfile(os.path.join(tconf.jm.generated, 'jupyter-example.zip'))
+    assert os.path.isfile(os.path.join(tconf.jm.generated, 'python-example.zip'))
+    assert os.path.isfile(os.path.join(tconf.jm.generated, 'jup-and-py-example.zip'))
 
 def test_ignore_spaces():
     

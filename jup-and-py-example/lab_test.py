@@ -1,5 +1,5 @@
 
-from intro1_sol import *
+from lab_sol import *
 
 import unittest
 
