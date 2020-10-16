@@ -22,9 +22,9 @@ Chapter examples
     :maxdepth: 2
     :glob:
 
-    python-intro/python-intro.ipynb
-    Jupyter introduction <jupyter-intro/jupyter-intro-sol.ipynb>
-    Tools introduction <tools-intro/tools-intro-sol.ipynb>
+    python-example/python-example.ipynb
+    jupyter-example/jupyter-example-sol.ipynb
+    Jupyter and Python example <jup-and-py-example/jup-and-py-example-sol.ipynb>
 
 Templates
 ==========
@@ -33,17 +33,15 @@ Templates
     :maxdepth: 2
     :glob:
 
-
+    changelog.md
     past-exams.ipynb
     exam-project.ipynb
     project-ideas.ipynb
-    project/project.ipynb
+    project/project.ipynb   
     project/markdown.ipynb
 
-.. toctree::
-    :hidden:
 
-    changelog.md
+
 
 Index
 ========
