@@ -1,5 +1,6 @@
 #!/usr/bin/env python3# -*- coding: utf-8 -*-
 
+
 # This is the configuration file of Sphynx, edit it as needed.
 
 import recommonmark
@@ -12,6 +13,7 @@ import os
 import sys
 sys.path.append('.') # for rtd 
 import jupman_tools as jmt
+import jupman_tools
 
 
 on_rtd = os.environ.get('READTHEDOCS') == 'True'
@@ -48,7 +50,13 @@ jm.chapter_files = ['jupman.py', 'my_lib.py', '_static/img/cc-by.png',
 jm.chapter_patterns =  ['*/']
 jm.chapter_exclude_patterns =  ['[^_]*/','exams/', 'project/']
 
-# words used in ipynb files - you might want to translate these in your language. Use plural.
+# words used in ipynb files - you might want to translate these in your language. 
+# Use singular
+jm.ipynb_show_solution = "Show solution"
+jm.ipynb_hide_solution = "Hide"
+jm.ipynb_show_answer = "Show answer"
+jm.ipynb_hide_answer = "Hide"
+# Use plural
 jm.ipynb_solutions = "SOLUTIONS"
 jm.ipynb_exercises = "EXERCISES"
 
@@ -424,7 +432,9 @@ pdf_use_numbered_links = False
 # Background images fitting mode
 pdf_fit_background_mode = 'scale'
 
+
 def setup(app):
+    jmt.init(jm)
     
     app.add_config_value(   'recommonmark_config', {
                                 'auto_toc_tree_section': 'Contents',
@@ -445,12 +455,13 @@ def setup(app):
             return x
 
     jm.zip_paths(['project', 'requirements.txt'], 
-                    '_static/generated/project-template',
-                    patterns = sub)
-    
+                  '_static/generated/project-template',
+                  patterns = sub)    
 
 source_suffix = {
     '.rst': 'restructuredtext',
     '.txt': 'markdown',
     '.md': 'markdown'
 }
+
+

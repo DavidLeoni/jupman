@@ -1,17 +1,18 @@
 
-/*
+/**
  * JUPYTER MANAGER JavaScript https://github.com/DavidLeoni/jupman 
  * 
  */
 
+
+/**
+ * @deprecated use jupman.toggleVisibility instead
+ * @param {string} what 
+ */
 function toggleVisibility(what){
-        var e = document.getElementById(what);
-        if(e.style.display == 'block')
-          e.style.display = 'none';
-        else
-          e.style.display = 'block';
-    };
-    
+    console.warn("global toggleVisibility is deprecated, use jupman.toggleVisibility instead");
+    jupman.toggleVisibility(what);            
+};
 
 function showthis(url) {
     window.open(url, "pres", "toolbar=yes,scrollbars=yes,resizable=yes,top=10,left=400,width=500,height=500");
@@ -103,42 +104,49 @@ var jupman = {
                 }
             }).parents('div .cell ').hide();        
     },
-    
-    toggleVisibility: function(what){
-        var e = document.getElementById(what);
-        if(e.style.display == 'block')
-          e.style.display = 'none';
-        else
-          e.style.display = 'block';
+   
+    /**
+     * NOTE: ONLY WORKS ON THE WEBSITE
+     *      
+     * @param {@string} solId i.e. jupman-sol-7
+     * @since 3.2 
+     */
+    toggleSolution : function(solId){
+        
+        let sol = $('#' + solId);
+                
+        button = sol.children(':first');                        
+                
+        content = sol.children(':nth-child(2)');
+
+        if (content.css('display') === 'none'){            
+            button.val(button.data('jupman-hide'));
+        } else {                                    
+            button.val(button.data('jupman-show'));            
+        }
+        content.slideToggle();                                
     },
     
+    /**
+     * Simple vanilla way to toggle an element
+     * @param {string} what i.e. someid (no # prefix)
+     */
+    toggleVisibility : function (what){
+
+        var e = document.getElementById(what);
+        if(e.style.display == 'block') {
+            e.style.display = 'none';
+        } else {
+            e.style.display = 'block';        
+        }
+    },
+
     /**
      *  Code common to both jupman in jupyter and Website
     */
     initCommon : function(){
-        
-        $(".jupman-solution-header").remove();
-        span = $('<div>');
-        span.addClass('jupman-solution-header');
-        span.text('Show/hide solution');
-        
-        span.insertBefore(".jupman-solution");
-        
-        
-        $(".jupman-solution").hide();
-        $(".jupman-solution-header").show();
 
-        $('.jupman-solution-header')
-            .off('click')
-            .click(function(){
-                
-                var uls = $(this).nextAll(".jupman-solution");             
-                var sibling = uls.eq(0);
-                          
-                sibling.slideToggle();        
-                ev.preventDefault();
-                ev.stopPropagation();
-        });
+        console.log('Jupman initCommon')
 
     },
 
@@ -157,16 +165,7 @@ var jupman = {
        // ****************************     WARNING      ********************************
        //         THIS HIDE STUFF DOES NOT WORK IN SPHINX, ONLY WORKS WHEN YOU MANUALLY EXPORT TO HTML 
        // ******************************************************************************
-       jupman.hideCell("%%HTML");
-       jupman.hideCell("import jupman");
        
-        // TODO this is a bit too hacky   
-       jupman.hideCell(/from exercise(.+)_solution import \*/)
-       
-       jupman.hideCellAll(/.*jupman_init.*/); 
-       jupman.hideCell("jupman_show_run(");
-       jupman.hideCell("nxpd.draw(");
-       jupman.hideCellAll("jupman_run("); 
        
        if (jupman.hasToc()){
            if ($("#jupman-toc").length === 0){
@@ -200,7 +199,7 @@ var jupman = {
                     } else {
                         $("#jupman-toc").hide();                        
                     }
-
+$
         /*            if ($("#jupman-toc").is(":visible")){
                         if (jupman.hoverToc()) {                    
                         } else {
@@ -285,7 +284,7 @@ var jupman = {
 
        jupman.initCommon();
         
-       if (typeof JUPMAN_IN_JUPYTER === "undefined" || !JUPMAN_IN_JUPYTER ){            
+       if (typeof JUPMAN_IN_JUPYTER === "undefined" || !JUPMAN_IN_JUPYTER ){
            jupman.initWebsite();
        } else {
            jupman.initJupyter();
