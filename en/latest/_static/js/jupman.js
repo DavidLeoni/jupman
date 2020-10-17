@@ -111,18 +111,17 @@ var jupman = {
      * @param {@string} solId i.e. jupman-sol-7
      * @since 3.2 
      */
-    toggleSolution : function(solId){
+    toggleSolution : function(caller){
         
-        let sol = $('#' + solId);
-                
-        button = sol.children(':first');                        
-                
-        content = sol.children(':nth-child(2)');
+        let toggler = $(caller); //$('#' + solId);        
+        let content = toggler.next();
+        
+        content.addClass('jupman-sol jupman-sol-content');        
 
         if (content.css('display') === 'none'){            
-            button.val(button.data('jupman-hide'));
+            toggler.text(toggler.data('jupman-hide'));
         } else {                                    
-            button.val(button.data('jupman-show'));            
+            toggler.text(toggler.data('jupman-show'));            
         }
         content.slideToggle();                                
     },
@@ -148,18 +147,28 @@ var jupman = {
         
         console.log('jupman.js initCommon start')
         
-        console.log("Initializing generic jupman-toggable stuff");
+        console.log("jupman.js Initializing togglable stuff");
         if (typeof $ == "undefined"){
             console.error("   No jquery found! Skipping ... ");
         } else {
-            let defaultShowMsg = 'Show';
-            let defaultHideMsg = 'Hide';
 
-            $(".jupman-toggable-header").remove();
+            console.log("jupman.js Initializing solutions");
+
+            $(".jupman-sol-toggler").each(function(index, value) {
+                $(value).next().hide();
+                $(value).next().next().hide(); // output
+            });
+
+            console.log("Initializing generic jupman-togglable stuff");
+
+            let defaultShowMsg = 'Show';
+            let defaultHideMsg = 'Hide';            
+
+            $(".jupman-toggler").remove();
             
-            $(".jupman-toggable").each(function(index, value) {
+            $(".jupman-togglable").each(function(index, value) {
                 let toggler = $('<a href="#"></a>');
-                toggler.addClass('jupman-toggable-header');
+                toggler.addClass('jupman-toggler');
                 let showMsg = defaultShowMsg;            
                 if ($(this).data('jupman-show')){
                     showMsg = $(this).data('jupman-show');
@@ -167,17 +176,17 @@ var jupman = {
                 
                 toggler.text(showMsg);
                 toggler.insertBefore(value);
-            });
+            });            
             
-            $(".jupman-toggable").hide();
-            $(".jupman-toggable-header").show();
+            $(".jupman-togglable").hide();
+            $(".jupman-toggler").show();
 
-            $('.jupman-toggable-header')
+            $('.jupman-toggler')
                 .off('click')
                 .click(function(ev){                                
                     let toggler = $(this);
                     
-                    let uls = toggler.nextAll(".jupman-toggable");
+                    let uls = toggler.nextAll(".jupman-togglable");
                     let sibling = uls.eq(0);
                     
                     let showMsg = defaultShowMsg;
@@ -204,7 +213,7 @@ var jupman = {
     },
 
     /**
-     *   Jupyter only instructions - doesn't run on ReadTheDocs
+     *   Jupyter only instructions - doesn't run on website
      */
     initJupyter : function(){
        console.log('jupman.js initJupyter start') 
@@ -277,7 +286,7 @@ $
     },
     
     /**
-    * RTD only instructions
+    * Website only instructions
     */
     initWebsite : function(){  
         

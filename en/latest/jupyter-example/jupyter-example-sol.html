@@ -176,7 +176,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../jupman-tests.html#Expressions-list">Expressions list</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../jupman-tests.html#Toggable-cells">Toggable cells</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../jupman-tests.html#Togglable-cells">Togglable cells</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../jupman-tests.html#Show/hide-exercises-(PREFERRED)">Show/hide exercises (PREFERRED)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jupman-tests.html#Toggling-with-Javascript">Toggling with Javascript</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jupman-tests.html#HTML-details-in-Markdown,-code-tag">HTML details in Markdown, code tag</a></li>
@@ -237,10 +237,11 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Global-image">Global image</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Local-exercise-image">Local exercise image</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Python-tutor">Python tutor</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Exercise-in-Jupyter">Exercise in Jupyter</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Python-tutor">Python tutor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Exercise-in-Jupyter">Exercise in Jupyter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Exercise-in-Jupyter-with-Python-Tutor">Exercise in Jupyter with Python Tutor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Question-in-Jupyter">Question in Jupyter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Exercise-in-Python">Exercise in Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#add">add</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#sub">sub</a></li>
 </ul>
@@ -775,9 +776,8 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Exercise-1">
 <h2>Exercise 1<a class="headerlink" href="#Exercise-1" title="Permalink to this headline">¶</a></h2>
 <p>Implement <code class="docutils literal notranslate"><span class="pre">inc</span></code> function:</p>
-<div id="jupman-sol-7" class="jupman-sol jupman-sol-code" onclick="jupman.toggleSolution('jupman-sol-7');" >
-    <input type="button" class="jupman-sol-label"         data-jupman-show="Show solution" data-jupman-hide="Hide" value="Show solution"/>
-    <div class="jupman-sol-content" style="display:none"><div class="nbinput nblast docutils container">
+<a class="jupman-sol jupman-sol-toggler"
+  onclick="jupman.toggleSolution(this);"         data-jupman-show="Show solution" data-jupman-hide="Hide">Show solution</a><div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
@@ -794,8 +794,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-    </div>
-</div><div class="nbinput nblast docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
@@ -810,9 +809,8 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Exercise-2">
 <h2>Exercise 2<a class="headerlink" href="#Exercise-2" title="Permalink to this headline">¶</a></h2>
 <p>Implement <code class="docutils literal notranslate"><span class="pre">upper</span></code> function</p>
-<div id="jupman-sol-9" class="jupman-sol jupman-sol-code" onclick="jupman.toggleSolution('jupman-sol-9');" >
-    <input type="button" class="jupman-sol-label"         data-jupman-show="Show solution" data-jupman-hide="Hide" value="Show solution"/>
-    <div class="jupman-sol-content" style="display:none"><div class="nbinput nblast docutils container">
+<a class="jupman-sol jupman-sol-toggler"
+  onclick="jupman.toggleSolution(this);"         data-jupman-show="Show solution" data-jupman-hide="Hide">Show solution</a><div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
@@ -829,8 +827,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-    </div>
-</div><div class="nbinput nblast docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
@@ -844,9 +841,8 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Exercise-3">
 <h3>Exercise 3<a class="headerlink" href="#Exercise-3" title="Permalink to this headline">¶</a></h3>
 <p>Note everything <em>after</em> the ‘write here’ comment will be discarded. Note you can put how many spaces you want in the comment</p>
-<div id="jupman-sol-11" class="jupman-sol jupman-sol-code" onclick="jupman.toggleSolution('jupman-sol-11');" >
-    <input type="button" class="jupman-sol-label"         data-jupman-show="Show solution" data-jupman-hide="Hide" value="Show solution"/>
-    <div class="jupman-sol-content" style="display:none"><div class="nbinput nblast docutils container">
+<a class="jupman-sol jupman-sol-toggler"
+  onclick="jupman.toggleSolution(this);"         data-jupman-show="Show solution" data-jupman-hide="Hide">Show solution</a><div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
@@ -863,8 +859,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-    </div>
-</div><div class="nbinput nblast docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
@@ -884,9 +879,8 @@ div.rendered_html tbody tr:hover {
 <h3>Exercise 4<a class="headerlink" href="#Exercise-4" title="Permalink to this headline">¶</a></h3>
 <p>Shows how to completely remove the content of a solution cell (including the solution comment)</p>
 <p><strong>EXERCISE</strong>: write a function that prints ‘hello’</p>
-<div id="jupman-sol-14" class="jupman-sol jupman-sol-code" onclick="jupman.toggleSolution('jupman-sol-14');" >
-    <input type="button" class="jupman-sol-label"         data-jupman-show="Show solution" data-jupman-hide="Hide" value="Show solution"/>
-    <div class="jupman-sol-content" style="display:none"><div class="nbinput nblast docutils container">
+<a class="jupman-sol jupman-sol-toggler"
+  onclick="jupman.toggleSolution(this);"         data-jupman-show="Show solution" data-jupman-hide="Hide">Show solution</a><div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
@@ -898,8 +892,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-    </div>
-</div><div class="nbinput nblast docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
@@ -913,11 +906,9 @@ div.rendered_html tbody tr:hover {
 <h3>Exercise 5<a class="headerlink" href="#Exercise-5" title="Permalink to this headline">¶</a></h3>
 <p>Shows the QUESTION / ANSWER feature. All content in ‘<strong>ANSWER</strong>:’ cell will be stripped</p>
 <p><strong>QUESTION</strong>: Describe why iPhone n + 1 is better than iPhone n</p>
-<div id="jupman-sol-17" class="jupman-sol jupman-sol-question" onclick="jupman.toggleSolution('jupman-sol-17');" >
-    <input type="button" class="jupman-sol-label"         data-jupman-show="Show answer" data-jupman-hide="Hide" value="Show answer"/>
-    <div class="jupman-sol-content" style="display:none"><p><strong>ANSWER</strong>: it costs more</p>
-    </div>
-</div></div>
+<a class="jupman-sol jupman-sol-toggler"
+  onclick="jupman.toggleSolution(this);"         data-jupman-show="Show answer" data-jupman-hide="Hide">Show answer</a><p><strong>ANSWER</strong>: it costs more</p>
+</div>
 </div>
 <div class="section" id="Conclusion">
 <h2>Conclusion<a class="headerlink" href="#Conclusion" title="Permalink to this headline">¶</a></h2>
@@ -925,7 +916,7 @@ div.rendered_html tbody tr:hover {
 <p>Relative image test, Markdown format:</p>
 <p><img alt="cc-by-78342" src="../_images/cc-by1.png" /></p>
 <p>Relative image test, HTML <code class="docutils literal notranslate"><span class="pre">img</span></code> tag:</p>
-<p><img alt="c336e039236845f7bbab42f1d166344a" src="../_images/cc-by1.png" /></p>
+<p><img alt="38e4f16414d3427f8d04d7a43b057de6" src="../_images/cc-by1.png" /></p>
 <p>Relative link test, Markdown format:</p>
 <p><a class="reference internal" href="../index.html"><span class="doc">Back to index</span></a></p>
 <p>Relative link test, HTML <code class="docutils literal notranslate"><span class="pre">a</span></code> tag:</p>

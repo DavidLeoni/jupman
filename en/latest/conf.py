@@ -13,7 +13,6 @@ import os
 import sys
 sys.path.append('.') # for rtd 
 import jupman_tools as jmt
-import jupman_tools
 
 
 on_rtd = os.environ.get('READTHEDOCS') == 'True'

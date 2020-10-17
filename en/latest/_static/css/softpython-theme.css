@@ -166,7 +166,7 @@ div.nbinput.container div.prompt, div.nboutput.container div.prompt{
 }
 
 
-.jupman-sol-label {
+.jupman-sol-toggler {
     background-color:#ebf3ed;  /* lighter than admonition */
     
     padding: 7px;

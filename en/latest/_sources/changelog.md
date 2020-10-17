@@ -10,7 +10,7 @@ Jupman Jupyter Manager
 
 - added optional build on Github Actions
 - solutions are finally hidden on the website, with a click-to-show button!
-- introduced generic jupman-toggable and specific jupman-sol CSS classes
+- introduced generic jupman-togglable and specific jupman-sol CSS classes
 - improved menu navigation
 - added softpython theme
 - images are now shown centered in HTML

@@ -176,7 +176,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Expressions-list">Expressions list</a></li>
-<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Toggable-cells">Toggable cells</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jupman-tests.html#Togglable-cells">Togglable cells</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#Show/hide-exercises-(PREFERRED)">Show/hide exercises (PREFERRED)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#Toggling-with-Javascript">Toggling with Javascript</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jupman-tests.html#HTML-details-in-Markdown,-code-tag">HTML details in Markdown, code tag</a></li>
@@ -237,10 +237,11 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Global-image">Global image</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Local-exercise-image">Local exercise image</a></li>
-<li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Python-tutor">Python tutor</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Exercise-in-Jupyter">Exercise in Jupyter</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Python-tutor">Python tutor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Exercise-in-Jupyter">Exercise in Jupyter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Exercise-in-Jupyter-with-Python-Tutor">Exercise in Jupyter with Python Tutor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Question-in-Jupyter">Question in Jupyter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Exercise-in-Python">Exercise in Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#add">add</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#sub">sub</a></li>
 </ul>
@@ -984,11 +985,9 @@ def f():
 <li><p>Markdown can be customized in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code></p></li>
 </ul>
 <p><strong>QUESTION</strong>: Describe why iPhone 8 is better than 7</p>
-<div id="jupman-sol-25" class="jupman-sol jupman-sol-question" onclick="jupman.toggleSolution('jupman-sol-25');" >
-    <input type="button" class="jupman-sol-label"         data-jupman-show="Show answer" data-jupman-hide="Hide" value="Show answer"/>
-    <div class="jupman-sol-content" style="display:none"><p><strong>ANSWER</strong>: it costs more</p>
-    </div>
-</div><p>becomes:</p>
+<a class="jupman-sol jupman-sol-toggler"
+  onclick="jupman.toggleSolution(this);"         data-jupman-show="Show answer" data-jupman-hide="Hide">Show answer</a><p><strong>ANSWER</strong>: it costs more</p>
+<p>becomes:</p>
 <p><strong>QUESTION</strong>: Describe why iPhone 8 is better than 7</p>
 </div>
 </div>
@@ -1013,7 +1012,7 @@ def f():
 </div>
 <div class="section" id="Hiding-cells">
 <h3>Hiding cells<a class="headerlink" href="#Hiding-cells" title="Permalink to this headline">¶</a></h3>
-<p>To hide cells (like for example the <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">jupman</span></code> code), click <code class="docutils literal notranslate"><span class="pre">View-&gt;Cell</span> <span class="pre">toolbar</span> <span class="pre">-&gt;</span> <span class="pre">Edit</span> <span class="pre">metadata</span></code> and add <code class="docutils literal notranslate"><span class="pre">&quot;nbsphinx&quot;:</span> <span class="pre">&quot;hidden&quot;</span></code> to the JSON (see also original <a class="reference external" href="https://nbsphinx.readthedocs.io/en/0.2.14/hidden-cells.html#Hidden-Cells">NBSphinx docs</a> and <a class="reference internal" href="jupman-tests.html#Toggable-cells"><span class="std std-ref">Toggable cells in Jupman tests</span></a> ).</p>
+<p>To hide cells (like for example the <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">jupman</span></code> code), click <code class="docutils literal notranslate"><span class="pre">View-&gt;Cell</span> <span class="pre">toolbar</span> <span class="pre">-&gt;</span> <span class="pre">Edit</span> <span class="pre">metadata</span></code> and add <code class="docutils literal notranslate"><span class="pre">&quot;nbsphinx&quot;:</span> <span class="pre">&quot;hidden&quot;</span></code> to the JSON (see also original <a class="reference external" href="https://nbsphinx.readthedocs.io/en/0.2.14/hidden-cells.html#Hidden-Cells">NBSphinx docs</a> and <a class="reference internal" href="jupman-tests.html#Togglable-cells"><span class="std std-ref">Togglable cells in Jupman tests</span></a> ).</p>
 <p><strong>NOTE</strong>: As of NBSphinx 2.17, it is not possible to hide only cell text but not the output.</p>
 <div class="section" id="Implications-of-hiding-'import-jupman'">
 <h4>Implications of hiding ‘import jupman’<a class="headerlink" href="#Implications-of-hiding-'import-jupman'" title="Permalink to this headline">¶</a></h4>
