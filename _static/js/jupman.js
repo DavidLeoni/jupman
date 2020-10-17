@@ -108,21 +108,20 @@ var jupman = {
     /**
      * NOTE: ONLY WORKS ON THE WEBSITE
      *      
-     * @param {@string} solId i.e. jupman-sol-7
+     * @param {@string} caller a this from html tag onclick
      * @since 3.2 
      */
-    toggleSolution : function(solId){
+    toggleSolution : function(caller){
         
-        let sol = $('#' + solId);
-                
-        button = sol.children(':first');                        
-                
-        content = sol.children(':nth-child(2)');
+        let toggler = $(caller);
+        let content = toggler.next();
+        
+        content.addClass('jupman-sol jupman-sol-content');        
 
         if (content.css('display') === 'none'){            
-            button.val(button.data('jupman-hide'));
+            toggler.text(toggler.data('jupman-hide'));
         } else {                                    
-            button.val(button.data('jupman-show'));            
+            toggler.text(toggler.data('jupman-show'));            
         }
         content.slideToggle();                                
     },
@@ -145,16 +144,73 @@ var jupman = {
      *  Code common to both jupman in jupyter and Website
     */
     initCommon : function(){
+        
+        console.log('jupman.js initCommon start')
+        
+        console.log("jupman.js Initializing togglable stuff");
+        if (typeof $ == "undefined"){
+            console.error("   No jquery found! Skipping ... ");
+        } else {
+                        
+            console.log("Initializing generic jupman-togglable stuff");
 
-        console.log('Jupman initCommon')
+            let defaultShowMsg = 'Show';
+            let defaultHideMsg = 'Hide';            
+
+            $(".jupman-toggler").remove();
+            
+            $(".jupman-togglable").each(function(index, value) {
+                let toggler = $('<a href="#"></a>');
+                toggler.addClass('jupman-toggler');
+                let showMsg = defaultShowMsg;            
+                if ($(this).data('jupman-show')){
+                    showMsg = $(this).data('jupman-show');
+                }
+                
+                toggler.text(showMsg);
+                toggler.insertBefore(value);
+            });            
+            
+            $(".jupman-togglable").hide();
+            $(".jupman-toggler").show();
+
+            $('.jupman-toggler')
+                .off('click')
+                .click(function(ev){                                
+                    let toggler = $(this);
+                    
+                    let uls = toggler.nextAll(".jupman-togglable");
+                    let sibling = uls.eq(0);
+                    
+                    let showMsg = defaultShowMsg;
+                    let hideMsg = defaultHideMsg;
+                    if (sibling.data('jupman-show')){
+                        showMsg = sibling.data('jupman-show');
+                    }
+                    if (sibling.data('jupman-hide')){
+                        hideMsg = sibling.data('jupman-hide');
+                    }
+                    if (sibling.css('display') === 'none'){            
+                        toggler.text(hideMsg);
+                    } else {                                    
+                        toggler.text(showMsg);
+                    }
+                    sibling.slideToggle();        
+                    ev.preventDefault();
+                    ev.stopPropagation();
+                    return false;
+            });
+        } 
+        console.log('jupman.js initCommon end')
 
     },
 
     /**
-     *   Jupyter only instructions - doesn't run on ReadTheDocs
+     *   Jupyter only instructions - doesn't run on website
      */
     initJupyter : function(){
-        
+       console.log('jupman.js initJupyter start') 
+
        var toc = $("<div>").attr("id", "jupman-toc");              
                                                              
        var nav = $("<div>")
@@ -219,15 +275,15 @@ $
  
         
        jupman.resize();
-       console.log("Finished initializing jupman.js in Jupyter Notebook.")
+       console.log('jupman.js initJupyter end')
     },
     
     /**
-    * RTD only instructions
+    * Website only instructions
     */
     initWebsite : function(){  
         
-        console.log("initializing jupman.js in Website ...")
+        console.log("jupman.js initWebsite start")
         
         console.log("Fixing menu clicks for https://github.com/DavidLeoni/jupman/issues/38")
 
@@ -274,7 +330,7 @@ $
         pytuts.closest('div.output_area.rendered_html.docutils.container')
               .css('overflow', 'visible')
 
-        console.log("Finished initializing jupman.js in Website")    
+        console.log("jupman.js initWebsite end")
     },
     
     /**

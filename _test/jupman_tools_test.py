@@ -119,23 +119,27 @@ def test_copy_chapter():
     nb_node = nbformat.read(replacements_fn, nbformat.NO_CONVERT)
 
     # markdown                             
-    assert '[A markdown relative link](index.ipynb)' in nb_node.cells[1].source
-    assert '![Another markdown link](_static/img/cc-by.png)' in nb_node.cells[2].source
-    assert '[A local markdown link](data/pop.csv)' in nb_node.cells[3].source
+    assert '[some link](index.ipynb)' in nb_node.cells[1].source
+    assert '![some link](_static/img/cc-by.png)' in nb_node.cells[2].source
+    assert '[some link](data/pop.csv)' in nb_node.cells[3].source
 
-    assert '<a href="index.ipynb" target="_blank">An html in markdown relative link</a>' in nb_node.cells[4].source
-
-    assert '<img src="_static/img/cc-by.png">' in nb_node.cells[5].source
-    assert '<a href="data/pop.csv">a html in markdown local link</a>' in nb_node.cells[6].source
+    assert '<a href="index.ipynb" target="_blank">a link</a>' in nb_node.cells[4].source
     
-    assert '<a href="index.ipynb">An html relative link</a>' in nb_node.cells[7].source
+    assert '<img src="_static/img/cc-by.png">' in nb_node.cells[5].source
+    assert '<a href="data/pop.csv">a link</a>' in nb_node.cells[6].source
+    
+    assert '<a href="index.ipynb">a link</a>' in nb_node.cells[7].source
 
     assert '<img src="_static/img/cc-by.png">' in nb_node.cells[8].source
 
-    assert '<a href="data/pop.csv">an html local link</a>' in nb_node.cells[9].source
+    assert '<a href="data/pop.csv">a link</a>' in nb_node.cells[9].source
 
     assert '# Python\nimport jupman' in nb_node.cells[10].source
     assert '#jupman-raise' in nb_node.cells[10].source
+
+    assert '<a href="index.html">a link</a>' in nb_node.cells[11].source
+    
+    assert '<a href="https://jupman.softpython.org">a link</a>' in nb_node.cells[12].source
 
     py_fn = os.path.join(dest_dir, 'file.py')
     assert os.path.isfile(py_fn)

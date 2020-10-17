@@ -319,7 +319,7 @@ def init(jupman):
     # Method as in https://github.com/spatialaudio/nbsphinx/issues/305#issuecomment-506748814
 
     def _from_notebook_node(self, nb, resources, **kwargs):
-        info('patched preprocessing method')            
+        info('patched nbsphinx from_notebook_node')
                                 
         for f in jupman.preprocessors:
             nb, resources = f.preprocess(nb, resources=resources)
@@ -343,7 +343,7 @@ class JupmanPreprocessor(Preprocessor):
     def preprocess(self, nb, resources):
         """ @since 3.2 """
 
-        info("****  Jupman: preprocessing notebook *****")
+        info("JupmanPreprocesser running...")
         
         """Careful path *includes* part of docname:
         {
@@ -686,7 +686,7 @@ class Jupman:
 
         def before_cell(n, cell_type):
             
-            sid = "jupman-sol-%s" % n
+            
 
             if cell_type == 'code': 
                 show = self.ipynb_show_solution
@@ -702,10 +702,11 @@ class Jupman:
                 show = self.ipynb_show_hide
                 sol_class = 'jupman-sol-code'
 
-            s = """<div id="%s" class="jupman-sol %s" onclick="jupman.toggleSolution('%s');" >""" % (sid,sol_class,sid)
-            s += """\n    <input type="button" class="jupman-sol-label" """
-            s += """        data-jupman-show="%s" data-jupman-hide="%s" value="%s"/>""" % (show, hide, show)
-            s += """\n    <div class="jupman-sol-content" style="display:none">""" 
+            
+            s = """<a  class="jupman-sol jupman-sol-toggler" """
+            s += """\n onclick="jupman.toggleSolution(this);" """
+            s += """\n data-jupman-show="%s" data-jupman-hide="%s">%s</a>""" % (show, hide, show)
+            s += """<div class="jupman-sol %s" style="display:none">  """ % sol_class
             
             ret = new_raw_cell()
             ret.metadata.format = "text/html"
@@ -716,7 +717,7 @@ class Jupman:
         def after_cell():
             ret = new_raw_cell()
             ret.metadata.format = "text/html"
-            ret.source = """    </div>\n</div>"""            
+            ret.source = """</div>"""
             return ret            
 
 
@@ -743,7 +744,7 @@ class Jupman:
                         nb.cells.append(before_cell(cell_counter, cell.cell_type))
                         cell.source = _cancel_tags(cell.source, self.tags)
                         nb.cells.append(cell)
-                        nb.cells.append(after_cell())                    
+                        nb.cells.append(after_cell())
                     nb.cells.append(stripped_cell)
                 else:
                     nb.cells.append(cell)
@@ -754,7 +755,7 @@ class Jupman:
                         nb.cells.append(cell)
                         nb.cells.append(after_cell()) 
                     else:
-                         # substitues with newline, otherwise it shows 'Type markdown or latex'   
+                         # substitutes with newline, otherwise it shows 'Type markdown or latex'   
                         stripped_cell.source = re.sub( self.markdown_answer, 
                                                        r"\1\n",  
                                                        cell.source.strip())
