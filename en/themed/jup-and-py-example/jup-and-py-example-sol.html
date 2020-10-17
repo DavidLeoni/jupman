@@ -115,8 +115,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../usage.html#Common-files">Common files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage.html#Running-Jupyter">Running Jupyter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage.html#Source-code-for-chapters">Source code for chapters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../usage.html#Type-of-exercises">Type of exercises</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../usage.html#Exercises-in-python-files">Exercises in python files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage.html#Exercise-types">Exercise types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../usage.html#Exercises-in-Python-files">Exercises in Python files</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../usage.html#Exercises-in-Jupyter-files">Exercises in Jupyter files</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../usage.html#Mixed-exercises-in-Jupyter-and-Python-files">Mixed exercises in Jupyter and Python files</a></li>
 </ul>
@@ -177,11 +177,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../jupman-tests.html#Expressions-list">Expressions list</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../jupman-tests.html#Toggable-cells">Toggable cells</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../jupman-tests.html#Toggling-with-Javascript-(PREFERRED)">Toggling with Javascript (PREFERRED)</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../jupman-tests.html#HTML-details-in-Markdown,-code-tag">HTML details in Markdown, code tag</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../jupman-tests.html#Togglable-cells">Togglable cells</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jupman-tests.html#Show/hide-exercises-(PREFERRED)">Show/hide exercises (PREFERRED)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jupman-tests.html#Toggling-with-Javascript">Toggling with Javascript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jupman-tests.html#HTML-details-in-Markdown,-code-tag">HTML details in Markdown, code tag</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jupman-tests.html#HTML-details-in-Markdown,-Markdown-mixed-code">HTML details in Markdown, Markdown mixed code</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jupman-tests.html#HTML-details-in-HTML,-raw-NBConvert-Format">HTML details in HTML, raw NBConvert Format</a></li>
 </ul>
@@ -239,10 +238,11 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#Global-image">Global image</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Local-exercise-image">Local exercise image</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Python-tutor">Python tutor</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Exercise-in-Jupyter">Exercise in Jupyter</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#Python-tutor">Python tutor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Exercise-in-Jupyter">Exercise in Jupyter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Exercise-in-Jupyter-with-Python-Tutor">Exercise in Jupyter with Python Tutor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Question-in-Jupyter">Question in Jupyter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Exercise-in-Python">Exercise in Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#add">add</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sub">sub</a></li>
 </ul>
@@ -251,7 +251,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../toc.html#templates">Templates</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../changelog.html#october-16-2020-3-2">October 16 2020 - 3.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#october-17th-2020-3-2">October 17th 2020 - 3.2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../changelog.html#january-16th-2020-3-1">January 16th 2020 - 3.1</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../changelog.html#december-29th-2019-3-0">December 29th 2019 - 3.0</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../changelog.html#september-24th-2018-2-0">September 24th 2018 - 2.0</a></li>
@@ -281,28 +281,15 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../project/project.html">Jupman Project</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../project/project.html#Introduzione">Introduzione</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../project/project.html#Sorgenti-dati">Sorgenti dati</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../project/project.html#Pulizia-e-integrazione-dati">Pulizia e integrazione dati</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../project/project.html#Analisi">Analisi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../project/project.html#Problematiche-riscontrate">Problematiche riscontrate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project/project.html#Introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project/project.html#Data-sources">Data sources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project/project.html#Data-cleaning-and-integration">Data cleaning and integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project/project.html#Analysis">Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project/project.html#Problems-found">Problems found</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../project/project.html#Conclusioni">Conclusioni</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../project/markdown.html">Markdown</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../project/markdown.html#Celle-Markdown">Celle Markdown</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../project/markdown.html#Paragrafi">Paragrafi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../project/markdown.html#Link">Link</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../project/markdown.html#Liste">Liste</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../project/markdown.html#Immagini">Immagini</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../project/markdown.html#Variabili-e-nomi-tecnici">Variabili e nomi tecnici</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../project/markdown.html#Codice-JSON-/-XML-/-Python">Codice JSON / XML / Python</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../project/markdown.html#Formule-matematiche">Formule matematiche</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../project/markdown.html#Tabelle">Tabelle</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../project/markdown.html">Markdown</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../toc.html#index">Index</a></li>
@@ -624,7 +611,7 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="section" id="Jupyter-and-python-example">
 <h1>Jupyter and python example<a class="headerlink" href="#Jupyter-and-python-example" title="Permalink to this headline">¶</a></h1>
-<p>Example of notebook for exercises both in Jupyter and Python files</p>
+<p>Most complex example of a notebook with exercises both in Jupyter and Python files.</p>
 <div class="section" id="Download-exercises-zip">
 <h2><a class="reference external" href="../_static/generated/jup-and-py-example.zip">Download exercises zip</a><a class="headerlink" href="#Download-exercises-zip" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/DavidLeoni/jupman/tree/master/jup-and-py-example">Browse files online</a></p>
@@ -713,10 +700,10 @@ It was a 5 indeed
 <div class="output_area rendered_html docutils container">
 <script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
 
-<script id="json-jm80fcdf9b-6a0d-4317-8378-0dc53c88ad47" type="application/json" >
-    {"trace": [{"func_name": "<module>", "stack_to_render": [], "stdout": "", "event": "step_line", "ordered_globals": [], "line": 2, "heap": {}, "globals": {}}, {"func_name": "<module>", "stack_to_render": [], "stdout": "", "event": "step_line", "ordered_globals": ["x"], "line": 3, "heap": {}, "globals": {"x": 5}}, {"func_name": "<module>", "stack_to_render": [], "stdout": "", "event": "step_line", "ordered_globals": ["x", "y"], "line": 4, "heap": {}, "globals": {"x": 5, "y": 6}}, {"func_name": "<module>", "stack_to_render": [], "stdout": "", "event": "return", "ordered_globals": ["x", "y", "z"], "line": 4, "heap": {}, "globals": {"y": 6, "x": 5, "z": 11}}], "code": " \nx = 5\ny = 6\nz = x + y"}
+<script id="json-jmd9c8aa4e-93fe-4823-824f-c48d31713d8f" type="application/json" >
+    {"code": " \nx = 5\ny = 6\nz = x + y", "trace": [{"func_name": "<module>", "line": 2, "stack_to_render": [], "globals": {}, "heap": {}, "event": "step_line", "stdout": "", "ordered_globals": []}, {"func_name": "<module>", "line": 3, "stack_to_render": [], "globals": {"x": 5}, "heap": {}, "event": "step_line", "stdout": "", "ordered_globals": ["x"]}, {"func_name": "<module>", "line": 4, "stack_to_render": [], "globals": {"x": 5, "y": 6}, "heap": {}, "event": "step_line", "stdout": "", "ordered_globals": ["x", "y"]}, {"func_name": "<module>", "line": 4, "stack_to_render": [], "globals": {"x": 5, "y": 6, "z": 11}, "heap": {}, "event": "return", "stdout": "", "ordered_globals": ["x", "y", "z"]}]}
 </script>
-<div id="jm80fcdf9b-6a0d-4317-8378-0dc53c88ad47" class="pytutorVisualizer"> </div>
+<div id="jmd9c8aa4e-93fe-4823-824f-c48d31713d8f" class="pytutorVisualizer"> </div>
 
 <style>
 .vizLayoutTd {
@@ -736,12 +723,12 @@ It was a 5 indeed
 <script>
 (function(){
 
-    var trace = JSON.parse(document.getElementById('json-jm80fcdf9b-6a0d-4317-8378-0dc53c88ad47').innerHTML);
+    var trace = JSON.parse(document.getElementById('json-jmd9c8aa4e-93fe-4823-824f-c48d31713d8f').innerHTML);
     // NOTE 1: id without #
     // NOTE 2 - maybe there are more predictable ways, but this will work anyway
     //        - id should be number
     visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jm80fcdf9b-6a0d-4317-8378-0dc53c88ad47',{'embeddedMode' : false,
+    addVisualizerToPage(trace, 'jmd9c8aa4e-93fe-4823-824f-c48d31713d8f',{'embeddedMode' : false,
                                      'visualizerIdOverride':visualizerIdOverride})
 
 
@@ -749,20 +736,21 @@ It was a 5 indeed
     // does not allow parent selection
     var pytuts = $('.pytutorVisualizer')
     pytuts.closest('div.output_html.rendered_html.output_result')
-            .css('overflow-x', 'visible')
+          .css('overflow-x', 'visible');
 
     //pytuts.closest('div.output_html.rendered_html.output_result')
-    //      .css('background-color','red')
+    //      .css('background-color','red');
 
 })()
 </script></div>
 </div>
+</div>
 <div class="section" id="Exercise-in-Jupyter">
-<h3>Exercise in Jupyter<a class="headerlink" href="#Exercise-in-Jupyter" title="Permalink to this headline">¶</a></h3>
+<h2>Exercise in Jupyter<a class="headerlink" href="#Exercise-in-Jupyter" title="Permalink to this headline">¶</a></h2>
 <p>Implement this function:</p>
-<div id="jupman-sol-12" class="jupman-sol jupman-sol-code" onclick="jupman.toggleSolution('jupman-sol-12');" >
-    <input type="button" class="jupman-sol-label"         data-jupman-show="Show solution" data-jupman-hide="Hide" value="Show solution"/>
-    <div class="jupman-sol-content" style="display:none"><div class="nbinput docutils container">
+<a  class="jupman-sol jupman-sol-toggler"
+ onclick="jupman.toggleSolution(this);"
+ data-jupman-show="Show solution" data-jupman-hide="Hide">Show solution</a><div class="jupman-sol jupman-sol-code" style="display:none"><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
@@ -784,7 +772,6 @@ It was a 5 indeed
 Guybrush
 </pre></div></div>
 </div>
-    </div>
 </div><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -805,9 +792,185 @@ Guybrush
 Guybrush
 </pre></div></div>
 </div>
+</div>
+<div class="section" id="Exercise-in-Jupyter-with-Python-Tutor">
+<h2>Exercise in Jupyter with Python Tutor<a class="headerlink" href="#Exercise-in-Jupyter-with-Python-Tutor" title="Permalink to this headline">¶</a></h2>
+<p>Write some code to display a jungle of pies</p>
+<a  class="jupman-sol jupman-sol-toggler"
+ onclick="jupman.toggleSolution(this);"
+ data-jupman-show="Show solution" data-jupman-hide="Hide">Show solution</a><div class="jupman-sol jupman-sol-code" style="display:none"><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="c1"># write here</span>
+
+<span class="n">la</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span>
+
+<span class="n">lb</span> <span class="o">=</span> <span class="p">[</span><span class="n">la</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
+
+<span class="n">lc</span> <span class="o">=</span> <span class="p">[</span><span class="n">lb</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">la</span><span class="p">)</span>
+
+<span class="n">jupman</span><span class="o">.</span><span class="n">pytut</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
+
+<script id="json-jm7065ffae-15bc-421d-95a9-8b0abadfa8d7" type="application/json" >
+    {"code": " \nimport math\n\n# write here\n\nla = [math.pi] * 5\n\nlb = [la] * 3\n\nlc = [lb] * 4\nprint(la)", "trace": [{"func_name": "<module>", "line": 2, "stack_to_render": [], "globals": {}, "heap": {}, "event": "step_line", "stdout": "", "ordered_globals": []}, {"func_name": "<module>", "line": 6, "stack_to_render": [], "globals": {"math": ["REF", 1]}, "heap": {"1": ["INSTANCE", "module"]}, "event": "step_line", "stdout": "", "ordered_globals": ["math"]}, {"func_name": "<module>", "line": 8, "stack_to_render": [], "globals": {"la": ["REF", 2], "math": ["REF", 1]}, "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416]}, "event": "step_line", "stdout": "", "ordered_globals": ["math", "la"]}, {"func_name": "<module>", "line": 10, "stack_to_render": [], "globals": {"la": ["REF", 2], "lb": ["REF", 3], "math": ["REF", 1]}, "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]]}, "event": "step_line", "stdout": "", "ordered_globals": ["math", "la", "lb"]}, {"func_name": "<module>", "line": 11, "stack_to_render": [], "globals": {"la": ["REF", 2], "lb": ["REF", 3], "math": ["REF", 1], "lc": ["REF", 4]}, "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]], "4": ["LIST", ["REF", 3], ["REF", 3], ["REF", 3], ["REF", 3]]}, "event": "step_line", "stdout": "", "ordered_globals": ["math", "la", "lb", "lc"]}, {"func_name": "<module>", "line": 11, "stack_to_render": [], "globals": {"la": ["REF", 2], "lb": ["REF", 3], "math": ["REF", 1], "lc": ["REF", 4]}, "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]], "4": ["LIST", ["REF", 3], ["REF", 3], ["REF", 3], ["REF", 3]]}, "event": "return", "stdout": "[3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793]\n", "ordered_globals": ["math", "la", "lb", "lc"]}]}
+</script>
+<div id="jm7065ffae-15bc-421d-95a9-8b0abadfa8d7" class="pytutorVisualizer"> </div>
+
+<style>
+.vizLayoutTd {
+    background-color: #fff !important;
+}
+
+#pyStdout {
+    min-height:25px;
+}
+
+/* 'Edit this code' link, hiding because replaces browser tab !!!*/
+#editCodeLinkDiv {
+    display:none;
+}
+</style>
+
+<script>
+(function(){
+
+    var trace = JSON.parse(document.getElementById('json-jm7065ffae-15bc-421d-95a9-8b0abadfa8d7').innerHTML);
+    // NOTE 1: id without #
+    // NOTE 2 - maybe there are more predictable ways, but this will work anyway
+    //        - id should be number
+    visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
+    addVisualizerToPage(trace, 'jm7065ffae-15bc-421d-95a9-8b0abadfa8d7',{'embeddedMode' : false,
+                                     'visualizerIdOverride':visualizerIdOverride})
+
+
+    // set overflow for pytuts - need to do in python as css
+    // does not allow parent selection
+    var pytuts = $('.pytutorVisualizer')
+    pytuts.closest('div.output_html.rendered_html.output_result')
+          .css('overflow-x', 'visible');
+
+    //pytuts.closest('div.output_html.rendered_html.output_result')
+    //      .css('background-color','red');
+
+})()
+</script></div>
+</div>
+</div><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="c1"># write here</span>
+
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
+
+<script id="json-jm7065ffae-15bc-421d-95a9-8b0abadfa8d7" type="application/json" >
+    {"code": " \nimport math\n\n# write here\n\nla = [math.pi] * 5\n\nlb = [la] * 3\n\nlc = [lb] * 4\nprint(la)", "trace": [{"func_name": "<module>", "line": 2, "stack_to_render": [], "globals": {}, "heap": {}, "event": "step_line", "stdout": "", "ordered_globals": []}, {"func_name": "<module>", "line": 6, "stack_to_render": [], "globals": {"math": ["REF", 1]}, "heap": {"1": ["INSTANCE", "module"]}, "event": "step_line", "stdout": "", "ordered_globals": ["math"]}, {"func_name": "<module>", "line": 8, "stack_to_render": [], "globals": {"la": ["REF", 2], "math": ["REF", 1]}, "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416]}, "event": "step_line", "stdout": "", "ordered_globals": ["math", "la"]}, {"func_name": "<module>", "line": 10, "stack_to_render": [], "globals": {"la": ["REF", 2], "lb": ["REF", 3], "math": ["REF", 1]}, "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]]}, "event": "step_line", "stdout": "", "ordered_globals": ["math", "la", "lb"]}, {"func_name": "<module>", "line": 11, "stack_to_render": [], "globals": {"la": ["REF", 2], "lb": ["REF", 3], "math": ["REF", 1], "lc": ["REF", 4]}, "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]], "4": ["LIST", ["REF", 3], ["REF", 3], ["REF", 3], ["REF", 3]]}, "event": "step_line", "stdout": "", "ordered_globals": ["math", "la", "lb", "lc"]}, {"func_name": "<module>", "line": 11, "stack_to_render": [], "globals": {"la": ["REF", 2], "lb": ["REF", 3], "math": ["REF", 1], "lc": ["REF", 4]}, "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]], "4": ["LIST", ["REF", 3], ["REF", 3], ["REF", 3], ["REF", 3]]}, "event": "return", "stdout": "[3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793]\n", "ordered_globals": ["math", "la", "lb", "lc"]}]}
+</script>
+<div id="jm7065ffae-15bc-421d-95a9-8b0abadfa8d7" class="pytutorVisualizer"> </div>
+
+<style>
+.vizLayoutTd {
+    background-color: #fff !important;
+}
+
+#pyStdout {
+    min-height:25px;
+}
+
+/* 'Edit this code' link, hiding because replaces browser tab !!!*/
+#editCodeLinkDiv {
+    display:none;
+}
+</style>
+
+<script>
+(function(){
+
+    var trace = JSON.parse(document.getElementById('json-jm7065ffae-15bc-421d-95a9-8b0abadfa8d7').innerHTML);
+    // NOTE 1: id without #
+    // NOTE 2 - maybe there are more predictable ways, but this will work anyway
+    //        - id should be number
+    visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
+    addVisualizerToPage(trace, 'jm7065ffae-15bc-421d-95a9-8b0abadfa8d7',{'embeddedMode' : false,
+                                     'visualizerIdOverride':visualizerIdOverride})
+
+
+    // set overflow for pytuts - need to do in python as css
+    // does not allow parent selection
+    var pytuts = $('.pytutorVisualizer')
+    pytuts.closest('div.output_html.rendered_html.output_result')
+          .css('overflow-x', 'visible');
+
+    //pytuts.closest('div.output_html.rendered_html.output_result')
+    //      .css('background-color','red');
+
+})()
+</script></div>
+</div>
+</div>
+<div class="section" id="Question-in-Jupyter">
+<h2>Question in Jupyter<a class="headerlink" href="#Question-in-Jupyter" title="Permalink to this headline">¶</a></h2>
+<p><strong>QUESTION</strong>: Why learn coding?</p>
+<a  class="jupman-sol jupman-sol-toggler"
+ onclick="jupman.toggleSolution(this);"
+ data-jupman-show="Show answer" data-jupman-hide="Hide">Show answer</a><div class="jupman-sol jupman-sol-question" style="display:none"><p><strong>ANSWER</strong>: So they pay me more</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Some other comment</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Some nasty formatting
+
+even more formatting
+</pre></div>
+</div>
+</div></div>
+<div class="section" id="Exercise-in-Python">
+<h2>Exercise in Python<a class="headerlink" href="#Exercise-in-Python" title="Permalink to this headline">¶</a></h2>
 <p>Start editing <code class="docutils literal notranslate"><span class="pre">lab.py</span></code> in text editor</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -816,12 +979,11 @@ Guybrush
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="add">
 <h2>add<a class="headerlink" href="#add" title="Permalink to this headline">¶</a></h2>
 <p>Implement <code class="docutils literal notranslate"><span class="pre">add</span></code> function:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -830,7 +992,7 @@ Guybrush
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -843,7 +1005,7 @@ Guybrush
 <h2>sub<a class="headerlink" href="#sub" title="Permalink to this headline">¶</a></h2>
 <p>Implement sub function</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -852,7 +1014,7 @@ Guybrush
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area docutils container">

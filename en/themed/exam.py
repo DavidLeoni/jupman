@@ -88,7 +88,7 @@ jupman-2000-12-31-FIRSTNAME-LASTNAME-ID
           exercise2.py
           exercise3.py  
 """
-@subcmd(help='Zips a builded exam, making it ready for deploy on the exam server')
+@subcmd(help='Zips a built exam, making it ready for deploy on the exam server')
 def package(parser,context,args):
     ld = arg_date(parser, args)
     eld_admin = '_private/' + ld 

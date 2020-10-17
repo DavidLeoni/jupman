@@ -45,28 +45,31 @@ img {
     display: inline;
 }
 
-.jupman-sol {
-    margin-top: -10px
+
+.jupman-sol {    
+    background-color:#f3faff !important;  /* lighter than admonition */;
+    border-color: #ede4f4 !important;
+    border-style: solid !important;
+    
 }
 
 .jupman-sol-question {
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
-.jupman-sol-label {
-    background-color:#f3faff  /* lighter than admonition */;
-    
-    padding: 7px;
-    
-    border-style: solid;
-    border-color: #ede4f4;   
+.jupman-sol-toggler {
+    margin-bottom: 20px !important;
+    text-decoration: none; 
+    display:table;
+    padding:5px !important; 
+    color: inherit;
 }
 
 .jupman-sol-content {
-    background-color:#f3faff;
-    padding-right:7px;    
-    border-style: solid;
-    border-color: #ede4f4;  
+    margin-bottom: 30px !important;
+    margin-top: -22px !important;
+    padding:7px !important; 
+    box-sizing:content-box;  /*prevents jupmping (to some degree)  https://stackoverflow.com/a/32769057 */
 }
 
 .jupman-sol-hidden {
@@ -75,4 +78,9 @@ img {
 
 .jupman-sol-visible {
     display: block;
+}
+
+.jupman-toggler {
+    text-decoration: none; 
+    display:block;
 }
