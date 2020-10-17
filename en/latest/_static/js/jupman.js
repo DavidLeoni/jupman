@@ -108,12 +108,12 @@ var jupman = {
     /**
      * NOTE: ONLY WORKS ON THE WEBSITE
      *      
-     * @param {@string} solId i.e. jupman-sol-7
+     * @param {@string} caller a this from html tag onclick
      * @since 3.2 
      */
     toggleSolution : function(caller){
         
-        let toggler = $(caller); //$('#' + solId);        
+        let toggler = $(caller);
         let content = toggler.next();
         
         content.addClass('jupman-sol jupman-sol-content');        
@@ -151,14 +151,7 @@ var jupman = {
         if (typeof $ == "undefined"){
             console.error("   No jquery found! Skipping ... ");
         } else {
-
-            console.log("jupman.js Initializing solutions");
-
-            $(".jupman-sol-toggler").each(function(index, value) {
-                $(value).next().hide();
-                $(value).next().next().hide(); // output
-            });
-
+                        
             console.log("Initializing generic jupman-togglable stuff");
 
             let defaultShowMsg = 'Show';
