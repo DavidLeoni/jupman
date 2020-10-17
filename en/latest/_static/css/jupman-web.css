@@ -76,3 +76,8 @@ img {
 .jupman-sol-visible {
     display: block;
 }
+
+.jupman-toggable-header {
+    text-decoration: none; 
+    display:block;
+}

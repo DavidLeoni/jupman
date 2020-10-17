@@ -145,8 +145,61 @@ var jupman = {
      *  Code common to both jupman in jupyter and Website
     */
     initCommon : function(){
+        
+        console.log('jupman.js initCommon start')
+        
+        console.log("Initializing generic jupman-toggable stuff");
+        if (typeof $ == "undefined"){
+            console.error("   No jquery found! Skipping ... ");
+        } else {
+            let defaultShowMsg = 'Show';
+            let defaultHideMsg = 'Hide';
 
-        console.log('Jupman initCommon')
+            $(".jupman-toggable-header").remove();
+            
+            $(".jupman-toggable").each(function(index, value) {
+                let toggler = $('<a href="#"></a>');
+                toggler.addClass('jupman-toggable-header');
+                let showMsg = defaultShowMsg;            
+                if ($(this).data('jupman-show')){
+                    showMsg = $(this).data('jupman-show');
+                }
+                
+                toggler.text(showMsg);
+                toggler.insertBefore(value);
+            });
+            
+            $(".jupman-toggable").hide();
+            $(".jupman-toggable-header").show();
+
+            $('.jupman-toggable-header')
+                .off('click')
+                .click(function(ev){                                
+                    let toggler = $(this);
+                    
+                    let uls = toggler.nextAll(".jupman-toggable");
+                    let sibling = uls.eq(0);
+                    
+                    let showMsg = defaultShowMsg;
+                    let hideMsg = defaultHideMsg;
+                    if (sibling.data('jupman-show')){
+                        showMsg = sibling.data('jupman-show');
+                    }
+                    if (sibling.data('jupman-hide')){
+                        hideMsg = sibling.data('jupman-hide');
+                    }
+                    if (sibling.css('display') === 'none'){            
+                        toggler.text(hideMsg);
+                    } else {                                    
+                        toggler.text(showMsg);
+                    }
+                    sibling.slideToggle();        
+                    ev.preventDefault();
+                    ev.stopPropagation();
+                    return false;
+            });
+        } 
+        console.log('jupman.js initCommon end')
 
     },
 
@@ -154,7 +207,8 @@ var jupman = {
      *   Jupyter only instructions - doesn't run on ReadTheDocs
      */
     initJupyter : function(){
-        
+       console.log('jupman.js initJupyter start') 
+
        var toc = $("<div>").attr("id", "jupman-toc");              
                                                              
        var nav = $("<div>")
@@ -219,7 +273,7 @@ $
  
         
        jupman.resize();
-       console.log("Finished initializing jupman.js in Jupyter Notebook.")
+       console.log('jupman.js initJupyter end')
     },
     
     /**
@@ -227,7 +281,7 @@ $
     */
     initWebsite : function(){  
         
-        console.log("initializing jupman.js in Website ...")
+        console.log("jupman.js initWebsite start")
         
         console.log("Fixing menu clicks for https://github.com/DavidLeoni/jupman/issues/38")
 
@@ -274,7 +328,7 @@ $
         pytuts.closest('div.output_area.rendered_html.docutils.container')
               .css('overflow', 'visible')
 
-        console.log("Finished initializing jupman.js in Website")    
+        console.log("jupman.js initWebsite end")
     },
     
     /**

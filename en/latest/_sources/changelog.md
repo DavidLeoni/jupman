@@ -6,15 +6,19 @@ Jupman Jupyter Manager
 [jupman.softpython.org](https://jupman.softpython.org)
 
 
-## October 16 2020 - 3.2
+## October 17th 2020 - 3.2
 
 - added optional build on Github Actions
-- solutions are finally hidden on the website, with a click to show button!
+- solutions are finally hidden on the website, with a click-to-show button!
+- introduced generic jupman-toggable and specific jupman-sol CSS classes
+- improved menu navigation
+- added softpython theme
+- images are now shown centered in HTML
 - moved to jupman.softpython.org
 - updated nbsphinx to 0.7.1
 - updated sphinx_rtd_theme to 0.4.3
 - updated sphinx to 2.3.1
-- updated pygments to2.7.1
+- updated pygments to 2.7.1
 
 ## January 16th 2020 - 3.1
 
