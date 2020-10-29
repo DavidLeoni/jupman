@@ -15,6 +15,8 @@ Jupman Jupyter Manager
 - added softpython theme
 - images are now shown centered in HTML
 - moved to jupman.softpython.org
+- fixed write here tag not preserving the line
+- deprecated jupman_tools.ignore_spaces in favor of tag_regex
 - updated nbsphinx to 0.7.1
 - updated sphinx_rtd_theme to 0.4.3
 - updated sphinx to 2.3.1

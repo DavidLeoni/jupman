@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                dev
+                3.2
               </div>
             
           
@@ -941,14 +941,14 @@ git push origin gh-pages
 </div>
 <div class="section" id="write-here">
 <h4>write here<a class="headerlink" href="#write-here" title="Permalink to this headline">¶</a></h4>
-<p>This special tag for python code erases whatever is found afterwards the <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">write</span> <span class="pre">here</span></code> comment</p>
+<p>This special tag for python code erases whatever is found afterwards the <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">write</span> <span class="pre">here</span></code> <strong>line</strong></p>
 <ul class="simple">
 <li><p>you can put how many spaces you want in the comment</p></li>
 <li><p>phrase can be customized in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code></p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="mi">5</span>
 
-<span class="c1">#  write  here</span>
+<span class="c1">#  write  here  fast please</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">+</span> <span class="n">w</span>
 <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">x</span>
@@ -957,7 +957,7 @@ git push origin gh-pages
 <p>becomes</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="mi">5</span>
 
-<span class="c1">#  write  here</span>
+<span class="c1">#  write  here  fast please</span>
 </pre></div>
 </div>
 </div>
@@ -1066,10 +1066,10 @@ def f():
 <div class="output_area rendered_html docutils container">
 <script src="_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
 
-<script id="json-jm81f65d45-553e-4c11-a5a1-8a118775ee36" type="application/json" >
-    {"trace": [{"stack_to_render": [], "ordered_globals": [], "heap": {}, "func_name": "<module>", "line": 2, "globals": {}, "stdout": "", "event": "step_line"}, {"stack_to_render": [], "ordered_globals": ["x"], "heap": {"1": ["LIST", 5, 8, 4]}, "func_name": "<module>", "line": 3, "globals": {"x": ["REF", 1]}, "stdout": "", "event": "step_line"}, {"stack_to_render": [], "ordered_globals": ["x", "y"], "heap": {"1": ["LIST", 5, 8, 4], "2": ["DICT", [3, 9]]}, "func_name": "<module>", "line": 4, "globals": {"y": ["REF", 2], "x": ["REF", 1]}, "stdout": "", "event": "step_line"}, {"stack_to_render": [], "ordered_globals": ["x", "y", "z"], "heap": {"1": ["LIST", 5, 8, 4], "2": ["DICT", [3, 9]], "3": ["LIST", ["REF", 1]]}, "func_name": "<module>", "line": 4, "globals": {"y": ["REF", 2], "z": ["REF", 3], "x": ["REF", 1]}, "stdout": "", "event": "return"}], "code": " \nx = [5,8,4]\ny= {3:9}\nz = [x]"}
+<script id="json-jm31777a58-c60d-48ef-be56-b6795c15f420" type="application/json" >
+    {"trace": [{"stack_to_render": [], "globals": {}, "ordered_globals": [], "func_name": "<module>", "heap": {}, "line": 2, "event": "step_line", "stdout": ""}, {"stack_to_render": [], "globals": {"x": ["REF", 1]}, "ordered_globals": ["x"], "func_name": "<module>", "heap": {"1": ["LIST", 5, 8, 4]}, "line": 3, "event": "step_line", "stdout": ""}, {"stack_to_render": [], "globals": {"x": ["REF", 1], "y": ["REF", 2]}, "ordered_globals": ["x", "y"], "func_name": "<module>", "heap": {"1": ["LIST", 5, 8, 4], "2": ["DICT", [3, 9]]}, "line": 4, "event": "step_line", "stdout": ""}, {"stack_to_render": [], "globals": {"x": ["REF", 1], "z": ["REF", 3], "y": ["REF", 2]}, "ordered_globals": ["x", "y", "z"], "func_name": "<module>", "heap": {"1": ["LIST", 5, 8, 4], "2": ["DICT", [3, 9]], "3": ["LIST", ["REF", 1]]}, "line": 4, "event": "return", "stdout": ""}], "code": " \nx = [5,8,4]\ny= {3:9}\nz = [x]"}
 </script>
-<div id="jm81f65d45-553e-4c11-a5a1-8a118775ee36" class="pytutorVisualizer"> </div>
+<div id="jm31777a58-c60d-48ef-be56-b6795c15f420" class="pytutorVisualizer"> </div>
 
 <style>
 .vizLayoutTd {
@@ -1089,12 +1089,12 @@ def f():
 <script>
 (function(){
 
-    var trace = JSON.parse(document.getElementById('json-jm81f65d45-553e-4c11-a5a1-8a118775ee36').innerHTML);
+    var trace = JSON.parse(document.getElementById('json-jm31777a58-c60d-48ef-be56-b6795c15f420').innerHTML);
     // NOTE 1: id without #
     // NOTE 2 - maybe there are more predictable ways, but this will work anyway
     //        - id should be number
     visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jm81f65d45-553e-4c11-a5a1-8a118775ee36',{'embeddedMode' : false,
+    addVisualizerToPage(trace, 'jm31777a58-c60d-48ef-be56-b6795c15f420',{'embeddedMode' : false,
                                      'visualizerIdOverride':visualizerIdOverride})
 
 
@@ -1152,10 +1152,10 @@ NameError: name &#39;w&#39; is not defined
 <div class="output_area rendered_html docutils container">
 <script src="_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
 
-<script id="json-jmd40470bd-b8f4-4082-9332-9dbc00719ccd" type="application/json" >
-    {"trace": [{"stack_to_render": [], "ordered_globals": [], "heap": {}, "func_name": "<module>", "line": 2, "globals": {}, "stdout": "", "event": "step_line"}, {"stack_to_render": [], "ordered_globals": [], "heap": {}, "func_name": "<module>", "line": 2, "globals": {}, "stdout": "", "exception_msg": "NameError: name 'w' is not defined", "event": "exception"}], "code": " \nx =  w + 5"}
+<script id="json-jmd2aaca6f-1979-4d5b-93af-1847b99776e0" type="application/json" >
+    {"trace": [{"stack_to_render": [], "globals": {}, "ordered_globals": [], "func_name": "<module>", "heap": {}, "line": 2, "event": "step_line", "stdout": ""}, {"stack_to_render": [], "globals": {}, "ordered_globals": [], "exception_msg": "NameError: name 'w' is not defined", "func_name": "<module>", "heap": {}, "line": 2, "event": "exception", "stdout": ""}], "code": " \nx =  w + 5"}
 </script>
-<div id="jmd40470bd-b8f4-4082-9332-9dbc00719ccd" class="pytutorVisualizer"> </div>
+<div id="jmd2aaca6f-1979-4d5b-93af-1847b99776e0" class="pytutorVisualizer"> </div>
 
 <style>
 .vizLayoutTd {
@@ -1175,12 +1175,12 @@ NameError: name &#39;w&#39; is not defined
 <script>
 (function(){
 
-    var trace = JSON.parse(document.getElementById('json-jmd40470bd-b8f4-4082-9332-9dbc00719ccd').innerHTML);
+    var trace = JSON.parse(document.getElementById('json-jmd2aaca6f-1979-4d5b-93af-1847b99776e0').innerHTML);
     // NOTE 1: id without #
     // NOTE 2 - maybe there are more predictable ways, but this will work anyway
     //        - id should be number
     visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jmd40470bd-b8f4-4082-9332-9dbc00719ccd',{'embeddedMode' : false,
+    addVisualizerToPage(trace, 'jmd2aaca6f-1979-4d5b-93af-1847b99776e0',{'embeddedMode' : false,
                                      'visualizerIdOverride':visualizerIdOverride})
 
 
