@@ -1266,9 +1266,11 @@ mkeot SomeFont.otf &gt; SomeFont.eot
 </div>
 <p>Running commands should be quite self-explanatory.</p>
 <p>NOTE: as of today (Dec 2019) software may contain bugs, but at least we check for major misuses (like trying to overwrite existing exams).</p>
-<p>In the file <a class="reference external" href="create-exam-example.sh">create-exam-example.sh</a> there is a typical run of the script, which creates the example exam for date <code class="docutils literal notranslate"><span class="pre">2000-12-31</span></code>. Notice it might ask you to delete the existing 2000-12-31 exam, if it does just follow the instructions. Here is the output:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./create-exam-example.sh
+<p>In the file <a class="reference external" href="create-exam-example.sh">create-exam-example.sh</a> there is a typical run of the script, which creates the example exam for date <code class="docutils literal notranslate"><span class="pre">2000-12-31</span></code>. Notice it might ask you to delete the existing 2000-12-31 exam, if it does just follow the instructions. Here’s the output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt; ./create-exam-example.sh
 python3 exam.py init <span class="m">2000</span>-12-31
+  Detected release from git: <span class="m">3</span>.2.0-3-g30a995c
+No GOOGLE_ANALYTICS environment variable was found, skipping it
 
   You can now edit Python solutions, tests, exercises and exam notebook here  :
 
@@ -1277,9 +1279,9 @@ python3 exam.py init <span class="m">2000</span>-12-31
   DONE.
 
 python3 exam.py package <span class="m">2000</span>-12-31
+  Detected release from git: <span class="m">3</span>.2.0-3-g30a995c
+No GOOGLE_ANALYTICS environment variable was found, skipping it
   Cleaning _private/2000-12-31/server/jupman  ...
-  Copying built website ...
-  Building pdf ..
   Copying exercises to _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/
   Copying code
     from  _private/2000-12-31/solutions
@@ -1292,6 +1294,7 @@ python3 exam.py package <span class="m">2000</span>-12-31
     Writing <span class="o">(</span>patched<span class="o">)</span> _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/lists_test.py
   Creating dir _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/img
     Writing _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/img/mountains.jpg
+  Building pdf ..
   Creating student exercises zip:  _private/2000-12-31/server/jupman-2000-12-31-exam.zip
   Writing jupman.py
   Writing my_lib.py
@@ -1299,11 +1302,8 @@ python3 exam.py package <span class="m">2000</span>-12-31
   Writing _static/js/jupman.js
   Writing _static/css/jupman.css
   Writing _static/js/toc.js
-  Wrote _private/2000-12-31/server/jupman-2000-12-31-exam
-  Creating server zip: _private/2000-12-31/jupman-2000-12-31-server.zip
-
-  You can now browse the website at:  /home/da/Da/prj/jupman/prj/_private/2000-12-31/server/jupman/html/index.html
-
+  Writing _static/js/pytutor-embed.bundle.min.js
+  Wrote _private/2000-12-31/server/jupman-2000-12-31-exam.zip
 
   DONE.
 
@@ -1316,6 +1316,8 @@ cp _templates/exam/solutions/lists_sol.py _templates/exam/solutions/lists_test.p
 ------- Done with shipped exams simulation, <span class="nb">time</span> to grade ...
 
 python3 exam.py grade <span class="m">2000</span>-12-31
+  Detected release from git: <span class="m">3</span>.2.0-3-g30a995c
+No GOOGLE_ANALYTICS environment variable was found, skipping it
   Copying Python files to execute and eventually grade in _private/2000-12-31/graded/john-doe-112233/graded
   Copying original shipped files <span class="o">(</span>don<span class="s1">&#39;t touch them!) in _private/2000-12-31/graded/john-doe-112233/shipped</span>
 <span class="s1">  Copying Python files to execute and eventually grade in _private/2000-12-31/graded/jane-doe-445566/graded</span>
@@ -1324,6 +1326,8 @@ python3 exam.py grade <span class="m">2000</span>-12-31
   DONE.
 
 python3 exam.py zip-grades <span class="m">2000</span>-12-31
+  Detected release from git: <span class="m">3</span>.2.0-3-g30a995c
+No GOOGLE_ANALYTICS environment variable was found, skipping it
 
   You can now find zips to send to students in _private/2000-12-31/graded
 
@@ -1331,6 +1335,8 @@ python3 exam.py zip-grades <span class="m">2000</span>-12-31
   DONE.
 
 python3 exam.py publish <span class="m">2000</span>-12-31
+  Detected release from git: <span class="m">3</span>.2.0-3-g30a995c
+No GOOGLE_ANALYTICS environment variable was found, skipping it
   Copying solutions to exams/2000-12-31/solutions
   Copying exam PDF text
 
