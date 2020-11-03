@@ -123,6 +123,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#Tags-to-strip">Tags to strip</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#jupman-raise">jupman-raise</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#jupman-strip">jupman-strip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jupman-purge">jupman-purge</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#write-here">write here</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#SOLUTION">SOLUTION</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#QUESTION---ANSWER">QUESTION - ANSWER</a></li>
@@ -239,6 +240,7 @@
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Local-exercise-image">Local exercise image</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Python-tutor">Python tutor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Exercise-in-Jupyter">Exercise in Jupyter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Exercise-using-previous-output">Exercise using previous output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Exercise-in-Jupyter-with-Python-Tutor">Exercise in Jupyter with Python Tutor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Question-in-Jupyter">Question in Jupyter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Exercise-in-Python">Exercise in Python</a></li>
@@ -917,7 +919,7 @@ git push origin gh-pages
 </div>
 <div class="section" id="jupman-strip">
 <h4>jupman-strip<a class="headerlink" href="#jupman-strip" title="Permalink to this headline">¶</a></h4>
-<p>Just strips code inside</p>
+<p>Just strips code inside exercises</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
@@ -936,6 +938,23 @@ git push origin gh-pages
 
 <span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="jupman-purge">
+<h4>jupman-purge<a class="headerlink" href="#jupman-purge" title="Permalink to this headline">¶</a></h4>
+<p>Eliminates content both from exercises AND solutions. Can be helpful when you have code which creates expected output, like images or python data - the idea is to completely remove that code both from exercises AND solutions, so students don’t accidentally copy-paste it or uncomment it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="mi">5</span>
+<span class="c1">#jupman-purge</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;expected_image.png&#39;</span><span class="p">)</span>
+<span class="n">jupman</span><span class="o">.</span><span class="n">save_py</span><span class="p">(</span><span class="s1">&#39;expected_output_db.py&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;big&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;structure&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+<span class="c1">#/jupman-purge</span>
+<span class="n">x</span><span class="o">=</span><span class="mi">6</span>
+</pre></div>
+</div>
+<p>becomes</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">x</span><span class="o">=</span><span class="mi">6</span>
 </pre></div>
 </div>
 </div>
