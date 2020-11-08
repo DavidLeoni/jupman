@@ -100,8 +100,8 @@
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Jupman Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#Installation">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#To-build-with-ReadTheDocs:">To build with ReadTheDocs:</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#To-build-with-Github-Actions:">To build with Github Actions:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Building-with-ReadTheDocs:">Building with ReadTheDocs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Building-with-Github-Actions:">Building with Github Actions:</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Local-build-with-Sphinx">Local build with Sphinx</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Optional---Running-tests">Optional - Running tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Optional---Install-Jupyter-contrib-extensions">Optional - Install Jupyter contrib extensions</a></li>
@@ -118,6 +118,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#Exercises-in-Python-files">Exercises in Python files</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Exercises-in-Jupyter-files">Exercises in Jupyter files</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Mixed-exercises-in-Jupyter-and-Python-files">Mixed exercises in Jupyter and Python files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Challenges">Challenges</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#Tags-to-strip">Tags to strip</a><ul>
@@ -246,6 +247,14 @@
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Exercise-in-Python">Exercise in Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#add">add</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#sub">sub</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="challenge-example/example-chal-sol.html">Example Challenge SOLUTIONS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="challenge-example/example-chal-sol.html#Download-exercises-zip">Download exercises zip</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="challenge-example/example-chal.html">Example Challenge</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="challenge-example/example-chal.html#Download-exercises-zip">Download exercises zip</a></li>
 </ul>
 </li>
 </ul>
@@ -627,8 +636,8 @@ div.rendered_html tbody tr:hover {
 <li><p>locally with <a class="reference external" href="https://github.com/DavidLeoni/readthedocs-to-actions">RTD Docker</a></p></li>
 </ul>
 <p>(Note Jupman itself is building on both ReadTheDocs and Github Actions only for testing purposes, one is enough)</p>
-<div class="section" id="To-build-with-ReadTheDocs:">
-<h3>To build with ReadTheDocs:<a class="headerlink" href="#To-build-with-ReadTheDocs:" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Building-with-ReadTheDocs:">
+<h3>Building with ReadTheDocs:<a class="headerlink" href="#Building-with-ReadTheDocs:" title="Permalink to this headline">¶</a></h3>
 <p><strong>IMPORTANT: choose a name which is NOT already on</strong> <a class="reference external" href="http://readthedocs.org">ReadTheDocs</a></p>
 <p>Create a <a class="reference external" href="http://readthedocs.org">ReadTheDocs account</a> <strong>using the same name as in Github</strong> so the address in readthedocs will be something like <em>my-project.readthedocs.org</em>.</p>
 <ul class="simple">
@@ -641,8 +650,8 @@ div.rendered_html tbody tr:hover {
 </li>
 </ul>
 </div>
-<div class="section" id="To-build-with-Github-Actions:">
-<h3>To build with Github Actions:<a class="headerlink" href="#To-build-with-Github-Actions:" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Building-with-Github-Actions:">
+<h3>Building with Github Actions:<a class="headerlink" href="#Building-with-Github-Actions:" title="Permalink to this headline">¶</a></h3>
 <p>Configure <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/.github/workflows/main.yml">.github/workflows/main.yml</a> on your computer to your needs - you will need to:</p>
 <ol class="arabic simple">
 <li><p>at the beginning there is an <code class="docutils literal notranslate"><span class="pre">if</span></code> which makes the workflow only work in <code class="docutils literal notranslate"><span class="pre">DavidLeoni/jupman</span></code> repository, change it with your names</p></li>
@@ -898,6 +907,24 @@ git push origin gh-pages
 <h4>Mixed exercises in Jupyter and Python files<a class="headerlink" href="#Mixed-exercises-in-Jupyter-and-Python-files" title="Permalink to this headline">¶</a></h4>
 <p>See <a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html"><span class="doc">jup-and-py-example/jup-and-py-example-sol.ipynb</span></a></p>
 </div>
+<div class="section" id="Challenges">
+<h4>Challenges<a class="headerlink" href="#Challenges" title="Permalink to this headline">¶</a></h4>
+<div class="admonition warning">
+<p>This is an experimental feature, current implementation is subject to change.</p>
+</div>
+<p>Challenges are solutions which remain unpublished and from which exercises are generated <strong>in the same original older</strong> where the solution resides (not only in the zip!). Challenge files can be both Jupyter notebooks or Python files, ending in <code class="docutils literal notranslate"><span class="pre">-chal-sol.ipynb</span></code> or <code class="docutils literal notranslate"><span class="pre">_chal_sol.py</span></code>.</p>
+<p>The idea is that challenges solutions are gitignored, and exercises are manually generated by calling <code class="docutils literal notranslate"><span class="pre">jupman.generate_exercise()</span></code> inside a Jupyter notebook like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#jupman-purge</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="p">;</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">);</span> <span class="kn">from</span> <span class="nn">conf</span> <span class="kn">import</span> <span class="n">jm</span><span class="p">;</span>
+<span class="n">jm</span><span class="o">.</span><span class="n">generate_exercise</span><span class="p">(</span><span class="s1">&#39;great_chal_sol.py&#39;</span><span class="p">)</span>
+<span class="c1">#/jupman-purge</span>
+</pre></div>
+</div>
+<p>It is a bit laborious but the idea is that typically you will also want to run and see tests results in Jupyter notebook so you can do it in the same final cell, which you will also probably want to set in cell metadata <code class="docutils literal notranslate"><span class="pre">&quot;nbsphinx&quot;:&quot;hidden&quot;</span></code></p>
+<ul class="simple">
+<li><p>the solution notebook must contain tags to strip and have SOLUTIONS at the end of the title (the word can be customized in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> - you might need to translate it)</p></li>
+</ul>
+</div>
 </div>
 <div class="section" id="Tags-to-strip">
 <h3>Tags to strip<a class="headerlink" href="#Tags-to-strip" title="Permalink to this headline">¶</a></h3>
@@ -1003,12 +1030,12 @@ def f():
 <ul class="simple">
 <li><p>Markdown can be customized in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code></p></li>
 </ul>
-<p><strong>QUESTION</strong>: Describe why iPhone 8 is better than 7</p>
+<p><strong>QUESTION</strong>: Describe why iPhone n+1 is better than iPhone n</p>
 <a  class="jupman-sol jupman-sol-toggler"
  onclick="jupman.toggleSolution(this);"
  data-jupman-show="Show answer" data-jupman-hide="Hide">Show answer</a><div class="jupman-sol jupman-sol-question" style="display:none"><p><strong>ANSWER</strong>: it costs more</p>
 </div><p>becomes:</p>
-<p><strong>QUESTION</strong>: Describe why iPhone 8 is better than 7</p>
+<p><strong>QUESTION</strong>: Describe why iPhone n+1 is better than iPhone n</p>
 </div>
 </div>
 <div class="section" id="Utilities-and-custom-js-and-css">
