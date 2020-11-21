@@ -261,6 +261,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../toc.html#templates">Templates</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#in-progress-3-3">IN PROGRESS - 3.3</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../changelog.html#october-17th-2020-3-2">October 17th 2020 - 3.2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../changelog.html#january-16th-2020-3-1">January 16th 2020 - 3.1</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../changelog.html#december-29th-2019-3-0">December 29th 2019 - 3.0</a></li>
@@ -710,10 +711,10 @@ It was a 5 indeed
 <div class="output_area rendered_html docutils container">
 <script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
 
-<script id="json-jm889079bd-bb36-41a9-8556-0841ef02d676" type="application/json" >
-    {"code": " \nx = 5\ny = 6\nz = x + y", "trace": [{"ordered_globals": [], "heap": {}, "globals": {}, "func_name": "<module>", "event": "step_line", "stdout": "", "line": 2, "stack_to_render": []}, {"ordered_globals": ["x"], "heap": {}, "globals": {"x": 5}, "func_name": "<module>", "event": "step_line", "stdout": "", "line": 3, "stack_to_render": []}, {"ordered_globals": ["x", "y"], "heap": {}, "globals": {"x": 5, "y": 6}, "func_name": "<module>", "event": "step_line", "stdout": "", "line": 4, "stack_to_render": []}, {"ordered_globals": ["x", "y", "z"], "heap": {}, "globals": {"x": 5, "z": 11, "y": 6}, "func_name": "<module>", "event": "return", "stdout": "", "line": 4, "stack_to_render": []}]}
+<script id="json-jm6efe0ac3-1c7e-493e-b7b3-d1e3d1bbcea6" type="application/json" >
+    {"code": " \nx = 5\ny = 6\nz = x + y", "trace": [{"heap": {}, "globals": {}, "event": "step_line", "func_name": "<module>", "ordered_globals": [], "stdout": "", "stack_to_render": [], "line": 2}, {"heap": {}, "globals": {"x": 5}, "event": "step_line", "func_name": "<module>", "ordered_globals": ["x"], "stdout": "", "stack_to_render": [], "line": 3}, {"heap": {}, "globals": {"x": 5, "y": 6}, "event": "step_line", "func_name": "<module>", "ordered_globals": ["x", "y"], "stdout": "", "stack_to_render": [], "line": 4}, {"heap": {}, "globals": {"z": 11, "x": 5, "y": 6}, "event": "return", "func_name": "<module>", "ordered_globals": ["x", "y", "z"], "stdout": "", "stack_to_render": [], "line": 4}]}
 </script>
-<div id="jm889079bd-bb36-41a9-8556-0841ef02d676" class="pytutorVisualizer"> </div>
+<div id="jm6efe0ac3-1c7e-493e-b7b3-d1e3d1bbcea6" class="pytutorVisualizer"> </div>
 
 <style>
 .vizLayoutTd {
@@ -733,12 +734,12 @@ It was a 5 indeed
 <script>
 (function(){
 
-    var trace = JSON.parse(document.getElementById('json-jm889079bd-bb36-41a9-8556-0841ef02d676').innerHTML);
+    var trace = JSON.parse(document.getElementById('json-jm6efe0ac3-1c7e-493e-b7b3-d1e3d1bbcea6').innerHTML);
     // NOTE 1: id without #
     // NOTE 2 - maybe there are more predictable ways, but this will work anyway
     //        - id should be number
     visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jm889079bd-bb36-41a9-8556-0841ef02d676',{'embeddedMode' : false,
+    addVisualizerToPage(trace, 'jm6efe0ac3-1c7e-493e-b7b3-d1e3d1bbcea6',{'embeddedMode' : false,
                                      'visualizerIdOverride':visualizerIdOverride})
 
 
@@ -856,38 +857,7 @@ It was a 5 indeed
 </pre></div></div>
 </div>
 <p>Other example:</p>
-<a  class="jupman-sol jupman-sol-toggler"
- onclick="jupman.toggleSolution(this);"
- data-jupman-show="Show solution" data-jupman-hide="Hide">Show solution</a><div class="jupman-sol jupman-sol-code" style="display:none"><div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">hello_db2</span> <span class="o">=</span> <span class="n">hello</span><span class="p">(</span><span class="s2">&quot;Threepwood&quot;</span><span class="p">)</span>
-
-<span class="n">hello_db2</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-[&#39;hello&#39;,
- &#39;Threepwood&#39;,
- &#39;hello&#39;,
- &#39;Threepwood&#39;,
- &#39;hello&#39;,
- &#39;Threepwood&#39;,
- &#39;hello&#39;,
- &#39;Threepwood&#39;,
- &#39;hello&#39;,
- &#39;Threepwood&#39;]
-</pre></div></div>
-</div>
-</div><div class="nbinput docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
@@ -987,10 +957,10 @@ It was a 5 indeed
 <div class="output_area rendered_html docutils container">
 <script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
 
-<script id="json-jm4d43a29d-8016-4485-95e0-f400f810c041" type="application/json" >
-    {"code": " \nimport math\n\n# write here\n\nla = [math.pi] * 5\n\nlb = [la] * 3\n\nlc = [lb] * 4\nprint(la)", "trace": [{"ordered_globals": [], "heap": {}, "globals": {}, "func_name": "<module>", "event": "step_line", "stdout": "", "line": 2, "stack_to_render": []}, {"ordered_globals": ["math"], "heap": {"1": ["INSTANCE", "module"]}, "globals": {"math": ["REF", 1]}, "func_name": "<module>", "event": "step_line", "stdout": "", "line": 6, "stack_to_render": []}, {"ordered_globals": ["math", "la"], "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416]}, "globals": {"la": ["REF", 2], "math": ["REF", 1]}, "func_name": "<module>", "event": "step_line", "stdout": "", "line": 8, "stack_to_render": []}, {"ordered_globals": ["math", "la", "lb"], "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]]}, "globals": {"lb": ["REF", 3], "la": ["REF", 2], "math": ["REF", 1]}, "func_name": "<module>", "event": "step_line", "stdout": "", "line": 10, "stack_to_render": []}, {"ordered_globals": ["math", "la", "lb", "lc"], "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]], "4": ["LIST", ["REF", 3], ["REF", 3], ["REF", 3], ["REF", 3]]}, "globals": {"lb": ["REF", 3], "lc": ["REF", 4], "la": ["REF", 2], "math": ["REF", 1]}, "func_name": "<module>", "event": "step_line", "stdout": "", "line": 11, "stack_to_render": []}, {"ordered_globals": ["math", "la", "lb", "lc"], "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]], "4": ["LIST", ["REF", 3], ["REF", 3], ["REF", 3], ["REF", 3]]}, "globals": {"lb": ["REF", 3], "lc": ["REF", 4], "la": ["REF", 2], "math": ["REF", 1]}, "func_name": "<module>", "event": "return", "stdout": "[3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793]\n", "line": 11, "stack_to_render": []}]}
+<script id="json-jma9cd1bc9-ffaa-4cae-bc02-b7fcfe8dac5c" type="application/json" >
+    {"code": " \nimport math\n\n# write here\n\nla = [math.pi] * 5\n\nlb = [la] * 3\n\nlc = [lb] * 4\nprint(la)", "trace": [{"heap": {}, "globals": {}, "event": "step_line", "func_name": "<module>", "ordered_globals": [], "stdout": "", "stack_to_render": [], "line": 2}, {"heap": {"1": ["INSTANCE", "module"]}, "globals": {"math": ["REF", 1]}, "event": "step_line", "func_name": "<module>", "ordered_globals": ["math"], "stdout": "", "stack_to_render": [], "line": 6}, {"heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416]}, "globals": {"math": ["REF", 1], "la": ["REF", 2]}, "event": "step_line", "func_name": "<module>", "ordered_globals": ["math", "la"], "stdout": "", "stack_to_render": [], "line": 8}, {"heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]]}, "globals": {"math": ["REF", 1], "la": ["REF", 2], "lb": ["REF", 3]}, "event": "step_line", "func_name": "<module>", "ordered_globals": ["math", "la", "lb"], "stdout": "", "stack_to_render": [], "line": 10}, {"heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]], "4": ["LIST", ["REF", 3], ["REF", 3], ["REF", 3], ["REF", 3]]}, "globals": {"math": ["REF", 1], "la": ["REF", 2], "lc": ["REF", 4], "lb": ["REF", 3]}, "event": "step_line", "func_name": "<module>", "ordered_globals": ["math", "la", "lb", "lc"], "stdout": "", "stack_to_render": [], "line": 11}, {"heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]], "4": ["LIST", ["REF", 3], ["REF", 3], ["REF", 3], ["REF", 3]]}, "globals": {"math": ["REF", 1], "la": ["REF", 2], "lc": ["REF", 4], "lb": ["REF", 3]}, "event": "return", "func_name": "<module>", "ordered_globals": ["math", "la", "lb", "lc"], "stdout": "[3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793]\n", "stack_to_render": [], "line": 11}]}
 </script>
-<div id="jm4d43a29d-8016-4485-95e0-f400f810c041" class="pytutorVisualizer"> </div>
+<div id="jma9cd1bc9-ffaa-4cae-bc02-b7fcfe8dac5c" class="pytutorVisualizer"> </div>
 
 <style>
 .vizLayoutTd {
@@ -1010,12 +980,12 @@ It was a 5 indeed
 <script>
 (function(){
 
-    var trace = JSON.parse(document.getElementById('json-jm4d43a29d-8016-4485-95e0-f400f810c041').innerHTML);
+    var trace = JSON.parse(document.getElementById('json-jma9cd1bc9-ffaa-4cae-bc02-b7fcfe8dac5c').innerHTML);
     // NOTE 1: id without #
     // NOTE 2 - maybe there are more predictable ways, but this will work anyway
     //        - id should be number
     visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jm4d43a29d-8016-4485-95e0-f400f810c041',{'embeddedMode' : false,
+    addVisualizerToPage(trace, 'jma9cd1bc9-ffaa-4cae-bc02-b7fcfe8dac5c',{'embeddedMode' : false,
                                      'visualizerIdOverride':visualizerIdOverride})
 
 
@@ -1059,10 +1029,10 @@ It was a 5 indeed
 <div class="output_area rendered_html docutils container">
 <script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
 
-<script id="json-jm4d43a29d-8016-4485-95e0-f400f810c041" type="application/json" >
-    {"code": " \nimport math\n\n# write here\n\nla = [math.pi] * 5\n\nlb = [la] * 3\n\nlc = [lb] * 4\nprint(la)", "trace": [{"ordered_globals": [], "heap": {}, "globals": {}, "func_name": "<module>", "event": "step_line", "stdout": "", "line": 2, "stack_to_render": []}, {"ordered_globals": ["math"], "heap": {"1": ["INSTANCE", "module"]}, "globals": {"math": ["REF", 1]}, "func_name": "<module>", "event": "step_line", "stdout": "", "line": 6, "stack_to_render": []}, {"ordered_globals": ["math", "la"], "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416]}, "globals": {"la": ["REF", 2], "math": ["REF", 1]}, "func_name": "<module>", "event": "step_line", "stdout": "", "line": 8, "stack_to_render": []}, {"ordered_globals": ["math", "la", "lb"], "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]]}, "globals": {"lb": ["REF", 3], "la": ["REF", 2], "math": ["REF", 1]}, "func_name": "<module>", "event": "step_line", "stdout": "", "line": 10, "stack_to_render": []}, {"ordered_globals": ["math", "la", "lb", "lc"], "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]], "4": ["LIST", ["REF", 3], ["REF", 3], ["REF", 3], ["REF", 3]]}, "globals": {"lb": ["REF", 3], "lc": ["REF", 4], "la": ["REF", 2], "math": ["REF", 1]}, "func_name": "<module>", "event": "step_line", "stdout": "", "line": 11, "stack_to_render": []}, {"ordered_globals": ["math", "la", "lb", "lc"], "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]], "4": ["LIST", ["REF", 3], ["REF", 3], ["REF", 3], ["REF", 3]]}, "globals": {"lb": ["REF", 3], "lc": ["REF", 4], "la": ["REF", 2], "math": ["REF", 1]}, "func_name": "<module>", "event": "return", "stdout": "[3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793]\n", "line": 11, "stack_to_render": []}]}
+<script id="json-jma9cd1bc9-ffaa-4cae-bc02-b7fcfe8dac5c" type="application/json" >
+    {"code": " \nimport math\n\n# write here\n\nla = [math.pi] * 5\n\nlb = [la] * 3\n\nlc = [lb] * 4\nprint(la)", "trace": [{"heap": {}, "globals": {}, "event": "step_line", "func_name": "<module>", "ordered_globals": [], "stdout": "", "stack_to_render": [], "line": 2}, {"heap": {"1": ["INSTANCE", "module"]}, "globals": {"math": ["REF", 1]}, "event": "step_line", "func_name": "<module>", "ordered_globals": ["math"], "stdout": "", "stack_to_render": [], "line": 6}, {"heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416]}, "globals": {"math": ["REF", 1], "la": ["REF", 2]}, "event": "step_line", "func_name": "<module>", "ordered_globals": ["math", "la"], "stdout": "", "stack_to_render": [], "line": 8}, {"heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]]}, "globals": {"math": ["REF", 1], "la": ["REF", 2], "lb": ["REF", 3]}, "event": "step_line", "func_name": "<module>", "ordered_globals": ["math", "la", "lb"], "stdout": "", "stack_to_render": [], "line": 10}, {"heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]], "4": ["LIST", ["REF", 3], ["REF", 3], ["REF", 3], ["REF", 3]]}, "globals": {"math": ["REF", 1], "la": ["REF", 2], "lc": ["REF", 4], "lb": ["REF", 3]}, "event": "step_line", "func_name": "<module>", "ordered_globals": ["math", "la", "lb", "lc"], "stdout": "", "stack_to_render": [], "line": 11}, {"heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]], "4": ["LIST", ["REF", 3], ["REF", 3], ["REF", 3], ["REF", 3]]}, "globals": {"math": ["REF", 1], "la": ["REF", 2], "lc": ["REF", 4], "lb": ["REF", 3]}, "event": "return", "func_name": "<module>", "ordered_globals": ["math", "la", "lb", "lc"], "stdout": "[3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793]\n", "stack_to_render": [], "line": 11}]}
 </script>
-<div id="jm4d43a29d-8016-4485-95e0-f400f810c041" class="pytutorVisualizer"> </div>
+<div id="jma9cd1bc9-ffaa-4cae-bc02-b7fcfe8dac5c" class="pytutorVisualizer"> </div>
 
 <style>
 .vizLayoutTd {
@@ -1082,12 +1052,12 @@ It was a 5 indeed
 <script>
 (function(){
 
-    var trace = JSON.parse(document.getElementById('json-jm4d43a29d-8016-4485-95e0-f400f810c041').innerHTML);
+    var trace = JSON.parse(document.getElementById('json-jma9cd1bc9-ffaa-4cae-bc02-b7fcfe8dac5c').innerHTML);
     // NOTE 1: id without #
     // NOTE 2 - maybe there are more predictable ways, but this will work anyway
     //        - id should be number
     visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jm4d43a29d-8016-4485-95e0-f400f810c041',{'embeddedMode' : false,
+    addVisualizerToPage(trace, 'jma9cd1bc9-ffaa-4cae-bc02-b7fcfe8dac5c',{'embeddedMode' : false,
                                      'visualizerIdOverride':visualizerIdOverride})
 
 

@@ -5,6 +5,9 @@ Jupman Jupyter Manager
 
 [jupman.softpython.org](https://jupman.softpython.org)
 
+## IN PROGRESS - 3.3
+
+- added optional parameter conf to jmt.init
 
 ## October 17th 2020 - 3.2
 
