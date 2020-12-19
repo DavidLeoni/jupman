@@ -140,7 +140,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#Website">Website</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#customize-theme">customize theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Customize-theme">Customize theme</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Fonts">Fonts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#font-sizes">font sizes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Warning-about-old-versions">Warning about old versions</a></li>
@@ -153,6 +153,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#Developer-notes">Developer notes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#Fix-nbsphinx-to-create-rst-files">Fix nbsphinx to create rst files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Git-performance-notes">Git performance notes</a></li>
 </ul>
 </li>
 </ul>
@@ -673,7 +674,7 @@ git push origin gh-pages
 <div class="section" id="Local-build-with-Sphinx">
 <h3>Local build with Sphinx<a class="headerlink" href="#Local-build-with-Sphinx" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
-<li><p>Install Python 3.5+</p></li>
+<li><p>Install Python 3.7+</p></li>
 <li><p><a class="reference external" href="http://jupyter.org/install.html">Install Jupyter</a></p></li>
 <li><p>Install Python modules -from the root of the project, run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m pip install --user -r requirements-build.txt
@@ -1247,9 +1248,17 @@ NameError: name &#39;w&#39; is not defined
 </div>
 <div class="section" id="Website">
 <h2>Website<a class="headerlink" href="#Website" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="customize-theme">
-<h3>customize theme<a class="headerlink" href="#customize-theme" title="Permalink to this headline">¶</a></h3>
-<p>If you want to change site colors and other changes, edit <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/_static/css/jupman-theme.css">_static/css/jupman-theme.css</a></p>
+<div class="section" id="Customize-theme">
+<h3>Customize theme<a class="headerlink" href="#Customize-theme" title="Permalink to this headline">¶</a></h3>
+<p>If you want to change site colors and other changes, copy/edit <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/_static/css/jupman-web.css">_static/css/jupman-web.css</a> and set it in conf <code class="docutils literal notranslate"><span class="pre">html_css_files</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_css_files</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;css/jupman.css&#39;</span><span class="p">,</span>      <span class="c1"># shared among jupyter and website</span>
+    <span class="s1">&#39;css/jupman-web.css&#39;</span><span class="p">,</span>  <span class="c1"># only on website</span>
+    <span class="c1">#&#39;css/softpython-theme.css&#39;,  # uncomment to activate</span>
+    <span class="c1">#&#39;css/scifi-theme.css&#39;,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="Fonts">
 <h3>Fonts<a class="headerlink" href="#Fonts" title="Permalink to this headline">¶</a></h3>
@@ -1412,6 +1421,55 @@ No GOOGLE_ANALYTICS environment variable was found, skipping it
 <p>Sometimes nbsphinx does not report properly RST conversion errors (<a class="reference external" href="https://github.com/DavidLeoni/jupman/issues/9">see bug</a>). As a hacky workaround, you might take the <code class="docutils literal notranslate"><span class="pre">nbsphinx.py</span></code> from <code class="docutils literal notranslate"><span class="pre">~/.local/lib/python3.5/site-packages/</span></code> , make a copy of it in your project home and patch it <a class="reference external" href="https://github.com/DavidLeoni/jupman/commit/0f332629ce4e2b0186c954c55aea7fa67992ace9#diff-bd3d9c4d2e80ed83fd2443d1301aa65bR649">like this</a> When you call sphinx, it will generate RST files in
 <code class="docutils literal notranslate"><span class="pre">_build/jupman-rst/</span></code>.</p>
 <p>Of course, things can be cleaner using a virtual env <a class="reference external" href="https://docs.python.org/3/library/venv.html">with venv</a></p>
+</div>
+<div class="section" id="Git-performance-notes">
+<h3>Git performance notes<a class="headerlink" href="#Git-performance-notes" title="Permalink to this headline">¶</a></h3>
+<p>Current suggested setup for hosting on Github is creating branch gh-pages and using Github Actions to populate it with html, zips, pdf and epub files. While keeping all that stuff versioned may seem pretty inefficient, apparently git is <a class="reference external" href="https://stackoverflow.com/a/48305739">pretty good</a> at compressing binary files</p>
+<p>The size of <code class="docutils literal notranslate"><span class="pre">.git</span></code> repo for a 1000 pdf page project SoftPython with 300 commits and 100 MB of code is:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.git: 183 MB
+</pre></div>
+</div>
+<p>By truncating gh-pages to last commit and garbage collecting, we get:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.git: 139 MB
+</pre></div>
+</div>
+<p>If we completely remove gh-pages branch, we get:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.git: 68.7 MB
+</pre></div>
+</div>
+<p>So gh-pages size is:</p>
+<ul class="simple">
+<li><p>one commit: 70.3 MB</p></li>
+<li><p>300 commits: 114.3 MB</p></li>
+</ul>
+<p>which is not even double than source code git size.</p>
+<p>If the repo gets really huge, in order to to shrink it some git knowledge is required.</p>
+<p><strong>If the repo is served from another server</strong> and you want to truncate that server git repo:</p>
+<p>On that server console:</p>
+<ol class="arabic simple">
+<li><p>first make sure you are on <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout gh-pages
+</pre></div>
+</div>
+<ol class="arabic" start="2">
+<li><p>truncates previous commits:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git fetch --depth<span class="o">=</span><span class="m">1</span> origin gh-pages
+</pre></div>
+</div>
+</li>
+<li><p>removes various links around which may still point to old commits:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git reflog expire --expire-unreachable<span class="o">=</span>now --all
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>actually deletes from disk old commits:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git gc --aggressive --prune<span class="o">=</span>all
+</pre></div>
+</div>
+<p>Note the result of truncation cannot be pushed back to origin as git would complain it is a <em>shallow</em> branch.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>

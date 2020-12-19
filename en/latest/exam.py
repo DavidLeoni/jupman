@@ -273,8 +273,9 @@ def publish(parser,context,args):
     info("Copying solutions to %s" % dest)
     shutil.copytree(source_solutions, dest)
 
-    info("Copying exam PDF text")
-    shutil.copyfile(student_pdf, '%s/%s' % (dest, get_exam_text_filename(ld, 'pdf')))
+    # better avoiding this, I often fix exams post-publication
+    #info("Copying exam PDF text")
+    #shutil.copyfile(student_pdf, '%s/%s' % (dest, get_exam_text_filename(ld, 'pdf')))
     
     info()
     info("Exam Python files copied.")

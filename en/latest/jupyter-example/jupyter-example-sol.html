@@ -140,7 +140,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../usage.html#Website">Website</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../usage.html#customize-theme">customize theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage.html#Customize-theme">Customize theme</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage.html#Fonts">Fonts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage.html#font-sizes">font sizes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage.html#Warning-about-old-versions">Warning about old versions</a></li>
@@ -153,6 +153,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../usage.html#Developer-notes">Developer notes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../usage.html#Fix-nbsphinx-to-create-rst-files">Fix nbsphinx to create rst files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage.html#Git-performance-notes">Git performance notes</a></li>
 </ul>
 </li>
 </ul>
@@ -684,16 +685,19 @@ div.rendered_html tbody tr:hover {
 <div class="output_area rendered_html docutils container">
 <script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
 
-<script id="json-jmad0f1a8c-bb28-4a43-8ffa-d9b898675786" type="application/json" >
+<script id="json-jmcad58a1b-3645-47c6-aec0-bc40cfb90fba" type="application/json" >
     {"code": " \nx = [1,2,3]\ny = x", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 3, "event": "step_line", "func_name": "<module>", "globals": {"x": ["REF", 1]}, "ordered_globals": ["x"], "stack_to_render": [], "heap": {"1": ["LIST", 1, 2, 3]}, "stdout": ""}, {"line": 3, "event": "return", "func_name": "<module>", "globals": {"x": ["REF", 1], "y": ["REF", 1]}, "ordered_globals": ["x", "y"], "stack_to_render": [], "heap": {"1": ["LIST", 1, 2, 3]}, "stdout": ""}]}
 </script>
-<div id="jmad0f1a8c-bb28-4a43-8ffa-d9b898675786" class="pytutorVisualizer"> </div>
+<div id="jmcad58a1b-3645-47c6-aec0-bc40cfb90fba" class="pytutorVisualizer"> </div>
 
 <style>
 .vizLayoutTd {
     background-color: #fff !important;
 }
 
+#pyStdout {
+    min-height:25px;
+}
 
 /* 'Edit this code' link, hiding because replaces browser tab !!!*/
 #editCodeLinkDiv {
@@ -704,13 +708,13 @@ div.rendered_html tbody tr:hover {
 <script>
 (function(){
 
-    var trace = JSON.parse(document.getElementById('json-jmad0f1a8c-bb28-4a43-8ffa-d9b898675786').innerHTML);
+    var trace = JSON.parse(document.getElementById('json-jmcad58a1b-3645-47c6-aec0-bc40cfb90fba').innerHTML);
     // NOTE 1: id without #
     // NOTE 2 - maybe there are more predictable ways, but this will work anyway
     //        - id should be number
     visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jmad0f1a8c-bb28-4a43-8ffa-d9b898675786',{'embeddedMode' : false,
-                                        'visualizerIdOverride':visualizerIdOverride})
+    addVisualizerToPage(trace, 'jmcad58a1b-3645-47c6-aec0-bc40cfb90fba',{'embeddedMode' : false,
+                                     'visualizerIdOverride':visualizerIdOverride})
 
 
     // set overflow for pytuts - need to do in python as css
@@ -743,16 +747,19 @@ div.rendered_html tbody tr:hover {
 <div class="output_area rendered_html docutils container">
 <script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
 
-<script id="json-jm39039533-91df-4106-a82e-166f207dbaa3" type="application/json" >
+<script id="json-jmfca3f3a6-cc36-48de-bf16-0cd50a8ace6f" type="application/json" >
     {"code": " \ny = [1,2,3]\nw  = y[0]", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 3, "event": "step_line", "func_name": "<module>", "globals": {"y": ["REF", 1]}, "ordered_globals": ["y"], "stack_to_render": [], "heap": {"1": ["LIST", 1, 2, 3]}, "stdout": ""}, {"line": 3, "event": "return", "func_name": "<module>", "globals": {"y": ["REF", 1], "w": 1}, "ordered_globals": ["y", "w"], "stack_to_render": [], "heap": {"1": ["LIST", 1, 2, 3]}, "stdout": ""}]}
 </script>
-<div id="jm39039533-91df-4106-a82e-166f207dbaa3" class="pytutorVisualizer"> </div>
+<div id="jmfca3f3a6-cc36-48de-bf16-0cd50a8ace6f" class="pytutorVisualizer"> </div>
 
 <style>
 .vizLayoutTd {
     background-color: #fff !important;
 }
 
+#pyStdout {
+    min-height:25px;
+}
 
 /* 'Edit this code' link, hiding because replaces browser tab !!!*/
 #editCodeLinkDiv {
@@ -763,13 +770,13 @@ div.rendered_html tbody tr:hover {
 <script>
 (function(){
 
-    var trace = JSON.parse(document.getElementById('json-jm39039533-91df-4106-a82e-166f207dbaa3').innerHTML);
+    var trace = JSON.parse(document.getElementById('json-jmfca3f3a6-cc36-48de-bf16-0cd50a8ace6f').innerHTML);
     // NOTE 1: id without #
     // NOTE 2 - maybe there are more predictable ways, but this will work anyway
     //        - id should be number
     visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jm39039533-91df-4106-a82e-166f207dbaa3',{'embeddedMode' : false,
-                                        'visualizerIdOverride':visualizerIdOverride})
+    addVisualizerToPage(trace, 'jmfca3f3a6-cc36-48de-bf16-0cd50a8ace6f',{'embeddedMode' : false,
+                                     'visualizerIdOverride':visualizerIdOverride})
 
 
     // set overflow for pytuts - need to do in python as css
@@ -933,7 +940,7 @@ div.rendered_html tbody tr:hover {
 <p>Relative image test, Markdown format:</p>
 <p><img alt="cc-by-78342" src="../_images/cc-by1.png" /></p>
 <p>Relative image test, HTML <code class="docutils literal notranslate"><span class="pre">img</span></code> tag:</p>
-<p><img alt="59fc194fdbd04c3fa02e9ad54357f89e" src="../_images/cc-by1.png" /></p>
+<p><img alt="cc-by-1243" src="../_images/cc-by1.png" /></p>
 <p>Relative link test, Markdown format:</p>
 <p><a class="reference internal" href="../index.html"><span class="doc">Back to index</span></a></p>
 <p>Relative link test, HTML <code class="docutils literal notranslate"><span class="pre">a</span></code> tag:</p>
