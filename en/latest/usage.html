@@ -121,13 +121,17 @@
 <li class="toctree-l4"><a class="reference internal" href="#Challenges">Challenges</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#Tags-to-strip">Tags to strip</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Solution-tags">Solution tags</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#jupman-raise">jupman-raise</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#jupman-strip">jupman-strip</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#jupman-purge">jupman-purge</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#write-here">write here</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#SOLUTION">SOLUTION</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#QUESTION---ANSWER">QUESTION - ANSWER</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Directive-tags">Directive tags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#jupman-purge">jupman-purge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jupman-preprocess">jupman-preprocess</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#Utilities-and-custom-js-and-css">Utilities and custom js and css</a></li>
@@ -248,6 +252,7 @@
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Exercise-in-Python">Exercise in Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#add">add</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#sub">sub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Fine-grained-purging">Fine grained purging</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="challenge-example/example-chal-sol.html">Example Challenge SOLUTIONS</a><ul>
@@ -715,19 +720,19 @@ git push origin gh-pages
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
-<li><p>Install it in Jupyter:</p></li>
+<li><p>Install in Jupyter:</p></li>
 </ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter contrib nbextension install --user
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
-<li><p>Enable extensions (putting here recommended ones):</p></li>
+<li><p>Enable extension:</p></li>
 </ol>
 <p>For being able to view table of contents while editing notebooks, install <code class="docutils literal notranslate"><span class="pre">toc2</span></code> extension:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter nbextension <span class="nb">enable</span> toc2/main
 </pre></div>
 </div>
-<p>To see tocs when in a document you will need to press a list button at the right-end of the toolbar).</p>
+<p>For tocs to appear when in a document you will need to press a list button at the right-end of the toolbar.</p>
 <p>(since Jupman 0.8 custom injected tocs are disabled by default)</p>
 <ol class="arabic simple" start="4">
 <li><p>For a nice GUI to install extensions, install the <a class="reference external" href="https://github.com/Jupyter-contrib/jupyter_nbextensions_configurator">Jupyter Nbextensions configurator</a>:</p></li>
@@ -751,12 +756,12 @@ git push origin gh-pages
 <div class="section" id="Getting-Started">
 <h2>Getting Started<a class="headerlink" href="#Getting-Started" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p>Edit as needed <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/conf.py">conf.py</a>, which is the configuration file for Sphinx. In particular, you <strong>MUST</strong> edit the sections marked with <code class="docutils literal notranslate"><span class="pre">TODO</span></code></p></li>
-<li><p>Try to launch a build</p>
+<li><p>Edit <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/conf.py">conf.py</a> as needed, which is the configuration file for Sphinx. In particular, you <strong>MUST</strong> edit the sections marked with <strong>TODO</strong></p></li>
+<li><p>Try launching build:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 build.py
 </pre></div>
 </div>
-<p>For more info, see <a class="reference external" href="#building-the-manual">related section</a></p>
+<p>For more info, see <a class="reference external" href="#Building-the-manual">related section</a></p>
 </li>
 <li><p>If everything works fine on your computer, push changes back to Github</p></li>
 <li><p>Go back to ReadTheDocs and try to run a build. Hopefully your project will become available on something like <em>my-project.readthedocs.org</em></p></li>
@@ -784,15 +789,15 @@ git push origin gh-pages
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 build.py -h
 </pre></div>
 </div>
-<p>To build everything (html + pdf + epub), go to console and from the root of the directory run:</p>
+<p>To build everything (html + pdf + epub), go to the console and from the root directory run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 build.py
 </pre></div>
 </div>
-<p><strong>NOTE: to also generate PDF you will need to install Latex environment</strong></p>
+<p><strong>NOTE: to generate PDFs you will need to install Latex environment</strong></p>
 </div>
 <div class="section" id="Publishing">
 <h2>Publishing<a class="headerlink" href="#Publishing" title="Permalink to this headline">¶</a></h2>
-<p>For publishing, the system uses ReadTheDocs so it is enough to push to master and ReadTheDocs will do the rest (for example, for jupman it is at address <a class="reference external" href="http://jupman.readthedocs.io">jupman.readthedocs.io</a></p>
+<p>For publishing, the system uses ReadTheDocs so it’s enough to push to master and ReadTheDocs will do the rest (for example, for jupman is available at address <a class="reference external" href="http://jupman.readthedocs.io">jupman.readthedocs.io</a></p>
 <p><strong>IMPORTANT: ReadTheDocs WILL *NOT* execute Jupyter notebooks because of</strong> <a class="reference external" href="https://github.com/DavidLeoni/softpython/issues/2">this bug</a></p>
 </div>
 <div class="section" id="Editing-the-worksheets">
@@ -847,14 +852,14 @@ git push origin gh-pages
 </div>
 <div class="section" id="Running-Jupyter">
 <h3>Running Jupyter<a class="headerlink" href="#Running-Jupyter" title="Permalink to this headline">¶</a></h3>
-<p>First of all, run Jupyter from the root of the directory:</p>
+<p>First of all, run Jupyter from the root directory:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter notebook
 </pre></div>
 </div>
 </div>
 <div class="section" id="Source-code-for-chapters">
 <h3>Source code for chapters<a class="headerlink" href="#Source-code-for-chapters" title="Permalink to this headline">¶</a></h3>
-<p>Put chapters one per folder, in the root. Any folder which does not starts with underscore <code class="docutils literal notranslate"><span class="pre">_</span></code> or <code class="docutils literal notranslate"><span class="pre">exam/</span></code> will be considered a chapter.</p>
+<p>Put chapters one per folder, in the root. Any folder which doesn’t start with underscore <code class="docutils literal notranslate"><span class="pre">_</span></code> or <code class="docutils literal notranslate"><span class="pre">exam/</span></code> will be considered a chapter.</p>
 <p>During build, each chapter gets automatically zipped and zip goes to <code class="docutils literal notranslate"><span class="pre">_static/generated</span></code>. So for example, <code class="docutils literal notranslate"><span class="pre">python-example/</span></code> produces a zip called <code class="docutils literal notranslate"><span class="pre">_static/generated/python-example.zip</span></code>, which will have these contents:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python-example
     _static
@@ -878,14 +883,14 @@ git push origin gh-pages
 </div>
 <div class="section" id="Exercise-types">
 <h3>Exercise types<a class="headerlink" href="#Exercise-types" title="Permalink to this headline">¶</a></h3>
-<p>There can be three kinds of exercises: exercises in python files, exercises in jupyter files and mixed jupyter and python exercises.</p>
+<p>There can be three kinds of exercises: exercises in Python files, exercises in Jupyter files and mixed jupyter and Python exercises.</p>
 <p>You can automatically generate an exercise from a solution file by stripping text marked with special tags. You can inspect generated files in <code class="docutils literal notranslate"><span class="pre">_build/jupman/</span></code> directory</p>
 <p>On the website, students will be able to see solutions by clicking on appropriate buttons.</p>
 <p>In the zips to download, two versions of files will provided, one without solution and one with solutions (in exam modality of course no solution will be shipped)</p>
 <div class="section" id="Exercises-in-Python-files">
 <h4>Exercises in Python files<a class="headerlink" href="#Exercises-in-Python-files" title="Permalink to this headline">¶</a></h4>
 <p>See <a class="reference internal" href="python-example/python-example.html"><span class="doc">python-example/python-example.ipynb</span></a></p>
-<p>In this type of exercises, typically you have a Jupyter file (like <code class="docutils literal notranslate"><span class="pre">python-example.ipynb</span></code>) that describes the exercise and then the actual exercises are in python files.</p>
+<p>In this type of exercises, typically you have a Jupyter file (like <code class="docutils literal notranslate"><span class="pre">python-example.ipynb</span></code>) that describes the exercise and then the actual exercises are in Python files.</p>
 <p>If there is a solution file <code class="docutils literal notranslate"><span class="pre">FILE_sol.py</span></code> ending in <code class="docutils literal notranslate"><span class="pre">_sol.py</span></code> but no corresponding exercise file <code class="docutils literal notranslate"><span class="pre">FILE.py</span></code> without the <code class="docutils literal notranslate"><span class="pre">_sol</span></code>:</p>
 <p>then Jupman will try to generate <code class="docutils literal notranslate"><span class="pre">FILE.py</span></code> one from <code class="docutils literal notranslate"><span class="pre">FILE_sol.py</span></code>. To do so, it will look for tags to strip inside the solution file.</p>
 <p>If there is already an exercise file like this:</p>
@@ -898,7 +903,7 @@ git push origin gh-pages
 <div class="section" id="Exercises-in-Jupyter-files">
 <h4>Exercises in Jupyter files<a class="headerlink" href="#Exercises-in-Jupyter-files" title="Permalink to this headline">¶</a></h4>
 <p>See example: <a class="reference internal" href="jupyter-example/jupyter-example-sol.html"><span class="doc">jupyter-example/jupyter-example-sol.ipynb</span></a></p>
-<p>This type of exercises stay in a jupyter notebook itself.</p>
+<p>This type of exercises stay in a Jupyter notebook itself.</p>
 <p>If there is a notebook ending in <code class="docutils literal notranslate"><span class="pre">-sol.ipynb</span></code>, the following applies (<strong>WARNING</strong>: for <code class="docutils literal notranslate"><span class="pre">ipynb</span></code> files we use dash <code class="docutils literal notranslate"><span class="pre">-</span></code>, <em>not</em> the underscore <code class="docutils literal notranslate"><span class="pre">_</span></code>):</p>
 <ul class="simple">
 <li><p>the notebook must contain tags to strip</p></li>
@@ -928,8 +933,9 @@ git push origin gh-pages
 </ul>
 </div>
 </div>
-<div class="section" id="Tags-to-strip">
-<h3>Tags to strip<a class="headerlink" href="#Tags-to-strip" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Solution-tags">
+<h3>Solution tags<a class="headerlink" href="#Solution-tags" title="Permalink to this headline">¶</a></h3>
+<p>Presence of these tags marks a cell as a solution.</p>
 <p>Start tags begin with a <code class="docutils literal notranslate"><span class="pre">#</span></code> while end tags begin with a <code class="docutils literal notranslate"><span class="pre">#\</span></code></p>
 <div class="section" id="jupman-raise">
 <h4>jupman-raise<a class="headerlink" href="#jupman-raise" title="Permalink to this headline">¶</a></h4>
@@ -970,23 +976,6 @@ git push origin gh-pages
 </pre></div>
 </div>
 </div>
-<div class="section" id="jupman-purge">
-<h4>jupman-purge<a class="headerlink" href="#jupman-purge" title="Permalink to this headline">¶</a></h4>
-<p>Eliminates content both from exercises AND solutions. Can be helpful when you have code which creates expected output, like images or python data - the idea is to completely remove that code both from exercises AND solutions, so students don’t accidentally copy-paste it or uncomment it.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="mi">5</span>
-<span class="c1">#jupman-purge</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;expected_image.png&#39;</span><span class="p">)</span>
-<span class="n">jupman</span><span class="o">.</span><span class="n">save_py</span><span class="p">(</span><span class="s1">&#39;expected_output_db.py&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;big&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;structure&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
-<span class="c1">#/jupman-purge</span>
-<span class="n">x</span><span class="o">=</span><span class="mi">6</span>
-</pre></div>
-</div>
-<p>becomes</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="mi">5</span>
-<span class="n">x</span><span class="o">=</span><span class="mi">6</span>
-</pre></div>
-</div>
-</div>
 <div class="section" id="write-here">
 <h4>write here<a class="headerlink" href="#write-here" title="Permalink to this headline">¶</a></h4>
 <p>This special tag for python code erases whatever is found afterwards the <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">write</span> <span class="pre">here</span></code> <strong>line</strong></p>
@@ -1022,22 +1011,69 @@ def f():
 </pre></div>
 </div>
 <p>becomes nothing:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>..
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="QUESTION---ANSWER">
 <h4>QUESTION - ANSWER<a class="headerlink" href="#QUESTION---ANSWER" title="Permalink to this headline">¶</a></h4>
-<p>In a markdown cell, everything in ‘<strong>ANSWER</strong>:’ cell will be stripped.</p>
+<p>In a markdown cell, everything in a cell with <code class="docutils literal notranslate"><span class="pre">**ANSWER**:</span></code> inside will be stripped.</p>
 <ul class="simple">
 <li><p>Markdown can be customized in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code></p></li>
 </ul>
 <p><strong>QUESTION</strong>: Describe why iPhone n+1 is better than iPhone n</p>
-<a  class="jupman-sol jupman-sol-toggler"
- onclick="jupman.toggleSolution(this);"
- data-jupman-show="Show answer" data-jupman-hide="Hide">Show answer</a><div class="jupman-sol jupman-sol-question" style="display:none"><p><strong>ANSWER</strong>: it costs more</p>
-</div><p>becomes:</p>
+<p>ANSWER: it costs more</p>
+<p>Becomes:</p>
 <p><strong>QUESTION</strong>: Describe why iPhone n+1 is better than iPhone n</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Directive-tags">
+<h3>Directive tags<a class="headerlink" href="#Directive-tags" title="Permalink to this headline">¶</a></h3>
+<p>Some tags change the preprocessor behaviour. They are applied before solution tags.</p>
+<div class="section" id="jupman-purge">
+<h4>jupman-purge<a class="headerlink" href="#jupman-purge" title="Permalink to this headline">¶</a></h4>
+<p>Eliminate content both from exercises AND solutions. Can be helpful when you have code which creates expected output, like images or python data - the idea is to completely remove code so so students don’t accidentally copy-paste it or uncomment it.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">jupman-purge-input</span></code>: purges only cell source</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jupman-purge-output</span></code>: purges only cell output</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jupman-purge-io</span></code> : purges both input and output</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">jupman-purge</span></code> purges only a span:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="mi">5</span>
+<span class="c1">#jupman-purge</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;expected_image.png&#39;</span><span class="p">)</span>
+<span class="n">jupman</span><span class="o">.</span><span class="n">save_py</span><span class="p">(</span><span class="s1">&#39;expected_output_db.py&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;big&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;structure&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+<span class="c1">#/jupman-purge</span>
+<span class="n">x</span><span class="o">=</span><span class="mi">6</span>
+</pre></div>
+</div>
+<p>becomes</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">x</span><span class="o">=</span><span class="mi">6</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="jupman-preprocess">
+<h4>jupman-preprocess<a class="headerlink" href="#jupman-preprocess" title="Permalink to this headline">¶</a></h4>
+<p>By default only notebooks solutions (ending in <code class="docutils literal notranslate"><span class="pre">-sol.ipynb</span></code>) are preprocessed before html conversion begins. If you want to force preprocessing on a particular non-solution notebook, add this in the first cell:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#jupman-preprocess</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="Utilities-and-custom-js-and-css">
@@ -1114,10 +1150,10 @@ def f():
 <div class="output_area rendered_html docutils container">
 <script src="_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
 
-<script id="json-jm31777a58-c60d-48ef-be56-b6795c15f420" type="application/json" >
-    {"trace": [{"stack_to_render": [], "globals": {}, "ordered_globals": [], "func_name": "<module>", "heap": {}, "line": 2, "event": "step_line", "stdout": ""}, {"stack_to_render": [], "globals": {"x": ["REF", 1]}, "ordered_globals": ["x"], "func_name": "<module>", "heap": {"1": ["LIST", 5, 8, 4]}, "line": 3, "event": "step_line", "stdout": ""}, {"stack_to_render": [], "globals": {"x": ["REF", 1], "y": ["REF", 2]}, "ordered_globals": ["x", "y"], "func_name": "<module>", "heap": {"1": ["LIST", 5, 8, 4], "2": ["DICT", [3, 9]]}, "line": 4, "event": "step_line", "stdout": ""}, {"stack_to_render": [], "globals": {"x": ["REF", 1], "z": ["REF", 3], "y": ["REF", 2]}, "ordered_globals": ["x", "y", "z"], "func_name": "<module>", "heap": {"1": ["LIST", 5, 8, 4], "2": ["DICT", [3, 9]], "3": ["LIST", ["REF", 1]]}, "line": 4, "event": "return", "stdout": ""}], "code": " \nx = [5,8,4]\ny= {3:9}\nz = [x]"}
+<script id="json-jm20aa639d-f3f4-417c-b99a-5c35302b6dd3" type="application/json" >
+    {"code": " \nx = [5,8,4]\ny= {3:9}\nz = [x]", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 3, "event": "step_line", "func_name": "<module>", "globals": {"x": ["REF", 1]}, "ordered_globals": ["x"], "stack_to_render": [], "heap": {"1": ["LIST", 5, 8, 4]}, "stdout": ""}, {"line": 4, "event": "step_line", "func_name": "<module>", "globals": {"x": ["REF", 1], "y": ["REF", 2]}, "ordered_globals": ["x", "y"], "stack_to_render": [], "heap": {"1": ["LIST", 5, 8, 4], "2": ["DICT", [3, 9]]}, "stdout": ""}, {"line": 4, "event": "return", "func_name": "<module>", "globals": {"x": ["REF", 1], "y": ["REF", 2], "z": ["REF", 3]}, "ordered_globals": ["x", "y", "z"], "stack_to_render": [], "heap": {"1": ["LIST", 5, 8, 4], "2": ["DICT", [3, 9]], "3": ["LIST", ["REF", 1]]}, "stdout": ""}]}
 </script>
-<div id="jm31777a58-c60d-48ef-be56-b6795c15f420" class="pytutorVisualizer"> </div>
+<div id="jm20aa639d-f3f4-417c-b99a-5c35302b6dd3" class="pytutorVisualizer"> </div>
 
 <style>
 .vizLayoutTd {
@@ -1137,12 +1173,12 @@ def f():
 <script>
 (function(){
 
-    var trace = JSON.parse(document.getElementById('json-jm31777a58-c60d-48ef-be56-b6795c15f420').innerHTML);
+    var trace = JSON.parse(document.getElementById('json-jm20aa639d-f3f4-417c-b99a-5c35302b6dd3').innerHTML);
     // NOTE 1: id without #
     // NOTE 2 - maybe there are more predictable ways, but this will work anyway
     //        - id should be number
     visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jm31777a58-c60d-48ef-be56-b6795c15f420',{'embeddedMode' : false,
+    addVisualizerToPage(trace, 'jm20aa639d-f3f4-417c-b99a-5c35302b6dd3',{'embeddedMode' : false,
                                      'visualizerIdOverride':visualizerIdOverride})
 
 
@@ -1185,9 +1221,9 @@ def f():
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 Traceback (most recent call last):
-  File &#34;/home/da/Da/prj/jupman/prj/jupman.py&#34;, line 2305, in _runscript
+  File &#34;/home/da/Da/prj/jupman/prj/jupman.py&#34;, line 2376, in _runscript
     self.run(script_str, user_globals, user_globals)
-  File &#34;/usr/lib/python3.5/bdb.py&#34;, line 431, in run
+  File &#34;/usr/lib/python3.7/bdb.py&#34;, line 578, in run
     exec(cmd, globals, locals)
   File &#34;&lt;string&gt;&#34;, line 2, in &lt;module&gt;
 NameError: name &#39;w&#39; is not defined
@@ -1200,10 +1236,10 @@ NameError: name &#39;w&#39; is not defined
 <div class="output_area rendered_html docutils container">
 <script src="_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
 
-<script id="json-jmd2aaca6f-1979-4d5b-93af-1847b99776e0" type="application/json" >
-    {"trace": [{"stack_to_render": [], "globals": {}, "ordered_globals": [], "func_name": "<module>", "heap": {}, "line": 2, "event": "step_line", "stdout": ""}, {"stack_to_render": [], "globals": {}, "ordered_globals": [], "exception_msg": "NameError: name 'w' is not defined", "func_name": "<module>", "heap": {}, "line": 2, "event": "exception", "stdout": ""}], "code": " \nx =  w + 5"}
+<script id="json-jm6b27f420-8c63-4f21-8cca-e172b79c0681" type="application/json" >
+    {"code": " \nx =  w + 5", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 2, "event": "exception", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": "", "exception_msg": "NameError: name 'w' is not defined"}]}
 </script>
-<div id="jmd2aaca6f-1979-4d5b-93af-1847b99776e0" class="pytutorVisualizer"> </div>
+<div id="jm6b27f420-8c63-4f21-8cca-e172b79c0681" class="pytutorVisualizer"> </div>
 
 <style>
 .vizLayoutTd {
@@ -1223,12 +1259,12 @@ NameError: name &#39;w&#39; is not defined
 <script>
 (function(){
 
-    var trace = JSON.parse(document.getElementById('json-jmd2aaca6f-1979-4d5b-93af-1847b99776e0').innerHTML);
+    var trace = JSON.parse(document.getElementById('json-jm6b27f420-8c63-4f21-8cca-e172b79c0681').innerHTML);
     // NOTE 1: id without #
     // NOTE 2 - maybe there are more predictable ways, but this will work anyway
     //        - id should be number
     visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jmd2aaca6f-1979-4d5b-93af-1847b99776e0',{'embeddedMode' : false,
+    addVisualizerToPage(trace, 'jm6b27f420-8c63-4f21-8cca-e172b79c0681',{'embeddedMode' : false,
                                      'visualizerIdOverride':visualizerIdOverride})
 
 

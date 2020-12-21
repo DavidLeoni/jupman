@@ -42,7 +42,7 @@
   <link rel="stylesheet" href="../_static/css/jupman-web.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Jupyter and python example" href="../jup-and-py-example/jup-and-py-example-sol.html" />
+    <link rel="next" title="Jupyter and Python example" href="../jup-and-py-example/jup-and-py-example-sol.html" />
     <link rel="prev" title="Python example" href="../python-example/python-example.html" /> 
 </head>
 
@@ -121,13 +121,17 @@
 <li class="toctree-l4"><a class="reference internal" href="../usage.html#Challenges">Challenges</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../usage.html#Tags-to-strip">Tags to strip</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../usage.html#Solution-tags">Solution tags</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../usage.html#jupman-raise">jupman-raise</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../usage.html#jupman-strip">jupman-strip</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../usage.html#jupman-purge">jupman-purge</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../usage.html#write-here">write here</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../usage.html#SOLUTION">SOLUTION</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../usage.html#QUESTION---ANSWER">QUESTION - ANSWER</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../usage.html#Directive-tags">Directive tags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../usage.html#jupman-purge">jupman-purge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../usage.html#jupman-preprocess">jupman-preprocess</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../usage.html#Utilities-and-custom-js-and-css">Utilities and custom js and css</a></li>
@@ -248,6 +252,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Exercise-in-Python">Exercise in Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#add">add</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#sub">sub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Fine-grained-purging">Fine grained purging</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../challenge-example/example-chal-sol.html">Example Challenge SOLUTIONS</a><ul>
@@ -803,14 +808,12 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 
-
 <span></span><span class="k">def</span> <span class="nf">helper</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
 
 
 <span class="k">def</span> <span class="nf">inc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-
-    <span class="k">return</span> <span class="n">helper</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">helper</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -836,14 +839,12 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-
 <span></span><span class="k">def</span> <span class="nf">helper2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
 
 
 <span class="k">def</span> <span class="nf">upper</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-
-    <span class="k">return</span> <span class="n">helper2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">helper2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -965,7 +966,7 @@ div.rendered_html tbody tr:hover {
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../jup-and-py-example/jup-and-py-example-sol.html" class="btn btn-neutral float-right" title="Jupyter and python example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../jup-and-py-example/jup-and-py-example-sol.html" class="btn btn-neutral float-right" title="Jupyter and Python example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../python-example/python-example.html" class="btn btn-neutral float-left" title="Python example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
