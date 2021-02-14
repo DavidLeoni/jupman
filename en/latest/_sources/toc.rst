@@ -9,11 +9,6 @@
     usage.md
     jupman-tests.ipynb
 
-|space|
-==========
-
-.. |space| unicode:: U+0020 .. space
-
 
 Chapter examples
 =================
