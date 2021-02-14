@@ -43,7 +43,3 @@ Templates
     project/markdown.ipynb
 
 
-
-
-Index
-========
