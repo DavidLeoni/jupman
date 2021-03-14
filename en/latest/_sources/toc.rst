@@ -20,7 +20,6 @@ Chapter examples
     python-example/python-example.ipynb
     jupyter-example/jupyter-example-sol.ipynb
     Jupyter and Python example <jup-and-py-example/jup-and-py-example-sol.ipynb>
-    challenge-example/example-chal-sol.ipynb
     challenge-example/example-chal.ipynb
 
 Templates
@@ -36,5 +35,4 @@ Templates
     project-ideas.ipynb
     project/project.ipynb   
     project/markdown.ipynb
-
 

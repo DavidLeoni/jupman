@@ -132,7 +132,8 @@ extensions = [
 
 # Exclude build directory and Jupyter backup files:
 exclude_patterns = [jm.build,
-                    jm.generated, 
+                    jm.generated,
+                    "**-chal-sol.*",
                     "_templates/exam-server",
                      "_private",
                      "_test",                     
