@@ -353,12 +353,15 @@ def delete_exam(parser,context,args):
         fatal("COULDN'T FIND ANY EXAM FILE TO DELETE FOR DATE: " + ld)
 
 
-handler = ArgumentHandler(description='Manages ' + jm.filename + ' exams.',
-                         use_subcommand_help=True)
-handler.run()
+if __name__ == "__main__":
+    logging.getLogger().setLevel(logging.INFO)
 
-print("")
-info("DONE.\n")
+    handler = ArgumentHandler(description='Manages ' + jm.filename + ' exams.',
+                         use_subcommand_help=True)
+    handler.run()
+
+    print("")
+    info("DONE.\n")
 
 
 
