@@ -52,7 +52,7 @@ def init(toc=False):
             #    so it is better to include scripts instead of using relative imports
 
             root = os.path.dirname(os.path.abspath(__file__))
-            _static = os.path.join(root, '_static')                
+            _static = os.path.join(root, '_static')                                        
             
             css = open("%s/css/jupman.css" % _static, "r").read()
             tocjs = open("%s/js/toc.js" % _static, "r").read()
@@ -221,6 +221,27 @@ def draw_text(text, fontsize=None):
         plt.text(0, 0, str(text),fontsize=9) # note: this default looks good in PDF, but is small for jupyter
     ax.axis('off')        
     plt.show()    
+    
+def draw_df(df, fontsize=16, scale=(1.8, 3.9), figsize=(12, 2)):
+    """ Draws a Pandas DataFrame as an image
+        Taken from https://stackoverflow.com/a/36904120
+        @since 3.3
+    """    
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    from pandas.plotting import table
+    import numpy as np
+    fig, ax = plt.subplots(figsize=figsize) # set size frame
+    ax.xaxis.set_visible(False)  # hide the x axis
+    ax.yaxis.set_visible(False)  # hide the y axis
+    ax.set_frame_on(False)  # no visible frame, uncomment if size is ok
+    col_widths = [0.008 * (8 + df[col].map(lambda x: len(str(x))).max()) for col in df]
+    tabla = table(ax, df, loc='upper right', colWidths=col_widths)  # where df is your data frame
+    tabla.auto_set_font_size(False) # Activate set fontsize manually
+    tabla.set_fontsize(fontsize) # if ++fontsize is necessary ++colWidths
+    tabla.scale(scale[0], scale[1]) # change size table
+    #plt.savefig('table.png', transparent=True)    
+        
     
 def pytut_json(jm_code):
     """ Runs jm_code and return a JSON execution trace
