@@ -242,6 +242,15 @@ def draw_df(df, fontsize=16, scale=(1.8, 3.9), figsize=(12, 2)):
     tabla.scale(scale[0], scale[1]) # change size table
     #plt.savefig('table.png', transparent=True)    
         
+def get_doc(fun):
+    """ Returns the help of a function formatted in a faithful manner
+        
+        @since 3.3
+    """
+    import pydoc
+    lines = pydoc.render_doc(fun, renderer=pydoc.plaintext).split('\n')
+    
+    return 'def ' + lines[2] + ':\n    """ ' + '\n    '.join(lines[3:]).strip()+ '\n    """'        
     
 def pytut_json(jm_code):
     """ Runs jm_code and return a JSON execution trace
