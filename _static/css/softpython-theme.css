@@ -167,3 +167,7 @@ div.nbinput.container div.prompt, div.nboutput.container div.prompt{
     background-color:#ebf3ed !important;  
     border-color: #d3dfd6 !important;            
 }
+
+a.jupman-sol-toggler:hover {
+    color: #21aa21 !important;
+}
