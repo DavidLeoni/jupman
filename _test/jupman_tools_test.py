@@ -226,8 +226,10 @@ def test_purge_tags():
     blo""") == '\n    bla\n    \n    ble\n    \n    blo'
     
 
-    
-    
+def test_make_stripped_cell_id():
+    assert jmt.make_stripped_cell_id('abc') == 'abc-stripped'
+    assert jmt.make_stripped_cell_id('a'*64) == 'a'*(64-len('-stripped')) + '-stripped'
+    assert jmt.make_stripped_cell_id('a'*60) == 'a'*(60-len('-stripped')) + '-stripped'
 
 
 def test_copy_chapter():
@@ -238,7 +240,7 @@ def test_copy_chapter():
     dest_dir = os.path.join(jm.build, 'test-chapter')
     jm.copy_code('_test/test-chapter',
                  dest_dir,
-                 copy_solutions=True)
+                 copy_solutions=True)    
 
     assert os.path.isdir(dest_dir)
 
