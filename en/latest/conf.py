@@ -215,7 +215,9 @@ todo_include_todos = True
 #
 html_theme_options = {
     # fix for https://github.com/DavidLeoni/jupman/issues/38
-    'collapse_navigation': False    
+    'collapse_navigation': False,
+    # needed for big docs  https://github.com/DavidLeoni/jupman/issues/77
+    'navigation_depth': 5 
 }
 
 # NOTE: in order to have complete collapsible menu, 

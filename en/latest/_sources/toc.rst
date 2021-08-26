@@ -25,7 +25,7 @@ Chapter examples
 
 
 Big sub chapter 1
----------------
+-------------------
 
 .. toctree::
     :maxdepth: 3
@@ -43,7 +43,7 @@ Big sub chapter 1
     big-docs-example1/big-docs-example10.ipynb
 
 Big sub chapter 2
----------------
+-----------------------
 
 .. toctree::
     :maxdepth: 3
