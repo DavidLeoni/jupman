@@ -101,7 +101,6 @@
 <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="index.html#Revisions">Revisions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#Contents">Contents</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#Menu-tests">Menu tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#Credits">Credits</a></li>
 </ul>
 </li>
@@ -245,7 +244,7 @@
 <li class="toctree-l3"><a class="reference internal" href="jupyter-example/jupyter-example-sol.html#Conclusion">Conclusion</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html">Jupyter and Python example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html">Mixed Jupyter and Python example</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Download-exercises-zip">Download exercises zip</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#What-to-do">What to do</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Let's-begin">Let’s begin</a></li>
@@ -4177,7 +4176,7 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="toc.html#templates">Templates</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Changelog</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#in-progress-3-3">IN PROGRESS - 3.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#february-25th-2022-3-3">February 25th 2022 - 3.3</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#october-17th-2020-3-2">October 17th 2020 - 3.2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#january-16th-2020-3-1">January 16th 2020 - 3.1</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#december-29th-2019-3-0">December 29th 2019 - 3.0</a></li>
@@ -4311,10 +4310,32 @@
 <h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
 <p>Jupman Jupyter Manager</p>
 <p><a class="reference external" href="https://jupman.softpython.org">jupman.softpython.org</a></p>
-<div class="section" id="in-progress-3-3">
-<h2>IN PROGRESS - 3.3<a class="headerlink" href="#in-progress-3-3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="february-25th-2022-3-3">
+<h2>February 25th 2022 - 3.3<a class="headerlink" href="#february-25th-2022-3-3" title="Permalink to this headline">¶</a></h2>
+<p>Implemented:</p>
 <ul class="simple">
-<li><p>added optional parameter conf to jmt.init</p></li>
+<li><p>jupman-preprocess #64</p></li>
+<li><p>big docs support #77</p></li>
+<li><p>Challenges support (suboptimal but usable) #56</p></li>
+<li><p>jupman-purge #59</p></li>
+<li><p>jupman.draw_text for #66</p></li>
+<li><p>jupman.save_py function</p></li>
+<li><p>jupman.get_doc as nice way to print function documentation #68</p></li>
+<li><p>jupman.draw_text to show some ASCII characters in local build #66</p></li>
+<li><p>jupman.mem_limit for Linux #62</p></li>
+<li><p>Home link should point to index.html #71</p></li>
+<li><p>optional parameter conf to jmt.init</p></li>
+<li><p>deterministic zip #60 (requires python 3.7)</p></li>
+</ul>
+<p>Fixed:</p>
+<ul class="simple">
+<li><p>Notebook validation failed: Non-unique cell id error #78</p></li>
+<li><p>exam pdf build breaks when using images #61</p></li>
+</ul>
+<p>Defined:</p>
+<ul class="simple">
+<li><p>how to use custom anchors #80</p></li>
+<li><p>how to have single pages like References at menu bottom #70</p></li>
 </ul>
 </div>
 <div class="section" id="october-17th-2020-3-2">

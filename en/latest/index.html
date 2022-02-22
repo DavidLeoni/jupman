@@ -102,7 +102,6 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Home</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#Revisions">Revisions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Contents">Contents</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Menu-tests">Menu tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Credits">Credits</a></li>
 </ul>
 </li>
@@ -246,7 +245,7 @@
 <li class="toctree-l3"><a class="reference internal" href="jupyter-example/jupyter-example-sol.html#Conclusion">Conclusion</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html">Jupyter and Python example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html">Mixed Jupyter and Python example</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Download-exercises-zip">Download exercises zip</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#What-to-do">What to do</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html#Let's-begin">Let’s begin</a></li>
@@ -4178,7 +4177,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="toc.html#templates">Templates</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html">Changelog</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="changelog.html#in-progress-3-3">IN PROGRESS - 3.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#february-25th-2022-3-3">February 25th 2022 - 3.3</a></li>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#october-17th-2020-3-2">October 17th 2020 - 3.2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#january-16th-2020-3-1">January 16th 2020 - 3.1</a></li>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#december-29th-2019-3-0">December 29th 2019 - 3.0</a></li>
@@ -4325,7 +4324,7 @@
 <li><p>exercises generation from solution templates (both .ipynb and .py)</p></li>
 <li><p>chapter zips</p></li>
 <li><p>code sharing among chapters (so students don’t need to install dependencies)</p></li>
-<li><p>Python Tutor integration (offline, doesn’t need dependencies)</p></li>
+<li><p>Python Tutor integration (offline, no required dependencies)</p></li>
 <li><p>supports hundreds pages and deep nesting</p></li>
 <li><p>decent PDF layout</p></li>
 <li><p>basic exam management</p></li>
@@ -4335,19 +4334,20 @@
 </ul>
 <p><strong>Currently lacking:</strong></p>
 <ul class="simple">
-<li><p>generated PDF always displays solutions</p></li>
-<li><p>Python Tutor doesn’t work in JupyterLab</p></li>
-<li><p>more testing, especially for EPUB support and exam management</p></li>
+<li><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/issues/87">generated PDF always displays solutions</a></p></li>
+<li><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/issues/42">Python Tutor doesn’t work in JupyterLab</a></p></li>
+<li><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/issues?q=is%3Aopen+is%3Aissue+label%3Aexams">more testing for exam management</a></p></li>
 </ul>
 <p><strong>Used by:</strong></p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://en.softpython.org/">SoftPython book (english)</a></p></li>
-<li><p><a class="reference external" href="https://it.softpython.org/">SoftPython book (italian)</a></p></li>
+<li><p><a class="reference external" href="https://en.softpython.org/">SoftPython book (english)</a> (1000+ pdf pages)</p></li>
+<li><p><a class="reference external" href="https://it.softpython.org/">SoftPython book (italian)</a> (1000+ pdf pages)</p></li>
 <li><p><a class="reference external" href="https://sciprog.davidleoni.it/">Scientific Programming Lab at University of Trento, Data Science Master</a> (english)</p></li>
 </ul>
 <div class="section" id="Revisions">
 <h2>Revisions<a class="headerlink" href="#Revisions" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li><p><strong>22 February 2022</strong>: Released v3.3</p></li>
 <li><p><strong>16 October 2020</strong>: Released v3.2</p></li>
 <li><p><strong>16 January 2020</strong>: Released v3.1</p></li>
 <li><p><strong>29 December 2019</strong>: Released v3.0</p></li>
@@ -4355,7 +4355,7 @@
 <li><p><strong>3 August 2018</strong>: Released v0.8</p></li>
 <li><p><a class="reference internal" href="changelog.html"><span class="doc">Change log</span></a></p></li>
 </ul>
-</div>
+<a id="contents"></a></div>
 <div class="section" id="Contents">
 <h2>Contents<a class="headerlink" href="#Contents" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
@@ -4364,9 +4364,8 @@
 <ol class="arabic simple">
 <li><p><a class="reference internal" href="python-example/python-example.html"><span class="doc">Python example</span></a></p></li>
 <li><p><a class="reference internal" href="jupyter-example/jupyter-example-sol.html"><span class="doc">Jupyter example</span></a></p></li>
-<li><p><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html"><span class="doc">Jupyter and python example</span></a></p></li>
-<li><p><a class="reference external" href="challenge-example/example-chal-sol.ipynb">Challenge example solution</a></p></li>
-<li><p><a class="reference internal" href="challenge-example/example-chal.html"><span class="doc">Challenge example</span></a></p></li>
+<li><p><a class="reference internal" href="jup-and-py-example/jup-and-py-example-sol.html"><span class="doc">Mixed jupyter and python example</span></a></p></li>
+<li><p>Challenges:   <a class="reference internal" href="challenge-example/example-chal.html"><span class="doc">example worksheet</span></a>    <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/challenge-example/example-chal-sol.ipynb">solution</a></p></li>
 </ol>
 </li>
 <li><p id="templates"><p>Templates</p>
@@ -4375,12 +4374,6 @@
 <li><p><a class="reference internal" href="changelog.html"><span class="doc">Changelog</span></a></p></li>
 </ol>
 </li>
-</ol>
-<a id="anchor-test"></a></div>
-<div class="section" id="Menu-tests">
-<h2>Menu tests<a class="headerlink" href="#Menu-tests" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li><p>One line test:   <a class="reference internal" href="past-exams.html"><span class="doc">1. intro</span></a>   <a class="reference internal" href="changelog.html"><span class="doc">2. operators</span></a>   <a class="reference internal" href="changelog.html"><span class="doc">3. methods</span></a></p></li>
 </ol>
 </div>
 <div class="section" id="Credits">
