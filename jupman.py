@@ -163,6 +163,12 @@ def mem_limit(MB=None):
     if os.name == 'nt':
         print('WARNING: limiting memory on Windows is not supported')
         return
+
+    #https://stackoverflow.com/a/64444776
+    import platform
+    if platform.system().lower() == 'darwin':
+        print('WARNING: limiting memory on Mac is not supported')
+        return        
     
     import resource
     with open('/proc/meminfo', 'r') as mem:
