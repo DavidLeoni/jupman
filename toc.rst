@@ -20,7 +20,7 @@ Chapter examples
 
     python-example/python-example.ipynb
     jupyter-example/jupyter-example-sol.ipynb
-    Jupyter and Python example <jup-and-py-example/jup-and-py-example-sol.ipynb>
+    Mixed Jupyter and Python example <jup-and-py-example/jup-and-py-example-sol.ipynb>
     
     toc-bigdocs.rst
     
