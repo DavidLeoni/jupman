@@ -5,9 +5,34 @@ Jupman Jupyter Manager
 
 [jupman.softpython.org](https://jupman.softpython.org)
 
-## IN PROGRESS - 3.3
+## February 25th 2022 - 3.3
 
-- added optional parameter conf to jmt.init
+Implemented: 
+
+- jupman-preprocess #64 
+- big docs support #77
+- Challenges support (suboptimal but usable) #56 
+- jupman-purge #59
+- jupman.draw_text for #66
+- jupman.save_py function
+- jupman.get_doc as nice way to print function documentation #68 
+- jupman.draw_text to show some ASCII characters in local build #66 
+- jupman.mem_limit for Linux #62 
+
+- Home link should point to index.html #71 
+- optional parameter conf to jmt.init
+- deterministic zip #60 (requires python 3.7)
+
+Fixed:
+
+- Notebook validation failed: Non-unique cell id error #78 
+- exam pdf build breaks when using images #61 
+
+Defined:
+
+- how to use custom anchors #80 
+- how to have single pages like References at menu bottom #70 
+
 
 ## October 17th 2020 - 3.2
 
