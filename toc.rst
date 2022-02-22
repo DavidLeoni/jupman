@@ -6,8 +6,8 @@
     :glob:
 
     Home <index.ipynb>
-    usage.md
-    jupman-tests.ipynb
+    Usage <usage.md>    
+    Tests <jupman-tests.ipynb>
 
 
 
