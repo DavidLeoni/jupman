@@ -72,7 +72,7 @@
             
             
               <div class="version">
-                3.2
+                dev
               </div>
             
           
@@ -105,7 +105,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../index.html#Credits">Credits</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../usage.html">Jupman Usage</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../usage.html#Installation">Installation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../usage.html#Building-with-ReadTheDocs:">Building with ReadTheDocs:</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage.html#Building-with-Github-Actions:">Building with Github Actions:</a></li>
@@ -171,7 +171,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../jupman-tests.html">Jupman Tests</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../jupman-tests.html">Tests</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../jupman-tests.html#Sezione-1">Sezione 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jupman-tests.html#Sezione-2">Sezione 2</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../jupman-tests.html#Subsection-1">Subsection 1</a></li>
@@ -256,7 +256,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#Python-tutor">Python tutor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Exercise-in-Jupyter">Exercise in Jupyter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Exercise-using-previous-output">Exercise using previous output</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Exercise-in-Jupyter-with-Python-Tutor">Exercise in Jupyter with Python Tutor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Question-in-Jupyter">Question in Jupyter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Exercise-in-Python">Exercise in Python</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#add">add</a></li>
@@ -4630,10 +4629,10 @@ It was a 5 indeed
 <div class="output_area rendered_html docutils container">
 <script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
 
-<script id="json-jm2e8995bd-3bc3-4aaf-b46f-222c32848134" type="application/json" >
+<script id="json-jm3f27f4df-eeba-46bf-be62-3c8cd7188697" type="application/json" >
     {"code": " \nx = 5\ny = 6\nz = x + y", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 3, "event": "step_line", "func_name": "<module>", "globals": {"x": 5}, "ordered_globals": ["x"], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 4, "event": "step_line", "func_name": "<module>", "globals": {"x": 5, "y": 6}, "ordered_globals": ["x", "y"], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 4, "event": "return", "func_name": "<module>", "globals": {"x": 5, "y": 6, "z": 11}, "ordered_globals": ["x", "y", "z"], "stack_to_render": [], "heap": {}, "stdout": ""}]}
 </script>
-<div id="jm2e8995bd-3bc3-4aaf-b46f-222c32848134" class="pytutorVisualizer"> </div>
+<div id="jm3f27f4df-eeba-46bf-be62-3c8cd7188697" class="pytutorVisualizer"> </div>
 
 <style>
 .vizLayoutTd {
@@ -4653,12 +4652,12 @@ It was a 5 indeed
 <script>
 (function(){
 
-    var trace = JSON.parse(document.getElementById('json-jm2e8995bd-3bc3-4aaf-b46f-222c32848134').innerHTML);
+    var trace = JSON.parse(document.getElementById('json-jm3f27f4df-eeba-46bf-be62-3c8cd7188697').innerHTML);
     // NOTE 1: id without #
     // NOTE 2 - maybe there are more predictable ways, but this will work anyway
     //        - id should be number
     visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jm2e8995bd-3bc3-4aaf-b46f-222c32848134',{'embeddedMode' : false,
+    addVisualizerToPage(trace, 'jm3f27f4df-eeba-46bf-be62-3c8cd7188697',{'embeddedMode' : false,
                                      'visualizerIdOverride':visualizerIdOverride})
 
 
@@ -4827,163 +4826,6 @@ It was a 5 indeed
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Exercise-in-Jupyter-with-Python-Tutor">
-<h2>Exercise in Jupyter with Python Tutor<a class="headerlink" href="#Exercise-in-Jupyter-with-Python-Tutor" title="Permalink to this headline">¶</a></h2>
-<p>Write some code which display a jungle of pies</p>
-<a  class="jupman-sol jupman-sol-toggler"
- onclick="jupman.toggleSolution(this);"
- data-jupman-show="Show solution" data-jupman-hide="Hide">Show solution</a><div class="jupman-sol jupman-sol-code" style="display:none"><div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">math</span>
-
-<span class="c1"># write here</span>
-
-<span class="n">la</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span>
-
-<span class="n">lb</span> <span class="o">=</span> <span class="p">[</span><span class="n">la</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
-
-<span class="n">lc</span> <span class="o">=</span> <span class="p">[</span><span class="n">lb</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">la</span><span class="p">)</span>
-
-<span class="n">jupman</span><span class="o">.</span><span class="n">pytut</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-[3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
-
-<script id="json-jmea83f84b-aaf8-42c2-b649-e92835aa040f" type="application/json" >
-    {"code": " \nimport math\n\n# write here\n\nla = [math.pi] * 5\n\nlb = [la] * 3\n\nlc = [lb] * 4\nprint(la)", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 6, "event": "step_line", "func_name": "<module>", "globals": {"math": ["REF", 1]}, "ordered_globals": ["math"], "stack_to_render": [], "heap": {"1": ["INSTANCE", "module"]}, "stdout": ""}, {"line": 8, "event": "step_line", "func_name": "<module>", "globals": {"math": ["REF", 1], "la": ["REF", 2]}, "ordered_globals": ["math", "la"], "stack_to_render": [], "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416]}, "stdout": ""}, {"line": 10, "event": "step_line", "func_name": "<module>", "globals": {"math": ["REF", 1], "la": ["REF", 2], "lb": ["REF", 3]}, "ordered_globals": ["math", "la", "lb"], "stack_to_render": [], "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]]}, "stdout": ""}, {"line": 11, "event": "step_line", "func_name": "<module>", "globals": {"math": ["REF", 1], "la": ["REF", 2], "lb": ["REF", 3], "lc": ["REF", 4]}, "ordered_globals": ["math", "la", "lb", "lc"], "stack_to_render": [], "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]], "4": ["LIST", ["REF", 3], ["REF", 3], ["REF", 3], ["REF", 3]]}, "stdout": ""}, {"line": 11, "event": "return", "func_name": "<module>", "globals": {"math": ["REF", 1], "la": ["REF", 2], "lb": ["REF", 3], "lc": ["REF", 4]}, "ordered_globals": ["math", "la", "lb", "lc"], "stack_to_render": [], "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]], "4": ["LIST", ["REF", 3], ["REF", 3], ["REF", 3], ["REF", 3]]}, "stdout": "[3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793]\n"}]}
-</script>
-<div id="jmea83f84b-aaf8-42c2-b649-e92835aa040f" class="pytutorVisualizer"> </div>
-
-<style>
-.vizLayoutTd {
-    background-color: #fff !important;
-}
-
-#pyStdout {
-    min-height:25px;
-}
-
-/* 'Edit this code' link, hiding because replaces browser tab !!!*/
-#editCodeLinkDiv {
-    display:none;
-}
-</style>
-
-<script>
-(function(){
-
-    var trace = JSON.parse(document.getElementById('json-jmea83f84b-aaf8-42c2-b649-e92835aa040f').innerHTML);
-    // NOTE 1: id without #
-    // NOTE 2 - maybe there are more predictable ways, but this will work anyway
-    //        - id should be number
-    visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jmea83f84b-aaf8-42c2-b649-e92835aa040f',{'embeddedMode' : false,
-                                     'visualizerIdOverride':visualizerIdOverride})
-
-
-    // set overflow for pytuts - need to do in python as css
-    // does not allow parent selection
-    var pytuts = $('.pytutorVisualizer')
-    pytuts.closest('div.output_html.rendered_html.output_result')
-            .css('overflow-x', 'visible')
-
-    //pytuts.closest('div.output_html.rendered_html.output_result')
-    //      .css('background-color','red')
-
-})()
-</script></div>
-</div>
-</div><div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">math</span>
-
-<span class="c1"># write here</span>
-
-
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-[3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
-
-<script id="json-jmea83f84b-aaf8-42c2-b649-e92835aa040f" type="application/json" >
-    {"code": " \nimport math\n\n# write here\n\nla = [math.pi] * 5\n\nlb = [la] * 3\n\nlc = [lb] * 4\nprint(la)", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 6, "event": "step_line", "func_name": "<module>", "globals": {"math": ["REF", 1]}, "ordered_globals": ["math"], "stack_to_render": [], "heap": {"1": ["INSTANCE", "module"]}, "stdout": ""}, {"line": 8, "event": "step_line", "func_name": "<module>", "globals": {"math": ["REF", 1], "la": ["REF", 2]}, "ordered_globals": ["math", "la"], "stack_to_render": [], "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416]}, "stdout": ""}, {"line": 10, "event": "step_line", "func_name": "<module>", "globals": {"math": ["REF", 1], "la": ["REF", 2], "lb": ["REF", 3]}, "ordered_globals": ["math", "la", "lb"], "stack_to_render": [], "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]]}, "stdout": ""}, {"line": 11, "event": "step_line", "func_name": "<module>", "globals": {"math": ["REF", 1], "la": ["REF", 2], "lb": ["REF", 3], "lc": ["REF", 4]}, "ordered_globals": ["math", "la", "lb", "lc"], "stack_to_render": [], "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]], "4": ["LIST", ["REF", 3], ["REF", 3], ["REF", 3], ["REF", 3]]}, "stdout": ""}, {"line": 11, "event": "return", "func_name": "<module>", "globals": {"math": ["REF", 1], "la": ["REF", 2], "lb": ["REF", 3], "lc": ["REF", 4]}, "ordered_globals": ["math", "la", "lb", "lc"], "stack_to_render": [], "heap": {"1": ["INSTANCE", "module"], "2": ["LIST", 3.1416, 3.1416, 3.1416, 3.1416, 3.1416], "3": ["LIST", ["REF", 2], ["REF", 2], ["REF", 2]], "4": ["LIST", ["REF", 3], ["REF", 3], ["REF", 3], ["REF", 3]]}, "stdout": "[3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793, 3.141592653589793]\n"}]}
-</script>
-<div id="jmea83f84b-aaf8-42c2-b649-e92835aa040f" class="pytutorVisualizer"> </div>
-
-<style>
-.vizLayoutTd {
-    background-color: #fff !important;
-}
-
-#pyStdout {
-    min-height:25px;
-}
-
-/* 'Edit this code' link, hiding because replaces browser tab !!!*/
-#editCodeLinkDiv {
-    display:none;
-}
-</style>
-
-<script>
-(function(){
-
-    var trace = JSON.parse(document.getElementById('json-jmea83f84b-aaf8-42c2-b649-e92835aa040f').innerHTML);
-    // NOTE 1: id without #
-    // NOTE 2 - maybe there are more predictable ways, but this will work anyway
-    //        - id should be number
-    visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jmea83f84b-aaf8-42c2-b649-e92835aa040f',{'embeddedMode' : false,
-                                     'visualizerIdOverride':visualizerIdOverride})
-
-
-    // set overflow for pytuts - need to do in python as css
-    // does not allow parent selection
-    var pytuts = $('.pytutorVisualizer')
-    pytuts.closest('div.output_html.rendered_html.output_result')
-            .css('overflow-x', 'visible')
-
-    //pytuts.closest('div.output_html.rendered_html.output_result')
-    //      .css('background-color','red')
-
-})()
-</script></div>
-</div>
-</div>
 <div class="section" id="Question-in-Jupyter">
 <h2>Question in Jupyter<a class="headerlink" href="#Question-in-Jupyter" title="Permalink to this headline">¶</a></h2>
 <p><strong>QUESTION</strong>: Why learn coding?</p>
@@ -5004,7 +4846,7 @@ even more formatting
 <h2>Exercise in Python<a class="headerlink" href="#Exercise-in-Python" title="Permalink to this headline">¶</a></h2>
 <p>Start editing <code class="docutils literal notranslate"><span class="pre">lab.py</span></code> in text editor</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -5017,7 +4859,7 @@ even more formatting
 <h2>add<a class="headerlink" href="#add" title="Permalink to this headline">¶</a></h2>
 <p>Implement <code class="docutils literal notranslate"><span class="pre">add</span></code> function:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -5026,7 +4868,7 @@ even more formatting
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -5039,7 +4881,7 @@ even more formatting
 <h2>sub<a class="headerlink" href="#sub" title="Permalink to this headline">¶</a></h2>
 <p>Implement sub function</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -5048,7 +4890,7 @@ even more formatting
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -5068,7 +4910,7 @@ This cell input will be completely removed
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -5104,7 +4946,7 @@ This cell input will be completely removed
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright # 2020 - 2021, People That Write a Lot.
+        &#169; Copyright # 2020 - 2022, People That Write a Lot.
 
     </p>
   </div>
