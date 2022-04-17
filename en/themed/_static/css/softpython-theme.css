@@ -1,3 +1,65 @@
+/* media query inspiration taken from https://stackoverflow.com/a/13550716 
+   See also issue https://github.com/DavidLeoni/jupman/issues/92  
+*/    
+
+html { font-size:55%; }
+
+@media screen and (min-width:480px) {
+    html { font-size:0.65em; }
+}
+@media screen and (min-width: 768px) {
+    html { font-size:0.7em; }
+/* Shrinks sidebar, we care only about desktop users, 
+   let other config hell be handled by rtd theme */    
+    .wy-nav-side,  
+    .wy-side-scroll, 
+    .wy-side-nav-search, 
+    .wy-menu-vertical, 
+    .wy-tray-container li, 
+    .rst-versions {
+        min-width:200px;
+        max-width:200px;
+    }        
+    .rst-versions.rst-badge {
+        max-width:200px;
+    }
+    .wy-nav-content-wrap {    
+        margin-left:200px;    
+    }
+    
+}
+@media screen and (min-width:1400px) {
+    html { font-size:1em; }
+/* Shrinks sidebar, we care only about desktop users, 
+   let other config hell be handled by rtd theme */    
+    .wy-nav-side,  
+    .wy-side-scroll, 
+    .wy-side-nav-search, 
+    .wy-menu-vertical, 
+    .wy-tray-container li, 
+    .rst-versions {
+        min-width:275px;
+        max-width:275px;
+    }        
+    .rst-versions.rst-badge {
+        max-width:275px;
+    }
+    .wy-nav-content-wrap {    
+        margin-left:275px;    
+    }
+    
+}
+@media screen and (min-width: 2000px) {
+    /*Don't care about huge res, 
+      I presume those users are accustomed  to zooming
+      which also works better with Python Tutor
+      see https://github.com/DavidLeoni/jupman/issues/93
+    */
+    html { font-size:1em; }  
+}
+
+
+
 
 @font-face {
     font-family:"Archivo";
@@ -74,19 +136,45 @@
     src: url("../fonts/Inconsolata/Inconsolata-VariableFont_wdth-wght.ttf");
 }
 
-.wy-nav-content {
-    background: #f9f8f3;
-    max-width:920px;
+/*needed only if you mess with sidebar width*/
+.wy-nav-content-wrap  {
+   background: rgba(0,0,0,.05);
+}
+
+
+.wy-nav-content{
+    background: #f9f8f3;     
+    margin-left:0 !important;  /* sometimes it gets disconneted .. */
  }
 
+
+.wy-nav-content p, .wy-nav-content div.admonition {
+    font-size: 1.25rem;    
+}
+
+.wy-nav-content p {
+    margin-right:1rem !important;
+    margin-top:1rem !important;
+    margin-bottom:1rem !important;
+    line-height: 1.9rem;       
+}
+
+.wy-nav-content ul, .wy-nav-content ol {    
+    margin-top:1.7rem !important;
+}
+
+.wy-nav-content li p{        
+    margin-top: -0.8rem !important;        
+}
 
 
  .wy-side-nav-search, .wy-nav-top {
    background-color: #537326;
  }
 
+
 .wy-nav-side {
-   background-color: #705d39;
+   background-color: #705d39;   
 }
 
 div.highlight, div.highlight-none, div.highlight-python, div.highlight-bash, div.highlight-ipython3 {
@@ -104,51 +192,74 @@ body {
 
 h1 {
     font-family: "Hussar","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+    font-size: 2.0rem;
+    padding-bottom: 0.8rem;
+    padding-top: 1.5rem;
 }
 
 h2,h3,h4,h5,h6,h7,h8 {
     font-family: "Varela","ff-tisa-web-pro","Georgia",Arial,sans-serif;
-    
+    padding-top:1.4rem;
 }
 
-h2 {
-    font-size:1.5rem;
-    padding-top:1.0rem;
-}
-
-h3 {
-    font-size:1.3rem;
-}
-
-h4 {
-    font-size:1.2rem;
-}
-
+h2 { font-size:1.6rem; }
+h3 { font-size:1.3rem; }
+h4 { font-size:1.2rem; }
 
 .wy-side-scroll {
-    font-size: 1.22rem;
-    
+    font-size: 1.22rem;    
+}
+
+.toctree-l1 > a {
+    line-height:2ch !important;
+}
+.toctree-l2 > a {
+    line-height:2ch !important;
+}
+.toctree-l3 > a {
+    line-height:2ch !important;
+}
+
+.toctree-l4 > a {
+    font-size: 1.06rem !important;
+    padding: .4045em 1.663em .4045em  4.663em !important;    
+    line-height:2ch !important;
+}
+
+.toctree-l5 > a {
+    font-size: 0.97rem !important;
+    padding: .4045em 1.663em .4045em  5em !important;
+    line-height:2ch !important;
 }
 
 .rst-content blockquote {
     font-size: 1.25rem;
 }
 
-.wy-nav-content p, .wy-nav-content li, .wy-nav-content div.admonition {
-    font-size: 1.25rem;
-    line-height: 1.7;
-}
+
 
 /* hack for Python Tutor 'next line to execute' becoming too big */
 #legendDiv p {
     font-size: 9pt;
 }
 
+
+table.docutils th > p {
+    font-size:1.1rem !important;
+}
+
+table.docutils td > p {
+    font-size:1.2rem !important;
+    margin-top:4px !important;
+    margin-bottom:0.5rem !important;
+}
+
+
 pre {
     font-family: "Inconsolata" !important;
-    font-size:20px !important;
+    font-size:1.2rem !important;
     background-color:#f8f8ec;
-    line-height: 1.0 !important;
+    line-height: 1.5rem !important;
 }
 
 
@@ -157,8 +268,22 @@ div.nbinput.container div.prompt, div.nboutput.container div.prompt{
     width:5px !important;
 }
 
+.rst-content code.literal {
+    color:black;
+    background-color: white !important;
+}
 
 .jupman-sol {    
     background-color:#ebf3ed !important;  
     border-color: #d3dfd6 !important;            
 }
+
+a.jupman-sol-toggler:hover {
+    color: #21aa21 !important;
+}
+
+/* pandas */
+.dataframe {
+    font-size:1rem !important;    
+}
+

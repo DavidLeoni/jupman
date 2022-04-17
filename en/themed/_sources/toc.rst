@@ -6,13 +6,11 @@
     :glob:
 
     Home <index.ipynb>
-    usage.md
-    jupman-tests.ipynb
-
-|space|
-==========
-
-.. |space| unicode:: U+0020 .. space
+    manual/quickstart.ipynb
+    manual/editing.ipynb
+    manual/customize.ipynb    
+    manual/exams-management.ipynb
+    Tests <jupman-tests.ipynb>
 
 
 Chapter examples
@@ -24,7 +22,11 @@ Chapter examples
 
     python-example/python-example.ipynb
     jupyter-example/jupyter-example-sol.ipynb
-    Jupyter and Python example <jup-and-py-example/jup-and-py-example-sol.ipynb>
+    Mixed Jupyter and Python example <jup-and-py-example/jup-and-py-example-sol.ipynb>
+    
+    toc-bigdocs.rst
+    
+    challenge-example/example-chal.ipynb
 
 Templates
 ==========
@@ -40,8 +42,3 @@ Templates
     project/project.ipynb   
     project/markdown.ipynb
 
-
-
-
-Index
-========
