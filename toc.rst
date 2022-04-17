@@ -6,9 +6,11 @@
     :glob:
 
     Home <index.ipynb>
-    Usage <usage.md>    
+    manual/quickstart.ipynb
+    manual/editing.ipynb
+    manual/customize.ipynb    
+    manual/exams-management.ipynb
     Tests <jupman-tests.ipynb>
-
 
 
 Chapter examples
