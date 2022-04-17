@@ -13,9 +13,17 @@ def sub(x,y):
     return help_func(x,y) 
 
 #jupman-strip
+# stripped stuff is not present in exercises
 def help_func(x,y):
     return x - y
 #/jupman-strip
+
+
+#jupman-purge
+# purged stuff not present in exercises nor in solutions
+def disappear(x):
+    return x 
+#/jupman-purge
 
 
 # everything after next comment will be discarded

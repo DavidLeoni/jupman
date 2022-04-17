@@ -3,19 +3,21 @@
 
 # This is the configuration file of Sphynx, edit it as needed.
 
+import sys
+sys.path.append('.') # for rtd 
+import os
+on_rtd = os.environ.get('READTHEDOCS') == 'True'
+
+#keep it first so we don't get deprecation warnings
+import jupman_tools as jmt
+
+
 import recommonmark
 from recommonmark.transform import AutoStructify
 from recommonmark.parser import CommonMarkParser
 import datetime
 import glob
 import re
-import os
-import sys
-sys.path.append('.') # for rtd 
-import jupman_tools as jmt
-
-
-on_rtd = os.environ.get('READTHEDOCS') == 'True'
 
 ###################   TODO EDIT AS NEEDED !!  ####################
 
@@ -41,7 +43,7 @@ jm.filename = 'jupman'   # The filename without the extension
 jm.chapter_files = ['jupman.py', 'my_lib.py', '_static/img/cc-by.png', 
                     
                     '_static/js/jupman.js',  # these files are injected when you call jupman.init()
-                    '_static/css/jupman.css', 
+                    '_static/css/jupman.css',                     
                     '_static/js/toc.js',
                     
                     '_static/js/pytutor-embed.bundle.min.js',]
@@ -62,17 +64,17 @@ jm.ipynb_exercises = "EXERCISES"
 #NOTE: this string is not just a translation, it's also a command that when building the exercises
 #      removes the content after it in the Python cell it is contained in
 #      If the user inserts extra spaces the phrase will be recognized anyway
-jm.write_solution_here = jmt.ignore_spaces("# write here", must_begin=False)
+jm.write_solution_here = jmt.tag_regex("# write here", must_begin=False, preserve_line=True)
 
 #NOTE: this string is not just a translation, it's also a command that when building the exercises  
 # completely removes the content of the python cell it is contained in (solution comment included). 
 # If the user inserts extra spaces the phrase will be recognized anyway
-jm.solution = jmt.ignore_spaces("# SOLUTION")
+jm.solution = jmt.tag_regex("# SOLUTION")
 
 #NOTE: this string is not just a translation, it's also a command that 
 #   when building the exercises removes the content after it in the markdown cell
 #   it is contained in
-jm.markdown_answer = jmt.ignore_spaces('**ANSWER**:')
+jm.markdown_answer = jmt.tag_regex('**ANSWER**:')
 #################################################################
 
 jm.zip_ignored = ['__pycache__', '**.ipynb_checkpoints', '.pyc', '.cache', '.pytest_cache', '.vscode']
@@ -130,7 +132,8 @@ extensions = [
 
 # Exclude build directory and Jupyter backup files:
 exclude_patterns = [jm.build,
-                    jm.generated, 
+                    jm.generated,
+                    "**-chal-sol.*",
                     "_templates/exam-server",
                      "_private",
                      "_test",                     
@@ -212,15 +215,10 @@ todo_include_todos = True
 #
 html_theme_options = {
     # fix for https://github.com/DavidLeoni/jupman/issues/38
-    'collapse_navigation': False    
+    'collapse_navigation': False,
+    # needed for big docs  https://github.com/DavidLeoni/jupman/issues/77
+    'navigation_depth': 5 
 }
-
-if os.environ.get('GOOGLE_ANALYTICS'):
-    print("Found GOOGLE_ANALYTICS environment variable")
-    html_theme_options['analytics_id'] = os.environ.get('GOOGLE_ANALYTICS')        
-else:
-    print('No GOOGLE_ANALYTICS environment variable was found, skipping it')
-    
 
 # NOTE: in order to have complete collapsible menu, 
 #       IT IS *FUNDAMENTAL* FOR html_theme to be defined
@@ -244,8 +242,9 @@ html_js_files = [
 
 html_css_files = [
     'css/jupman.css',      # shared among jupyter and website
-    'css/jupman-web.css',  # only on website
-    'css/softpython-theme.css',  
+    'css/jupman-web.css',  # only on website    
+    'css/softpython-theme.css',  #uncomment to activate    
+
 ]
 
 # -- Options for HTMLHelp output ------------------------------------------
@@ -432,9 +431,9 @@ pdf_use_numbered_links = False
 pdf_fit_background_mode = 'scale'
 
 
-def setup(app):
-    jmt.init(jm)
-    
+def setup(app):        
+    jmt.init(jm, globals())
+
     app.add_config_value(   'recommonmark_config', {
                                 'auto_toc_tree_section': 'Contents',
                                 'enable_eval_rst':True
@@ -445,7 +444,7 @@ def setup(app):
     jm.zip_folders('exams/*/solutions', 
                     lambda x:  '%s-%s-exam' % (jm.filename, x.split('/')[-2]))
     # Build Project
-    def sub(x):
+    def remap(x):
         if x == 'requirements.txt':
             return 'NAME-SURNAME-ID/requirements.txt'
         elif x.startswith('project/'):
@@ -455,7 +454,7 @@ def setup(app):
 
     jm.zip_paths(['project', 'requirements.txt'], 
                   '_static/generated/project-template',
-                  patterns = sub)    
+                  remap=remap)    
 
 source_suffix = {
     '.rst': 'restructuredtext',
