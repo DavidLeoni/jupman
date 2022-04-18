@@ -2,13 +2,29 @@
    See also issue https://github.com/DavidLeoni/jupman/issues/92  
 */    
 
-html { font-size:55%; }
+html { font-size:85%; }
+
+.wy-side-scroll a {
+       font-size: 1.5em;
+}   
+.toctree-l4  > a {
+   font-size: 1.4em !important;
+}
 
 @media screen and (min-width:480px) {
-    html { font-size:0.65em; }
+    html { font-size:0.87.5em; }
 }
 @media screen and (min-width: 768px) {
-    html { font-size:0.7em; }
+    html { font-size:0.9em; }
+
+   .wy-side-scroll {
+       font-size: 0.8rem;    
+   }
+   
+   .toctree-l4 > a {
+       font-size: 1.06rem !important;
+   }
+   
 /* Shrinks sidebar, we care only about desktop users, 
    let other config hell be handled by rtd theme */    
     .wy-nav-side,  
@@ -57,7 +73,6 @@ html { font-size:55%; }
     */
     html { font-size:1em; }  
 }
-
 
 
 
@@ -206,9 +221,7 @@ h2 { font-size:1.6rem; }
 h3 { font-size:1.3rem; }
 h4 { font-size:1.2rem; }
 
-.wy-side-scroll {
-    font-size: 1.22rem;    
-}
+
 
 .toctree-l1 > a {
     line-height:2ch !important;
@@ -221,7 +234,6 @@ h4 { font-size:1.2rem; }
 }
 
 .toctree-l4 > a {
-    font-size: 1.06rem !important;
     padding: .4045em 1.663em .4045em  4.663em !important;    
     line-height:2ch !important;
 }
@@ -235,7 +247,6 @@ h4 { font-size:1.2rem; }
 .rst-content blockquote {
     font-size: 1.25rem;
 }
-
 
 
 /* hack for Python Tutor 'next line to execute' becoming too big */
