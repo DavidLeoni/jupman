@@ -16,11 +16,16 @@ html { font-size:0.81em; }
 }
 
 @media screen and (min-width:481px) { /* rtd uses max-width 480 cutoff*/
-    html { font-size:0.87.5em; }
+    
 }
 @media screen and (min-width: 769px) { /* rtd uses max-width 768 cutoff*/
-    html { font-size:0.9em; }
+    
+    html { font-size:0.77em; }    
 
+    .wy-nav-content {
+        max-width:600px;
+    }
+    
    .wy-side-scroll {
        font-size: 0.8rem;    
    }
@@ -49,7 +54,9 @@ html { font-size:0.81em; }
     
 }
 @media screen and (min-width:1100px) { /* min-width as in rtd theme */
-    html { font-size:1em; }
+    
+    html { font-size:0.78em; }    
+    
 /* Shrinks sidebar, we care only about desktop users, 
    let other config hell be handled by rtd theme */    
     .wy-nav-side,  
@@ -69,15 +76,35 @@ html { font-size:0.81em; }
     }
     
 }
-@media screen and (min-width: 2000px) {
-    /*Don't care about huge res, 
-      I presume those users are accustomed  to zooming
+@media screen and (min-width:1400px) { 
+    .wy-nav-content {
+        max-width:700px;
+    }
+
+}
+
+@media screen and (min-width:1600px) { 
+    html { font-size:0.85em; }    
+    
+    .wy-nav-content {
+        max-width:750px;
+    }
+    
+}
+
+@media screen and (min-width: 1900px) {    
+    html { font-size:1em; }  
+    
+    .wy-nav-content {
+        max-width:800px;
+    }
+    
+}
+
+/* I presume higher res users are accustomed  to zooming
       which also works better with Python Tutor
       see https://github.com/DavidLeoni/jupman/issues/93
     */
-    html { font-size:1em; }  
-}
-
 
 
 @font-face {
