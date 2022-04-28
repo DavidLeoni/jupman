@@ -214,12 +214,16 @@ html { font-size:0.81em; }
 }
 
 
+.wy-side-nav-search {
+    padding-right: 20px;
+}
+
  .wy-side-nav-search, .wy-nav-top {
    background-color: #537326;
  }
 
 
-.wy-nav-side {
+.wy-nav-side {   
    background-color: #705d39;   
 }
 

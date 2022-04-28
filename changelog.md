@@ -5,6 +5,11 @@ Jupman Jupyter Manager
 
 [jupman.softpython.org](https://jupman.softpython.org)
 
+## April 28th 2022 - 3.4
+
+- fixed softpython theme font size #92
+- restructured manual
+
 ## February 25th 2022 - 3.3
 
 Implemented: 
