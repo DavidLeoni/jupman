@@ -43,5 +43,10 @@ Templates
 
 Tests
 ==================    
-    Jupman tests <manual/jupman-tests.ipynb>
-    Python Tutor tests <manual/jupman-tests-pytutor.ipynb>
+
+.. toctree::
+    :maxdepth: 2
+    :glob:
+
+    Jupman tests <manual/tests.ipynb>
+    Python Tutor tests <manual/tests-pytutor.ipynb>
