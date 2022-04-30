@@ -10,8 +10,7 @@
     manual/editing.ipynb
     manual/customize.ipynb    
     manual/exams-management.ipynb
-    Tests <jupman-tests.ipynb>
-
+    
 
 Chapter examples
 =================
@@ -42,3 +41,12 @@ Templates
     project/project.ipynb   
     project/markdown.ipynb
 
+Tests
+==================    
+
+.. toctree::
+    :maxdepth: 2
+    :glob:
+
+    Jupman tests <manual/tests.ipynb>
+    Python Tutor tests <manual/tests-pytutor.ipynb>
