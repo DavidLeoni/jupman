@@ -78,7 +78,7 @@ html { font-size:0.81em; }
 }
 @media screen and (min-device-width:1400px) { 
     .wy-nav-content {
-        max-width:680px;
+        max-width:695px;
     }
 
 }
@@ -87,16 +87,17 @@ html { font-size:0.81em; }
     html { font-size:0.85em; }    
     
     .wy-nav-content {
-        max-width:750px;
+        max-width:755px;
     }
     
 }
+
 
 @media screen and (min-device-width: 1900px) {    
     html { font-size:0.98em; }  
     
     .wy-nav-content {
-        max-width:860px;
+        max-width:870px;
     }
     
 }
