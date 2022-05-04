@@ -259,6 +259,25 @@ div.admonition {
     border-radius:12px;
 }
 
+div.admonition.note, div.admonition.warning {
+  padding-right: 0;
+  padding-top: 0px;    
+  padding-bottom: 0px; 
+}
+
+div.admonition.note p, div.admonition.warning p{
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;    
+}
+
+p.admonition-title.fa.fa-exclamation-circle {
+    margin-right: 0 !important;
+    padding-top: 0.6rem; 
+    padding-bottom: 0.6rem;  
+    border-top-left-radius:  15px;
+    border-top-right-radius:  15px;    
+}
+
 body {
     font-family: "Archivo","proxima-nova","Helvetica Neue",Arial,sans-serif;    
 }

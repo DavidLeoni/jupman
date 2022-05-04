@@ -4595,14 +4595,30 @@ Am I readable?
 <p>Until there is an info/warning extension for Markdown/CommonMark, such boxes can be created by using HTML</p>
 <div><p>elements like this:</p>
 <div class="admonition note">
-<p><strong>Note:</strong> This is an info!</p>
+<p><strong>Note:</strong> This is an info, mixed bold!</p>
 </div>
 <div class="admonition warning">
-<p><strong>Note:</strong> This is a warn!</p>
+<p><strong>Note:</strong> This is a warn, mixed bold!</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle">Note: This is a long info, plain title</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title fa fa-exclamation-circle">This is a long warn, plain title!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><strong>Note: This is a long info, bold title</strong></p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title fa fa-exclamation-circle"><strong>This is a long warn, plain title!</strong></p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.</p>
 </div>
 <p>For this to work reliably, you should obey the following guidelines:</p>
 <ul>
-<li><p>The class attribute has to be either “alert alert-info” or “alert alert-warning”, other values will not be converted correctly.</p></li>
+<li><p>The class attribute has to be either <code class="docutils literal notranslate"><span class="pre">&quot;alert</span> <span class="pre">alert-info&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;alert</span> <span class="pre">alert-warning&quot;</span></code>, other values will not be converted correctly.</p></li>
 <li><p>No further attributes are allowed.</p></li>
 <li><p>For compatibility with CommonMark, you should add an empty line between the</p>
 <div><p>start tag and the beginning of the content.</p>
@@ -4904,7 +4920,7 @@ ZeroDivisionError: division by zero
 <div class="section" id="Very-large-input">
 <h3>Very large input<a class="headerlink" href="#Very-large-input" title="Permalink to this headline">¶</a></h3>
 <p>In Jupyter: default behaviour, show scrollbar</p>
-<p>On the website: should expand in horizontal as much as it wants, the rationale is that for input code since it may be printed to PDF you should always manually put line breaks.</p>
+<p>On the website: default behaviour, show scrollbar</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
