@@ -20,6 +20,8 @@ source  $DIR/bin/activate
 set -o xtrace
 python3 -m pip install --upgrade pip
 python3 -m pip install  -r requirements-build.txt
+python3 -m pip install  -r _test/requirements-test.txt
+
 set +o xtrace
 echo deactivate
 deactivate
