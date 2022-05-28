@@ -39,6 +39,11 @@ nbsphinx.egg-info/
 
 
 
+##### KDEVELOP
+.kdev4
+*.kdev4
+
+
 ##### VSCODE
 .vscode
 
