@@ -1,11 +1,14 @@
 var DOCUMENTATION_OPTIONS = {
     URL_ROOT: document.getElementById("documentation_options").getAttribute('data-url_root'),
-    VERSION: '3.4.5',
+    VERSION: '3.4.5-5-g14a2fe0',
     LANGUAGE: 'en',
     COLLAPSE_INDEX: false,
     BUILDER: 'html',
     FILE_SUFFIX: '.html',
-    HAS_SOURCE: true,
+    LINK_SUFFIX: '.html',
+    HAS_SOURCE: false,
     SOURCELINK_SUFFIX: '',
-    NAVIGATION_WITH_KEYS: false
+    NAVIGATION_WITH_KEYS: false,
+    SHOW_SEARCH_SUMMARY: true,
+    ENABLE_SEARCH_SHORTCUTS: true,
 };
