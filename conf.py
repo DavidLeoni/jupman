@@ -208,6 +208,9 @@ html_baseurl = 'https://jupman.softpython.org/en/latest/'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
 
+# don't want _sources directory
+html_copy_source = False
+
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
