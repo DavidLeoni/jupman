@@ -61,7 +61,7 @@ jobs:
     - name: Commit documentation changes
       run: |
         git clone https://github.com/${{ github.repository }}.git --branch ${WEB_BRANCH} --single-branch ${WEB_BRANCH}
-        
+        rm -rf * ${WEB_BRANCH}/${{ env.WEB_PATH }}
         mkdir -p ${WEB_BRANCH}/${{ env.WEB_PATH }}
         cp -r $GITHUB_WORKSPACE/html/* ${WEB_BRANCH}/${{ env.WEB_PATH }}
         if compgen -G "$GITHUB_WORKSPACE/latex/*.pdf" > /dev/null; then
