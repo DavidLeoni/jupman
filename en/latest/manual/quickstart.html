@@ -4303,26 +4303,27 @@ git push origin gh-pages
 <ol class="arabic simple">
 <li><p>Install Python 3.7+</p></li>
 <li><p><a class="reference external" href="http://jupyter.org/install.html">Install Jupyter</a></p></li>
-<li><p>Install required modules:</p>
-<ol class="loweralpha simple">
-<li><p>In a virtual environment (recommended) - from the root of the project, run: <code class="docutils literal notranslate"><span class="pre">bash</span>&#160;&#160;&#160; <span class="pre">./create-env.sh</span></code></p></li>
+<li><p>Install required modules:</p></li>
 </ol>
-</li>
-</ol>
+<p>3.a) In a virtual environment (<strong>recommended</strong>) - from the root of the project, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./create-env.sh
+</pre></div>
+</div>
 <p>This will automatically install required modules in <code class="docutils literal notranslate"><span class="pre">_private/jupman_env</span></code></p>
 <p>NOTE: the script only works with python3.7, in case you have another version just edit the script.</p>
 <p>Afterwards, to activate the environment run:</p>
-<p><code class="docutils literal notranslate"><span class="pre">bash</span>&#160;&#160;&#160; <span class="pre">source</span> <span class="pre">_private/jupman_env/bin/activate</span></code></p>
-<div class="line-block">
-<div class="line">to deactivate (from anywhere):</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">bash</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">deactivate</span></code></div>
-</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>b. without a virtual environment (warning: the requirements-build pinpoints a lot of dependencies to have reproducible builds, but this may mess up other python programs!) From the root of the project, run:
-```bash
-python3 -m pip install --user -r requirements-build.txt
-```
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> _private/jupman_env/bin/activate
 </pre></div>
 </div>
+<p>to deactivate (from anywhere):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>deactivate
+</pre></div>
+</div>
+<p>3.b) without a virtual environment (<strong>not recommended</strong>): From the root of the project, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m pip install --user -r requirements-build.txt
+</pre></div>
+</div>
+<p>Warning: to have reproducible builds <code class="docutils literal notranslate"><span class="pre">requirements-build.txt</span></code> pinpoints a lot of dependencies , installing without virtual environment may mess up other python programs!</p>
 </section>
 <section id="Optional---Running-tests">
 <h3>Optional - Running tests<a class="headerlink" href="#Optional---Running-tests" title="Permalink to this headline"></a></h3>
