@@ -2,13 +2,12 @@
 on: [push]
 
 jobs:
-      
-  build_docs_job:
+  
+  run_tests:     
     if: (github.repository == 'DavidLeoni/jupman') && ((github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/dev') || (github.ref == 'refs/heads/themed'))
     runs-on: ubuntu-20.04
     env:
       BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
-
     name: Run tests
     steps:  
     - name: Really run tests
@@ -18,8 +17,13 @@ jobs:
         cd ${BRANCH_NAME}
         python3 -m pip install --user -r requirements-build.txt
         python3 -m pip install --user -r _test/requirements-test.txt
-        python3 -m pytest _test/*_test.py                        
-      
+        python3 -m pytest _test/*_test.py                  
+    
+  build_docs_job:     
+    needs: run_tests      
+    runs-on: ubuntu-20.04
+    env:
+      BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
     name: Build docs          
     steps:  
     - name: Install deps
