@@ -44,7 +44,7 @@ jobs:
     - name: sets WEB_PATH
       run: echo "WEB_PATH=${{env.LANGUAGE}}/${{env.VERSION}}" >> $GITHUB_ENV
     - name: Run Sphinx in RTD docker      
-      uses: DavidLeoni/readthedocs-to-actions@v1.2
+      #uses: DavidLeoni/readthedocs-to-actions@v1.2
       with:
         RTD_PRJ_NAME: jupman        
         GIT_URL: https://github.com/${{ github.repository }}.git
@@ -60,11 +60,15 @@ jobs:
         tree -aC $GITHUB_WORKSPACE
     - name: Commit documentation changes
       run: |
-        git clone https://github.com/${{ github.repository }}.git --branch ${WEB_BRANCH} --single-branch ${WEB_BRANCH}
-        # Otherwise we get Permission Denied error (??)
-        sudo chown -R $USER:$USER /home/github/actions-runner/_work/${{ github.repository }}
-        rm -rf * ${WEB_BRANCH}/${{ env.WEB_PATH }}
-        mkdir -p ${WEB_BRANCH}/${{ env.WEB_PATH }}
+        git clone https://github.com/${{ github.repository }}.git --branch ${WEB_BRANCH} --single-branch ${WEB_BRANCH}        
+        if [ -d "${WEB_BRANCH}/${{ env.WEB_PATH }}" ] 
+        then
+            git rm -r * ${WEB_BRANCH}/${{ env.WEB_PATH }}
+        fi                
+        mkdir -p ${WEB_BRANCH}/${{ env.WEB_PATH }}        
+        echo "TEST: WENT PAST DIRECTORY CREATION!" 
+        exit  #TEST!
+        
         cp -r $GITHUB_WORKSPACE/html/* ${WEB_BRANCH}/${{ env.WEB_PATH }}
         if compgen -G "$GITHUB_WORKSPACE/latex/*.pdf" > /dev/null; then
              cp -r $GITHUB_WORKSPACE/latex/*.pdf ${WEB_BRANCH}/${{ env.WEB_PATH }}
