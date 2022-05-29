@@ -7,14 +7,14 @@ jobs:
     if: (github.repository == 'DavidLeoni/jupman') && ((github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/dev') || (github.ref == 'refs/heads/themed'))
     runs-on: ubuntu-20.04
     env:
-      BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
+      SOURCE_BRANCH: ${{ github.head_ref || github.ref_name }} 
     name: Run tests
     steps:  
     - name: Install test deps
       run: |
         sudo apt-get install pandoc        
-        git clone https://github.com/${{ github.repository }}.git --branch ${BRANCH_NAME} --single-branch ${BRANCH_NAME}
-        cd ${BRANCH_NAME}
+        git clone https://github.com/${{ github.repository }}.git --branch ${SOURCE_BRANCH} --single-branch ${SOURCE_BRANCH}
+        cd ${SOURCE_BRANCH}
         python3 -m pip install --user -r requirements-build.txt
         python3 -m pip install --user -r _test/requirements-test.txt
     - name: Run pytest
@@ -25,7 +25,8 @@ jobs:
     needs: run_tests      
     runs-on: ubuntu-20.04
     env:
-      BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
+      SOURCE_BRANCH: ${{ github.head_ref || github.ref_name }} 
+      WEB_BRANCH: gh-pages
     name: Build docs          
     steps:  
     - name: Install deps
@@ -58,23 +59,23 @@ jobs:
         tree -aC $GITHUB_WORKSPACE
     - name: Commit documentation changes
       run: |
-        git clone https://github.com/${{ github.repository }}.git --branch gh-pages --single-branch gh-pages
+        git clone https://github.com/${{ github.repository }}.git --branch ${WEB_BRANCH} --single-branch ${WEB_BRANCH}
         
-        mkdir -p gh-pages/${{ env.WEB_PATH }}
-        cp -r $GITHUB_WORKSPACE/html/* gh-pages/${{ env.WEB_PATH }}
+        mkdir -p ${WEB_BRANCH}/${{ env.WEB_PATH }}
+        cp -r $GITHUB_WORKSPACE/html/* ${WEB_BRANCH}/${{ env.WEB_PATH }}
         if compgen -G "$GITHUB_WORKSPACE/latex/*.pdf" > /dev/null; then
-             cp -r $GITHUB_WORKSPACE/latex/*.pdf gh-pages/${{ env.WEB_PATH }}
+             cp -r $GITHUB_WORKSPACE/latex/*.pdf ${WEB_BRANCH}/${{ env.WEB_PATH }}
         else
              echo "ERROR: NO PDF FILES WHERE GENERATED!"
         fi
         if compgen -G "$GITHUB_WORKSPACE/epub/*.epub" > /dev/null; then
-             cp -r $GITHUB_WORKSPACE/epub/*.epub gh-pages/${{ env.WEB_PATH }}
+             cp -r $GITHUB_WORKSPACE/epub/*.epub ${WEB_BRANCH}/${{ env.WEB_PATH }}
         else
              echo "ERROR: NO EPUB FILES WHERE GENERATED!"
         fi
 
         # note: html zip is already provided by Github
-        cd gh-pages        
+        cd ${WEB_BRANCH}
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .      
