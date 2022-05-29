@@ -15,6 +15,7 @@ jobs:
     - name: Test
       run: |
         git clone https://github.com/${{ github.repository }}.git --branch ${BRANCH_NAME} --single-branch ${BRANCH_NAME}
+        cd {BRANCH_NAME}
         python3 -m pip install --user -r requirements-build.txt
         python3 -m pip install --user -r _test/requirements-test.txt
         python3 -m pytest _test/*_test.py                
