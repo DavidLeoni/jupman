@@ -19,6 +19,7 @@ jobs:
         python3 -m pip install --user -r _test/requirements-test.txt
     - name: Run pytest
       run: |        
+        cd ${SOURCE_BRANCH}
         python3 -m pytest _test/*_test.py                  
     
   build_docs_job:     
