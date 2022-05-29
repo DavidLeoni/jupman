@@ -22,6 +22,8 @@ import nbsphinx
 from common_test import * 
 import datetime
 
+def test_fail_on_purpose():
+    assert True == False
 
 def test_detect_release():
     res =  jmt.detect_release()
