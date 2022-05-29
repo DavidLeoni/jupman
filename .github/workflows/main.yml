@@ -3,13 +3,15 @@ on: [push]
 
 jobs:
       
-  build_docs_job:     
+  build_docs_job:
     if: (github.repository == 'DavidLeoni/jupman') && ((github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/dev') || (github.ref == 'refs/heads/themed'))
     runs-on: ubuntu-20.04
     env:
       BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
 
-    - name: Run tests
+    name: Run tests
+    steps:  
+    - name: Really run tests
       run: |
         sudo apt-get install pandoc
         git clone https://github.com/${{ github.repository }}.git --branch ${BRANCH_NAME} --single-branch ${BRANCH_NAME}
