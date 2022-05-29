@@ -61,28 +61,29 @@ jobs:
     - name: Commit documentation changes
       run: |
         git clone https://github.com/${{ github.repository }}.git --branch ${WEB_BRANCH} --single-branch ${WEB_BRANCH}        
-        if [ -d "${WEB_BRANCH}/${{ env.WEB_PATH }}" ] 
+
+        cd ${WEB_BRANCH}
+        if [ -d "${{ env.WEB_PATH }}" ] 
         then
-            git rm -r * ${WEB_BRANCH}/${{ env.WEB_PATH }}
+            git rm -r * ${{ env.WEB_PATH }}
         fi                
-        mkdir -p ${WEB_BRANCH}/${{ env.WEB_PATH }}        
+        mkdir -p ${{ env.WEB_PATH }}        
         echo "TEST: WENT PAST DIRECTORY CREATION!" 
         exit  #TEST!
         
-        cp -r $GITHUB_WORKSPACE/html/* ${WEB_BRANCH}/${{ env.WEB_PATH }}
+        cp -r $GITHUB_WORKSPACE/html/* ${{ env.WEB_PATH }}
         if compgen -G "$GITHUB_WORKSPACE/latex/*.pdf" > /dev/null; then
-             cp -r $GITHUB_WORKSPACE/latex/*.pdf ${WEB_BRANCH}/${{ env.WEB_PATH }}
+             cp -r $GITHUB_WORKSPACE/latex/*.pdf ${{ env.WEB_PATH }}
         else
              echo "ERROR: NO PDF FILES WHERE GENERATED!"
         fi
         if compgen -G "$GITHUB_WORKSPACE/epub/*.epub" > /dev/null; then
-             cp -r $GITHUB_WORKSPACE/epub/*.epub ${WEB_BRANCH}/${{ env.WEB_PATH }}
+             cp -r $GITHUB_WORKSPACE/epub/*.epub ${{ env.WEB_PATH }}
         else
              echo "ERROR: NO EPUB FILES WHERE GENERATED!"
         fi
 
-        # note: html zip is already provided by Github
-        cd ${WEB_BRANCH}
+        # note: html zip is already provided by Github        
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .      
