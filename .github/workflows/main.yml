@@ -4,7 +4,7 @@ on: [push]
 jobs:
   
   run_tests:     
-    if: (github.repository == 'TESTDavidLeoni/jupman') && ((github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/dev') || (github.ref == 'refs/heads/themed'))
+    if: (github.repository == 'DavidLeoni/jupman') && ((github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/dev') || (github.ref == 'refs/heads/themed'))
     runs-on: ubuntu-20.04
     env:
       SOURCE_BRANCH: ${{ github.head_ref || github.ref_name }} 
@@ -23,7 +23,7 @@ jobs:
         python3 -m pytest _test/*_test.py                  
     
   build_docs_job:     
-    #needs: run_tests      
+    needs: run_tests      
     runs-on: ubuntu-20.04
     env:
       SOURCE_BRANCH: ${{ github.head_ref || github.ref_name }} 
@@ -68,8 +68,6 @@ jobs:
             git rm -r * ${{ env.WEB_PATH }}
         fi                
         mkdir -p ${{ env.WEB_PATH }}        
-        echo "TEST: WENT PAST DIRECTORY CREATION!" 
-        exit  #TEST!
         
         cp -r $GITHUB_WORKSPACE/html/* ${{ env.WEB_PATH }}
         if compgen -G "$GITHUB_WORKSPACE/latex/*.pdf" > /dev/null; then
