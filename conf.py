@@ -130,6 +130,13 @@ extensions = [
     #, 'rst2pdf.pdfbuilder'
 ]
 
+#OFFLINE BROWSING https://github.com/DavidLeoni/jupman/issues/96
+mathjax_path = "js/mathjax/tex-mml-chtml.js"
+nbsphinx_requirejs_path = "js/require.min.js"  
+#must reset otherwise adds integrity and crossorigin html attributes
+nbsphinx_requirejs_options = { }
+
+
 # Exclude build directory and Jupyter backup files:
 exclude_patterns = [jm.build,
                     jm.generated,
@@ -201,12 +208,15 @@ language = None
 # -- Options for HTML output ----------------------------------------------
 
 html_title = project # + ' version ' + release
-# canonical url for documentation
-# since sphinx 1.8
+
+# canonical url for documentation, since sphinx 1.8
 html_baseurl = 'https://jupman.softpython.org/en/themed/'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
+
+# don't want _sources directory
+html_copy_source = False
 
 
 # Theme options are theme-specific and customize the look and feel of a theme

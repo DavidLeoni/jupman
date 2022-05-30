@@ -22,7 +22,6 @@ import nbsphinx
 from common_test import * 
 import datetime
 
-
 def test_detect_release():
     res =  jmt.detect_release()
     assert res == 'dev' or len(res.split('.')) >= 2
