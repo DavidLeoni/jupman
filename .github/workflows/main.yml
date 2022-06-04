@@ -13,7 +13,7 @@ jobs:
     - name: Install test deps
       run: |
         sudo apt-get install pandoc        
-        git clone https://github.com/${{ github.repository }}.git --branch ${SOURCE_BRANCH} --single-branch ${SOURCE_BRANCH}
+        git clone  --depth=1 --single-branch --branch ${SOURCE_BRANCH} https://github.com/${{ github.repository }}.git   ${SOURCE_BRANCH}
         cd ${SOURCE_BRANCH}
         python3 -m pip install --user -r requirements-build.txt
         python3 -m pip install --user -r _test/requirements-test.txt
@@ -59,8 +59,8 @@ jobs:
       run: |        
         tree -aC $GITHUB_WORKSPACE
     - name: Commit documentation changes
-      run: |
-        git clone https://github.com/${{ github.repository }}.git --branch ${WEB_BRANCH} --single-branch ${WEB_BRANCH}        
+      run: |           
+        git clone  --depth=1 --single-branch --branch ${WEB_BRANCH} https://github.com/${{ github.repository }}.git   ${WEB_BRANCH}
 
         cd ${WEB_BRANCH}
         if [ -d "${{ env.WEB_PATH }}" ] 
