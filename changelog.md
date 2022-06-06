@@ -5,6 +5,15 @@ Jupman Jupyter Manager
 
 [jupman.softpython.org](https://jupman.softpython.org)
 
+# June 4th 2022 - 3.5
+
+- generated html can be really used offline #96, also fixes wrong math symbols with local build #3
+- automated testing on github actions #99
+- virtual env install, pinpointed build depenedencies #92
+- fixed text overflow on smartphones #94,  fixed softpython theme flag
+- github actions: always reset html output #98
+
+
 ## April 28th 2022 - 3.4
 
 - fixed softpython theme font size #92
