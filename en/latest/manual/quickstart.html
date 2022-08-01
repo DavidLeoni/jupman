@@ -4283,7 +4283,7 @@
 <h3>Building with Github Actions:<a class="headerlink" href="#Building-with-Github-Actions:" title="Permalink to this headline"></a></h3>
 <p>Configure <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/.github/workflows/main.yml">.github/workflows/main.yml</a> on your computer to your needs - you will need to:</p>
 <ol class="arabic simple">
-<li><p>at the beginning there is an <code class="docutils literal notranslate"><span class="pre">if</span></code> which makes the workflow only work in <code class="docutils literal notranslate"><span class="pre">DavidLeoni/jupman</span></code> repository, change it with your names</p></li>
+<li><p>at the beginning in the <code class="docutils literal notranslate"><span class="pre">build_docs_job</span></code> section there is an <code class="docutils literal notranslate"><span class="pre">if</span></code> which makes the workflow only work in <code class="docutils literal notranslate"><span class="pre">DavidLeoni/jupman</span></code> repository, change it with your project repo and comment the following <code class="docutils literal notranslate"><span class="pre">needs:</span> <span class="pre">run_tests</span></code> line</p></li>
 <li><p>set RTD_PRJ_NAME</p></li>
 <li><p>If you want to publish to <a class="reference external" href="https://pages.github.com/">Github Pages</a>: everything is set, just create an empty branch <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> in an new HTML_FOLDER <strong>before</strong> committing - from some other folder in your file system:</p></li>
 </ol>
