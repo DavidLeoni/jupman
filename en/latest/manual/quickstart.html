@@ -38,7 +38,7 @@
             <a href="../toc-page.html" class="icon icon-home"> Jupman
           </a>
               <div class="version">
-                3.4
+                3.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -65,7 +65,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#Configure">Configure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Build-the-manual">Build the manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Building-the-manual">Building the manual</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Publish">Publish</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Further-steps">Further steps</a></li>
 </ul>
@@ -4310,10 +4310,22 @@ git push origin gh-pages
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./create-env.sh
 </pre></div>
 </div>
-<p>This will automatically install required modules in <code class="docutils literal notranslate"><span class="pre">_private/jupman_env</span></code></p>
-<p>NOTE: the script only works with python3.7, in case you have another version just edit the script.</p>
+<p>This will automatically install required modules in <code class="docutils literal notranslate"><span class="pre">_private/jupman_env</span></code> using <code class="docutils literal notranslate"><span class="pre">python3</span></code> system binary.</p>
+<p>If you want to usa a particular python binary (note it must already be on your system), run i.e.:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./create-env.sh python3.7
+</pre></div>
+</div>
 <p>Afterwards, to activate the environment run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> _private/jupman_env/bin/activate
+<ul class="simple">
+<li><p>In Windows:</p></li>
+</ul>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>_private\jupman_env\bin\activate
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>in Linux/Mac:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> activate
 </pre></div>
 </div>
 <p>to deactivate (from anywhere):</p>
@@ -4408,15 +4420,15 @@ git push origin gh-pages
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter notebook
 </pre></div>
 </div>
-<ol class="arabic" start="6">
+<ol class="arabic">
 <li><p>If you wish your notebooks to appear in the generated manual, you have to add them in the <code class="docutils literal notranslate"><span class="pre">toc.rst</span></code> file.</p>
 <p><strong>NOTE</strong>: the page <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/toc-page.rst">toc-page.rst</a>, which is set to be the <code class="docutils literal notranslate"><span class="pre">master_doc</span></code> of Sphinx, will just load the actual Table of Contents which is in <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/toc.rst">toc.rst</a>. It looks a bit convoluted because when it comes to indexes Sphinx is not much reliable, <a class="reference external" href="https://github.com/DavidLeoni/jupman/issues/11">see this issue</a> . We strongly advise <em>not</em> to change these settings !</p>
 </li>
 <li><p>edit the home, which is in the <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/index.ipynb">index.ipynb</a> file</p></li>
 </ol>
 </section>
-<section id="Build-the-manual">
-<h2>Build the manual<a class="headerlink" href="#Build-the-manual" title="Permalink to this headline"></a></h2>
+<section id="Building-the-manual">
+<h2>Building the manual<a class="headerlink" href="#Building-the-manual" title="Permalink to this headline"></a></h2>
 <p><strong>For a quick build</strong> that only produces html:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 build.py -q
 </pre></div>
