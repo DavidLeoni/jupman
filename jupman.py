@@ -2801,6 +2801,11 @@ def pytut():
 """ % (json_id, trace, div_id)
     inject += """ 
         <style>
+        
+        #uiControlsPane {
+            display: none;
+        }
+        
         .vizLayoutTd {
             background-color: #fff !important;
         }
@@ -2823,7 +2828,7 @@ def pytut():
             var trace = JSON.parse(document.getElementById('%s').innerHTML);                                        
             // NOTE 1: id without #
             
-            addVisualizerToPage(trace, '%s',{'embeddedMode' : false,
+            addVisualizerToPage(trace, '%s',{'embeddedMode' : false,                       
                                              'visualizerIdOverride':'%s'})  
             
             
