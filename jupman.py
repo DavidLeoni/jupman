@@ -2806,6 +2806,12 @@ def pytut():
             display: none;
         }
         
+        div.ui-resizable-handle.ui-resizable-e {
+            border-color: #dddddd !important;
+            border-width:2px !important; 
+        }
+        
+        
         .vizLayoutTd {
             background-color: #fff !important;
         }
