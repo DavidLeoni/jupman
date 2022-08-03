@@ -28,6 +28,17 @@ from jupman_tools import warn
 
 import logging
 
+
+class JupmanExam:
+    """ @since 3.6
+    """        
+    def __init__(self, date_ymd):
+        """ @since 3.6
+        """                
+        self.date_ymd = date_ymd
+        self.date = jmt.parse_date(date_ymd)
+        self.date_human = self.date.strftime('%a %d, %b %Y')
+    
 jm = conf.jm
 
 @contextmanager
@@ -41,7 +52,7 @@ def CD(new_dir):
         os.chdir(prevdir)
         info(f"Restored working dir.")
 
-def get_target_student(ld):
+def get_target_student(ld):    
     return '_private/%s/student-zip/%s/'  % (ld, jm.get_exam_student_folder(ld))
 
 def get_exam_text_filename(ld, extension):
@@ -82,10 +93,6 @@ def init(parser, context,args):
                     eld_admin,
                     ignore=shutil.ignore_patterns('exam-yyyy-mm-dd.ipynb'))
     
-    jmt.expand_JM(   '_templates/exam/solutions/exam-yyyy-mm-dd.ipynb', 
-                    exam_ipynb,
-                    ld,
-                    conf)
 
     os.rename('%s/jupman-yyyy-mm-dd-grades.ods' % eld_admin,
               "%s/%s-%s-grades.ods" % (eld_admin, conf.jm.filename, ld))
@@ -104,7 +111,7 @@ jupman-2000-12-31-FIRSTNAME-LASTNAME-ID
     exercise3.py  
 """
 @subcmd(help='Zips a builded exam, making it ready for deploy on the exam server')
-def package(parser,context,args):
+def package(parser,context,args):        
     
     parser.add_argument('date', help="date in format 'yyyy-mm-dd'" )
     parser.add_argument('-t','--site',  action='store_true', help="zips the site" )
@@ -112,6 +119,8 @@ def package(parser,context,args):
     
     vs = vars(parser.parse_args(args))
     ld = jmt.parse_date_str(vs['date'])
+    
+    jm.exam = JupmanExam(ld)
     
     zip_site = vs['site']
     zip_server = vs['server']
@@ -157,6 +166,8 @@ def package(parser,context,args):
 
 
     info("Copying exercises to " + str(target_student))
+    
+    
     jm.copy_code(eld_solutions, target_student, copy_solutions=False)
 
     
@@ -217,6 +228,8 @@ def package(parser,context,args):
 @subcmd(help='Set up grading for the provided exam')
 def grade(parser,context,args):
     ld = arg_date(parser, args)
+    jm.exam = JupmanExam(ld)
+    
     eld_admin = "_private/%s" % ld
     shipped = "%s/shipped" % eld_admin
     graded = "%s/graded" % eld_admin
@@ -250,6 +263,7 @@ def grade(parser,context,args):
 @subcmd('zip-grades', help='Creates a separate zip for each student containing his graded sheet and code')
 def zip_grades(parser,context,args):
     ld = arg_date(parser, args)
+    jm.exam = JupmanExam(ld)
     eld_admin = "_private/" + ld 
     shipped = eld_admin + "/shipped"
 
@@ -271,6 +285,7 @@ def zip_grades(parser,context,args):
 @subcmd('publish', help='Copies exam python files from private/ to exam/ (both exercises and solutions), and zips them')
 def publish(parser,context,args):
     ld = arg_date(parser, args)
+    jm.exam = JupmanExam(ld)
     source = "_private/%s" % ld  
     source_admin = source
     source_solutions =  '%s/solutions' % source
@@ -314,6 +329,8 @@ def publish(parser,context,args):
 def delete_exam(parser,context,args):
         
     ld = arg_date(parser, args)
+    jm.exam = JupmanExam(ld)
+    
     eld_admin = '_private/%s' % ld
     
     pubeld = 'exams/%s' % ld

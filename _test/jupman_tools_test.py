@@ -8,7 +8,7 @@ import jupman_tools as jmt
 from hypothesis import given
 from pprint import pprint
 from hypothesis.strategies import text
-from jupman_tools import ignore_spaces, tag_regex, Jupman
+from jupman_tools import ignore_spaces, tag_regex, JupmanConfig, SphinxConfig, JupmanContext
 import pytest 
 import re
 from sphinx.application import Sphinx
@@ -18,9 +18,12 @@ import time
 import filecmp
 import shutil
 import nbsphinx
+import inspect
 
 from common_test import * 
 import datetime
+
+
 
 def test_detect_release():
     res =  jmt.detect_release()
@@ -45,7 +48,7 @@ def test_parse_date_str():
 
 
 def test_jupman_constructor():
-    jm = Jupman()
+    jm = JupmanConfig()
     # only testing the vital attrs
     assert jm.filename == 'jupman'
     #NOTE: putting '/' at the end causes exclude_patterns to not work !
@@ -99,16 +102,18 @@ sys.do_something()"""
 
 
 def test_is_zip_ignored():
-    jm = make_jm()
-    assert jm.is_zip_ignored('.ipynb_checkpoints')
-    assert jm.is_zip_ignored('prova/.ipynb_checkpoints')
-    assert jm.is_zip_ignored('prova/__pycache__')
-    assert not jm.is_zip_ignored('good')
-    assert not jm.is_zip_ignored('very/good')
+    jcxt = make_jupman_context()    
+    assert jmt.is_zip_ignored(jcxt, '.ipynb_checkpoints')
+    assert jmt.is_zip_ignored(jcxt, 'prova/.ipynb_checkpoints')
+    assert jmt.is_zip_ignored(jcxt, 'prova/__pycache__')
+    assert not jmt.is_zip_ignored(jcxt, 'good')
+    assert not jmt.is_zip_ignored(jcxt, 'very/good')
     
 
 def test_is_code_sol_to_strip():
-    jm = make_jm()
+    
+    jcxt = make_jupman_context()
+    jcxt.jpre_website = True
     solution = '# SOLUTION\nx=5\n'
     write_here = '# write here\nx=5\n'
     jupman_raise = '#jupman-raise\nx=5\n#/jupman-raise\n'
@@ -121,25 +126,25 @@ def test_is_code_sol_to_strip():
     jupman_purge_output = 'bla\n#jupman-purge-output\nbla\n'
     jupman_purge_io = 'bla\n#jupman-purge-io\nbla\n'
 
-    assert jm.is_to_strip(solution) == True
-    assert jm.is_to_strip(write_here) == True
-    assert jm.is_to_strip(jupman_raise) == True
-    assert jm.is_to_strip(jupman_strip) == True
-    assert jm.is_to_strip(jupman_purge) == True
-    assert jm.is_to_strip(jupman_preprocess) == True    
-    assert jm.is_to_strip(jupman_purge_input) == True
-    assert jm.is_to_strip(jupman_purge_output) == True
-    assert jm.is_to_strip(jupman_purge_io) == True
+    assert jmt.is_to_strip(jcxt, solution) == True
+    assert jmt.is_to_strip(jcxt, write_here) == True
+    assert jmt.is_to_strip(jcxt, jupman_raise) == True
+    assert jmt.is_to_strip(jcxt, jupman_strip) == True
+    assert jmt.is_to_strip(jcxt, jupman_purge) == True
+    assert jmt.is_to_strip(jcxt, jupman_preprocess) == True    
+    assert jmt.is_to_strip(jcxt, jupman_purge_input) == True
+    assert jmt.is_to_strip(jcxt, jupman_purge_output) == True
+    assert jmt.is_to_strip(jcxt, jupman_purge_io) == True
 
-    assert jm.is_code_sol(solution) == True
-    assert jm.is_code_sol(write_here) == True    
-    assert jm.is_code_sol(jupman_raise) == True
-    assert jm.is_code_sol(jupman_strip) == True
-    assert jm.is_code_sol(jupman_purge) == False
-    assert jm.is_code_sol(jupman_purge_io) == False
-    assert jm.is_code_sol(jupman_purge_input) == False
-    assert jm.is_code_sol(jupman_purge_output) == False
-    assert jm.is_code_sol(jupman_preprocess) == False
+    assert jmt.is_code_sol(jcxt, solution) == True
+    assert jmt.is_code_sol(jcxt, write_here) == True    
+    assert jmt.is_code_sol(jcxt, jupman_raise) == True
+    assert jmt.is_code_sol(jcxt, jupman_strip) == True
+    assert jmt.is_code_sol(jcxt, jupman_purge) == False
+    assert jmt.is_code_sol(jcxt, jupman_purge_io) == False
+    assert jmt.is_code_sol(jcxt, jupman_purge_input) == False
+    assert jmt.is_code_sol(jcxt, jupman_purge_output) == False
+    assert jmt.is_code_sol(jcxt, jupman_preprocess) == False
     
     cx = """x = 9
 #jupman-purge
@@ -148,17 +153,17 @@ def test_is_code_sol_to_strip():
 y = 'purged!'
 #/jupman-purge
 # after"""
-    assert jm.is_to_strip(cx) == True
-    assert jm.is_code_sol(cx) == False
+    assert jmt.is_to_strip(jcxt, cx) == True
+    assert jmt.is_code_sol(jcxt, cx) == False
 
 
 def test_purge_tags():
-    jm = make_jm()
-
+    jcxt = make_jupman_context()
+    jcxt.jpre_website = True
 
     # single tag directive
     
-    assert jm._purge_tags("""
+    assert jmt._purge_tags(jcxt, """
     bla
     #jupman-preprocess
     ble
@@ -166,13 +171,13 @@ def test_purge_tags():
     
     # single tag directive
     
-    assert jm._purge_tags("""#jupman-preprocess
+    assert jmt._purge_tags(jcxt, """#jupman-preprocess
     ble
     """) == '\n    ble\n    '
     
     
     # span tag purge directive, removes between
-    assert jm._purge_tags("""
+    assert jmt._purge_tags(jcxt, """
     bla
     #jupman-purge
     ble
@@ -181,7 +186,7 @@ def test_purge_tags():
     """) == '\n    bla\n    \n    blo\n    '
     
     # purge io directive, removes all
-    assert jm._purge_tags("""
+    assert jmt._purge_tags(jcxt, """
     bla
     #jupman-purge-io
     ble        
@@ -189,14 +194,14 @@ def test_purge_tags():
     
 
     # purge input directive, removes all
-    assert jm._purge_tags("""
+    assert jmt._purge_tags(jcxt, """
     bla
     #jupman-purge-input
     ble        
     """) == ''
 
     # purge output directive, no effect
-    assert jm._purge_tags("""
+    assert jmt._purge_tags(jcxt, """
     bla
     #jupman-purge-output
     ble
@@ -205,19 +210,19 @@ def test_purge_tags():
     
     # solution span tag
     
-    assert jm._purge_tags("""
+    assert jmt._purge_tags(jcxt, """
     #jupman-raise
     bla
     #/jupman-raise""") == '\n    \n    bla\n    '
     
     # solution span tag
     
-    assert jm._purge_tags("""
+    assert jmt._purge_tags(jcxt, """
     #jupman-strip
     bla
     #/jupman-strip""") == '\n    \n    bla\n    '
     
-    assert jm._purge_tags("""
+    assert jmt._purge_tags(jcxt, """
     bla
     #jupman-strip
     ble
@@ -234,12 +239,12 @@ def test_make_stripped_cell_id():
 def test_copy_chapter():
     clean()
     
-    jm = make_jm()
-    os.makedirs(jm.build)
-    dest_dir = os.path.join(jm.build, 'test-chapter')
-    jm.copy_code('_test/test-chapter',
-                 dest_dir,
-                 copy_solutions=True)    
+    jcxt = make_jupman_context()    
+    os.makedirs(jcxt.jm.build)
+    dest_dir = os.path.join(jcxt.jm.build, 'test-chapter')
+    jmt.copy_code(jcxt, '_test/test-chapter',
+                  dest_dir,
+                  copy_solutions=True)    
 
     assert os.path.isdir(dest_dir)
 
@@ -271,6 +276,23 @@ def test_copy_chapter():
     assert '<a href="index.html">a link</a>' in nb_node.cells[11].source
     
     assert '<a href="https://jupman.softpython.org">a link</a>' in nb_node.cells[12].source
+
+    assert 'replacements.ipynb' in nb_node.cells[13].source
+    assert jcxt.jm.manual in nb_node.cells[13].source
+    assert jcxt.author in nb_node.cells[13].source
+        
+    assert 'replacements.ipynb' in nb_node.cells[14].source
+    assert jcxt.jm.manual in nb_node.cells[14].source
+    assert nb_node.cells[14].source.count(jcxt.author) == 2
+        
+    assert 'replacements.ipynb' in nb_node.cells[15].source
+    assert jcxt.jm.manual in nb_node.cells[15].source
+    assert jcxt.author in nb_node.cells[15].source
+            
+    assert 'replacements.ipynb' in nb_node.cells[16].source
+    assert jcxt.jm.manual in nb_node.cells[16].source
+    assert jcxt.author in nb_node.cells[16].source
+    
 
     py_fn = os.path.join(dest_dir, 'file.py')
     assert os.path.isfile(py_fn)
@@ -377,9 +399,9 @@ def test_copy_chapter():
     nb_sol_fn = os.path.join(dest_dir, 'nb-sol.ipynb')
     nb_sol_web = nbformat.read(nb_sol_fn, nbformat.NO_CONVERT)
 
-    jm._sol_nb_to_ex(nb_sol_web,
-                     os.path.abspath(nb_sol_fn),
-                     website=True)
+    jcxt = JupmanContext(make_sphinx_config(), os.path.abspath(nb_sol_fn), True)
+
+    jmt._sol_nb_to_ex(jcxt, nb_sol_web)
     
     stripped8 = 0
     stripped10 = 0
@@ -418,14 +440,14 @@ def test_copy_chapter():
 
     nb_chal_ex = nbformat.read(nb_chal_ex_fn, nbformat.NO_CONVERT)
 
-    assert jm.ipynb_solutions not in nb_chal_ex.cells[1].source
+    assert jcxt.jm.ipynb_solutions not in nb_chal_ex.cells[1].source
     
 
 
 def test_setup(tconf):
         
     mockapp = MockSphinx()
-    
+        
     tconf.setup(mockapp)
     # if so tests run smoothly also on non-jupman projects
     if os.path.exists('jupyter-example'):
@@ -437,8 +459,7 @@ def test_setup(tconf):
     if os.path.exists('challenge-example'):
         assert os.path.isfile(os.path.join(tconf.jm.generated, 'challenge-example.zip'))
 
-    # test reproducible build zips
-    # https://github.com/DavidLeoni/jupman/issues/60
+    # test reproducible build zips  https://github.com/DavidLeoni/jupman/issues/60
         
     if os.path.exists('jup-and-py-example'):
             
@@ -512,22 +533,22 @@ def test_span_pattern():
     
 
 def test_validate_code_tags():
-    jm = make_jm()
-    assert jm.validate_code_tags('# SOLUTION\nbla', 'some_file') == 1
-    assert jm.validate_code_tags('  # SOLUTION\nbla', 'some_file') == 1
-    assert jm.validate_code_tags('something before  # SOLUTION\nbla', 'some_file') == 0
-    assert jm.validate_code_tags('#jupman-strip\nblabla#/jupman-strip', 'some_file') == 1
-    assert jm.validate_code_tags('#jupman-strip\nA#/jupman-strip #jupman-raise\nB#/jupman-raise', 'some_file') == 2
+    jcxt = make_jupman_context()
+    assert jmt.validate_code_tags(jcxt, '# SOLUTION\nbla', 'some_file') == 1
+    assert jmt.validate_code_tags(jcxt, '  # SOLUTION\nbla', 'some_file') == 1
+    assert jmt.validate_code_tags(jcxt, 'something before  # SOLUTION\nbla', 'some_file') == 0
+    assert jmt.validate_code_tags(jcxt, '#jupman-strip\nblabla#/jupman-strip', 'some_file') == 1
+    assert jmt.validate_code_tags(jcxt, '#jupman-strip\nA#/jupman-strip #jupman-raise\nB#/jupman-raise', 'some_file') == 2
     
-    assert jm.validate_code_tags('#jupman-preprocess', 'some_file') == 0
-    assert jm.validate_code_tags('#jupman-purge\nblabla#/jupman-purge', 'some_file') == 0
-    assert jm.validate_code_tags('#jupman-purge-input\nA', 'some_file') == 0
-    assert jm.validate_code_tags('#jupman-purge-output\nA', 'some_file') == 0
-    assert jm.validate_code_tags('#jupman-purge-io\nA', 'some_file') == 0
+    assert jmt.validate_code_tags(jcxt, '#jupman-preprocess', 'some_file') == 0
+    assert jmt.validate_code_tags(jcxt, '#jupman-purge\nblabla#/jupman-purge', 'some_file') == 0
+    assert jmt.validate_code_tags(jcxt, '#jupman-purge-input\nA', 'some_file') == 0
+    assert jmt.validate_code_tags(jcxt, '#jupman-purge-output\nA', 'some_file') == 0
+    assert jmt.validate_code_tags(jcxt, '#jupman-purge-io\nA', 'some_file') == 0
     
     # pairs count as one
-    assert jm.validate_code_tags('#jupman-raise\nA#/jupman-raise', 'some_file') == 1
-    assert jm.validate_code_tags("""
+    assert jmt.validate_code_tags(jcxt, '#jupman-raise\nA#/jupman-raise', 'some_file') == 1
+    assert jmt.validate_code_tags(jcxt, """
     hello
     #jupman-raise
     something
@@ -537,17 +558,18 @@ def test_validate_code_tags():
     #/jupman-raise""", 'some_file') == 2
 
 def test_validate_markdown_tags():
-    jm = make_jm()
+    jcxt = make_jupman_context()
 
-    assert jm.validate_markdown_tags('**ANSWER**: hello', 'some_file') == 1
-    assert jm.validate_markdown_tags('  **ANSWER**: hello', 'some_file') == 1
-    assert jm.validate_markdown_tags('bla  **ANSWER**: hello', 'some_file') == 0
+    assert jmt.validate_markdown_tags(jcxt, '**ANSWER**: hello', 'some_file') == 1
+    assert jmt.validate_markdown_tags(jcxt, '  **ANSWER**: hello', 'some_file') == 1
+    assert jmt.validate_markdown_tags(jcxt, 'bla  **ANSWER**: hello', 'some_file') == 0
     
 
     
 def test_preprocessor_sol():
     jm = make_jm()
-    jmt.init(jm)
+    import conf
+    jmt.init(jm, conf)
     
     
     nb_fn = '_test/test-chapter/nb-sol.ipynb'
@@ -586,7 +608,8 @@ def test_preprocessor_sol():
 
 def test_preprocessor_force():
     jm = make_jm()
-    jmt.init(jm)
+    import conf
+    jmt.init(jm, conf)
     
     
     nb_fn = '_test/test-chapter/force-preprocess.ipynb'
@@ -618,7 +641,8 @@ def test_preprocessor_force():
     
 def test_preprocessor_normal():
     jm = make_jm()
-    jmt.init(jm)
+    import conf
+    jmt.init(jm, conf)
     
     nb_fn = '_test/test-chapter/replacements.ipynb'
     
@@ -638,3 +662,82 @@ def test_preprocessor_normal():
     
     assert 'stay!' in nb_orig.cells[10].source            
     
+def test_expr_matcher():    
+
+    P = jmt.EXPR_PATTERN
+    assert P.match("_JUPMAN_.a").group(0) == "_JUPMAN_.a"    
+    assert P.match("_JUPMAN_.") == None    
+    assert P.match("_JUPMAN_") == None    
+    assert P.match("_JUPMAN_.a.b").group(0) == "_JUPMAN_.a.b"
+    assert P.match("_JUPMAN_.ab.b").group(0) == "_JUPMAN_.ab.b"
+    assert P.match("_JUPMAN_.a.bc").group(0) == "_JUPMAN_.a.bc"
+    assert P.match("_JUPMAN_.7a") == None
+    assert P.match("_JUPMAN_.a7").group(0) == "_JUPMAN_.a7"    
+    assert P.match("_JUPMAN_.f()").group(0) == "_JUPMAN_.f()"    
+    assert P.match("_JUPMAN_.c.ga()").group(0) == "_JUPMAN_.c.ga()"        
+    assert P.match("_JUPMAN_.f(3)").group(0) == "_JUPMAN_.f(3)"
+    assert P.match("_JUPMAN_.f(2,5,1)").group(0) == "_JUPMAN_.f(2,5,1)"      
+    # chaining is not supported, maybe it should refuse/warn but we don't care
+    assert P.match("_JUPMAN_.f().g()").group(0) == "_JUPMAN_.f()"  
+    
+    
+    assert [m.group(0) for m in P.finditer("  _JUPMAN_.a CIAO_JUPMAN_.b.c HELLO ")] == ["_JUPMAN_.a", "_JUPMAN_.b.c"]
+    
+    assert [m.group(0) for m in P.finditer("Z_JUPMAN_.a _JUPMAN_.b.c Q")] == ["_JUPMAN_.a", "_JUPMAN_.b.c"]    
+    assert [m.group(0) for m in P.finditer("_JUPMAN_.a'_JUPMAN_.b")] == ["_JUPMAN_.a", "_JUPMAN_.b"]
+    assert [m.group(0) for m in P.finditer("_JUPMAN_.a\t_JUPMAN_.b")] == ["_JUPMAN_.a", "_JUPMAN_.b"]
+    assert [m.group(0) for m in P.finditer("_JUPMAN_.a\n_JUPMAN_.b")] == ["_JUPMAN_.a", "_JUPMAN_.b"]
+    assert [m.group(0) for m in P.finditer("_JUPMAN_.a]_JUPMAN_.b")] == ["_JUPMAN_.a", "_JUPMAN_.b"]
+    assert [m.group(0) for m in P.finditer("_JUPMAN_.a)_JUPMAN_.b")] == ["_JUPMAN_.a", "_JUPMAN_.b"]
+    assert [m.group(0) for m in P.finditer("_JUPMAN_.a\"_JUPMAN_.b")] == ["_JUPMAN_.a", "_JUPMAN_.b"]
+    # a non-character separator is always necessary, in future if we improve the regex this test may fail 
+    assert [m.group(0) for m in P.finditer("  _JUPMAN_.aZ_JUPMAN_.b")] == ["_JUPMAN_.aZ_JUPMAN_.b"]
+    assert [m.group(0) for m in P.finditer("  _JUPMAN_.a()_JUPMAN_.b")] == ["_JUPMAN_.a()", "_JUPMAN_.b"]
+    assert [m.group(0) for m in P.finditer("  _JUPMAN_.a()Z_JUPMAN_.b")] == ["_JUPMAN_.a()", "_JUPMAN_.b"]
+    
+    
+    
+def test_replace_templates():
+    
+    class C:
+        pass
+            
+    def mkcxt():
+        ret = make_jupman_context()
+        ret.website = True
+        return ret
+    
+    jcxt = mkcxt();  jcxt.a = 7
+    assert jmt.replace_templates(jcxt, "_JUPMAN_.a") == "7"    
+    
+    jcxt = mkcxt();  
+    assert jmt.replace_templates(jcxt, "_JUPMAN_.") == "_JUPMAN_."
+    jcxt = mkcxt();  
+    assert jmt.replace_templates(jcxt, "_JUPMAN_") == "_JUPMAN_"
+    jcxt = mkcxt();  # stuff not defined
+    assert jmt.replace_templates(jcxt, "_JUPMAN_.a.b") == "_JUPMAN_.a.b"
+    
+    jcxt = mkcxt();  jcxt.a = C();  jcxt.a.b = 3   
+    assert jmt.replace_templates(jcxt, "_JUPMAN_.a.b") == "3"
+    
+    jcxt = mkcxt();  jcxt.ab = C();  jcxt.ab.b = 9
+    assert jmt.replace_templates(jcxt, "_JUPMAN_.ab.b") == "9"
+    jcxt = mkcxt();  jcxt.bc = 2;  jcxt.bc = 2
+    assert jmt.replace_templates(jcxt, "_JUPMAN_.a.bc") == "_JUPMAN_.a.bc"
+    jcxt = mkcxt();  
+    assert jmt.replace_templates(jcxt, "_JUPMAN_.7a") == "_JUPMAN_.7a"
+    jcxt = mkcxt();  jcxt.a7 = 4
+    assert jmt.replace_templates(jcxt, "_JUPMAN_.a7") == "4"    
+    jcxt = mkcxt();  jcxt.f = lambda xjc: "hi"  
+    assert jmt.replace_templates(jcxt, "_JUPMAN_.f()") == "hi"    
+    jcxt = mkcxt();  jcxt.c = C(); jcxt.c.ga = lambda xjc: "hello"   
+    assert jmt.replace_templates(jcxt, "_JUPMAN_.c.ga()") == "hello"    
+    # no more than one parameter (for now)
+    jcxt = mkcxt();  jcxt.f = lambda xjc, y: "hello"  
+    assert jmt.replace_templates(jcxt, "_JUPMAN_.f(3)") == "_JUPMAN_.f(3)"
+    assert jmt.replace_templates(jcxt, "_JUPMAN_.f(2,5,1)") == "_JUPMAN_.f(2,5,1)"
+    # chaining is not supported, maybe it should refuse/warn but we don't care
+    jcxt = mkcxt();  jcxt.f = lambda xjc: "hi";  jcxt.g = lambda xjc: "hello"; 
+    assert jmt.replace_templates(jcxt, "_JUPMAN_.f().g()") == "hi.g()"  
+        
+     

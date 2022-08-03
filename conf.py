@@ -88,7 +88,7 @@ jm.build = "_build"
 jm.manuals = {
     "student": {
         "name" : "Jupman",  # TODO put manual name, like "Scientific Programming"
-        "audience" : "studenti",
+        "audience" : "students",
         "args" : "",
         "output" : ""
     }
@@ -441,7 +441,8 @@ pdf_fit_background_mode = 'scale'
 
 
 def setup(app):        
-    jmt.init(jm, globals())
+    import logging
+    jmt.init(jm, globals(), debug_level=logging.DEBUG)
 
     app.add_config_value(   'recommonmark_config', {
                                 'auto_toc_tree_section': 'Contents',

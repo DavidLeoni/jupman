@@ -16,5 +16,6 @@ import nbformat
 from common_test import *
 
 
-#import exam
 import shutil
+
+import exam

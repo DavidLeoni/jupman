@@ -9,7 +9,7 @@ import jupman_tools as jmt
 from hypothesis import given
 from hypothesis.strategies import text
 
-from jupman_tools import ignore_spaces, tag_regex, Jupman
+from jupman_tools import ignore_spaces, tag_regex, JupmanConfig, JupmanContext
 import pytest 
 import re
 from sphinx.application import Sphinx
@@ -26,14 +26,28 @@ def clean():
     if os.path.isdir('_build/test-tmp'):
         jmt.delete_tree('_build/test-tmp', '_build/test-tmp')
 
-def prep_jm(jm : Jupman):
+def prep_jm(jm : JupmanConfig):
     jm.build = '_build/test'
     jm.generated = '_build/test-generated'
+    jm.manual = 'students'    
 
-def make_jm() -> Jupman:
-    jm = Jupman()
+def make_jm() -> JupmanConfig:
+    jm = JupmanConfig()
     prep_jm(jm)
     return jm
+
+
+def make_sphinx_config() -> dict:
+    sc = {}
+    sc['author'] = 'People That Write a Lot'
+    sc['jm'] = make_jm()
+    return sc
+
+
+def make_jupman_context() -> JupmanContext:
+    sc = make_sphinx_config()
+    return JupmanContext(sc, '_private/test', False)
+    
 
 @pytest.fixture
 def tconf():
