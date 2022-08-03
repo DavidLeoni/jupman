@@ -2778,8 +2778,8 @@ def pytut():
 
     trace = pytut_json(new_code)        
     
-    gen_id = hashlib.md5(code.encode()).hexdigest()
-        
+    #Note: potentially there could be equal codes requiring pytut visualization, but probability should be low    
+    gen_id = hashlib.md5(code.encode()).hexdigest()            
     div_id = f'jm-{gen_id}'
     json_id = f'json-{div_id}'
     visualizerIdOverride = f'viz-{div_id}'        
@@ -2814,8 +2814,7 @@ def pytut():
             display:none;  
         }
         </style>   
-    """
-    #Note: potentially there could be equal codes requiring pytut visualization, but probability should be low    
+    """    
     
     inject +=   """                        
         <script>
