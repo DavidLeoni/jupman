@@ -2774,7 +2774,7 @@ def pytut():
         return
                 
     import urllib
-    from IPython.display import  display, HTML
+    from IPython.display import  display, HTML, IFrame
 
     trace = pytut_json(new_code)        
     
@@ -2782,13 +2782,16 @@ def pytut():
     gen_id = hashlib.md5(code.encode()).hexdigest()            
     div_id = f'jm-{gen_id}'
     json_id = f'json-{div_id}'
+    shad_id = f'shad-{div_id}'
     visualizerIdOverride = f'viz-{div_id}'        
     
     relpath = detect_relpath(notebook_globals["In"]) 
+            
     
     inject = ""
     
-    # will end up reloading multiple times the script, not very efficient 
+    # will end up reloading multiple times the script, not very efficient                    
+    
     inject +=  """
         <script src="%s_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
     """ % relpath
@@ -2815,12 +2818,19 @@ def pytut():
         .vizLayoutTd {
             background-color: #fff !important;
         }
-                            
+        
+        /* Restore default value to prevent red arrow misaligning on long code, 
+           see https://github.com/DavidLeoni/jupman/issues/105 */
+        /*#gutterTD {
+            padding:10px !important;            
+        }*/
+        
+        
         #pyStdout {
             min-height:25px;
         }
 
-        /* 'Edit this code' link, hiding because replaces browser tab !!!*/
+        /* Edit this code link, hiding because replaces browser tab !!! */
         #editCodeLinkDiv {
             display:none;  
         }
@@ -2856,4 +2866,41 @@ def pytut():
     <div style="text-align:center; font-size:0.9em"> Visualization offered by <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> </div> 
     """
     
-    return HTML(inject)
+    wrapper = ""
+    
+    wrapper +="""
+    <style>
+        table {
+            background-color:orange !important;
+        }        
+    </style>
+    """
+    
+    wrapper += """
+    <div id="%s" >" 
+    
+        <template id="%s" shadowroot="open">        
+            <slot></slot>
+            TODO WHY IT DOESN'T SHOW PYTHON TUTOR???
+            %s
+        </template>
+    </div> 
+    """ % (div_id, shad_id, inject)
+    
+    wrapper += """
+    
+    <script >
+        (function(){
+        
+        console.log("CIAO");
+        let dest = document.querySelector('#%s');
+        let tmpl = document.querySelector('#%s');            
+        let shadowRoot = dest.attachShadow({mode: 'open'});
+        shadowRoot.appendChild(tmpl.content.cloneNode(true));
+        })();
+    </script>
+    
+"""    % (div_id, shad_id) 
+        
+    
+    return HTML(wrapper)
