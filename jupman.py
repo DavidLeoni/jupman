@@ -2789,8 +2789,15 @@ def pytut():
     inject = ""
     
     # will end up reloading multiple times the script, not very efficient 
-    inject +=  """
+    
+    inject +=  """        
         <script src="%s_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
+    """ % relpath
+    
+    inject += """
+        <style>
+        @import "%s_static/css/jupman.css";
+        </style>
     """ % relpath
                     
     inject += """ 
@@ -2799,33 +2806,6 @@ def pytut():
         </script>
         <div id="%s" class="pytutorVisualizer"> </div>
 """ % (json_id, trace, div_id)
-    inject += """ 
-        <style>
-        
-        #uiControlsPane {
-            display: none;
-        }
-        
-        div.ui-resizable-handle.ui-resizable-e {
-            border-color: #dddddd !important;
-            border-width:2px !important; 
-        }
-        
-        
-        .vizLayoutTd {
-            background-color: #fff !important;
-        }
-                            
-        #pyStdout {
-            min-height:25px;
-        }
-
-        /* 'Edit this code' link, hiding because replaces browser tab !!!*/
-        #editCodeLinkDiv {
-            display:none;  
-        }
-        </style>   
-    """    
     
     inject +=   """                        
         <script>
