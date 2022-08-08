@@ -143,7 +143,7 @@ jobs:
                         #f.write(s)
 
 
-        findReplace('${{ WEB_PATH }}', 
+        findReplace('${WEB_PATH}', 
                     r'(<link rel="stylesheet" href="[\w\/\-\.]*)(/jupman-web.css)(" type="text/css" />\n)',
                     r'\1\2\3      \1/softpython-theme.css\3', 
                     "*.html")
