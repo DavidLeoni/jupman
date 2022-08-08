@@ -116,12 +116,12 @@ jobs:
 
         git clone  --depth=1 --single-branch --branch ${WEB_BRANCH} https://github.com/${{ github.repository }}.git   ${WEB_BRANCH}
         
-        if [ -d "${{ env.WEB_PATH }}" ] 
+        if [ -d "${WEB_PATH}" ] 
         then
-            git rm -r * ${{ env.WEB_PATH }}
+            git rm -r * ${WEB_PATH}
         fi                
         
-        cp -r en/latest ${{ WEB_PATH }}                              
+        cp -r en/latest ${WEB_PATH}
       
         sudo tee -a /tmp/jupman_html_script.py <<EOF
 
