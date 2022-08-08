@@ -331,15 +331,29 @@ h3 { font-size:1.3rem; }
 h4 { font-size:1.2rem; }
 
 .rst-content blockquote {
-    font-size: 1.25rem;
+    
+    padding-top: 0.05rem;
+    padding-bottom: 0.05rem;
+    text-align:center;    
 }
 
+.rst-content blockquote p {
+    font-size: 1.30rem;    
+}
 pre {
     font-family: "Inconsolata" !important;
     font-size:1.2rem !important;
     background-color:#f8f8ec;
     line-height: 1.5rem !important;
 }
+
+
+/*  python code cell */
+div.input_area.highlight-ipython3 pre {
+    background-color:#f6f6f6;
+}
+
+
 
 
 .rst-content code.literal {
