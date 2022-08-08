@@ -100,7 +100,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}            
         
         
-jupman_specific_stuff:  # custom stuff, you don't need this       
+  jupman_specific_stuff:  # custom stuff, you don't need this       
     if: (github.repository == 'DavidLeoni/jupman') && (github.ref == 'refs/heads/master')
     needs: build_docs_job
     runs-on: ubuntu-20.04
