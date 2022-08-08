@@ -156,7 +156,7 @@ jobs:
         # note: html zip is already provided by Github        
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add .      
+        git add .       
         touch .nojekyll
         git add .nojekyll  # explicit, otherwise is ignored
         git commit -m "Update documentation" -a || true
