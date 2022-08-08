@@ -140,9 +140,8 @@ jobs:
                     
                     s = re.sub(regex, replace, s)                        
                     
-                    with open(filepath, "w") as f:                 
-                        print("TODO DRY RUN")
-                        #f.write(s)
+                    with open(filepath, "w") as f:                                         
+                        f.write(s)
 
 
         findReplace('${WEB_PATH}', 
