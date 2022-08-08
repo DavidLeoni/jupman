@@ -22,8 +22,9 @@ jobs:
         cd ${SOURCE_BRANCH}
         python3 -m pytest _test/*_test.py                  
     
-  build_docs_job:     
-    needs: run_tests      
+  build_docs_job:
+    if: (github.repository == 'DavidLeoni/jupman') && (github.ref == 'refs/heads/master')
+    needs: run_tests
     runs-on: ubuntu-20.04
     env:
       SOURCE_BRANCH: ${{ github.head_ref || github.ref_name }} 
@@ -90,12 +91,84 @@ jobs:
         git commit -m "Update documentation" -a || true
         # The above command will fail if no changes were present, so we ignore
         # the return code.
+                
     - name: Push changes
       uses: ad-m/github-push-action@v0.6.0
       with:
-        branch: gh-pages
-        directory: gh-pages
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ env.WEB_BRANCH }}
+        directory: ${{ env.WEB_BRANCH }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}            
+        
+        
+  jupman_specific_stuff:  
+    # custom stuff, you don't need this       
+    if: (github.repository == 'DavidLeoni/jupman') && (github.ref == 'refs/heads/master')
+    needs: build_docs_job
+    runs-on: ubuntu-20.04
+    env:
+      WEB_BRANCH: gh-pages
+      WEB_PATH: themed
+    name: Jupman-specific stuff  (you don't need this)
+    steps:     
+
+    - name: Generate html for softpython theme
+      run: |
+
+        git clone  --depth=1 --single-branch --branch ${WEB_BRANCH} https://github.com/${{ github.repository }}.git   ${WEB_BRANCH}
+      
+        cd ${WEB_BRANCH}
+      
+        if [ -d "${WEB_PATH}" ] 
+        then
+            git rm -r * ${WEB_PATH}
+        fi                
+        
+        cp -r en/latest ${WEB_PATH}
+      
+        sudo tee -a /tmp/jupman_html_script.py <<EOF
+
+        import os, fnmatch, re
+
+        def findReplace(directory, regex, replace, filePattern):
+            
+            for path, dirs, files in os.walk(os.path.abspath(directory)):
+                for filename in fnmatch.filter(files, filePattern):
+                    filepath = os.path.join(path, filename)
+                    print('Replacing ', filepath)
+                    with open(filepath) as f:
+                        s = f.read()
+                    
+                    s = re.sub(regex, replace, s)                        
+                    
+                    with open(filepath, "w") as f:                                         
+                        f.write(s)
+
+
+        findReplace('${WEB_PATH}', 
+                    r'(<link rel="stylesheet" href="[\w\/\-\.]*)(/jupman-web.css)(" type="text/css" />\n)',
+                    r'\1\2\3      \1/softpython-theme.css\3', 
+                    "*.html")
+        print("Done replacing jupman html")
+        EOF
+        
+        python3 /tmp/jupman_html_script.py
+                    
+        # note: html zip is already provided by Github        
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .       
+        touch .nojekyll
+        git add .nojekyll  # explicit, otherwise is ignored
+        git commit -m "Update documentation" -a || true
+        # The above command will fail if no changes were present, so we ignore
+        
+        
+    - name: Push changes for themes
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        branch: ${{ env.WEB_BRANCH }}
+        directory: ${{ env.WEB_BRANCH }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}    
     - name: deploy to custom server
       run: |
         # Custom deploy, you don't need this

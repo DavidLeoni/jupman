@@ -14,5 +14,5 @@ Replica for testing ReadTheDocs:
 Replicas for testing Github Action build, hosted on Github Pages:
 
 * https://DavidLeoni.github.io/jupman/en/latest
-* https://DavidLeoni.github.io/jupman/en/themed
+* https://DavidLeoni.github.io/jupman/themed
 
