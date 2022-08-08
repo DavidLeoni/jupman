@@ -163,15 +163,15 @@ jobs:
         # The above command will fail if no changes were present, so we ignore
         
         
-#    - name: Push changes for themes
-#      uses: ad-m/github-push-action@v0.6.0
-#      with:
-#        branch: ${{ env.WEB_BRANCH }}
-#        directory: ${{ env.WEB_BRANCH }}
-#        github_token: ${{ secrets.GITHUB_TOKEN }}    
-#    - name: deploy to custom server
-#      run: |
-#        # Custom deploy, you don't need this
-#        if [ ! -z "${{ secrets.DAVAPI_URL }}" ]; then 
-#            curl --silent --digest --user ${{ secrets.DAVAPI_CREDENTIALS}} ${{ secrets.DAVAPI_URL }}
-#        fi
+    - name: Push changes for themes
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        branch: ${{ env.WEB_BRANCH }}
+        directory: ${{ env.WEB_BRANCH }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}    
+    - name: deploy to custom server
+      run: |
+        # Custom deploy, you don't need this
+        if [ ! -z "${{ secrets.DAVAPI_URL }}" ]; then 
+            curl --silent --digest --user ${{ secrets.DAVAPI_CREDENTIALS}} ${{ secrets.DAVAPI_URL }}
+        fi
