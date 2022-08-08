@@ -4,7 +4,7 @@ on: [push]
 jobs:
   
   run_tests:     
-    if: (github.repository == 'TODODavidLeoni/jupman') && ((github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/dev') || (github.ref == 'refs/heads/themed'))
+    if: (github.repository == 'DavidLeoni/jupman') && ((github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/dev') || (github.ref == 'refs/heads/themed'))
     runs-on: ubuntu-20.04
     env:
       SOURCE_BRANCH: ${{ github.head_ref || github.ref_name }} 
@@ -23,7 +23,7 @@ jobs:
         python3 -m pytest _test/*_test.py                  
     
   build_docs_job:
-    if: (github.repository == 'TODODavidLeoni/jupman') && (github.ref == 'refs/heads/master')
+    if: (github.repository == 'DavidLeoni/jupman') && (github.ref == 'refs/heads/master')
     needs: run_tests
     runs-on: ubuntu-20.04
     env:
@@ -103,7 +103,7 @@ jobs:
   jupman_specific_stuff:  
     # custom stuff, you don't need this       
     if: (github.repository == 'DavidLeoni/jupman') && (github.ref == 'refs/heads/master')
-#    needs: build_docs_job
+    needs: build_docs_job
     runs-on: ubuntu-20.04
     env:
       WEB_BRANCH: gh-pages
