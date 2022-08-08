@@ -115,7 +115,9 @@ jobs:
       run: |
 
         git clone  --depth=1 --single-branch --branch ${WEB_BRANCH} https://github.com/${{ github.repository }}.git   ${WEB_BRANCH}
-        
+      
+        cd ${WEB_BRANCH}
+      
         if [ -d "${WEB_PATH}" ] 
         then
             git rm -r * ${WEB_PATH}
