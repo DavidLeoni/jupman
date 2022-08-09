@@ -5,11 +5,24 @@ Jupman Jupyter Manager
 
 [jupman.softpython.org](https://jupman.softpython.org)
 
+
+# August 9th, 2022 - 3.5.3
+
+- Python Tutor:
+  - added credits #111
+  - visualized vertical separator bar #110 
+  - fixed red arrow misalignment #105
+  - stable ids #107
+  - removed 'Customize visualization' #108
+- Github actions: automatically build themed version #100
+- SoftPython theme #92: various fixes
+
+
 # June 4th 2022 - 3.5
 
 - generated html can be really used offline #96, also fixes wrong math symbols with local build #3
 - automated testing on github actions #99
-- virtual env install, pinpointed build depenedencies #92
+- virtual env install, pinpointed build depenedencies #82
 - fixed text overflow on smartphones #94,  fixed softpython theme flag
 - github actions: always reset html output #98
 
