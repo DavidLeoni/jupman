@@ -283,28 +283,37 @@ div.highlight, div.highlight-none, div.highlight-python, div.highlight-bash, div
     border-radius:12px;
 }
 
+/* ************   ALERT BOXES START  ************ */
+
 div.admonition {
-    border-radius:12px;
+    border-radius:12px;    
 }
 
 div.admonition.note, div.admonition.warning {
-  padding-right: 0;
-  padding-top: 0px;    
-  padding-bottom: 0px; 
+   padding-right: 0px;
+   padding-top:0px;
+   padding-bottom:0.18rem;
 }
 
-div.admonition.note p, div.admonition.warning p{
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;    
+/* have *no* idea why I need both 2 and 3, but with the single line I get 
+ * random results in warning boxes, sometimes  works and sometimes doesn't
+*/
+div.admonition:nth-child(2),div.admonition:nth-child(3) {
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;    
 }
 
 p.admonition-title.fa.fa-exclamation-circle {
+   margin-top:0px !important;   
     margin-right: 0 !important;
-    padding-top: 0.6rem; 
-    padding-bottom: 0.6rem;  
+    padding-top: 0.8rem; 
+    padding-bottom: 0.8rem;    
     border-top-left-radius:  15px;
     border-top-right-radius:  15px;    
 }
+
+/* ************   ALERT BOXES END  ************ */
+
 
 body {
     font-family: "Archivo","proxima-nova","Helvetica Neue",Arial,sans-serif;    
