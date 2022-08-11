@@ -236,6 +236,23 @@ def test_make_stripped_cell_id():
     assert jmt.make_stripped_cell_id('a'*60) == 'a'*(60-len('-stripped')) + '-stripped'
 
 
+def test_replace_html_rel():
+    """ @since 3.5.4
+    """
+    
+    # note inside it calls uproot, needs this to be run from project root
+    assert jmt.replace_html_rel('<a href="../_static/img/hello.png">', '_test/jupman_tools_test.py') \
+           == '<a href="_static/img/hello.png">'
+    assert jmt.replace_html_rel('<a target="_blank" href="../_static/img/hello.png">', '_test/jupman_tools_test.py') \
+           == '<a target="_blank" href="_static/img/hello.png">'       
+    assert jmt.replace_html_rel('<img src="../_static/img/hello.png">', '_test/jupman_tools_test.py') \
+           == '<img src="_static/img/hello.png">'
+    assert jmt.replace_html_rel('<img alt="bla" src="../_static/img/hello.png">', '_test/jupman_tools_test.py') \
+           == '<img alt="bla" src="_static/img/hello.png">'
+       
+    assert jmt.replace_html_rel('A B <img alt="cc-by-1243" src="../_static/img/cc-by.png"> C D', '_test/jupman_tools_test.py') \
+           == 'A B <img alt="cc-by-1243" src="_static/img/cc-by.png"> C D'
+
 def test_copy_chapter():
     clean()
     
@@ -276,22 +293,28 @@ def test_copy_chapter():
     assert '<a href="index.html">a link</a>' in nb_node.cells[11].source
     
     assert '<a href="https://jupman.softpython.org">a link</a>' in nb_node.cells[12].source
+    
+    assert '<img alt="bla13" src="_static/img/cc-by.png">' in nb_node.cells[13].source
+    
+    assert '<a target="_blank" href="index.ipynb">a link</a>' in nb_node.cells[14].source
+    
+    assert '<a target="_blank" href="https://jupman.softpython.org">a link</a>' in nb_node.cells[15].source
 
-    assert 'replacements.ipynb' in nb_node.cells[13].source
-    assert jcxt.jm.manual in nb_node.cells[13].source
-    assert jcxt.author in nb_node.cells[13].source
-        
-    assert 'replacements.ipynb' in nb_node.cells[14].source
-    assert jcxt.jm.manual in nb_node.cells[14].source
-    assert nb_node.cells[14].source.count(jcxt.author) == 2
-        
-    assert 'replacements.ipynb' in nb_node.cells[15].source
-    assert jcxt.jm.manual in nb_node.cells[15].source
-    assert jcxt.author in nb_node.cells[15].source
-            
     assert 'replacements.ipynb' in nb_node.cells[16].source
     assert jcxt.jm.manual in nb_node.cells[16].source
     assert jcxt.author in nb_node.cells[16].source
+        
+    assert 'replacements.ipynb' in nb_node.cells[17].source
+    assert jcxt.jm.manual in nb_node.cells[17].source
+    assert nb_node.cells[17].source.count(jcxt.author) == 2
+        
+    assert 'replacements.ipynb' in nb_node.cells[18].source
+    assert jcxt.jm.manual in nb_node.cells[18].source
+    assert jcxt.author in nb_node.cells[18].source
+            
+    assert 'replacements.ipynb' in nb_node.cells[19].source
+    assert jcxt.jm.manual in nb_node.cells[19].source
+    assert jcxt.author in nb_node.cells[19].source
     
 
     py_fn = os.path.join(dest_dir, 'file.py')

@@ -6,7 +6,7 @@ Jupman Jupyter Manager
 [jupman.softpython.org](https://jupman.softpython.org)
 
 
-# August 9th, 2022 - 3.5.3
+## August 11th, 2022 - 3.5.4
 
 - Python Tutor:
   - added credits #111
@@ -16,6 +16,7 @@ Jupman Jupyter Manager
   - removed 'Customize visualization' #108
 - Github actions: automatically build themed version #100
 - SoftPython theme #92: various fixes
+- Fixed relative html a, img with attributes in markdown not working in zip: #113
 
 
 # June 4th 2022 - 3.5

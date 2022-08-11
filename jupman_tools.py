@@ -829,18 +829,23 @@ def replace_md_rel(code : str, filepath : str) -> str:
     ret = replace_html_rel(ret, filepath)
     return ret
 
+
 def replace_html_rel(code : str, filepath : str) -> str:
+    
     """ Takes html to be copied into zips and returns string with relative paths removed
+    
+        NOTE: supported syntax is very rigid!    
     """    
     upr = uproot(filepath).replace('.',r'\.')
 
-    ret =  re.sub(r'(<a\s+href=\")(%s)(.*?\"(\s+.*?=\".*?\")*>)' % upr,               
-                  r"\1\3",
+    ret =  re.sub(r'(<a\s+)(target=\"_blank\"\s+)*(href=\")(%s)(.*?\"(\s+.*?=\".*?\")*>)' % upr,               
+                  r"\1\2\3\5",
                   code)
 
-    ret =  re.sub(r'(<img\s+src=\")(%s)(.*?\"(\s+.*?=\".*?\")*>)' % upr,
-                  r"\1\3",
+    ret =  re.sub(r'(<img\s+)(alt=\".*\"\s+)*(src=\")(%s)(.*?\"(\s+.*?=\".*?\")*>)' % upr,
+                  r"\1\2\3\5",
                   ret)    
+        
     return ret
 
 
