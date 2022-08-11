@@ -20,7 +20,11 @@ jobs:
     - name: Run pytest
       run: |        
         cd ${SOURCE_BRANCH}
-        python3 -m pytest _test/*_test.py                  
+        python3 -m pytest _test/*_test.py        
+    - name: Create example exam
+      run: |
+        cd ${SOURCE_BRANCH}
+        ./create-exam-example.sh
     
   build_docs_job:
     if: (github.repository == 'DavidLeoni/jupman') && (github.ref == 'refs/heads/master')
