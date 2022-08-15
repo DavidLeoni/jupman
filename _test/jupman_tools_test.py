@@ -620,7 +620,7 @@ def test_preprocessor_sol():
     assert stripped_count == 1
     
         
-    nb_new, new_res = exp.from_notebook_node(nb_orig, resources)
+    rst_str, new_res = exp.from_notebook_node(nb_orig, resources)
         
     stripped_count = 0
     for cell in nb_orig.cells: 
@@ -650,8 +650,9 @@ def test_preprocessor_force():
     assert 'stripped!' in nb_orig.cells[2].source
     assert 'purged!' in nb_orig.cells[3].source
     
-    nb_new, new_res = exp.from_notebook_node(nb_orig, resources)
+    rst_str, new_res = exp.from_notebook_node(nb_orig, resources)
         
+    
     stripped_count = 0
     for cell in nb_orig.cells: 
         if 'stripped!' in cell.source:
@@ -660,7 +661,7 @@ def test_preprocessor_force():
         assert '#jupman-preprocess' not in cell.source
         assert 'purged!' not in cell.source        
     
-    assert stripped_count == 1
+    assert stripped_count == 1   # should be in the soution cell
     
 def test_preprocessor_normal():
     jm = make_jm()

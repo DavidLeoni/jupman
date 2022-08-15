@@ -14,7 +14,7 @@ import datetime
 import collections
 import zipfile
 import shutil
-from nbconvert.preprocessors import Preprocessor  
+import nbconvert
 from pylatexenc.latexencode import unicode_to_latex
 
 class _Mocker:
@@ -729,7 +729,7 @@ def init(jm, sphinx_config=None, debug_level=logging.INFO):
         debug('patched nbsphinx from_notebook_node')
                                 
         for p in jcxt.jm.preprocessors:
-            p.jcxt = jcxt
+            p.jcxt = jcxt             
             nb, resources = p.preprocess(nb, resources=resources)
 
         return nbsphinx_from_notebook_node(self, nb, resources=resources, **kwargs)        
@@ -759,7 +759,7 @@ def make_stripped_cell_id(cid):
         return cand
 
 
-class JupmanPreprocessor(Preprocessor):
+class JupmanPreprocessor(nbconvert.preprocessors.Preprocessor):
     """ @since 3.2 """
 
 
@@ -787,12 +787,13 @@ class JupmanPreprocessor(Preprocessor):
         rel_dir, partial_fn = os.path.split(resources['nbsphinx_docname'])                
         source_abs_fn = os.path.join(resources['metadata']['path'], partial_fn + '.ipynb')     
         
-
-        if _is_to_preprocess(self.jcxt, nb):
+        #TODO don't know if copy is strictly necessary, thinking about multithreading            
+        njcxt = JupmanContext(self.jcxt, source_abs_fn, True)
+        
+        if _is_to_preprocess(njcxt, nb):
             relpath = os.path.relpath(source_abs_fn, os.path.abspath(os.getcwd()))
-            info("JupmanPreprocessor: parsing %s" % relpath )
-            #TODO don't know if copy is strictly necessary, thinking about multithreading            
-            njcxt = JupmanContext(self.jcxt, source_abs_fn, True)
+            info("JupmanPreprocessor: parsing %s" % relpath )            
+            
             try:
                 validate_tags(njcxt, source_abs_fn)
             except Exception as ex:
@@ -1355,7 +1356,6 @@ def _is_to_preprocess(jcxt : JupmanContext, nb):
     """
         @since 3.3
     """
-                      
     source_abs_fn = jcxt.jpre_filepath
     
     if source_abs_fn.endswith('.ipynb'):
@@ -1367,10 +1367,11 @@ def _is_to_preprocess(jcxt : JupmanContext, nb):
         
         if fileKind == FileKinds.CHALLENGE_SOLUTION:  # weird case, only really for jupman documentation itself
             return True
-        
-        if len(nb.cells) > 0:
+            
+        if len(nb.cells) > 0:            
             cell = nb.cells[0]
-            if cell.cell_type == 'code' and ('#' + jcxt.jm.preprocess) in cell.source :
+            
+            if cell.cell_type == 'code' and ('#' + jcxt.jm.preprocess) in cell.source :                
                 return True
         
     return False
