@@ -253,69 +253,63 @@ def test_replace_html_rel():
     assert jmt.replace_html_rel('A B <img alt="cc-by-1243" src="../_static/img/cc-by.png"> C D', '_test/jupman_tools_test.py') \
            == 'A B <img alt="cc-by-1243" src="_static/img/cc-by.png"> C D'
 
-def test_copy_chapter():
-    clean()
+def subtest_copy_chapter_replacements(dest_dir):
     
-    jcxt = make_jupman_context()    
-    os.makedirs(jcxt.jm.build)
-    dest_dir = os.path.join(jcxt.jm.build, 'test-chapter')
-    jmt.copy_code(jcxt, '_test/test-chapter',
-                  dest_dir,
-                  copy_solutions=True)    
-
-    assert os.path.isdir(dest_dir)
-
     replacements_fn = os.path.join(dest_dir, 'replacements.ipynb')
+    jcxt = JupmanContext(make_sphinx_config(), replacements_fn, True)
+    
     assert os.path.isfile(replacements_fn)
 
-    nb_node = nbformat.read(replacements_fn, nbformat.NO_CONVERT)
+    nb_repl = nbformat.read(replacements_fn, nbformat.NO_CONVERT)
 
     # markdown                             
-    assert '[some link](index.ipynb)' in nb_node.cells[1].source
-    assert '![some link](_static/img/cc-by.png)' in nb_node.cells[2].source
-    assert '[some link](data/pop.csv)' in nb_node.cells[3].source
+    assert '[some link](index.ipynb)' in nb_repl.cells[1].source
+    assert '![some link](_static/img/cc-by.png)' in nb_repl.cells[2].source
+    assert '[some link](data/pop.csv)' in nb_repl.cells[3].source
 
-    assert '<a href="index.ipynb" target="_blank">a link</a>' in nb_node.cells[4].source
+    assert '<a href="index.ipynb" target="_blank">a link</a>' in nb_repl.cells[4].source
     
-    assert '<img src="_static/img/cc-by.png">' in nb_node.cells[5].source
-    assert '<a href="data/pop.csv">a link</a>' in nb_node.cells[6].source
+    assert '<img src="_static/img/cc-by.png">' in nb_repl.cells[5].source
+    assert '<a href="data/pop.csv">a link</a>' in nb_repl.cells[6].source
     
-    assert '<a href="index.ipynb">a link</a>' in nb_node.cells[7].source
+    assert '<a href="index.ipynb">a link</a>' in nb_repl.cells[7].source
 
-    assert '<img src="_static/img/cc-by.png">' in nb_node.cells[8].source
+    assert '<img src="_static/img/cc-by.png">' in nb_repl.cells[8].source
 
-    assert '<a href="data/pop.csv">a link</a>' in nb_node.cells[9].source
+    assert '<a href="data/pop.csv">a link</a>' in nb_repl.cells[9].source
 
-    assert '# Python\nimport jupman' in nb_node.cells[10].source
-    assert '#jupman-raise' in nb_node.cells[10].source
-    assert 'stay!' in nb_node.cells[10].source
+    assert '# Python\nimport jupman' in nb_repl.cells[10].source
+    assert '#jupman-raise' in nb_repl.cells[10].source
+    assert 'stay!' in nb_repl.cells[10].source
 
-    assert '<a href="index.html">a link</a>' in nb_node.cells[11].source
+    assert '<a href="index.html">a link</a>' in nb_repl.cells[11].source
     
-    assert '<a href="https://jupman.softpython.org">a link</a>' in nb_node.cells[12].source
+    assert '<a href="https://jupman.softpython.org">a link</a>' in nb_repl.cells[12].source
     
-    assert '<img alt="bla13" src="_static/img/cc-by.png">' in nb_node.cells[13].source
+    assert '<img alt="bla13" src="_static/img/cc-by.png">' in nb_repl.cells[13].source
     
-    assert '<a target="_blank" href="index.ipynb">a link</a>' in nb_node.cells[14].source
+    assert '<a target="_blank" href="index.ipynb">a link</a>' in nb_repl.cells[14].source
     
-    assert '<a target="_blank" href="https://jupman.softpython.org">a link</a>' in nb_node.cells[15].source
+    assert '<a target="_blank" href="https://jupman.softpython.org">a link</a>' in nb_repl.cells[15].source
 
-    assert 'replacements.ipynb' in nb_node.cells[16].source
-    assert jcxt.jm.manual in nb_node.cells[16].source
-    assert jcxt.author in nb_node.cells[16].source
+    assert 'replacements.ipynb' in nb_repl.cells[16].source
+    assert jcxt.jm.manual in nb_repl.cells[16].source
+    assert jcxt.author in nb_repl.cells[16].source
         
-    assert 'replacements.ipynb' in nb_node.cells[17].source
-    assert jcxt.jm.manual in nb_node.cells[17].source
-    assert nb_node.cells[17].source.count(jcxt.author) == 2
+    assert 'replacements.ipynb' in nb_repl.cells[17].source
+    assert jcxt.jm.manual in nb_repl.cells[17].source
+    assert nb_repl.cells[17].source.count(jcxt.author) == 2
         
-    assert 'replacements.ipynb' in nb_node.cells[18].source
-    assert jcxt.jm.manual in nb_node.cells[18].source
-    assert jcxt.author in nb_node.cells[18].source
+    assert 'replacements.ipynb' in nb_repl.cells[18].source
+    assert jcxt.jm.manual in nb_repl.cells[18].source
+    assert jcxt.author in nb_repl.cells[18].source
             
-    assert 'replacements.ipynb' in nb_node.cells[19].source
-    assert jcxt.jm.manual in nb_node.cells[19].source
-    assert jcxt.author in nb_node.cells[19].source
-    
+    assert 'replacements.ipynb' in nb_repl.cells[19].source
+    assert jcxt.jm.manual in nb_repl.cells[19].source
+    assert jcxt.author in nb_repl.cells[19].source
+
+
+def subtest_copy_chapter_py_files(dest_dir):
 
     py_fn = os.path.join(dest_dir, 'file.py')
     assert os.path.isfile(py_fn)
@@ -355,8 +349,10 @@ def test_copy_chapter():
         assert '# Python\nimport jupman' in py_ex_code
         assert '#jupman-raise' not in py_ex_code
         assert '# work!\nraise' in py_ex_code
+    
 
-    # nb_ex ----------------------------
+def subtest_copy_chapter_exercises(dest_dir):
+
     nb_ex_fn = os.path.join(dest_dir, 'nb.ipynb')
     assert os.path.isfile(nb_ex_fn)
 
@@ -388,11 +384,11 @@ def test_copy_chapter():
     
     assert nb_ex.cells[13].source == ''    
     assert nb_ex.cells[13].outputs == []
-    assert nb_ex.cells[13].metadata['nbsphinx'] == 'hidden'
-    
-    
+    assert nb_ex.cells[13].metadata['nbsphinx'] == 'hidden'    
 
-    # nb_sol --------------------
+
+def subtest_copy_chapter_solution(dest_dir):
+
     nb_sol_fn = os.path.join(dest_dir, 'nb-sol.ipynb')
     nb_sol = nbformat.read(nb_sol_fn, nbformat.NO_CONVERT) 
     assert 'stripped!' in nb_sol.cells[8].source   # jupman-strip  strips everything inside exercises
@@ -418,7 +414,8 @@ def test_copy_chapter():
     assert nb_sol.cells[13].outputs == []
     assert nb_sol.cells[13].metadata['nbsphinx'] == 'hidden'
 
-    # nb_sol_web --------------------
+def subtest_copy_chapter_solution_web(dest_dir): 
+
     nb_sol_fn = os.path.join(dest_dir, 'nb-sol.ipynb')
     nb_sol_web = nbformat.read(nb_sol_fn, nbformat.NO_CONVERT)
 
@@ -444,7 +441,12 @@ def test_copy_chapter():
     assert stripped8 == 1
     assert stripped10 == 1
 
-    # chal --------------------
+def subtest_copy_chapter_challenge(dest_dir):
+    
+    nb_sol_fn = os.path.join(dest_dir, 'nb-sol.ipynb')
+    
+    
+    
     py_chal_sol_fn = os.path.join(dest_dir, 'my_chal_sol.py')    
     assert not os.path.isfile(py_chal_sol_fn)
     py_chal_fn = os.path.join(dest_dir, 'my_chal.py')
@@ -456,7 +458,9 @@ def test_copy_chapter():
         py_chal_test_code = py_chal_test_f.read()
         assert 'from my_chal import *' in py_chal_test_code
 
+    
     nb_chal_ex_fn = os.path.join(dest_dir, 'nb-chal.ipynb')    
+    jcxt = JupmanContext(make_sphinx_config(), os.path.abspath(nb_chal_ex_fn), True)
     assert os.path.isfile(nb_chal_ex_fn)
     nb_chal_sol_fn = os.path.join(dest_dir, 'nb-chal-sol.ipynb')
     assert not os.path.isfile(nb_chal_sol_fn)
@@ -464,6 +468,28 @@ def test_copy_chapter():
     nb_chal_ex = nbformat.read(nb_chal_ex_fn, nbformat.NO_CONVERT)
 
     assert jcxt.jm.ipynb_solutions not in nb_chal_ex.cells[1].source
+    
+
+def test_copy_chapter():
+    clean()
+    
+    jcxt = make_jupman_context()    
+    os.makedirs(jcxt.jm.build)
+    dest_dir = os.path.join(jcxt.jm.build, 'test-chapter')
+    jmt.copy_code(jcxt, '_test/test-chapter',
+                  dest_dir,
+                  copy_solutions=True)    
+
+    assert os.path.isdir(dest_dir)
+
+    subtest_copy_chapter_replacements(dest_dir)
+    subtest_copy_chapter_py_files(dest_dir)
+    subtest_copy_chapter_exercises(dest_dir)
+    subtest_copy_chapter_solution(dest_dir)
+    subtest_copy_chapter_solution_web(dest_dir)
+    subtest_copy_chapter_challenge(dest_dir)
+        
+    
     
 
 
