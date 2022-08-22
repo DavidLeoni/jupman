@@ -47,31 +47,50 @@ def init(toc=False):
             # NOTE: 
             # 1. regardless of the notebook position from which you are importing,
             #    in root you get the directory of jupman.py file
-            # 2. in Jupyter you *cannot* know reliably the worksheet position  
-            #    see https://github.com/ipython/ipython/issues/10123
-            #    so it is better to include scripts instead of using relative imports
-
-            root = os.path.dirname(os.path.abspath(__file__))
-            _static = os.path.join(root, '_static')                                        
+            # 2. in Jupyter you *cannot* know reliably the worksheet position so we use hacks
+            #    see https://github.com/ipython/ipython/issues/10123                                                
             
-            css = open("%s/css/jupman.css" % _static, "r").read()
-            tocjs = open("%s/js/toc.js" % _static, "r").read()
-            js = open("%s/js/jupman.js" % _static, "r").read()
+            import inspect
+            import hashlib
+            
+            #Hacky way to get variables from stack, but if we use %run -i we don't need it.    
+            notebook_globals = inspect.stack()[1][0].f_globals                            
+            relpath = detect_relpath(notebook_globals["In"]) 
+            _static = os.path.join(relpath, '_static')
+            
+            ret = ""
 
-            ret = "<style>\n" 
-            ret += css
-            ret += "\n </style>\n"
+            ret += """
+            <script type="application/javascript"> 
+                var JUPMAN_IN_JUPYTER = true;
+            </script>
+            """  
+            
+            ret += """
+                <style>
+                @import "%s_static/css/jupman.css";
+                </style>
+            """ % relpath
 
-            ret +="\n"
-
-            ret += "<script>\n"
-            ret += "var JUPMAN_IN_JUPYTER = true;"  
-            ret += "\n"
             if toc:
-                ret += tocjs
-                ret += "\n"    
-            ret += js
-            ret += "\n</script>\n"
+                ret +=  """        
+                    <script src="%s_static/js/toc.js" type="application/javascript"></script>
+                """ % relpath
+            else:
+                ret +=  """
+                    <style>
+                        #jupman-toc{
+                            display : none !important;
+                        }
+                    
+                    </style>                    
+                """ 
+                
+            ret +=  """        
+                <script src="%s_static/js/jupman.js" type="application/javascript"></script>
+            """ % relpath                                    
+    
+
             return HTML(ret)
     except Exception as ex:
         print(ex)
