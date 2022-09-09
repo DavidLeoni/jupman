@@ -184,14 +184,13 @@ html { font-size:0.81em; }
     src: url("../fonts/Inconsolata/Inconsolata-VariableFont_wdth-wght.ttf");
 }
 
-/*needed only if you mess with sidebar width*/
-.wy-nav-content-wrap  {
-   background: rgba(0,0,0,.05);
+
+.wy-nav-content{
+    background-color: #f9f8f3;  
 }
 
 
-.wy-nav-content{
-    background: #f9f8f3;     
+.wy-nav-content{        
     margin-left:0 !important;  /* sometimes it gets disconneted .. */
  }
 
@@ -229,10 +228,6 @@ html { font-size:0.81em; }
    background-color: #537326;
  }
 
-
-.wy-nav-side {   
-   background-color: #705d39;   
-}
 
 .toctree-l1 > a {
     line-height:2ch !important;
@@ -413,3 +408,45 @@ a.jupman-sol-toggler:hover {
     font-size:1rem !important;    
 }
 
+/* *********  SHADOWS START   ********* */
+
+.wy-nav-content  {     
+     box-shadow: 3px 4px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.wy-side-scroll, .wy-side-nav-search {
+   box-shadow: inset 3px 4px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.wy-form input {
+   box-shadow:  0px 0px 20px 7px rgba(0, 200, 0, 0.3);
+}
+
+.toctree-l1 > ul {
+   
+   padding-top:0.4rem;
+   box-shadow: inset 0px 0px 8px 2.5px rgba(0, 0, 0, 0.2);
+}
+
+
+.wy-nav-side, .wy-nav-top {     
+     box-shadow: 1px 4px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+div.notranslate,  .admonition, .pytutorVisualizer { 
+     box-shadow: 1px 1px 3px 1px rgba(0, 0, 30, 0.2);
+}
+
+
+table.docutils {    
+    margin: 5px !important;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 30, 0.2);
+}
+
+/* only for index pages */
+.toctree-wrapper ul {
+    box-shadow: none !important;
+}
+
+
+/* *********  SHADOWS END   ********* */
