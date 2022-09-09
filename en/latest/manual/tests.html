@@ -94,15 +94,14 @@
 <li class="toctree-l3"><a class="reference internal" href="editing.html#jupman-preprocess">jupman-preprocess</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="editing.html#Utilities-and-custom-js-and-css">Utilities and custom js and css</a></li>
-<li class="toctree-l2"><a class="reference internal" href="editing.html#Hiding-cells">Hiding cells</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="editing.html#Implications-of-hiding-'import-jupman'">Implications of hiding ‘import jupman’</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Hiding-cells">Hiding cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Utilities">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="editing.html#Launch-unit-tests">Launch unit tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="editing.html#Python-Tutor">Python Tutor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="editing.html#Pandas">Pandas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="editing.html#Showing-function-help">Showing function help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Custom-js-and-css">Custom js and css</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Show-table-of-contents">Show table of contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="customize.html">Customize</a><ul>
@@ -144,6 +143,12 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../jupyter-example/jupyter-example-sol.html#Conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../jupyter-example/jupyter-js-sol.html">Jupyter example with custom js and css</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jupyter-example/jupyter-js-sol.html#Download-exercises-zip">Download exercises zip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jupyter-example/jupyter-js-sol.html#Exercise-1">Exercise 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jupyter-example/jupyter-js-sol.html#Exercise-2">Exercise 2</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html">Mixed Jupyter and Python example</a><ul>
@@ -4141,6 +4146,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#Info/Warning-Boxes">Info/Warning Boxes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Math">Math</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Unicode">Unicode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Tables">Tables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#A-small-table">A small table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#An-extra-large-table">An extra large table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#A-table-with-extra-large-text">A table with extra large text</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Lists">Lists</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Image">Image</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#SVG-Images">SVG Images</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#PNG-Images">PNG Images</a></li>
@@ -4644,6 +4656,175 @@ cat wiz.txt
 <p>You should see a star in a black circle: ✪</p>
 <p>You should see a check: ✓</p>
 <p>table characters: │ ├ └ ─</p>
+</section>
+<section id="Tables">
+<h2>Tables<a class="headerlink" href="#Tables" title="Permalink to this headline"></a></h2>
+<section id="A-small-table">
+<h3>A small table<a class="headerlink" href="#A-small-table" title="Permalink to this headline"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 27%" />
+<col style="width: 13%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Surname</p></th>
+<th class="head"><p>Age</p></th>
+<th class="head"><p>Occupation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Augustus</p></td>
+<td><p>Gloop</p></td>
+<td><p>40</p></td>
+<td><p>Software Engineer</p></td>
+</tr>
+<tr class="row-odd"><td><p>Veruca</p></td>
+<td><p>Salt</p></td>
+<td><p>34</p></td>
+<td><p>Writer</p></td>
+</tr>
+<tr class="row-even"><td><p>Violet</p></td>
+<td><p>Beauregarde</p></td>
+<td><p>37</p></td>
+<td><p>Accountant</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="An-extra-large-table">
+<h3>An extra large table<a class="headerlink" href="#An-extra-large-table" title="Permalink to this headline"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 11%" />
+<col style="width: 7%" />
+<col style="width: 11%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 14%" />
+<col style="width: 11%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Why</p></th>
+<th class="head"><p>do</p></th>
+<th class="head"><p>you</p></th>
+<th class="head"><p>need</p></th>
+<th class="head"><p>so</p></th>
+<th class="head"><p>much</p></th>
+<th class="head"><p>chocolate?</p></th>
+<th class="head"><p>I don’t</p></th>
+<th class="head"><p>understand.</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Oompa</p></td>
+<td><p>Loompa,</p></td>
+<td><p>do</p></td>
+<td><p>ba</p></td>
+<td><p>dee</p></td>
+<td><p>doo</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>I’ve</p></td>
+<td><p>got</p></td>
+<td><p>a</p></td>
+<td><p>perfect</p></td>
+<td><p>puzzle</p></td>
+<td><p>for</p></td>
+<td><p>you.</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Oompa</p></td>
+<td><p>Loompa,</p></td>
+<td><p>do</p></td>
+<td><p>ba</p></td>
+<td><p>dee</p></td>
+<td><p>doo</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>If</p></td>
+<td><p>you</p></td>
+<td><p>are</p></td>
+<td><p>wise</p></td>
+<td><p>you’ll</p></td>
+<td><p>listen</p></td>
+<td><p>to</p></td>
+<td><p>me.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>What</p></td>
+<td><p>do</p></td>
+<td><p>you</p></td>
+<td><p>get</p></td>
+<td><p>when</p></td>
+<td><p>you</p></td>
+<td><p>guzzle</p></td>
+<td><p>down</p></td>
+<td><p>sweets?</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="A-table-with-extra-large-text">
+<h3>A table with extra large text<a class="headerlink" href="#A-table-with-extra-large-text" title="Permalink to this headline"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 31%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Who</p></th>
+<th class="head"><p>do you</p></th>
+<th class="head"><p>blame?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Gum chewing’s fine when it’s once in a
+while.</p></td>
+<td><p>It stops you from smoking and brightens your smile.</p></td>
+<td><p>But it’s repulsive revolting and wrong.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Blaming the kids is a lie and a shame</p></td>
+<td><p>You know exactly who’s to blame:</p></td>
+<td><p>The mother and the father!</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="Lists">
+<h2>Lists<a class="headerlink" href="#Lists" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Home</p>
+<ul>
+<li><p>Contents</p></li>
+<li><p>Revisions</p></li>
+</ul>
+</li>
+<li><p>More</p>
+<ul>
+<li><p>Quickstart</p></li>
+<li><p>Configure</p>
+<ul>
+<li><p>Building the manual</p></li>
+<li><p>Publish</p></li>
+<li><p>Further steps</p></li>
+</ul>
+</li>
+<li><p>Installation</p></li>
+</ul>
+</li>
+</ul>
 </section>
 <section id="Image">
 <h2>Image<a class="headerlink" href="#Image" title="Permalink to this headline"></a></h2>

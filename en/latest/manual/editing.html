@@ -94,15 +94,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#jupman-preprocess">jupman-preprocess</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#Utilities-and-custom-js-and-css">Utilities and custom js and css</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Hiding-cells">Hiding cells</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Implications-of-hiding-'import-jupman'">Implications of hiding ‘import jupman’</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#Hiding-cells">Hiding cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Utilities">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Launch-unit-tests">Launch unit tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Python-Tutor">Python Tutor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Pandas">Pandas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Showing-function-help">Showing function help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Custom-js-and-css">Custom js and css</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Show-table-of-contents">Show table of contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="customize.html">Customize</a><ul>
@@ -144,6 +143,12 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../jupyter-example/jupyter-example-sol.html#Conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../jupyter-example/jupyter-js-sol.html">Jupyter example with custom js and css</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jupyter-example/jupyter-js-sol.html#Download-exercises-zip">Download exercises zip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jupyter-example/jupyter-js-sol.html#Exercise-1">Exercise 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jupyter-example/jupyter-js-sol.html#Exercise-2">Exercise 2</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html">Mixed Jupyter and Python example</a><ul>
@@ -4141,6 +4146,13 @@
 <li class="toctree-l3"><a class="reference internal" href="tests.html#Info/Warning-Boxes">Info/Warning Boxes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tests.html#Math">Math</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tests.html#Unicode">Unicode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Tables">Tables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#A-small-table">A small table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#An-extra-large-table">An extra large table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#A-table-with-extra-large-text">A table with extra large text</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Lists">Lists</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tests.html#Image">Image</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="tests.html#SVG-Images">SVG Images</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tests.html#PNG-Images">PNG Images</a></li>
@@ -4514,45 +4526,58 @@ div.rendered_html tbody tr:hover {
 <section id="Common-files">
 <h2>Common files<a class="headerlink" href="#Common-files" title="Permalink to this headline"></a></h2>
 <p>There are a bunch of files common to all worksheets and possibly website</p>
-<p><em>You do not need to change them (except maybe my_lib.py)</em></p>
+<p><em>You do not need to change them (except maybe</em> <code class="docutils literal notranslate"><span class="pre">my_lib.py</span></code><em>)</em></p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 58%" />
-<col style="width: 31%" />
+<col style="width: 63%" />
+<col style="width: 16%" />
 <col style="width: 6%" />
 <col style="width: 6%" />
+<col style="width: 9%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>File</p></th>
 <th class="head"><p>Description</p></th>
 <th class="head"><p>Jupyter</p></th>
 <th class="head"><p>Website</p></th>
+<th class="head"><p>Student zips</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/jupman.py">jupman.py</a></p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/jupman_tools.py">jupman_tools.py</a></p></td>
+<td><p>back end stuff</p></td>
+<td><p>X</p></td>
+<td><p>X</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/jupman.py">jupman.py</a></p></td>
 <td><p>utilities for worksheets</p></td>
 <td><p>X</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/jupman.py">my_lib.py</a></p></td>
-<td><p>custom utilities for worksheets (you can change the name)</p></td>
 <td><p>X</p></td>
-<td></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/_static/js/jupman.js">_static/js/jupman.js</a></p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/jupman.py">my_lib.py</a></p></td>
+<td><p>custom utilities example</p></td>
+<td><p>X</p></td>
+<td><p>X</p></td>
+<td><p>X</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/_static/js/jupman.js">_static/js/jupman.js</a></p></td>
 <td><p>Javascript code</p></td>
 <td><p>X</p></td>
 <td><p>X</p></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/_static/css/jupman.css">_static/css/jupman.css</a></p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/_static/css/jupman.css">_static/css/jupman.css</a></p></td>
 <td><p>CSS</p></td>
 <td><p>X</p></td>
-<td></td>
+<td><p>X</p></td>
+<td><p>X</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/_static/css/jupman-web.css">_static/css/jupman-web.css</a></p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/_static/css/jupman-web.css">_static/css/jupman-web.css</a></p></td>
 <td><p>CSS</p></td>
 <td></td>
+<td><p>X</p></td>
 <td><p>X</p></td>
 </tr>
 </tbody>
@@ -4586,7 +4611,7 @@ div.rendered_html tbody tr:hover {
     my_lib.py
 </pre></div>
 </div>
-<p>The zip folder structure will be a merge of chapter files and files shared by all chapters which are specified in <code class="docutils literal notranslate"><span class="pre">exercises_common_files</span></code> variable in <a class="reference external" href="../conf.py">conf.py</a>. Since the root in the zip becomes the chapter itself, jupman will process <code class="docutils literal notranslate"><span class="pre">.py</span></code> and <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> files for fixing eventual relative imports. Markdown and HTML links in ipynb will also be adjusted.</p>
+<p>The zip folder structure will be a merge of chapter files and files shared by all chapters which are specified in <code class="docutils literal notranslate"><span class="pre">exercises_common_files</span></code> variable in <a class="reference external" href="../conf.py">conf.py</a>. Since the root in the zip becomes the chapter itself, jupman will process <code class="docutils literal notranslate"><span class="pre">.py</span></code> and <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> files for fixing eventual relative imports. Markdown, HTML and CSS links in ipynb will also be adjusted.</p>
 <p>Exercise files can be automatically generated from solutions, as we will see next.</p>
 </section>
 <section id="Exercise-types">
@@ -4782,33 +4807,25 @@ def f():
 </div>
 </section>
 </section>
-<section id="Utilities-and-custom-js-and-css">
-<h2>Utilities and custom js and css<a class="headerlink" href="#Utilities-and-custom-js-and-css" title="Permalink to this headline"></a></h2>
-<p>If you need custom js and/or css in a notebook, you can inject it by running <code class="docutils literal notranslate"><span class="pre">jupman.init()</span></code> in the first cell</p>
-<p><strong>NOTE</strong>: it is not really mandatory, it’s mostly intended to tweak notebooks downloaded locally. It should be avoided for notebooks meant for students, as it is more likely it will mess their configurations - also, they might copy the notebooks without knowing they contain the custom js and use weird extensions which could generate conflicts (such as double toc)</p>
+<section id="Hiding-cells">
+<h2>Hiding cells<a class="headerlink" href="#Hiding-cells" title="Permalink to this headline"></a></h2>
+<p>A way to hide cells (like for example the <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">jupman</span></code> code) is by clicking <code class="docutils literal notranslate"><span class="pre">View-&gt;Cell</span> <span class="pre">toolbar</span> <span class="pre">-&gt;</span> <span class="pre">Edit</span> <span class="pre">metadata</span></code> and adding <code class="docutils literal notranslate"><span class="pre">&quot;nbsphinx&quot;:</span> <span class="pre">&quot;hidden&quot;</span></code> to the JSON (see also original <a class="reference external" href="https://nbsphinx.readthedocs.io/en/0.2.14/hidden-cells.html#Hidden-Cells">NBSphinx docs</a> and <a class="reference external" href="../jupman-tests.ipynb#Togglable-cells">Togglable cells in Jupman tests</a> ).</p>
+<p><strong>NOTE 1</strong>: As of NBSphinx 2.17, it is not possible to hide only cell text but not the output.</p>
+</section>
+<section id="Utilities">
+<h2>Utilities<a class="headerlink" href="#Utilities" title="Permalink to this headline"></a></h2>
+<p><strong>NOTE</strong>: not mandatory, it’s mostly intended to tweak notebooks downloaded locally. Should be avoided in notebooks meant for students, as it’s more likely it will mess their configurations - also, they might copy the notebooks without knowing they contain the custom js and use weird extensions which could generate conflicts (such as double toc)</p>
 <p>For notebooks in the root folder:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jupman</span>
-<span class="n">jupman</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Worksheets in in subfolders can use <code class="docutils literal notranslate"><span class="pre">sys.path</span></code> to locate the module</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">jupman</span>
-<span class="n">jupman</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>If you think it looks ugly, see <a class="reference external" href="https://github.com/DavidLeoni/jupman/issues/12">this issue</a> for why we don’t use alternatives such as modules and relative imports.</p>
-<p><strong>Show table of contents</strong>: Since 0.8, toc is disabled. If you want it, try to <a class="reference external" href="#Optional---Install-Jupyter-contrib-extensions">install toc2 extension</a>, otherwise you can still enable jupman toc with <code class="docutils literal notranslate"><span class="pre">jupman_init(toc=True)</span></code>. Running it will create the sidebar even when editing in Jupyter. If you want to refresh the sidebar, just run again the cell. It is not recommended, though, especially in notebooks meant to be shipped to students (see considerations above).</p>
-</section>
-<section id="Hiding-cells">
-<h2>Hiding cells<a class="headerlink" href="#Hiding-cells" title="Permalink to this headline"></a></h2>
-<p>To hide cells (like for example the <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">jupman</span></code> code), click <code class="docutils literal notranslate"><span class="pre">View-&gt;Cell</span> <span class="pre">toolbar</span> <span class="pre">-&gt;</span> <span class="pre">Edit</span> <span class="pre">metadata</span></code> and add <code class="docutils literal notranslate"><span class="pre">&quot;nbsphinx&quot;:</span> <span class="pre">&quot;hidden&quot;</span></code> to the JSON (see also original <a class="reference external" href="https://nbsphinx.readthedocs.io/en/0.2.14/hidden-cells.html#Hidden-Cells">NBSphinx docs</a> and <a class="reference external" href="../jupman-tests.ipynb#Togglable-cells">Togglable cells in Jupman tests</a> ).</p>
-<p><strong>NOTE</strong>: As of NBSphinx 2.17, it is not possible to hide only cell text but not the output.</p>
-<section id="Implications-of-hiding-'import-jupman'">
-<h3>Implications of hiding ‘import jupman’<a class="headerlink" href="#Implications-of-hiding-'import-jupman'" title="Permalink to this headline"></a></h3>
-<p>Only in the HTML version, hiding the <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">jupman</span></code> code, will also prevent <code class="docutils literal notranslate"><span class="pre">jupman.py</span></code> to embed inside the page the Javascript file <code class="docutils literal notranslate"><span class="pre">jupman.js</span></code>: this is perfectly fine as it is fetched separately thanks to the <code class="docutils literal notranslate"><span class="pre">app.add_javascript('js/jupman.js')</span></code> command in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code></p>
-</section>
+<p>Some reason for this ugliness is reported in <a class="reference external" href="https://github.com/DavidLeoni/jupman/issues/12">this issue</a>.</p>
 </section>
 <section id="Launch-unit-tests">
 <h2>Launch unit tests<a class="headerlink" href="#Launch-unit-tests" title="Permalink to this headline"></a></h2>
@@ -4853,51 +4870,41 @@ def f():
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
-<script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
+    <script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
 
-<script id="json-jm33eac117-4aed-4acd-90d4-91d642060a9c" type="application/json" >
-    {"code": " \nx = [5,8,4]\ny= {3:9}\nz = [x]", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 3, "event": "step_line", "func_name": "<module>", "globals": {"x": ["REF", 1]}, "ordered_globals": ["x"], "stack_to_render": [], "heap": {"1": ["LIST", 5, 8, 4]}, "stdout": ""}, {"line": 4, "event": "step_line", "func_name": "<module>", "globals": {"x": ["REF", 1], "y": ["REF", 2]}, "ordered_globals": ["x", "y"], "stack_to_render": [], "heap": {"1": ["LIST", 5, 8, 4], "2": ["DICT", [3, 9]]}, "stdout": ""}, {"line": 4, "event": "return", "func_name": "<module>", "globals": {"x": ["REF", 1], "y": ["REF", 2], "z": ["REF", 3]}, "ordered_globals": ["x", "y", "z"], "stack_to_render": [], "heap": {"1": ["LIST", 5, 8, 4], "2": ["DICT", [3, 9]], "3": ["LIST", ["REF", 1]]}, "stdout": ""}]}
-</script>
-<div id="jm33eac117-4aed-4acd-90d4-91d642060a9c" class="pytutorVisualizer"> </div>
+    <style>
+    @import "../_static/css/jupman.css";
+    </style>
 
-<style>
-.vizLayoutTd {
-    background-color: #fff !important;
-}
+    <script id="json-jm-bd043a0e3fa82bc4882c4f23fa7f36ad" type="application/json" >
+        {"code": " \nx = [5,8,4]\ny= {3:9}\nz = [x]", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 3, "event": "step_line", "func_name": "<module>", "globals": {"x": ["REF", 1]}, "ordered_globals": ["x"], "stack_to_render": [], "heap": {"1": ["LIST", 5, 8, 4]}, "stdout": ""}, {"line": 4, "event": "step_line", "func_name": "<module>", "globals": {"x": ["REF", 1], "y": ["REF", 2]}, "ordered_globals": ["x", "y"], "stack_to_render": [], "heap": {"1": ["LIST", 5, 8, 4], "2": ["DICT", [3, 9]]}, "stdout": ""}, {"line": 4, "event": "return", "func_name": "<module>", "globals": {"x": ["REF", 1], "y": ["REF", 2], "z": ["REF", 3]}, "ordered_globals": ["x", "y", "z"], "stack_to_render": [], "heap": {"1": ["LIST", 5, 8, 4], "2": ["DICT", [3, 9]], "3": ["LIST", ["REF", 1]]}, "stdout": ""}]}
+    </script>
+    <div id="jm-bd043a0e3fa82bc4882c4f23fa7f36ad" class="pytutorVisualizer"> </div>
 
-#pyStdout {
-    min-height:25px;
-}
+    <script>
+    (function(){
 
-/* 'Edit this code' link, hiding because replaces browser tab !!!*/
-#editCodeLinkDiv {
-    display:none;
-}
-</style>
+        var trace = JSON.parse(document.getElementById('json-jm-bd043a0e3fa82bc4882c4f23fa7f36ad').innerHTML);
+        // NOTE 1: id without #
 
-<script>
-(function(){
-
-    var trace = JSON.parse(document.getElementById('json-jm33eac117-4aed-4acd-90d4-91d642060a9c').innerHTML);
-    // NOTE 1: id without #
-    // NOTE 2 - maybe there are more predictable ways, but this will work anyway
-    //        - id should be number
-    visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jm33eac117-4aed-4acd-90d4-91d642060a9c',{'embeddedMode' : false,
-                                     'visualizerIdOverride':visualizerIdOverride})
+        addVisualizerToPage(trace, 'jm-bd043a0e3fa82bc4882c4f23fa7f36ad',{'embeddedMode' : false,
+                                         'visualizerIdOverride':'viz-jm-bd043a0e3fa82bc4882c4f23fa7f36ad'})
 
 
-    // set overflow for pytuts - need to do in python as css
-    // does not allow parent selection
-    var pytuts = $('.pytutorVisualizer')
-    pytuts.closest('div.output_html.rendered_html.output_result')
-            .css('overflow-x', 'visible')
+        // set overflow for pytuts - need to do in python as css
+        // does not allow parent selection
+        var pytuts = $('.pytutorVisualizer')
+        pytuts.closest('div.output_html.rendered_html.output_result')
+                .css('overflow-x', 'visible')
 
-    //pytuts.closest('div.output_html.rendered_html.output_result')
-    //      .css('background-color','red')
+        //pytuts.closest('div.output_html.rendered_html.output_result')
+        //      .css('background-color','red')
 
-})()
-</script></div>
+    })()
+    </script>
+
+
+<div style="text-align:center; font-size:0.9em"> Visualization provided by <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> </div></div>
 </div>
 <p>Beware of variables which were initialized in previous cells, they won’t be available in Python Tutor and you will get an error:</p>
 <div class="nbinput nblast docutils container">
@@ -4923,7 +4930,7 @@ def f():
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 Traceback (most recent call last):
-  File &#34;../jupman.py&#34;, line 2434, in _runscript
+  File &#34;../jupman.py&#34;, line 2443, in _runscript
     self.run(script_str, user_globals, user_globals)
   File &#34;/usr/lib/python3.7/bdb.py&#34;, line 578, in run
     exec(cmd, globals, locals)
@@ -4936,51 +4943,41 @@ NameError: name &#39;w&#39; is not defined
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
-<script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
+    <script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
 
-<script id="json-jmb7f48e46-a1e2-482f-b709-cf80f6162686" type="application/json" >
-    {"code": " \nx =  w + 5", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 2, "event": "exception", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": "", "exception_msg": "NameError: name 'w' is not defined"}]}
-</script>
-<div id="jmb7f48e46-a1e2-482f-b709-cf80f6162686" class="pytutorVisualizer"> </div>
+    <style>
+    @import "../_static/css/jupman.css";
+    </style>
 
-<style>
-.vizLayoutTd {
-    background-color: #fff !important;
-}
+    <script id="json-jm-9e3b324a5fd4bb62d93772404e88cfbc" type="application/json" >
+        {"code": " \nx =  w + 5", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 2, "event": "exception", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": "", "exception_msg": "NameError: name 'w' is not defined"}]}
+    </script>
+    <div id="jm-9e3b324a5fd4bb62d93772404e88cfbc" class="pytutorVisualizer"> </div>
 
-#pyStdout {
-    min-height:25px;
-}
+    <script>
+    (function(){
 
-/* 'Edit this code' link, hiding because replaces browser tab !!!*/
-#editCodeLinkDiv {
-    display:none;
-}
-</style>
+        var trace = JSON.parse(document.getElementById('json-jm-9e3b324a5fd4bb62d93772404e88cfbc').innerHTML);
+        // NOTE 1: id without #
 
-<script>
-(function(){
-
-    var trace = JSON.parse(document.getElementById('json-jmb7f48e46-a1e2-482f-b709-cf80f6162686').innerHTML);
-    // NOTE 1: id without #
-    // NOTE 2 - maybe there are more predictable ways, but this will work anyway
-    //        - id should be number
-    visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jmb7f48e46-a1e2-482f-b709-cf80f6162686',{'embeddedMode' : false,
-                                     'visualizerIdOverride':visualizerIdOverride})
+        addVisualizerToPage(trace, 'jm-9e3b324a5fd4bb62d93772404e88cfbc',{'embeddedMode' : false,
+                                         'visualizerIdOverride':'viz-jm-9e3b324a5fd4bb62d93772404e88cfbc'})
 
 
-    // set overflow for pytuts - need to do in python as css
-    // does not allow parent selection
-    var pytuts = $('.pytutorVisualizer')
-    pytuts.closest('div.output_html.rendered_html.output_result')
-            .css('overflow-x', 'visible')
+        // set overflow for pytuts - need to do in python as css
+        // does not allow parent selection
+        var pytuts = $('.pytutorVisualizer')
+        pytuts.closest('div.output_html.rendered_html.output_result')
+                .css('overflow-x', 'visible')
 
-    //pytuts.closest('div.output_html.rendered_html.output_result')
-    //      .css('background-color','red')
+        //pytuts.closest('div.output_html.rendered_html.output_result')
+        //      .css('background-color','red')
 
-})()
-</script></div>
+    })()
+    </script>
+
+
+<div style="text-align:center; font-size:0.9em"> Visualization provided by <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> </div></div>
 </div>
 </section>
 <section id="Pandas">
@@ -5149,7 +5146,7 @@ NameError: name &#39;w&#39; is not defined
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/manual_editing_37_0.png" src="../_images/manual_editing_37_0.png" />
+<img alt="../_images/manual_editing_36_0.png" src="../_images/manual_editing_36_0.png" />
 </div>
 </div>
 </section>
@@ -5176,14 +5173,23 @@ def get_doc(fun):
     &#34;&#34;&#34;
 </pre></div></div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</section>
+<section id="Custom-js-and-css">
+<h2>Custom js and css<a class="headerlink" href="#Custom-js-and-css" title="Permalink to this headline"></a></h2>
+<p>If you need custom js and/or css in a notebook, you can inject it by running</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jupman</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+<p>in the first cell, it will inject <code class="docutils literal notranslate"><span class="pre">jupman.js</span></code> and <code class="docutils literal notranslate"><span class="pre">jupman.css</span></code></p>
+</section>
+<section id="Show-table-of-contents">
+<h2>Show table of contents<a class="headerlink" href="#Show-table-of-contents" title="Permalink to this headline"></a></h2>
+<p>Since 0.8, custom toc is disabled, try instead <a class="reference internal" href="quickstart.html#Optional---Install-Jupyter-contrib-extensions"><span class="std std-ref">installing toc2 extension</span></a>. If you still want the jupman toc (not recommended), execute</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jupman</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">toc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
+<p>it will create the sidebar even when editing in Jupyter. To refresh the sidebar, just rerun the cell.</p>
+<p>Note: hiding the <code class="docutils literal notranslate"><span class="pre">jupman.init</span></code> code cell will prevent the build system to embed the Javascript file <code class="docutils literal notranslate"><span class="pre">jupman.js</span></code> inside the page in the HTML website: this is still fine as it is fetched separately by settings in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>.</p>
 </section>
 </section>
 

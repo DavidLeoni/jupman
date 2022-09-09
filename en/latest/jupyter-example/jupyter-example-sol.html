@@ -26,7 +26,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Jupyter and Python example" href="../jup-and-py-example/jup-and-py-example-sol.html" />
+    <link rel="next" title="Jupyter example with custom js and css" href="jupyter-js-sol.html" />
     <link rel="prev" title="Python example" href="../python-example/python-example.html" /> 
 </head>
 
@@ -94,15 +94,14 @@
 <li class="toctree-l3"><a class="reference internal" href="../manual/editing.html#jupman-preprocess">jupman-preprocess</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/editing.html#Utilities-and-custom-js-and-css">Utilities and custom js and css</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/editing.html#Hiding-cells">Hiding cells</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../manual/editing.html#Implications-of-hiding-'import-jupman'">Implications of hiding ‘import jupman’</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/editing.html#Hiding-cells">Hiding cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/editing.html#Utilities">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/editing.html#Launch-unit-tests">Launch unit tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/editing.html#Python-Tutor">Python Tutor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/editing.html#Pandas">Pandas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/editing.html#Showing-function-help">Showing function help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/editing.html#Custom-js-and-css">Custom js and css</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/editing.html#Show-table-of-contents">Show table of contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/customize.html">Customize</a><ul>
@@ -144,6 +143,12 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#Conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jupyter-js-sol.html">Jupyter example with custom js and css</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jupyter-js-sol.html#Download-exercises-zip">Download exercises zip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupyter-js-sol.html#Exercise-1">Exercise 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupyter-js-sol.html#Exercise-2">Exercise 2</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html">Mixed Jupyter and Python example</a><ul>
@@ -4141,6 +4146,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../manual/tests.html#Info/Warning-Boxes">Info/Warning Boxes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manual/tests.html#Math">Math</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manual/tests.html#Unicode">Unicode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manual/tests.html#Tables">Tables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../manual/tests.html#A-small-table">A small table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../manual/tests.html#An-extra-large-table">An extra large table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../manual/tests.html#A-table-with-extra-large-text">A table with extra large text</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../manual/tests.html#Lists">Lists</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manual/tests.html#Image">Image</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../manual/tests.html#SVG-Images">SVG Images</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../manual/tests.html#PNG-Images">PNG Images</a></li>
@@ -4568,51 +4580,41 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
-<script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
+    <script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
 
-<script id="json-jmcad58a1b-3645-47c6-aec0-bc40cfb90fba" type="application/json" >
-    {"code": " \nx = [1,2,3]\ny = x", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 3, "event": "step_line", "func_name": "<module>", "globals": {"x": ["REF", 1]}, "ordered_globals": ["x"], "stack_to_render": [], "heap": {"1": ["LIST", 1, 2, 3]}, "stdout": ""}, {"line": 3, "event": "return", "func_name": "<module>", "globals": {"x": ["REF", 1], "y": ["REF", 1]}, "ordered_globals": ["x", "y"], "stack_to_render": [], "heap": {"1": ["LIST", 1, 2, 3]}, "stdout": ""}]}
-</script>
-<div id="jmcad58a1b-3645-47c6-aec0-bc40cfb90fba" class="pytutorVisualizer"> </div>
+    <style>
+    @import "../_static/css/jupman.css";
+    </style>
 
-<style>
-.vizLayoutTd {
-    background-color: #fff !important;
-}
+    <script id="json-jm-dde7e6fa128d45cb08b061187ffa60fd" type="application/json" >
+        {"code": " \nx = [1,2,3]\ny = x", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 3, "event": "step_line", "func_name": "<module>", "globals": {"x": ["REF", 1]}, "ordered_globals": ["x"], "stack_to_render": [], "heap": {"1": ["LIST", 1, 2, 3]}, "stdout": ""}, {"line": 3, "event": "return", "func_name": "<module>", "globals": {"x": ["REF", 1], "y": ["REF", 1]}, "ordered_globals": ["x", "y"], "stack_to_render": [], "heap": {"1": ["LIST", 1, 2, 3]}, "stdout": ""}]}
+    </script>
+    <div id="jm-dde7e6fa128d45cb08b061187ffa60fd" class="pytutorVisualizer"> </div>
 
-#pyStdout {
-    min-height:25px;
-}
+    <script>
+    (function(){
 
-/* 'Edit this code' link, hiding because replaces browser tab !!!*/
-#editCodeLinkDiv {
-    display:none;
-}
-</style>
+        var trace = JSON.parse(document.getElementById('json-jm-dde7e6fa128d45cb08b061187ffa60fd').innerHTML);
+        // NOTE 1: id without #
 
-<script>
-(function(){
-
-    var trace = JSON.parse(document.getElementById('json-jmcad58a1b-3645-47c6-aec0-bc40cfb90fba').innerHTML);
-    // NOTE 1: id without #
-    // NOTE 2 - maybe there are more predictable ways, but this will work anyway
-    //        - id should be number
-    visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jmcad58a1b-3645-47c6-aec0-bc40cfb90fba',{'embeddedMode' : false,
-                                     'visualizerIdOverride':visualizerIdOverride})
+        addVisualizerToPage(trace, 'jm-dde7e6fa128d45cb08b061187ffa60fd',{'embeddedMode' : false,
+                                         'visualizerIdOverride':'viz-jm-dde7e6fa128d45cb08b061187ffa60fd'})
 
 
-    // set overflow for pytuts - need to do in python as css
-    // does not allow parent selection
-    var pytuts = $('.pytutorVisualizer')
-    pytuts.closest('div.output_html.rendered_html.output_result')
-            .css('overflow-x', 'visible')
+        // set overflow for pytuts - need to do in python as css
+        // does not allow parent selection
+        var pytuts = $('.pytutorVisualizer')
+        pytuts.closest('div.output_html.rendered_html.output_result')
+                .css('overflow-x', 'visible')
 
-    //pytuts.closest('div.output_html.rendered_html.output_result')
-    //      .css('background-color','red')
+        //pytuts.closest('div.output_html.rendered_html.output_result')
+        //      .css('background-color','red')
 
-})()
-</script></div>
+    })()
+    </script>
+
+
+<div style="text-align:center; font-size:0.9em"> Visualization provided by <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> </div></div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
@@ -4629,51 +4631,41 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
-<script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
+    <script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
 
-<script id="json-jmfca3f3a6-cc36-48de-bf16-0cd50a8ace6f" type="application/json" >
-    {"code": " \ny = [1,2,3]\nw  = y[0]", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 3, "event": "step_line", "func_name": "<module>", "globals": {"y": ["REF", 1]}, "ordered_globals": ["y"], "stack_to_render": [], "heap": {"1": ["LIST", 1, 2, 3]}, "stdout": ""}, {"line": 3, "event": "return", "func_name": "<module>", "globals": {"y": ["REF", 1], "w": 1}, "ordered_globals": ["y", "w"], "stack_to_render": [], "heap": {"1": ["LIST", 1, 2, 3]}, "stdout": ""}]}
-</script>
-<div id="jmfca3f3a6-cc36-48de-bf16-0cd50a8ace6f" class="pytutorVisualizer"> </div>
+    <style>
+    @import "../_static/css/jupman.css";
+    </style>
 
-<style>
-.vizLayoutTd {
-    background-color: #fff !important;
-}
+    <script id="json-jm-ab5ed56f3b57e0cfd7474ee34e8a9a36" type="application/json" >
+        {"code": " \ny = [1,2,3]\nw  = y[0]", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 3, "event": "step_line", "func_name": "<module>", "globals": {"y": ["REF", 1]}, "ordered_globals": ["y"], "stack_to_render": [], "heap": {"1": ["LIST", 1, 2, 3]}, "stdout": ""}, {"line": 3, "event": "return", "func_name": "<module>", "globals": {"y": ["REF", 1], "w": 1}, "ordered_globals": ["y", "w"], "stack_to_render": [], "heap": {"1": ["LIST", 1, 2, 3]}, "stdout": ""}]}
+    </script>
+    <div id="jm-ab5ed56f3b57e0cfd7474ee34e8a9a36" class="pytutorVisualizer"> </div>
 
-#pyStdout {
-    min-height:25px;
-}
+    <script>
+    (function(){
 
-/* 'Edit this code' link, hiding because replaces browser tab !!!*/
-#editCodeLinkDiv {
-    display:none;
-}
-</style>
+        var trace = JSON.parse(document.getElementById('json-jm-ab5ed56f3b57e0cfd7474ee34e8a9a36').innerHTML);
+        // NOTE 1: id without #
 
-<script>
-(function(){
-
-    var trace = JSON.parse(document.getElementById('json-jmfca3f3a6-cc36-48de-bf16-0cd50a8ace6f').innerHTML);
-    // NOTE 1: id without #
-    // NOTE 2 - maybe there are more predictable ways, but this will work anyway
-    //        - id should be number
-    visualizerIdOverride = Math.trunc(Math.random() * 100000000000)
-    addVisualizerToPage(trace, 'jmfca3f3a6-cc36-48de-bf16-0cd50a8ace6f',{'embeddedMode' : false,
-                                     'visualizerIdOverride':visualizerIdOverride})
+        addVisualizerToPage(trace, 'jm-ab5ed56f3b57e0cfd7474ee34e8a9a36',{'embeddedMode' : false,
+                                         'visualizerIdOverride':'viz-jm-ab5ed56f3b57e0cfd7474ee34e8a9a36'})
 
 
-    // set overflow for pytuts - need to do in python as css
-    // does not allow parent selection
-    var pytuts = $('.pytutorVisualizer')
-    pytuts.closest('div.output_html.rendered_html.output_result')
-            .css('overflow-x', 'visible')
+        // set overflow for pytuts - need to do in python as css
+        // does not allow parent selection
+        var pytuts = $('.pytutorVisualizer')
+        pytuts.closest('div.output_html.rendered_html.output_result')
+                .css('overflow-x', 'visible')
 
-    //pytuts.closest('div.output_html.rendered_html.output_result')
-    //      .css('background-color','red')
+        //pytuts.closest('div.output_html.rendered_html.output_result')
+        //      .css('background-color','red')
 
-})()
-</script></div>
+    })()
+    </script>
+
+
+<div style="text-align:center; font-size:0.9em"> Visualization provided by <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> </div></div>
 </div>
 </section>
 <section id="Exercise-1">
@@ -4825,7 +4817,7 @@ div.rendered_html tbody tr:hover {
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../python-example/python-example.html" class="btn btn-neutral float-left" title="Python example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../jup-and-py-example/jup-and-py-example-sol.html" class="btn btn-neutral float-right" title="Jupyter and Python example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="jupyter-js-sol.html" class="btn btn-neutral float-right" title="Jupyter example with custom js and css" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
