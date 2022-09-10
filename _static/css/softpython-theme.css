@@ -281,7 +281,7 @@ html { font-size:0.81em; }
 
 
 div.highlight, div.highlight-none, div.highlight-python, div.highlight-bash, div.highlight-ipython3 {
-    border-radius:12px;
+    border-radius:8px !important;
 }
 
 /* ************   ALERT BOXES START  ************ 
