@@ -185,15 +185,21 @@ html { font-size:0.81em; }
 }
 
 
-.wy-nav-content{
-    background-color: #f9f8f3;  
-}
-
-
-.wy-nav-content{        
+/** putting here default colors, may be overridden by textures in separate file */
+.wy-nav-content {
+    background-color: #f9f8f3;        
     margin-left:0 !important;  /* sometimes it gets disconneted .. */
  }
 
+.wy-nav-content-wrap  {
+   /*background-color: rgba(0,0,0,.05); */
+}
+
+.wy-nav-side {   
+   background-color: #705d39; 
+}
+
+ 
 
 .wy-nav-content p, .wy-nav-content div.admonition {
     font-size: 1.25rem;    
@@ -450,3 +456,36 @@ table.docutils {
 
 
 /* *********  SHADOWS END   ********* */
+
+
+
+/* *********  WEBKIT SCROLLBAR START   ********* 
+ *
+ * Note Firefox is already fine, see https://github.com/DavidLeoni/jupman/issues/122
+ */
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 8px;
+  background-color: rgba(0, 0, 0, 0);
+  
+}
+
+::-webkit-scrollbar-thumb {  
+  border-radius: 10px;    
+  background-color: rgba(170, 150, 70, 0.1);   
+}
+
+.wy-side-scroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(170, 140, 100, 1); 
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4); 
+}
+
+/* *********  WEBKIT SCROLLBAR END   ********* */
+
