@@ -193,6 +193,7 @@ html { font-size:0.81em; }
 
 .wy-nav-content-wrap  {
    /*background-color: rgba(0,0,0,.05); */
+   background-attachment: fixed;
 }
 
 .wy-nav-side {   
@@ -281,7 +282,7 @@ html { font-size:0.81em; }
 
 
 div.highlight, div.highlight-none, div.highlight-python, div.highlight-bash, div.highlight-ipython3 {
-    border-radius:12px;
+    border-radius:8px !important;
 }
 
 /* ************   ALERT BOXES START  ************ 
@@ -380,8 +381,17 @@ div.nbinput.container div.prompt, div.nboutput.container div.prompt{
     display:none
 }
 
+/* ***************   TABLES START  ****************** */
+
+div.wy-table-responsive > table {
+   min-width:30%;
+   margin-left:auto !important;
+   margin-right:auto !important;
+
+}
+
 table.docutils th > p {
-    font-size:1.1rem !important;
+    font-size:1.1rem !important;   
 }
 
 table.docutils td > p {
@@ -391,6 +401,38 @@ table.docutils td > p {
 }
 
 
+table.docutils {   
+   border-top: 3px solid #9874 !important;
+   border-left: 3px solid #9874 !important;
+   border-right: 3px solid #9874 !important;
+   border-bottom: 3px solid #98774!important;
+}
+
+table.docutils th {    
+   text-align:center;
+   padding-top:0px !important;
+   padding-bottom:0px !important;
+   background: linear-gradient(to bottom, #fbf0d811 0%, #faedd044 33%);
+   color:#776;
+   border-left: 2px solid #9879 !important;
+   border-bottom: 2px solid #9877 !important;
+}
+
+table.docutils tr:nth-child(even) {
+  background: #FAFCFF;
+}
+
+.rst-content table.docutils:not(.field-list) tr:nth-child(2n-1) td, .wy-table-backed{
+   background-color: #FAF8F5;
+}
+
+
+table.docutils td p {    
+   white-space:normal ;
+   line-height: 1.6rem !important;
+}
+
+/* *****************   TABLES END    **********************  */
 
 
 /* hack for Python Tutor 'next line to execute' becoming too big */
@@ -466,7 +508,7 @@ table.docutils {
 
 ::-webkit-scrollbar-track {
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(200, 200, 200, 0.3);
 }
 
 ::-webkit-scrollbar {
@@ -478,7 +520,8 @@ table.docutils {
 
 ::-webkit-scrollbar-thumb {  
   border-radius: 10px;    
-  background-color: rgba(170, 150, 70, 0.1);   
+  background-color: rgba(10, 100, 150, 0.15);   
+   box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5); 
 }
 
 .wy-side-scroll::-webkit-scrollbar-thumb {
