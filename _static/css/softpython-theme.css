@@ -177,9 +177,9 @@ html { font-size:0.81em; }
 
     src:url("../fonts/Inconsolata/Inconsolata-VariableFont_wdth-wght.eot");
     src:url("../fonts/Inconsolata/Inconsolata-VariableFont_wdth-wght.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/Varela/Inconsolata-VariableFont_wdth-wght.woff2") format("woff2"),
-    url("../fonts/Varela/Inconsolata-VariableFont_wdth-wght.woff") format("woff"),
-    url("../fonts/Varela/Inconsolata-VariableFont_wdth-wght.ttf") format("truetype");
+    url("../fonts/Inconsolata/Inconsolata-VariableFont_wdth-wght.woff2") format("woff2"),
+    url("../fonts/Inconsolata/Inconsolata-VariableFont_wdth-wght.woff") format("woff"),
+    url("../fonts/Inconsolata/Inconsolata-VariableFont_wdth-wght.ttf") format("truetype");
 
     src: url("../fonts/Inconsolata/Inconsolata-VariableFont_wdth-wght.ttf");
 }
