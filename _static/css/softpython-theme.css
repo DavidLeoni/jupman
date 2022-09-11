@@ -322,12 +322,12 @@ p.admonition-title.fa.fa-exclamation-circle {
 
 
 body {
-    font-family: "Archivo","proxima-nova","Helvetica Neue",Arial,sans-serif;    
+    font-family: "Archivo","proxima-nova","Helvetica Neue","Arial","sans-serif";    
 }
 
 
 h1 {
-    font-family: "Hussar","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+    font-family: "Hussar","ff-tisa-web-pro","Georgia","Arial","sans-serif";
     font-size: 2.0rem;
     padding-bottom: 0.8rem;   
     padding-top: 1.5rem;
@@ -337,7 +337,7 @@ h1 {
 
 
 h2,h3,h4,h5,h6,h7,h8 {
-    font-family: "Varela","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+    font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif";
     padding-top:1.4rem;
 }
 
@@ -421,7 +421,7 @@ table.docutils th {
    padding-top:0px !important;
    padding-bottom:0px !important;   
    background:#2311;   
-   color:#332c; 
+   color:#333d; 
    border-bottom: 2px solid #9a75 !important;
    border-radius:5px;
 }
@@ -445,8 +445,10 @@ table.docutils tr:nth-child(even) {
 
 
 .jupman-sol {    
-    background-color:#ebf3ed !important;  
-    border-color: #d3dfd6 !important;            
+   font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif";
+   border-radius:3px;   
+   background-color:#ebf3ed !important;  
+   border-color: #d3dfd6 !important;            
 }
 
 a.jupman-sol-toggler:hover {
@@ -549,14 +551,14 @@ footer p {
 
 
 .rst-footer-buttons a {
-   font-family: "Inconsolata","SFMono-Regular","Menlo","Monaco","Consolas","Liberation Mono","Courier New","Courier","monospace";
-   font-size:1.2rem;   
-   border-radius:15px;   
-   background-color: #9953 !important;   
+   font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif";
+   font-size:1.05rem;   
+   border-radius:15px;         
+   background-color: #eee9 !important;   
 }
 
 .rst-footer-buttons a:hover {
-   background-color:#ab73 !important;
+   background-color: #eee5 !important;   
 }
 
 /* *********   FOOTER  END  **********  */
