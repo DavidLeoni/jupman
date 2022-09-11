@@ -527,3 +527,33 @@ div.notranslate,  .admonition, .pytutorVisualizer {
 /* *********  WEBKIT SCROLLBAR END   ********* */
 
 
+/* *********   FOOTER  START  **********  */
+
+footer {
+   font-family: "Inconsolata","SFMono-Regular","Menlo","Monaco","Consolas","Liberation Mono","Courier New","Courier","monospace" !important;
+   text-align:center;
+}
+
+/* Built with ...*/
+footer  {
+      font-size:1.1rem;
+}
+
+/* Copyright */
+footer p {
+   font-size:1.2rem !important;
+}
+
+
+.rst-footer-buttons a {
+   font-family: "Inconsolata","SFMono-Regular","Menlo","Monaco","Consolas","Liberation Mono","Courier New","Courier","monospace";
+   font-size:1.2rem;   
+   border-radius:15px;   
+   background-color: #9953 !important;   
+}
+
+.rst-footer-buttons a:hover {
+   background-color:#ab73 !important;
+}
+
+/* *********   FOOTER  END  **********  */
