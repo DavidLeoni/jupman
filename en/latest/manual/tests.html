@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tests &mdash; Jupman</title>
+  <title>Generic tests &mdash; Jupman</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/jupman.css" type="text/css" />
@@ -26,9 +26,7 @@
         <script src="../_static/js/pytutor-embed.bundle.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Python tutor tests" href="tests-pytutor.html" />
-    <link rel="prev" title="Markdown" href="../project/markdown.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -36,8 +34,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../toc-page.html">
-            <img src="../_static/jupman.svg" class="logo" alt="Logo"/>
+            <a href="../toc-page.html" class="icon icon-home"> Jupman
           </a>
               <div class="version">
                 3.5
@@ -50,7 +47,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#Contents">Contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#Revisions">Revisions</a></li>
@@ -4132,75 +4129,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../project/markdown.html">Markdown</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="../toc.html#tests">Tests</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Jupman tests</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Section-1">Section 1</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Section-2">Section 2</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Subsection-1">Subsection 1</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Subsection-2">Subsection 2</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#Python-code">Python code</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Python-in-Markdown">Python in Markdown</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Other-quotes">Other quotes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Download-links">Download links</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Links-to-HTML">Links to HTML</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Info/Warning-Boxes">Info/Warning Boxes</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#jupman-alert-principle">jupman-alert-principle</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#Math">Math</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Unicode">Unicode</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Tables">Tables</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#A-small-table">A small table</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#An-extra-large-table">An extra large table</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#A-table-with-extra-large-text">A table with extra large text</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#Lists">Lists</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Images">Images</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#SVG-Images">SVG Images</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#PNG-Images">PNG Images</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Inline-images---pure-markdown">Inline images - pure markdown</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Inline-images---markdown-and-img">Inline images - markdown and img</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Img-class">Img class</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#A-picture-with-alternate-text">A picture with alternate text</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#Expressions-list">Expressions list</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Togglable-cells">Togglable cells</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Show/hide-exercises-(PREFERRED)">Show/hide exercises (PREFERRED)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Toggling-with-Javascript">Toggling with Javascript</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#HTML-details-in-Markdown,-code-tag">HTML details in Markdown, code tag</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#HTML-details-in-Markdown,-Markdown-mixed-code">HTML details in Markdown, Markdown mixed code</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#HTML-details-in-HTML,-raw-NBConvert-Format">HTML details in HTML, raw NBConvert Format</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#Files-in-templates">Files in templates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Stripping-answers">Stripping answers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Formatting-problems">Formatting problems</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Characters-per-line">Characters per line</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Very-large-input">Very large input</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Very-long-output">Very long output</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#Python-tutor-tests">Python tutor tests</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="tests-pytutor.html">Python Tutor tests</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#scope">scope</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#window-overflow">window overflow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#pytut-execution">pytut execution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#infinite-loops">infinite loops</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#resizability">resizability</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#cross-arrows">cross arrows</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#print-output">print output</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Alignment-test-1">Alignment test 1</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Alignment-test-2">Alignment test 2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Alternative:-HTML-magics">Alternative: HTML magics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Alternative:-NBTutor">Alternative: NBTutor</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../toc.html#tests">Tests</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
@@ -4248,9 +4177,7 @@
          see https://github.com/DavidLeoni/jupman/issues/39
     <li><a href="../toc-page.html">Docs</a> &raquo;</li>
     
-        <li><a href="../toc.html">Chapter examples</a> &raquo;</li>
-    
-    <li>Tests</li>
+    <li>Generic tests</li>
     -->
 
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -4526,10 +4453,10 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<section id="Tests">
-<h1>Tests<a class="headerlink" href="#Tests" title="Permalink to this headline"></a></h1>
-<p>Tests and cornercases.</p>
-<p>The page Title has one sharp, the Sections always have two sharps.</p>
+<section id="Generic-tests">
+<h1>Generic tests<a class="headerlink" href="#Generic-tests" title="Permalink to this headline"></a></h1>
+<p>Shows recommendations and cornercases. See also <a class="reference external" href="https://jupman.softpython.org/themed">softpython themed</a> version.</p>
+<p>The page Title has one sharp, sections always have two sharps.</p>
 <section id="Section-1">
 <h2>Section 1<a class="headerlink" href="#Section-1" title="Permalink to this headline"></a></h2>
 <p>bla bla</p>
@@ -4592,8 +4519,8 @@ cat wiz.txt
 <h2>Download links<a class="headerlink" href="#Download-links" title="Permalink to this headline"></a></h2>
 <p>Files manually put in <code class="docutils literal notranslate"><span class="pre">_static</span></code> :</p>
 <ul class="simple">
-<li><p>Download <a class="reference external" href="../_static/trial.odt">trial.odt</a></p></li>
-<li><p>Download <a class="reference external" href="../_static/trial.pdf">trial.pdf</a></p></li>
+<li><p>Download <a class="reference external" href="../_static/jupman/trial.odt">trial.odt</a></p></li>
+<li><p>Download <a class="reference external" href="../_static/jupman/trial.pdf">trial.pdf</a></p></li>
 </ul>
 <p>Files in arbitrary folder position :</p>
 <ul class="simple">
@@ -4604,7 +4531,7 @@ cat wiz.txt
 <section id="Links-to-HTML">
 <h2>Links to HTML<a class="headerlink" href="#Links-to-HTML" title="Permalink to this headline"></a></h2>
 <ul class="simple">
-<li><p>Link to <a class="reference external" href="../_static/trial.html">trial.html</a></p></li>
+<li><p>Link to <a class="reference external" href="../_static/jupman/trial.html">trial.html</a></p></li>
 </ul>
 </section>
 <section id="Info/Warning-Boxes">
@@ -4938,14 +4865,14 @@ SVG(filename=&#39;../img/cc-by.svg&#39;)
 </section>
 <section id="Inline-images---pure-markdown">
 <h3>Inline images - pure markdown<a class="headerlink" href="#Inline-images---pure-markdown" title="Permalink to this headline"></a></h3>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Bla ![A PNG image md](../_static/img/notebook_icon.png)  bli blo
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Bla ![A PNG image md](../_static/img/jupman/notebook_icon.png)  bli blo
 </pre></div>
 </div>
 <p>Bla <img alt="A PNG image md" src="../_images/notebook_icon.png" /> bli blo</p>
 </section>
 <section id="Inline-images---markdown-and-img">
 <h3>Inline images - markdown and img<a class="headerlink" href="#Inline-images---markdown-and-img" title="Permalink to this headline"></a></h3>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>bla &lt;img alt=&quot;markimg84545&quot; style=&quot;display:inline&quot; src=&quot;../_static/img/notebook_icon.png&quot;&gt; bli blo
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>bla &lt;img alt=&quot;markimg84545&quot; style=&quot;display:inline&quot; src=&quot;../_static/img/jupman/notebook_icon.png&quot;&gt; bli blo
 </pre></div>
 </div>
 <p>bla <img alt="markimg84545" src="../_images/notebook_icon.png" /> bli blo</p>
@@ -4953,7 +4880,7 @@ SVG(filename=&#39;../img/cc-by.svg&#39;)
 <section id="Img-class">
 <h3>Img class<a class="headerlink" href="#Img-class" title="Permalink to this headline"></a></h3>
 <p>If we pass a class, it will to be present in the website:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;img alt=&quot;markimg7325&quot; class=&quot;jupman-inline-img&quot; src=&quot;../_static/img/notebook_icon.png&quot;&gt;
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;img alt=&quot;markimg7325&quot; class=&quot;jupman-inline-img&quot; src=&quot;../_static/img/jupman/notebook_icon.png&quot;&gt;
 </pre></div>
 </div>
 <p>This <img alt="markimg7325" class="jupman-inline-img" src="../_images/notebook_icon.png" /> should be inline</p>
@@ -5411,10 +5338,7 @@ long output ... 149
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../project/markdown.html" class="btn btn-neutral float-left" title="Markdown" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="tests-pytutor.html" class="btn btn-neutral float-right" title="Python tutor tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 
