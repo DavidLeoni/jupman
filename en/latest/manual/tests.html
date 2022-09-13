@@ -4143,7 +4143,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#Other-quotes">Other quotes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Download-links">Download links</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Links-to-HTML">Links to HTML</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Info/Warning-Boxes">Info/Warning Boxes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Info/Warning-Boxes">Info/Warning Boxes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#jupman-alert-principle">jupman-alert-principle</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#Math">Math</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Unicode">Unicode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Tables">Tables</a><ul>
@@ -4153,12 +4156,13 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#Lists">Lists</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Image">Image</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Images">Images</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#SVG-Images">SVG Images</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#PNG-Images">PNG Images</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Inline-images---pure-markdown">Inline images - pure markdown</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Inline-images---markdown-and-img">Inline images - markdown and img</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Img-class">Img class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#A-picture-with-alternate-text">A picture with alternate text</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#Expressions-list">Expressions list</a></li>
@@ -4630,6 +4634,26 @@ cat wiz.txt
 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
 </div>
 <div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle">Note: This is a long info, plain title, multiple paragraph with code</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.</p>
+<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title fa fa-exclamation-circle">This is a long warn, plain title, multiple paragraph, code</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.</p>
+<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
 <p class="admonition-title fa fa-exclamation-circle"><strong>Note: This is a long info, bold title</strong></p>
 <p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.</p>
 </div>
@@ -4643,6 +4667,72 @@ cat wiz.txt
 <li><p>No further attributes are allowed.</p></li>
 <li><p>For compatibility with CommonMark, you should add an empty line between the <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> start tag and the beginning of the content.</p></li>
 </ul>
+<section id="jupman-alert-principle">
+<h3>jupman-alert-principle<a class="headerlink" href="#jupman-alert-principle" title="Permalink to this headline"></a></h3>
+<p>Some alerts to be often reminded can be preceded with an empty div having class <code class="docutils literal notranslate"><span class="pre">jupman-alert-principle</span></code> followed by a regular alert box, so they will display as you want on the website and as fallback boxes in the pdf (did this way as we can’t add classes nor other attributes, tried also <code class="docutils literal notranslate"><span class="pre">data-jupman</span></code> html attributes with no success)</p>
+<p><strong>NOTE</strong>: default colors are indicative and minimal on purpose, for a better view see <a class="reference external" href="https://jupman.softpython.org/themed/manual/tests.html#jupman-alert-principle">softpython themed version</a></p>
+<p><strong>Recommended approach</strong>: The typical principle alert should be brief and may have a link to more substantial text, with a short line under it. If you need more explicative text, put it outside:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;jupman-alert-principle&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-info&quot;</span><span class="p">&gt;</span>
+
+[IV PRINCIPLE](https://jupman.softpython.org/principles.html#V-PRINCIPLE): **You shall write tests!**
+
+Who does **not** writes tests, falls into _Debugging Hell_!
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<div class="jupman-alert-principle"></div><div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><a class="reference external" href="https://jupman.softpython.org/principles.html#IV-PRINCIPLE">IV PRINCIPLE</a>: <strong>You shall write tests!</strong></p>
+<p>Who does <strong>not</strong> writes tests, falls into <em>Debugging Hell</em>!</p>
+</div>
+<p><strong>Normal weight font:</strong></p>
+<div class="jupman-alert-principle"></div><div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><a class="reference external" href="https://jupman.softpython.org/principles.html#IV-PRINCIPLE">IV PRINCIPLE</a>: You shall write tests!</p>
+<p>Who does <strong>not</strong> writes tests, falls into <em>Debugging Hell</em>!</p>
+</div>
+<p><strong>Shorter principle recall, bold:</strong></p>
+<div class="jupman-alert-principle"></div><div class="admonition note">
+<p><a class="reference external" href="https://jupman.softpython.org/principles.html#IV-PRINCIPLE">IV PRINCIPLE</a>: <strong>You shall write tests!</strong></p>
+</div>
+<p><strong>Shorter principle recall, normal font weight:</strong></p>
+<div class="jupman-alert-principle"></div><div class="admonition note">
+<p><a class="reference external" href="https://jupman.softpython.org/principles.html#IV-PRINCIPLE">IV PRINCIPLE</a>: You shall write tests!</p>
+</div>
+<p><strong>Shorter principle recall, all bold:</strong> (doesn’t work: shows artifacts)</p>
+<div class="jupman-alert-principle"></div><div class="admonition note">
+<p><strong>`IV PRINCIPLE &lt;https://jupman.softpython.org/principles.html#IV-PRINCIPLE&gt;`__: You shall write tests!</strong></p>
+</div>
+<p><strong>Longer principle with text outside the box</strong> (recommended):</p>
+<div class="jupman-alert-principle"></div><div class="admonition note">
+<p><a class="reference external" href="https://jupman.softpython.org/principles.html#VII-PRINCIPLE">VII PRINCIPLE</a>: <strong>You shall never ever add nor remove elements from a sequence you are iterating with a</strong> <code class="docutils literal notranslate"><span class="pre">for</span></code> !</p>
+</div>
+<p>Better to keep explanation text and code outside</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+    <span class="n">lst</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># aarrgh</span>
+</pre></div>
+</div>
+<p><strong>Longer principle with text inside the box</strong> (not recommended):</p>
+<div class="jupman-alert-principle"></div><div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><a class="reference external" href="https://jupman.softpython.org/principles.html#VII-PRINCIPLE">VII PRINCIPLE</a>: <strong>You shall never ever add nor remove elements from a sequence you are iterating with a</strong> <code class="docutils literal notranslate"><span class="pre">for</span></code> !</p>
+<p>This is a <strong>way too long</strong> principle only for <em>testing</em> purposes, typically it’s much better keeping long stuff outside.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+    <span class="n">lst</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># aaargh</span>
+</pre></div>
+</div>
+</div>
+<p><strong>Longer principle with text inside the box, all bold</strong> (not recommended, doesn’t work: shows artifacts):</p>
+<div class="jupman-alert-principle"></div><div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><strong>`VII PRINCIPLE &lt;https://jupman.softpython.org/principles.html#VII-PRINCIPLE&gt;`__: You shall never ever add nor remove elements from a sequence you are iterating with a</strong> <code class="docutils literal notranslate"><span class="pre">for</span></code> !</p>
+<p>This is a <strong>way too long</strong> principle only for <em>testing</em> purposes, typically it’s much better keeping long stuff outside.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+    <span class="n">lst</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># aaargh</span>
+</pre></div>
+</div>
+</div>
+</section>
 </section>
 <section id="Math">
 <h2>Math<a class="headerlink" href="#Math" title="Permalink to this headline"></a></h2>
@@ -4826,8 +4916,8 @@ while.</p></td>
 </li>
 </ul>
 </section>
-<section id="Image">
-<h2>Image<a class="headerlink" href="#Image" title="Permalink to this headline"></a></h2>
+<section id="Images">
+<h2>Images<a class="headerlink" href="#Images" title="Permalink to this headline"></a></h2>
 <section id="SVG-Images">
 <h3>SVG Images<a class="headerlink" href="#SVG-Images" title="Permalink to this headline"></a></h3>
 <p>SVG images work in notebook, but here it is commented since it breaks Latex, <a class="reference external" href="https://github.com/DavidLeoni/jupman/issues/1">see issue</a></p>
@@ -4865,6 +4955,10 @@ SVG(filename=&#39;../img/cc-by.svg&#39;)
 </pre></div>
 </div>
 <p>This <img alt="markimg7325" class="jupman-inline-img" src="../_images/notebook_icon.png" /> should be inline</p>
+</section>
+<section id="A-picture-with-alternate-text">
+<h3>A picture with alternate text<a class="headerlink" href="#A-picture-with-alternate-text" title="Permalink to this headline"></a></h3>
+<p><img alt="An example picture" src="../_images/leaves1.png" /></p>
 </section>
 </section>
 <section id="Expressions-list">
