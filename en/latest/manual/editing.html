@@ -9,6 +9,7 @@
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/jupman.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/jupman-web.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="canonical" href="https://jupman.softpython.org/en/latest/manual/editing.html" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -35,7 +36,8 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../toc-page.html" class="icon icon-home"> Jupman
+            <a href="../toc-page.html">
+            <img src="../_static/jupman.svg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
                 3.5
@@ -4526,7 +4528,7 @@ div.rendered_html tbody tr:hover {
 </style>
 <section id="Editing-worksheets">
 <h1>Editing worksheets<a class="headerlink" href="#Editing-worksheets" title="Permalink to this headline"></a></h1>
-<p>Here we give an overview of how to edit worksheets. More info can be found in <a class="reference external" href="../jupman-tests.ipynb">Jupman tests notebook</a></p>
+<p>Here we give an overview of how to edit worksheets. More info can be found in <a class="reference internal" href="tests.html"><span class="doc">Tests notebook</span></a></p>
 <section id="Common-files">
 <h2>Common files<a class="headerlink" href="#Common-files" title="Permalink to this headline"></a></h2>
 <p>There are a bunch of files common to all worksheets and possibly website</p>
@@ -4551,19 +4553,28 @@ div.rendered_html tbody tr:hover {
 <tr class="row-even"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/jupman_tools.py">jupman_tools.py</a></p></td>
 <td><p>back end stuff</p></td>
 <td><p>X</p></td>
-<td><p>X</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
 <td></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/jupman.py">jupman.py</a></p></td>
 <td><p>utilities for worksheets</p></td>
 <td><p>X</p></td>
-<td><p>X</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
 <td><p>X</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/jupman.py">my_lib.py</a></p></td>
 <td><p>custom utilities example</p></td>
 <td><p>X</p></td>
-<td><p>X</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
 <td><p>X</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/_static/js/jupman.js">_static/js/jupman.js</a></p></td>
@@ -4582,7 +4593,7 @@ div.rendered_html tbody tr:hover {
 <td><p>CSS</p></td>
 <td></td>
 <td><p>X</p></td>
-<td><p>X</p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -4934,7 +4945,7 @@ def f():
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 Traceback (most recent call last):
-  File &#34;../jupman.py&#34;, line 2443, in _runscript
+  File &#34;../jupman.py&#34;, line 2453, in _runscript
     self.run(script_str, user_globals, user_globals)
   File &#34;/usr/lib/python3.7/bdb.py&#34;, line 578, in run
     exec(cmd, globals, locals)
