@@ -50,5 +50,5 @@ Tests
     :maxdepth: 2
     :glob:
 
-    Jupman tests <manual/tests.ipynb>
-    Python Tutor tests <manual/tests-pytutor.ipynb>
+    <manual/tests.ipynb>
+    <manual/tests-pytutor.ipynb>
