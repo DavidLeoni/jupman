@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Generic tests &mdash; Jupman</title>
+  <title>Recommendations and cornercases &mdash; Jupman</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/jupman.css" type="text/css" />
@@ -4131,7 +4131,7 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../toc.html#tests">Tests</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Generic tests</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Recommendations and cornercases</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#Section-1">Section 1</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Section-2">Section 2</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#Subsection-1">Subsection 1</a></li>
@@ -4182,17 +4182,19 @@
 <li class="toctree-l4"><a class="reference internal" href="#Very-long-output">Very long output</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#When-you-need-colors">When you need colors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Python-tutor-tests">Python tutor tests</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="tests-pytutor.html">Python Tutor tests</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#scope">scope</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#window-overflow">window overflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Data-types">Data types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Window-overflow">Window overflow</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#pytut-execution">pytut execution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#infinite-loops">infinite loops</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#resizability">resizability</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#cross-arrows">cross arrows</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#print-output">print output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Infinite-loops">Infinite loops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Resizability">Resizability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Cross-arrows">Cross arrows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Print-output">Print output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Alignment-test-1">Alignment test 1</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Alignment-test-2">Alignment test 2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Alternative:-HTML-magics">Alternative: HTML magics</a></li>
@@ -4248,7 +4250,7 @@
     
         <li><a href="../toc.html">Chapter examples</a> &raquo;</li>
     
-    <li>Generic tests</li>
+    <li>Recommendations and cornercases</li>
     -->
 
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -4524,9 +4526,9 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<section id="Generic-tests">
-<h1>Generic tests<a class="headerlink" href="#Generic-tests" title="Permalink to this headline"></a></h1>
-<p>Shows recommendations and cornercases. See also <a class="reference external" href="https://jupman.softpython.org/themed/manual/tests.html">softpython themed</a> version.</p>
+<section id="Recommendations-and-cornercases">
+<h1>Recommendations and cornercases<a class="headerlink" href="#Recommendations-and-cornercases" title="Permalink to this headline"></a></h1>
+<p>Shows various tests, see also <a class="reference external" href="https://jupman.softpython.org/themed/manual/tests.html">softpython themed</a> version.</p>
 <p>The page Title has one sharp, sections always have two sharps.</p>
 <section id="Section-1">
 <h2>Section 1<a class="headerlink" href="#Section-1" title="Permalink to this headline"></a></h2>
@@ -5233,7 +5235,7 @@ ZeroDivisionError: division by zero
 <p>In Jupyter: by clicking, you can collapse</p>
 <p>On the website: a scrollbar should appear</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">150</span><span class="p">):</span>
@@ -5400,6 +5402,33 @@ long output ... 149
 </div>
 </section>
 </section>
+<section id="When-you-need-colors">
+<h2>When you need colors<a class="headerlink" href="#When-you-need-colors" title="Permalink to this headline"></a></h2>
+<p>For colors on the fly you can use inline style in markdown. Works on:</p>
+<ul class="simple">
+<li><p>website: yes</p></li>
+<li><p>Jupyter: no</p></li>
+<li><p>pdf: ?</p></li>
+</ul>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">.</span><span class="nc">be-fancy</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">red</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;be-fancy&quot;</span><span class="p">&gt;</span>
+     This should display in red
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<style>
+    .be-fancy {
+        color: red;
+    }
+</style><div class="be-fancy"><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>This should display in red
+</pre></div>
+</div>
+</div></section>
 <section id="Python-tutor-tests">
 <h2>Python tutor tests<a class="headerlink" href="#Python-tutor-tests" title="Permalink to this headline"></a></h2>
 <p>See <a class="reference internal" href="tests-pytutor.html"><span class="doc">Pytutor page</span></a></p>

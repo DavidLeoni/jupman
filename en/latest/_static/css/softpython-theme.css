@@ -326,11 +326,7 @@ div.admonition div.notranslate {
 
 /* both top bar and panel */
 .jupman-alert-principle + div.admonition {    
-    border-radius:7px !important;    
-    background:url("../img/concrete-small.jpg"),
-                   #fff7 !important;
-    background-blend-mode: overlay;
-        
+    border-radius:7px !important;        
     letter-spacing: 0.11rem;       
 }
 
@@ -344,7 +340,6 @@ div.admonition div.notranslate {
 
 /* panel paragraphs, useful for distancing */
 .jupman-alert-principle + div.admonition p {
- 
     padding-top: 0.9rem !important;
     padding-bottom: 0.9rem !important; 
     text-align: center;
@@ -360,11 +355,7 @@ div.admonition div.notranslate {
 /* top bar */
 .jupman-alert-principle + div p.admonition-title.fa.fa-exclamation-circle {
     font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif";
-    background:url("../img/concrete-small.jpg"),
-               #fff7 !important;
-    background-blend-mode: overlay;
-    color: #666e;    
-    
+    color: #666e;        
     font-size:1.3rem;
     margin-top:0px !important;   
     margin-right: 0px !important;
@@ -609,6 +600,178 @@ div.notranslate,  .admonition, .pytutorVisualizer {
 /* *********  WEBKIT SCROLLBAR END   ********* */
 
 
+/* ********* PYTHON TUTOR START  **********  */
+
+/* External frame */
+.ExecutionVisualizer #curInstr {
+   font-family: "Archivo","proxima-nova","Helvetica Neue","Arial","sans-serif" !important;    
+   font-size:1.0rem !important;
+}
+
+.ExecutionVisualizer > table > tbody > tr > td:first-child{
+  border-radius:5px 0px 0px 5px;    
+  box-shadow: 1px 2px 9px 1px #999;
+}
+
+.ExecutionVisualizer > table > tbody > tr > td:last-child{
+  border-radius:0px 5px 5px 0px;
+  box-shadow: 2px 2px 9px 1px #999;
+}
+
+.ExecutionVisualizer  table  tbody  > tr > td {    
+    background: #fff !important;
+    
+   /*background:url("../img/jupman/softpython-theme/wood-small.jpg"),
+    #ffff !important;
+    background-blend-mode:hard-light;*/
+}
+
+/* Left code NOTE: For some reason we need also #codAndNav ...*/
+.ExecutionVisualizer  #codAndNav #pyCodeOutputDiv table {    
+    padding-top:0px !important;        
+    border-top:none;        
+    border-radius:7px !important;    
+}
+
+
+/*  legend: line that just executed, next line to execute  */
+
+.ExecutionVisualizer #legendDiv {
+    font-family: "Archivo","proxima-nova","Helvetica Neue","Arial","sans-serif" !important;    
+    margin-top:25px !important;
+    font-size:0.9rem !important;    
+}
+
+.ExecutionVisualizer #legendDiv p {    
+    font-family: "Archivo","proxima-nova","Helvetica Neue","Arial","sans-serif" !important;    
+    margin-top:5px !important;
+    font-size:0.9rem !important;    
+}
+
+
+/* First Prev Next Last buttons */
+
+.ExecutionVisualizer #vcrControls button {
+   font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif";
+   font-size:0.9rem;   
+   padding-top:0.2rem;
+   padding-bottom:0.2rem;
+   padding-left:0.7rem;
+   padding-right:0.7rem;
+   border-radius:12px;         
+   background-color: #f5f5f5 !important;   
+   border:0px solid;
+   box-shadow: 1px 1px 0px 1px;  
+}
+
+.ExecutionVisualizer #vcrControls button:hover {
+    background-color: #f8f8f8 !important;   
+}
+
+.ExecutionVisualizer #vcrControls button:active {
+    background-color: #ddde !important;   
+    box-shadow: -1px -1px 0px 1px;      
+}
+
+.ExecutionVisualizer #vcrControls button[disabled] {
+    background-color: #ddd !important;   
+    color:eee !important;
+}
+
+.ExecutionVisualizer #vcrControls button[disabled]:active {
+    background-color: #ddd !important;   
+    color:eee !important;
+    box-shadow: 1px 1px 0px 1px;  
+}
+
+
+/* Virtual display */
+
+.ExecutionVisualizer  #pyCodeOutput {
+    border-radius:7px;
+    box-shadow: 0px 2px 5px 2px #eee;
+
+}
+
+
+/* Frames and Objects */
+
+.ExecutionVisualizer #stackHeader,  .ExecutionVisualizer #heapHeader{    
+    font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif";  
+    font-size:1.02rem !important;
+    text-align:left !important;
+}
+
+.ExecutionVisualizer #printOutputDocs {
+    font-family: "Archivo","proxima-nova","Helvetica Neue","Arial","sans-serif" !important;    
+}
+
+/* print output */
+.ExecutionVisualizer #pyStdout {
+    border:none !important;
+    box-shadow: 1px 1px 3px 1px #ccc;
+}
+
+/* Frames and Objects panels */
+.ExecutionVisualizer .vizLayoutTd td {
+    border-radius:0px !important;
+    box-shadow: none !important;
+}
+
+.ExecutionVisualizer .stackFrameHeader {    
+    font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif";   
+    font-size:0.9rem !important;
+}
+
+.ExecutionVisualizer .stackFrame {
+    border-radius:6px !important;
+    box-shadow: 1px 1px 3px 1px #a0a0b5;
+}
+
+/* Yellow heap  */
+.ExecutionVisualizer .listTbl,
+.ExecutionVisualizer .tupleTbl,
+.ExecutionVisualizer .setTbl, 
+.ExecutionVisualizer .dictTbl, 
+.ExecutionVisualizer .classTbl, 
+.ExecutionVisualizer .instTbl {
+    box-shadow: 1px 1px 3px 1px #b0b0a1;
+    border: none !important;
+}
+
+.ExecutionVisualizer .li
+/* Yellow heap end */
+stTbl td,
+.ExecutionVisualizer .tupleTbl td,
+.ExecutionVisualizer .setTbl, 
+.ExecutionVisualizer .dictTbl, 
+.ExecutionVisualizer .classTbl td, 
+.ExecutionVisualizer .instTbl td {
+    border-color: #bbb !important;
+}
+
+.ExecutionVisualizer .listTbl tr td:first-child,
+.ExecutionVisualizer .tupleTbl tr td:first-child {
+    border-left: none !important;    
+}
+
+.ExecutionVisualizer .funcObj {
+    box-shadow: 1px 1px 3px 1px #ccc5;
+    padding:8px;
+    border-radius:15px;
+}
+
+
+
+/* Show middle bar */
+.ExecutionVisualizer div.ui-resizable-handle.ui-resizable-e {
+    border-color: #d9d9df !important;
+    border-width:1px !important; 
+    box-shadow:  0px 0px 2px 0px #2223 !important;
+}
+
+/* ********* PYTHON TUTOR END **********  */
+
 /* *********   FOOTER  START  **********  */
 
 footer {
@@ -639,4 +802,6 @@ footer p {
 }
 
 /* *********   FOOTER  END  **********  */
+
+
 
