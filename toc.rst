@@ -50,5 +50,5 @@ Tests
     :maxdepth: 2
     :glob:
 
-    <manual/tests.ipynb>
-    <manual/tests-pytutor.ipynb>
+    manual/tests.ipynb
+    manual/tests-pytutor.ipynb

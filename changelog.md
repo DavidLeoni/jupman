@@ -1,7 +1,7 @@
 
 # Changelog
 
-Jupman Jupyter Manager 
+Jupman: A template for online manuals made with Jupyter notebooks.
 
 [jupman.softpython.org](https://jupman.softpython.org)
 
@@ -19,7 +19,7 @@ Jupman Jupyter Manager
 - Fixed relative html a, img with attributes in markdown not working in zip: #113
 
 
-# June 4th 2022 - 3.5
+## June 4th 2022 - 3.5
 
 - generated html can be really used offline #96, also fixes wrong math symbols with local build #3
 - automated testing on github actions #99
