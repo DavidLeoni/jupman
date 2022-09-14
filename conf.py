@@ -215,7 +215,7 @@ html_baseurl = 'https://jupman.softpython.org/en/latest/'
 html_sourcelink_suffix = ''
 
 
-html_logo = '_static/img/jupman.svg'
+html_logo = '_static/img/jupman/jupman.svg'
 html_favicon = '_static/img/jupman/favicon.ico'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
