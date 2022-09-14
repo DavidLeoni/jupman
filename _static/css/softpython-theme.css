@@ -326,11 +326,7 @@ div.admonition div.notranslate {
 
 /* both top bar and panel */
 .jupman-alert-principle + div.admonition {    
-    border-radius:7px !important;    
-    background:url("../img/concrete-small.jpg"),
-                   #fff7 !important;
-    background-blend-mode: overlay;
-        
+    border-radius:7px !important;        
     letter-spacing: 0.11rem;       
 }
 
@@ -344,7 +340,6 @@ div.admonition div.notranslate {
 
 /* panel paragraphs, useful for distancing */
 .jupman-alert-principle + div.admonition p {
- 
     padding-top: 0.9rem !important;
     padding-bottom: 0.9rem !important; 
     text-align: center;
@@ -360,11 +355,7 @@ div.admonition div.notranslate {
 /* top bar */
 .jupman-alert-principle + div p.admonition-title.fa.fa-exclamation-circle {
     font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif";
-    background:url("../img/concrete-small.jpg"),
-               #fff7 !important;
-    background-blend-mode: overlay;
-    color: #666e;    
-    
+    color: #666e;        
     font-size:1.3rem;
     margin-top:0px !important;   
     margin-right: 0px !important;
