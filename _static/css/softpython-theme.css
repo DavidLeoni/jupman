@@ -226,6 +226,14 @@ html { font-size:0.81em; }
     padding-right: 20px;
 }
 
+.wy-side-nav-search > a.icon {
+    padding-left:10px !important;
+    padding-right:10px !important;
+    padding-top:5px !important;
+    padding-bottom:5px !important;
+    border-radius:15px;
+}
+
 
 #rtd-search-form {
     font-size:1.05rem;
@@ -236,26 +244,59 @@ html { font-size:0.81em; }
  }
 
 
-.toctree-l1 > a {
+.wy-menu .toctree-l1 > a {
     line-height:2ch !important;
 }
-.toctree-l2 > a {
+.wy-menu .toctree-l2 > a {
     line-height:2ch !important;
 }
-.toctree-l3 > a {
+.wy-menu .toctree-l3 > a {
     line-height:2ch !important;
 }
 
-.toctree-l4 > a {
+.wy-menu .toctree-l4 > a {
     padding: .4045em 1.663em .4045em  4.663em !important;    
     line-height:2ch !important;
 }
 
-.toctree-l5 > a {
+.wy-menu .toctree-l5 > a {
     font-size: 0.97rem !important;
     padding: .4045em 1.663em .4045em  5em !important;
     line-height:2ch !important;
 }
+
+
+.wy-menu li.toctree-l1 > a:active {
+  background:#bba2 !important;
+}
+
+
+.wy-menu li > a:active {
+  background:#bba6 !important;
+}
+
+.wy-menu li.toctree-l1 > a:hover {   
+   background:#8647;
+}
+
+.wy-menu li.toctree-l1.current > a:hover {   
+   background:#e2e2e2;
+}
+
+
+.wy-menu li.toctree-l2 > a:hover {
+   background:#d9d9d9;
+}
+
+
+.wy-menu li.toctree-l3 > a:hover {
+   background:#ddd !important;
+}
+
+.wy-menu li.toctree-l4 > a:hover {
+   background:#ccc !important;
+}
+
 
 /* only for toc in index pages */
 .toctree-wrapper {
@@ -278,6 +319,8 @@ html { font-size:0.81em; }
 .toctree-wrapper .toctree-l2 ul {   
     margin-top:0.4rem !important;    
 }
+
+
 
 
 
