@@ -603,10 +603,6 @@ div.notranslate,  .admonition, .pytutorVisualizer {
 /* ********* PYTHON TUTOR START  **********  */
 
 /* External frame */
-.ExecutionVisualizer #curInstr {
-   font-family: "Archivo","proxima-nova","Helvetica Neue","Arial","sans-serif" !important;    
-   font-size:1.0rem !important;
-}
 
 .ExecutionVisualizer > table > tbody > tr > td:first-child{
   border-radius:5px 0px 0px 5px;    
@@ -630,22 +626,24 @@ div.notranslate,  .admonition, .pytutorVisualizer {
 .ExecutionVisualizer  #codAndNav #pyCodeOutputDiv table {    
     padding-top:0px !important;        
     border-top:none;        
-    border-radius:7px !important;    
+    border-radius:7px !important;        
+    box-shadow: 0px 2px 5px 2px #eee;
 }
+
 
 
 /*  legend: line that just executed, next line to execute  */
 
 .ExecutionVisualizer #legendDiv {
-    font-family: "Archivo","proxima-nova","Helvetica Neue","Arial","sans-serif" !important;    
+    font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif" !important;
     margin-top:25px !important;
     font-size:0.9rem !important;    
 }
 
 .ExecutionVisualizer #legendDiv p {    
-    font-family: "Archivo","proxima-nova","Helvetica Neue","Arial","sans-serif" !important;    
-    margin-top:5px !important;
+    font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif" !important;    
     font-size:0.9rem !important;    
+    margin-top:5px !important;
 }
 
 
@@ -685,32 +683,38 @@ div.notranslate,  .admonition, .pytutorVisualizer {
 }
 
 
-/* Virtual display */
+/* Step 3 of 5 */
+.ExecutionVisualizer #curInstr {
+   font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif" !important;
+   font-size:1.0rem !important;
+}
 
-.ExecutionVisualizer  #pyCodeOutput {
-    border-radius:7px;
-    box-shadow: 0px 2px 5px 2px #eee;
-
+.ExecutionVisualizer #errorOutput {
+   font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif" !important;
+   font-size:1.0rem !important;
 }
 
 
-/* Frames and Objects */
+/* Virtual monitor description line:  Print output (drag lower right corner to resize) */
+.ExecutionVisualizer #printOutputDocs {
+    font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif"  !important;        
+}
 
+/* Virtual monitor box */
+
+.ExecutionVisualizer #pyStdout {
+    border:none !important;
+    box-shadow: 1px 1px 3px 1px #ccc;
+}
+
+
+/* Frames and Objects top headers */
 .ExecutionVisualizer #stackHeader,  .ExecutionVisualizer #heapHeader{    
     font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif";  
     font-size:1.02rem !important;
     text-align:left !important;
 }
 
-.ExecutionVisualizer #printOutputDocs {
-    font-family: "Archivo","proxima-nova","Helvetica Neue","Arial","sans-serif" !important;    
-}
-
-/* print output */
-.ExecutionVisualizer #pyStdout {
-    border:none !important;
-    box-shadow: 1px 1px 3px 1px #ccc;
-}
 
 /* Frames and Objects panels */
 .ExecutionVisualizer .vizLayoutTd td {
@@ -739,9 +743,8 @@ div.notranslate,  .admonition, .pytutorVisualizer {
     border: none !important;
 }
 
-.ExecutionVisualizer .li
-/* Yellow heap end */
-stTbl td,
+
+.ExecutionVisualizer .listTbl td,
 .ExecutionVisualizer .tupleTbl td,
 .ExecutionVisualizer .setTbl, 
 .ExecutionVisualizer .dictTbl, 
@@ -761,7 +764,7 @@ stTbl td,
     border-radius:15px;
 }
 
-
+/* Yellow heap end */
 
 /* Show middle bar */
 .ExecutionVisualizer div.ui-resizable-handle.ui-resizable-e {

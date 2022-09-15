@@ -36,6 +36,11 @@ div.ui-resizable-handle.ui-resizable-e {
 }
 
 
+/* fix for Python Tutor displaying set header as grey https://github.com/DavidLeoni/jupman/issues/125*/
+.ExecutionVisualizer .setTbl td {
+    background-color: #ffffc6;
+}
+
 /* ************ PYTHON TUTOR END ***************   */
 
 
