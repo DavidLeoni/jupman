@@ -9,7 +9,6 @@
 
 _build/
 _private/*
-!_private/README.md
 
 /_templates/exam/server/*
 !_templates/exam/server/README.md
