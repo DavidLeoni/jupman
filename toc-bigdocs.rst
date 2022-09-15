@@ -1,37 +1,67 @@
-Big sub chapter 1
--------------------
+
+Big sub chapter A
+=====================
 
 .. toctree::
     :maxdepth: 3
     :glob:
 
-    big-docs-example1/big-docs-example01.ipynb
-    big-docs-example1/big-docs-example02.ipynb
-    big-docs-example1/big-docs-example03.ipynb
-    big-docs-example1/big-docs-example04.ipynb
-    big-docs-example1/big-docs-example05.ipynb
-    big-docs-example1/big-docs-example06.ipynb
-    big-docs-example1/big-docs-example07.ipynb
-    big-docs-example1/big-docs-example08.ipynb
-    big-docs-example1/big-docs-example09.ipynb
-    big-docs-example1/big-docs-example10.ipynb
+    big-docs-example-A/big-docs-example-A1.ipynb
+    big-docs-example-A/big-docs-example-A2.ipynb
     
-    
-Big sub chapter 2
------------------------
+Big sub chapter A.A
+-----------------------------
+
 
 .. toctree::
     :maxdepth: 3
     :glob:
 
-    big-docs-example2/big-docs-example01.ipynb
-    big-docs-example2/big-docs-example02.ipynb
-    big-docs-example2/big-docs-example03.ipynb
-    big-docs-example2/big-docs-example04.ipynb
-    big-docs-example2/big-docs-example05.ipynb
-    big-docs-example2/big-docs-example06.ipynb
-    big-docs-example2/big-docs-example07.ipynb
-    big-docs-example2/big-docs-example08.ipynb
-    big-docs-example2/big-docs-example09.ipynb
-    big-docs-example2/big-docs-example10.ipynb
+    big-docs-example-A/A/big-docs-example-AA1.ipynb
+    big-docs-example-A/A/big-docs-example-AA2.ipynb
+
+    
+Big sub chapter A.A.A
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    
+.. toctree::
+    :maxdepth: 3
+    :glob:    
+    
+    big-docs-example-A/A/A/big-docs-example-AAA1.ipynb
+    big-docs-example-A/A/A/big-docs-example-AAA2.ipynb
+    
+
+Big sub chapter A.A.B
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    
+.. toctree::
+    :maxdepth: 3
+    :glob:    
+
+    big-docs-example-A/A/B/big-docs-example-AAB1.ipynb
+    
+    
+Big sub chapter A.A.C
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    
+.. toctree::
+    :maxdepth: 3
+    :glob:    
+
+    big-docs-example-A/A/C/big-docs-example-AAC1.ipynb
+    big-docs-example-A/A/C/big-docs-example-AAC2.ipynb
+    
+    
+Big sub chapter A.B
+-----------------------------
+    
+
+.. toctree::
+    :maxdepth: 3
+    :glob:    
+
+    big-docs-example-A/B/big-docs-example-AB1.ipynb    
+    
     
