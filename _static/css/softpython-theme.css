@@ -226,12 +226,12 @@ html { font-size:0.81em; }
     padding-right: 20px;
 }
 
-.wy-side-nav-search > a.icon {
+.wy-side-nav-search > a {
     padding-left:10px !important;
     padding-right:10px !important;
     padding-top:5px !important;
     padding-bottom:5px !important;
-    border-radius:15px;
+    border-radius:35px;
 }
 
 
@@ -548,11 +548,6 @@ table.docutils tr:nth-child(even) {
 
 /* *****************   TABLES END    **********************  */
 
-/* hack for Python Tutor 'next line to execute' becoming too big */
-#legendDiv p {
-    font-size: 9pt;
-}
-
 
 
 .jupman-sol {    
@@ -687,6 +682,25 @@ div.notranslate,  .admonition, .pytutorVisualizer {
     font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif" !important;    
     font-size:0.9rem !important;    
     margin-top:5px !important;
+}
+
+
+
+/* step slider */
+
+.ExecutionVisualizer #executionSlider {
+    box-shadow: 1px 0px 2px 0px #aaa;
+    height: 5px;    
+    border: none;
+    margin-bottom:21px !important;
+}    
+
+.ExecutionVisualizer #executionSlider span.ui-slider-handle {
+    background: #eee !important;
+    border:none;
+    box-shadow: 1px 1px 2px 0px #777;
+    margin-top:-3px;
+    cursor: grab;
 }
 
 
