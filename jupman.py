@@ -2852,7 +2852,7 @@ def pytut():
     """ % (json_id, div_id, visualizerIdOverride)
     
     inject += """
-    <div style="text-align:center; font-size:0.9em"> Visualization provided by <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> </div> 
+    <div style="text-align:center; font-size:0.9em"> <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> visualization</div> 
     """
     
     return HTML(inject)
