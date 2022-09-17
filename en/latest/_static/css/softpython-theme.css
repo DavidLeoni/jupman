@@ -226,6 +226,14 @@ html { font-size:0.81em; }
     padding-right: 20px;
 }
 
+.wy-side-nav-search > a {
+    padding-left:10px !important;
+    padding-right:10px !important;
+    padding-top:5px !important;
+    padding-bottom:5px !important;
+    border-radius:35px;
+}
+
 
 #rtd-search-form {
     font-size:1.05rem;
@@ -236,26 +244,59 @@ html { font-size:0.81em; }
  }
 
 
-.toctree-l1 > a {
+.wy-menu .toctree-l1 > a {
     line-height:2ch !important;
 }
-.toctree-l2 > a {
+.wy-menu .toctree-l2 > a {
     line-height:2ch !important;
 }
-.toctree-l3 > a {
+.wy-menu .toctree-l3 > a {
     line-height:2ch !important;
 }
 
-.toctree-l4 > a {
+.wy-menu .toctree-l4 > a {
     padding: .4045em 1.663em .4045em  4.663em !important;    
     line-height:2ch !important;
 }
 
-.toctree-l5 > a {
+.wy-menu .toctree-l5 > a {
     font-size: 0.97rem !important;
     padding: .4045em 1.663em .4045em  5em !important;
     line-height:2ch !important;
 }
+
+
+.wy-menu li.toctree-l1 > a:active {
+  background:#bba2 !important;
+}
+
+
+.wy-menu li > a:active {
+  background:#bba6 !important;
+}
+
+.wy-menu li.toctree-l1 > a:hover {   
+   background:#8647;
+}
+
+.wy-menu li.toctree-l1.current > a:hover {   
+   background:#e2e2e2;
+}
+
+
+.wy-menu li.toctree-l2 > a:hover {
+   background:#d9d9d9;
+}
+
+
+.wy-menu li.toctree-l3 > a:hover {
+   background:#ddd !important;
+}
+
+.wy-menu li.toctree-l4 > a:hover {
+   background:#ccc !important;
+}
+
 
 /* only for toc in index pages */
 .toctree-wrapper {
@@ -278,6 +319,8 @@ html { font-size:0.81em; }
 .toctree-wrapper .toctree-l2 ul {   
     margin-top:0.4rem !important;    
 }
+
+
 
 
 
@@ -505,11 +548,6 @@ table.docutils tr:nth-child(even) {
 
 /* *****************   TABLES END    **********************  */
 
-/* hack for Python Tutor 'next line to execute' becoming too big */
-#legendDiv p {
-    font-size: 9pt;
-}
-
 
 
 .jupman-sol {    
@@ -624,11 +662,15 @@ div.notranslate,  .admonition, .pytutorVisualizer {
 
 /* Left code NOTE: For some reason we need also #codAndNav ...*/
 .ExecutionVisualizer  #codAndNav #pyCodeOutputDiv table {    
+    font-family: "Inconsolata","SFMono-Regular","Menlo","Monaco","Consolas","Liberation Mono","Courier New","Courier","monospace" !important;    
+    font-size:1.12rem !important;
+    
     padding-top:0px !important;        
     border-top:none;        
     border-radius:7px !important;        
     box-shadow: 0px 2px 5px 2px #eee;
 }
+
 
 
 
@@ -644,6 +686,25 @@ div.notranslate,  .admonition, .pytutorVisualizer {
     font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif" !important;    
     font-size:0.9rem !important;    
     margin-top:5px !important;
+}
+
+
+
+/* step slider */
+
+.ExecutionVisualizer #executionSlider {
+    box-shadow: 1px 0px 2px 0px #aaa;
+    height: 5px;    
+    border: none;
+    margin-bottom:21px !important;
+}    
+
+.ExecutionVisualizer #executionSlider span.ui-slider-handle {
+    background: #eee !important;
+    border:none;
+    box-shadow: 1px 1px 2px 0px #777;
+    margin-top:-3px;
+    cursor: grab;
 }
 
 
@@ -695,6 +756,14 @@ div.notranslate,  .admonition, .pytutorVisualizer {
 }
 
 
+/* Middle vertical bar */
+.ExecutionVisualizer div.ui-resizable-handle.ui-resizable-e {
+    border-color: #d9d9df !important;
+    border-width:1px !important; 
+    box-shadow:  0px 0px 2px 0px #2223 !important;
+}
+
+
 /* Virtual monitor description line:  Print output (drag lower right corner to resize) */
 .ExecutionVisualizer #printOutputDocs {
     font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif"  !important;        
@@ -703,6 +772,8 @@ div.notranslate,  .admonition, .pytutorVisualizer {
 /* Virtual monitor box */
 
 .ExecutionVisualizer #pyStdout {
+    font-family: "Inconsolata","SFMono-Regular","Menlo","Monaco","Consolas","Liberation Mono","Courier New","Courier","monospace" !important;    
+    font-size:0.9rem !important;    
     border:none !important;
     box-shadow: 1px 1px 3px 1px #ccc;
 }
@@ -727,12 +798,23 @@ div.notranslate,  .admonition, .pytutorVisualizer {
     font-size:0.9rem !important;
 }
 
-.ExecutionVisualizer .stackFrame {
+.ExecutionVisualizer .stackFrame {    
     border-radius:6px !important;
     box-shadow: 1px 1px 3px 1px #a0a0b5;
 }
 
+.ExecutionVisualizer .stackFrame td {    
+   font-family: "Inconsolata","SFMono-Regular","Menlo","Monaco","Consolas","Liberation Mono","Courier New","Courier","monospace" !important;    
+   font-size:0.9rem !important;
+}
+
 /* Yellow heap  */
+
+.ExecutionVisualizer .heapObject td, .ExecutionVisualizer .heapObject div {
+   font-family: "Inconsolata","SFMono-Regular","Menlo","Monaco","Consolas","Liberation Mono","Courier New","Courier","monospace" !important;    
+   font-size: 0.95rem !important;
+}
+
 .ExecutionVisualizer .listTbl,
 .ExecutionVisualizer .tupleTbl,
 .ExecutionVisualizer .setTbl, 
@@ -765,13 +847,6 @@ div.notranslate,  .admonition, .pytutorVisualizer {
 }
 
 /* Yellow heap end */
-
-/* Show middle bar */
-.ExecutionVisualizer div.ui-resizable-handle.ui-resizable-e {
-    border-color: #d9d9df !important;
-    border-width:1px !important; 
-    box-shadow:  0px 0px 2px 0px #2223 !important;
-}
 
 /* ********* PYTHON TUTOR END **********  */
 
