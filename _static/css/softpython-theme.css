@@ -662,11 +662,15 @@ div.notranslate,  .admonition, .pytutorVisualizer {
 
 /* Left code NOTE: For some reason we need also #codAndNav ...*/
 .ExecutionVisualizer  #codAndNav #pyCodeOutputDiv table {    
+    font-family: "Inconsolata","SFMono-Regular","Menlo","Monaco","Consolas","Liberation Mono","Courier New","Courier","monospace" !important;    
+    font-size:1.12rem !important;
+    
     padding-top:0px !important;        
     border-top:none;        
     border-radius:7px !important;        
     box-shadow: 0px 2px 5px 2px #eee;
 }
+
 
 
 
@@ -752,6 +756,14 @@ div.notranslate,  .admonition, .pytutorVisualizer {
 }
 
 
+/* Middle vertical bar */
+.ExecutionVisualizer div.ui-resizable-handle.ui-resizable-e {
+    border-color: #d9d9df !important;
+    border-width:1px !important; 
+    box-shadow:  0px 0px 2px 0px #2223 !important;
+}
+
+
 /* Virtual monitor description line:  Print output (drag lower right corner to resize) */
 .ExecutionVisualizer #printOutputDocs {
     font-family: "Varela","ff-tisa-web-pro","Georgia","Arial","sans-serif"  !important;        
@@ -760,6 +772,8 @@ div.notranslate,  .admonition, .pytutorVisualizer {
 /* Virtual monitor box */
 
 .ExecutionVisualizer #pyStdout {
+    font-family: "Inconsolata","SFMono-Regular","Menlo","Monaco","Consolas","Liberation Mono","Courier New","Courier","monospace" !important;    
+    font-size:0.9rem !important;    
     border:none !important;
     box-shadow: 1px 1px 3px 1px #ccc;
 }
@@ -784,12 +798,23 @@ div.notranslate,  .admonition, .pytutorVisualizer {
     font-size:0.9rem !important;
 }
 
-.ExecutionVisualizer .stackFrame {
+.ExecutionVisualizer .stackFrame {    
     border-radius:6px !important;
     box-shadow: 1px 1px 3px 1px #a0a0b5;
 }
 
+.ExecutionVisualizer .stackFrame td {    
+   font-family: "Inconsolata","SFMono-Regular","Menlo","Monaco","Consolas","Liberation Mono","Courier New","Courier","monospace" !important;    
+   font-size:0.9rem !important;
+}
+
 /* Yellow heap  */
+
+.ExecutionVisualizer .heapObject td, .ExecutionVisualizer .heapObject div {
+   font-family: "Inconsolata","SFMono-Regular","Menlo","Monaco","Consolas","Liberation Mono","Courier New","Courier","monospace" !important;    
+   font-size: 0.95rem !important;
+}
+
 .ExecutionVisualizer .listTbl,
 .ExecutionVisualizer .tupleTbl,
 .ExecutionVisualizer .setTbl, 
@@ -822,13 +847,6 @@ div.notranslate,  .admonition, .pytutorVisualizer {
 }
 
 /* Yellow heap end */
-
-/* Show middle bar */
-.ExecutionVisualizer div.ui-resizable-handle.ui-resizable-e {
-    border-color: #d9d9df !important;
-    border-width:1px !important; 
-    box-shadow:  0px 0px 2px 0px #2223 !important;
-}
 
 /* ********* PYTHON TUTOR END **********  */
 
