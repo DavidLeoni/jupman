@@ -10,6 +10,7 @@ Jupman: A template for online manuals made with Jupyter notebooks.
 
 Added:
 - Softpython theme eye candy #122
+- softpython-theme-textures.css with manually embedded base64 images
 - logo, favicon #123
 - explicilty stated all dependencies in requirements-buils.txt, added create_env script #82
 - improved manual/*
