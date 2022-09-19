@@ -857,7 +857,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../manual/tests-pytutor.html#Print-output">Print output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manual/tests-pytutor.html#Alignment-test-1">Alignment test 1</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manual/tests-pytutor.html#Alignment-test-2">Alignment test 2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../manual/tests-pytutor.html#Duplicated-code-bug">Duplicated code bug</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manual/tests-pytutor.html#Cloned-cell-test">Cloned cell test</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manual/tests-pytutor.html#Alternative:-HTML-magics">Alternative: HTML magics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manual/tests-pytutor.html#Alternative:-NBTutor">Alternative: NBTutor</a></li>
 </ul>
@@ -1285,10 +1285,12 @@ It was a 5 indeed
     <div id="jm-2fd875edc51ed8a6922628f64553c4ab" class="pytutorVisualizer"> </div>
 
     <script>
+
     (function(){
+        console.log("jupman.py embedded javascript: adding Python tutor visualizer...")
 
         var trace = JSON.parse(document.getElementById('json-jm-2fd875edc51ed8a6922628f64553c4ab').innerHTML);
-        // NOTE 1: id without #
+        // NOTE: id without #
 
         addVisualizerToPage(trace, 'jm-2fd875edc51ed8a6922628f64553c4ab',{'embeddedMode' : false,
                                          'visualizerIdOverride':'viz-jm-2fd875edc51ed8a6922628f64553c4ab'})
@@ -1307,7 +1309,7 @@ It was a 5 indeed
     </script>
 
 
-<div style="text-align:center; font-size:0.9em"> Visualization provided by <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> </div></div>
+<div style="text-align:center; font-size:0.9em"> <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> visualization</div></div>
 </div>
 </section>
 <section id="Exercise-in-Jupyter">

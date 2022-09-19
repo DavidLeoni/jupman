@@ -857,7 +857,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../manual/tests-pytutor.html#Print-output">Print output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manual/tests-pytutor.html#Alignment-test-1">Alignment test 1</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manual/tests-pytutor.html#Alignment-test-2">Alignment test 2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../manual/tests-pytutor.html#Duplicated-code-bug">Duplicated code bug</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manual/tests-pytutor.html#Cloned-cell-test">Cloned cell test</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manual/tests-pytutor.html#Alternative:-HTML-magics">Alternative: HTML magics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../manual/tests-pytutor.html#Alternative:-NBTutor">Alternative: NBTutor</a></li>
 </ul>
@@ -1259,10 +1259,12 @@ div.rendered_html tbody tr:hover {
     <div id="jm-dde7e6fa128d45cb08b061187ffa60fd" class="pytutorVisualizer"> </div>
 
     <script>
+
     (function(){
+        console.log("jupman.py embedded javascript: adding Python tutor visualizer...")
 
         var trace = JSON.parse(document.getElementById('json-jm-dde7e6fa128d45cb08b061187ffa60fd').innerHTML);
-        // NOTE 1: id without #
+        // NOTE: id without #
 
         addVisualizerToPage(trace, 'jm-dde7e6fa128d45cb08b061187ffa60fd',{'embeddedMode' : false,
                                          'visualizerIdOverride':'viz-jm-dde7e6fa128d45cb08b061187ffa60fd'})
@@ -1281,7 +1283,7 @@ div.rendered_html tbody tr:hover {
     </script>
 
 
-<div style="text-align:center; font-size:0.9em"> Visualization provided by <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> </div></div>
+<div style="text-align:center; font-size:0.9em"> <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> visualization</div></div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
@@ -1310,10 +1312,12 @@ div.rendered_html tbody tr:hover {
     <div id="jm-ab5ed56f3b57e0cfd7474ee34e8a9a36" class="pytutorVisualizer"> </div>
 
     <script>
+
     (function(){
+        console.log("jupman.py embedded javascript: adding Python tutor visualizer...")
 
         var trace = JSON.parse(document.getElementById('json-jm-ab5ed56f3b57e0cfd7474ee34e8a9a36').innerHTML);
-        // NOTE 1: id without #
+        // NOTE: id without #
 
         addVisualizerToPage(trace, 'jm-ab5ed56f3b57e0cfd7474ee34e8a9a36',{'embeddedMode' : false,
                                          'visualizerIdOverride':'viz-jm-ab5ed56f3b57e0cfd7474ee34e8a9a36'})
@@ -1332,7 +1336,7 @@ div.rendered_html tbody tr:hover {
     </script>
 
 
-<div style="text-align:center; font-size:0.9em"> Visualization provided by <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> </div></div>
+<div style="text-align:center; font-size:0.9em"> <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> visualization</div></div>
 </div>
 </section>
 <section id="Exercise-1">
