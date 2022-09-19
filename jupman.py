@@ -2756,9 +2756,9 @@ def pytut():
     
     #Hacky way to get variables from stack, but if we use %run -i we don't need it.    
     notebook_globals = inspect.stack()[1][0].f_globals    
+    code = notebook_globals["In"][-1]                           
     
-    code = notebook_globals["In"][-1]                   
-
+        
     i = code.find('jupman.pytut()')
    
     if i == -1:
@@ -2798,7 +2798,7 @@ def pytut():
     trace = pytut_json(new_code)        
     
     #Note: potentially there could be equal codes requiring pytut visualization, but probability should be low    
-    gen_id = hashlib.md5(code.encode()).hexdigest()            
+    gen_id = f'{hashlib.md5(code.encode()).hexdigest()}-{len(notebook_globals["In"])+1}'
     div_id = f'jm-{gen_id}'
     json_id = f'json-{div_id}'
     visualizerIdOverride = f'viz-{div_id}'        
