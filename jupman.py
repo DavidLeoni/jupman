@@ -2828,11 +2828,13 @@ def pytut():
     
     inject +=   """                        
         <script>
+        
         (function(){
-
-            var trace = JSON.parse(document.getElementById('%s').innerHTML);                                        
-            // NOTE 1: id without #
+            console.log("jupman.py embedded javascript: adding Python tutor visualizer...")
             
+            var trace = JSON.parse(document.getElementById('%s').innerHTML);                                        
+            // NOTE: id without #
+                    
             addVisualizerToPage(trace, '%s',{'embeddedMode' : false,                       
                                              'visualizerIdOverride':'%s'})  
             
