@@ -239,8 +239,9 @@ html { font-size:0.81em; }
     font-size:1.05rem;
 }
 
-.wy-side-nav-search, .wy-nav-top {
-   background-color: #325506;
+
+ .wy-side-nav-search, .wy-nav-top {   
+   background-color: #537326;
  }
  
 .wy-menu .toctree-l1 > a, li.toctree-l1 > a > .toctree-expand {
@@ -281,6 +282,11 @@ html { font-size:0.81em; }
 .wy-menu li.toctree-l1 > a:hover {   
    background:#8643;
 }
+
+.wy-menu li.toctree-l1.current > a {
+  color: #333 !important;
+}
+
 
 .wy-menu li.toctree-l1.current > a:hover {   
    background:#e2e2e2;
@@ -580,7 +586,8 @@ a.jupman-sol-toggler:hover {
 }
 
 .wy-form input {
-   box-shadow:  0px 0px 20px 7px rgba(0, 200, 0, 0.3);
+   box-shadow:  0px 0px 20px 7px rgba(150, 200, 130, 0.3);
+}
 }
 
 .toctree-l1 > ul {
