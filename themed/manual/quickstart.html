@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quickstart &mdash; Jupman</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/jupman.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/jupman-web.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/softpython-theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/softpython-theme-textures.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="canonical" href="https://jupman.softpython.org/en/latest/manual/quickstart.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="../_static/js/mathjax/tex-mml-chtml.js"></script>
+        <script src="../_static/js/jupman.js"></script>
+        <script src="../_static/js/pytutor-embed.bundle.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Editing worksheets" href="editing.html" />
+    <link rel="prev" title="Jupman" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../toc-page.html">
+            <img src="../_static/jupman.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.5
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#Contents">Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#Revisions">Revisions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#Credits">Credits</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Building-with-ReadTheDocs:">Building with ReadTheDocs:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Building-with-Github-Actions:">Building with Github Actions:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Local-build-with-Sphinx">Local build with Sphinx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Optional---Running-tests">Optional - Running tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Optional---Install-Jupyter-contrib-extensions">Optional - Install Jupyter contrib extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Configure">Configure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Building-the-manual">Building the manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Publish">Publish</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Further-steps">Further steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="editing.html">Editing worksheets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Common-files">Common files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Running-Jupyter">Running Jupyter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Source-code-for-chapters">Source code for chapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Exercise-types">Exercise types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="editing.html#Exercises-in-Python-files">Exercises in Python files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="editing.html#Exercises-in-Jupyter-files">Exercises in Jupyter files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="editing.html#Mixed-exercises-in-Jupyter-and-Python-files">Mixed exercises in Jupyter and Python files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="editing.html#Challenges">Challenges</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Solution-tags">Solution tags</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="editing.html#jupman-raise">jupman-raise</a></li>
+<li class="toctree-l3"><a class="reference internal" href="editing.html#jupman-strip">jupman-strip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="editing.html#write-here">write here</a></li>
+<li class="toctree-l3"><a class="reference internal" href="editing.html#SOLUTION">SOLUTION</a></li>
+<li class="toctree-l3"><a class="reference internal" href="editing.html#QUESTION---ANSWER">QUESTION - ANSWER</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Directive-tags">Directive tags</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="editing.html#jupman-purge">jupman-purge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="editing.html#jupman-preprocess">jupman-preprocess</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Hiding-cells">Hiding cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Launch-unit-tests">Launch unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Python-Tutor">Python Tutor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Pandas">Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Showing-function-help">Showing function help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Custom-js-and-css">Custom js and css</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Show-table-of-contents">Show table of contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="customize.html">Customize</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="customize.html#Change-website-theme">Change website theme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize.html#Fonts">Fonts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize.html#font-sizes">font sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize.html#Warning-about-old-versions">Warning about old versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize.html#Fix-nbsphinx-to-create-rst-files">Fix nbsphinx to create rst files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize.html#Git-performance-notes">Git performance notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="exams-management.html">Exams management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="exams-management.html#What-is-an-exam">What is an exam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exams-management.html#Exam-commands">Exam commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../toc.html">Chapter examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python-example/python-example.html">Python example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../python-example/python-example.html#Download-exercises-zip">Download exercises zip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-example/python-example.html#What-to-do">What to do</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../python-example/python-example.html#Let's-begin">Let’s begin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../python-example/python-example.html#Global-image">Global image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-example/python-example.html#Local-exercise-image">Local exercise image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-example/python-example.html#Python-tutor">Python tutor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-example/python-example.html#add">add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../python-example/python-example.html#sub">sub</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../jupyter-example/jupyter-example-sol.html">Jupyter example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jupyter-example/jupyter-example-sol.html#Download-exercises-zip">Download exercises zip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jupyter-example/jupyter-example-sol.html#What-to-do">What to do</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jupyter-example/jupyter-example-sol.html#Exercise-1">Exercise 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jupyter-example/jupyter-example-sol.html#Exercise-2">Exercise 2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../jupyter-example/jupyter-example-sol.html#Exercise-3">Exercise 3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../jupyter-example/jupyter-example-sol.html#Exercise-4">Exercise 4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../jupyter-example/jupyter-example-sol.html#Exercise-5">Exercise 5</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../jupyter-example/jupyter-example-sol.html#Conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../jupyter-example/jupyter-js-sol.html">Jupyter example with custom js and css</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jupyter-example/jupyter-js-sol.html#Download-exercises-zip">Download exercises zip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jupyter-example/jupyter-js-sol.html#Exercise-1">Exercise 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jupyter-example/jupyter-js-sol.html#Exercise-2">Exercise 2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html">Mixed Jupyter and Python example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Download-exercises-zip">Download exercises zip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#What-to-do">What to do</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Let's-begin">Let’s begin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Global-image">Global image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Local-exercise-image">Local exercise image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Python-tutor">Python tutor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Exercise-in-Jupyter">Exercise in Jupyter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Exercise-using-previous-output">Exercise using previous output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Question-in-Jupyter">Question in Jupyter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Exercise-in-Python">Exercise in Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#add">add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#sub">sub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jup-and-py-example/jup-and-py-example-sol.html#Fine-grained-purging">Fine grained purging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-bigdocs.html">Big sub chapter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html">Big docs example 1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#reasonable-header">reasonable header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#reasonable-sub-header">reasonable sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id1">reasonable header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id2">reasonable sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#header-with-long-title">header with long title</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#sub-header-with-long-title">sub header with long title</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id4">header with long title</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id5">sub header with long title</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id6">header with long title</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id7">sub header with long title</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#header-with-extra-super-long-title">header with extra super long title</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#sub-header-with-extra-super-long-title">sub header with extra super long title</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id8">header with extra super long title</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id9">sub header with extra super long title</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id10">header with extra super long title</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id11">sub header with extra super long title</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id12">header with extra super long title</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id13">sub header with extra super long title</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#header">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#sub-header">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id14">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id15">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id16">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id17">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id18">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id19">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id20">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id21">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id22">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id23">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id24">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id25">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id26">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id27">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id28">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id29">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id30">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id31">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id32">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id33">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id34">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id35">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id36">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id37">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id38">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id39">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id40">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id41">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id42">reasonable header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id43">reasonable sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id44">reasonable header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id45">reasonable sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#header-with-long-text">header with long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#sub-header-with-long-text">sub header with long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id46">header with long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id47">sub header with long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id48">header with long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id49">sub header with long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#header-with-extra-super-long-text">header with extra super long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#sub-header-with-extra-super-long-text">sub header with extra super long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id50">header with extra super long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id51">sub header with extra super long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id52">header with extra super long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id53">sub header with extra super long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id54">header with extra super long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id55">sub header with extra super long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id56">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id57">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id58">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id59">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id60">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id61">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id62">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id63">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id64">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id65">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id66">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id67">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id68">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id69">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id70">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id71">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id72">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id73">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id74">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id75">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id76">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id77">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id78">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id79">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id80">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id81">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id82">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id83">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id84">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-1.html#id85">sub header</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html">Big docs example 2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#reasonable-header">reasonable header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#reasonable-sub-header">reasonable sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id1">reasonable header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id2">reasonable sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#header-with-long-text">header with long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#sub-header-with-long-text">sub header with long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id3">header with long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id4">sub header with long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id5">header with long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id6">sub header with long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#header-with-extra-super-long-text">header with extra super long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#sub-header-with-extra-super-long-text">sub header with extra super long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id7">header with extra super long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id8">sub header with extra super long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id9">header with extra super long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id10">sub header with extra super long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id11">header with extra super long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id12">sub header with extra super long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#header">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#sub-header">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id13">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id14">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id15">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id16">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id17">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id18">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id19">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id20">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id21">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id22">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id23">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id24">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id25">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id26">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id27">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id28">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id29">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id30">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id31">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id32">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id33">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id34">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id35">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id36">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id37">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id38">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id39">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id40">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id41">reasonable header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id42">reasonable sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id43">reasonable header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id44">reasonable sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id45">header with long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id46">sub header with long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id47">header with long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id48">sub header with long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id49">header with long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id50">sub header with long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id51">header with extra super long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id52">sub header with extra super long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id53">header with extra super long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id54">sub header with extra super long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id55">header with extra super long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id56">sub header with extra super long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id57">header with extra super long text</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id58">sub header with extra super long text</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id59">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id60">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id61">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id62">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id63">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id64">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id65">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id66">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id67">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id68">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id69">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id70">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id71">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id72">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id73">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id74">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id75">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id76">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id77">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id78">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id79">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id80">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id81">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id82">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id83">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id84">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id85">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id86">sub header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id87">header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/big-docs-example-2.html#id88">sub header</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../toc-bigdocs.html#big-sub-chapter-a">Big sub chapter A</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html">Big docs example A1</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#reasonable-header">reasonable header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id1">reasonable header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#header-with-long-text">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id3">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id5">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#header-with-extra-super-long-text">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id7">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id9">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id11">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#header">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id13">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id15">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id17">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id19">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id21">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id23">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id25">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id27">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id29">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id31">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id33">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id35">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id37">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id39">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id41">reasonable header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id43">reasonable header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id45">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id47">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id49">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id51">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id53">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id55">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id57">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id59">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id61">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id63">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id65">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id67">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id69">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id71">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id73">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id75">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id77">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id79">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id81">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id83">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id85">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A1.html#id87">header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html">Big docs example A2</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#reasonable-header">reasonable header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id1">reasonable header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#header-with-long-text">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id3">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id5">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#header-with-extra-super-long-text">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id7">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id9">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id11">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#header">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id13">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id15">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id17">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id19">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id21">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id23">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id25">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id27">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id29">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id31">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id33">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id35">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id37">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id39">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id41">reasonable header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id43">reasonable header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id45">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id47">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id49">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id51">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id53">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id55">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id57">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id59">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id61">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id63">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id65">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id67">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id69">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id71">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id73">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id75">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id77">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id79">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id81">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id83">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id85">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/big-docs-example-A2.html#id87">header</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../toc-bigdocs.html#big-sub-chapter-a-a">Big sub chapter A.A</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/A/big-docs-example-AA1.html">Big docs example AA1</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/A/big-docs-example-AA2.html">Big docs example AA2</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../toc-bigdocs.html#big-sub-chapter-a-b">Big sub chapter A.B</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/B/big-docs-example-AB1.html">Big docs example AB1</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../toc-bigdocs.html#big-sub-chapter-a-c">Big sub chapter A.C</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/C/big-docs-example-AC1.html">Big docs example AC1</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/A/C/big-docs-example-AC2.html">Big docs example AC2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../toc-bigdocs.html#big-sub-chapter-b">Big sub chapter B</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html">Big docs example AB1</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#reasonable-header">reasonable header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id1">reasonable header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#header-with-long-text">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id3">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id5">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#header-with-extra-super-long-text">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id7">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id9">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id11">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#header">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id13">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id15">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id17">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id19">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id21">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id23">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id25">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id27">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id29">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id31">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id33">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id35">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id37">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id39">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id41">reasonable header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id43">reasonable header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id45">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id47">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id49">header with long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id51">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id53">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id55">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id57">header with extra super long text</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id59">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id61">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id63">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id65">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id67">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id69">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id71">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id73">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id75">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id77">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id79">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id81">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id83">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id85">header</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../big-docs-example/B/big-docs-example-B1.html#id87">header</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../challenge-example/example-chal.html">Example Challenge</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../challenge-example/example-chal.html#Download-exercises-zip">Download exercises zip</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../toc.html#templates">Templates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#august-11th-2022-3-5-4">August 11th, 2022 - 3.5.4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#june-4th-2022-3-5">June 4th 2022 - 3.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#april-28th-2022-3-4">April 28th 2022 - 3.4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#february-25th-2022-3-3">February 25th 2022 - 3.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#october-17th-2020-3-2">October 17th 2020 - 3.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#january-16th-2020-3-1">January 16th 2020 - 3.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#december-29th-2019-3-0">December 29th 2019 - 3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#september-24th-2018-2-0">September 24th 2018 - 2.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#september-19th-2018-1-0">September 19th 2018 - 1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#august-26th-2018-0-9">August 26th 2018 - 0.9</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#august-12th-2018-0-8">August 12th 2018 - 0.8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#august-3rd-2018-0-7">August 3rd 2018 - 0.7</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../past-exams.html">Past Exams</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../exam-project.html">Exam project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../exam-project.html#What-to-do">What to do</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exam-project.html#Technical-requirements">Technical requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../exam-project.html#Python-code">Python code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../exam-project.html#requirements.txt-file"><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../exam-project.html#Graphical-interfaces">Graphical interfaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../exam-project.html#Be-careful-to">Be careful to</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../project-ideas.html">Project ideas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../project-ideas.html#TODO">TODO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project-ideas.html#Introduction">Introduction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../project/project.html">Jupman Project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../project/project.html#Introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project/project.html#Data-sources">Data sources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project/project.html#Data-cleaning-and-integration">Data cleaning and integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project/project.html#Analysis">Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project/project.html#Problems-found">Problems found</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project/project.html#Conclusioni">Conclusioni</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../project/markdown.html">Markdown</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../toc.html#tests">Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tests.html">Rendering tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Section-1">Section 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Section-2">Section 2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#Subsection-1">Subsection 1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#Subsection-2">Subsection 2</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Python-code">Python code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Python-in-Markdown">Python in Markdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Other-quotes">Other quotes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Download-links">Download links</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Links-to-HTML">Links to HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Info/Warning-Boxes">Info/Warning Boxes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#jupman-alert-principle">jupman-alert-principle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Math">Math</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Unicode">Unicode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Tables">Tables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#A-small-table">A small table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#An-extra-large-table">An extra large table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#A-table-with-extra-large-text">A table with extra large text</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Lists">Lists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Images">Images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#SVG-Images">SVG Images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#PNG-Images">PNG Images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#Inline-images---pure-markdown">Inline images - pure markdown</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#Inline-images---markdown-and-img">Inline images - markdown and img</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#Img-class">Img class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#A-picture-with-alternate-text">A picture with alternate text</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Expressions-list">Expressions list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Togglable-cells">Togglable cells</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#Show/hide-exercises-(RECOMMENDED)">Show/hide exercises (RECOMMENDED)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#Toggling-with-Javascript">Toggling with Javascript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#HTML-details-in-Markdown,-code-tag">HTML details in Markdown, code tag</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#HTML-details-in-Markdown,-Markdown-mixed-code">HTML details in Markdown, Markdown mixed code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#HTML-details-in-HTML,-raw-NBConvert-Format">HTML details in HTML, raw NBConvert Format</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Stripping-answers">Stripping answers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Files-in-templates">Files in templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Inline-text-style">Inline text style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Formatting-problems">Formatting problems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#Characters-per-line">Characters per line</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#Very-large-input">Very large input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html#Very-long-output">Very long output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#Python-tutor-tests">Python tutor tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests-pytutor.html">Python Tutor tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Data-types">Data types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Window-overflow">Window overflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#pytut-execution">pytut execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Infinite-loops">Infinite loops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Resizability">Resizability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Cross-arrows">Cross arrows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Print-output">Print output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Alignment-test-1">Alignment test 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Alignment-test-2">Alignment test 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Cloned-cell-test">Cloned cell test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Alternative:-HTML-magics">Alternative: HTML magics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests-pytutor.html#Alternative:-NBTutor">Alternative: NBTutor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference external" href="toc.html#http://">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../toc-page.html">Jupman</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+    <div id='jupman-langs'></div>
+
+    <!-- SMALL TEMPLATE FOR LANGUAGES (VERY CUSTOM FOR softpython.org !!)
+    <script>
+    var hn = window.location.hostname;
+    var pn = window.location.pathname;
+
+    if (hn.includes('softpython.org')){
+        JUPMAN_LANG = hn.slice(0,window.location.hostname.indexOf('.'));
+    } else if (pn.includes('/_build/html')){
+        var pos = pn.indexOf('/_build/html');
+        JUPMAN_LANG = pn.slice(pos-2, pos);
+    } else {
+        JUPMAN_LANG = 'en';
+    }
+    console.log('JUPMAN_LANG=',JUPMAN_LANG);
+    </script>
+    -->
+    
+    
+     <!-- <li> <h2 style="background-color:red; color:yellow">WARNING! THIS VERSION IS OLD !  <br/>
+    <a style=" text-decoration: underline;" href="https://jupman.readthedocs.io/en/latest">GOT TO LATEST VERSION</a></li>
+ </h2></li>-->
+    <!-- Commented because doesn't work with sections,
+         see https://github.com/DavidLeoni/jupman/issues/39
+    <li><a href="../toc-page.html">Docs</a> &raquo;</li>
+    
+        <li><a href="../toc.html">Chapter examples</a> &raquo;</li>
+    
+    <li>Quickstart</li>
+    -->
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="Quickstart">
+<h1>Quickstart<a class="headerlink" href="#Quickstart" title="Permalink to this headline"></a></h1>
+<p>Jupman uses <a class="reference external" href="http://nbsphinx.readthedocs.io/">NbSphinx</a> and either <a class="reference external" href="https://readthedocs.org">ReadTheDocs</a> or <a class="reference external" href="https://github.com/features/actions">Github Actions</a></p>
+<section id="Installation">
+<h2>Installation<a class="headerlink" href="#Installation" title="Permalink to this headline"></a></h2>
+<p>(Instructions are for Ubuntu, on Windows may differ)</p>
+<p>First, on Github, fork as a template <a class="reference external" href="https://github.com/DavidLeoni/jupman">jupman project</a> to create yours, for example <code class="docutils literal notranslate"><span class="pre">my-project</span></code>.</p>
+<p>Then, on your computer, clone the <code class="docutils literal notranslate"><span class="pre">my-project</span></code> from Github</p>
+<p>You can choose to build either on:</p>
+<ul class="simple">
+<li><p>ReadTheDocs</p></li>
+<li><p>Github Actions</p></li>
+<li><p>locally with plain Sphinx</p></li>
+<li><p>locally with <a class="reference external" href="https://github.com/DavidLeoni/readthedocs-to-actions">RTD Docker</a></p></li>
+</ul>
+<p>(Note Jupman itself is building on both ReadTheDocs and Github Actions only for testing purposes, one is enough)</p>
+<section id="Building-with-ReadTheDocs:">
+<h3>Building with ReadTheDocs:<a class="headerlink" href="#Building-with-ReadTheDocs:" title="Permalink to this headline"></a></h3>
+<p><strong>IMPORTANT: choose a name which is NOT already on</strong> <a class="reference external" href="http://readthedocs.org">ReadTheDocs</a></p>
+<p>Create a <a class="reference external" href="http://readthedocs.org">ReadTheDocs account</a> <strong>using the same name as in Github</strong> so the address in readthedocs will be something like <em>my-project.readthedocs.org</em>.</p>
+<ul class="simple">
+<li><p>Use ReadTheDocs panels to link the project to your Github repository.</p></li>
+<li><p>In <em>Admin-&gt; Advanced settings panel</em>, set:</p>
+<ul>
+<li><p><em>Python interpreter</em> to <em>CPython 3.x</em></p></li>
+<li><p><em>Requirements</em> to <code class="docutils literal notranslate"><span class="pre">requirements-build.txt</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="Building-with-Github-Actions:">
+<h3>Building with Github Actions:<a class="headerlink" href="#Building-with-Github-Actions:" title="Permalink to this headline"></a></h3>
+<p>Configure <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/.github/workflows/main.yml">.github/workflows/main.yml</a> on your computer to your needs - you will need to:</p>
+<ol class="arabic simple">
+<li><p>at the beginning in the <code class="docutils literal notranslate"><span class="pre">build_docs_job</span></code> section there is an <code class="docutils literal notranslate"><span class="pre">if</span></code> which makes the workflow only work in <code class="docutils literal notranslate"><span class="pre">DavidLeoni/jupman</span></code> repository, change it with your project repo and comment the following <code class="docutils literal notranslate"><span class="pre">needs:</span> <span class="pre">run_tests</span></code> line</p></li>
+<li><p>set RTD_PRJ_NAME</p></li>
+<li><p>If you want to publish to <a class="reference external" href="https://pages.github.com/">Github Pages</a>: everything is set, just create an empty branch <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> in an new HTML_FOLDER <strong>before</strong> committing - from some other folder in your file system:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone  YOUR_REPO_ADDRESS  HTML_FOLDER
+<span class="nb">cd</span> HTML_FOLDER
+git checkout --orphan gh-pages
+git rm -rf .
+touch bla
+git add .
+git commit -m <span class="s2">&quot;init&quot;</span>
+git push origin gh-pages
+</pre></div>
+</div>
+</section>
+<section id="Local-build-with-Sphinx">
+<h3>Local build with Sphinx<a class="headerlink" href="#Local-build-with-Sphinx" title="Permalink to this headline"></a></h3>
+<p>Assuming you are on Linux/Mac:</p>
+<ol class="arabic simple">
+<li><p>Install Python 3.7+</p></li>
+<li><p><a class="reference external" href="http://jupyter.org/install.html">Install Jupyter</a></p></li>
+<li><p>Install required modules:</p></li>
+</ol>
+<p>3.a) In a virtual environment (<strong>recommended</strong>) - from the root of the project, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./create-env.sh
+</pre></div>
+</div>
+<p>This will automatically install required modules in <code class="docutils literal notranslate"><span class="pre">_private/jupman_env</span></code> using <code class="docutils literal notranslate"><span class="pre">python3</span></code> system binary.</p>
+<p>If you want to usa a particular python binary (note it must already be on your system), run i.e.:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./create-env.sh python3.7
+</pre></div>
+</div>
+<p>Afterwards, to activate the environment run:</p>
+<ul class="simple">
+<li><p>In Windows:</p></li>
+</ul>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>_private\jupman_env\bin\activate
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>in Linux/Mac:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> activate
+</pre></div>
+</div>
+<p>to deactivate (from anywhere):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>deactivate
+</pre></div>
+</div>
+<p>3.b) without a virtual environment (<strong>not recommended</strong>): From the root of the project, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m pip install --user -r requirements-build.txt
+</pre></div>
+</div>
+<p>Warning: to have reproducible builds <code class="docutils literal notranslate"><span class="pre">requirements-build.txt</span></code> pinpoints a lot of dependencies , installing without virtual environment may mess up other python programs!</p>
+</section>
+<section id="Optional---Running-tests">
+<h3>Optional - Running tests<a class="headerlink" href="#Optional---Running-tests" title="Permalink to this headline"></a></h3>
+<p>To check everything is working, you may want to run the tests.</p>
+<ol class="arabic simple">
+<li><p>Install test dependencies:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m pip install --user -r _test/requirements-test.txt
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Run the tests:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m pytest _test/*_test.py
+</pre></div>
+</div>
+</section>
+<section id="Optional---Install-Jupyter-contrib-extensions">
+<h3>Optional - Install Jupyter contrib extensions<a class="headerlink" href="#Optional---Install-Jupyter-contrib-extensions" title="Permalink to this headline"></a></h3>
+<p>For a better editing experience like having Table of contents and other things, do the following:</p>
+<ol class="arabic simple">
+<li><p>install the <a class="reference external" href="https://github.com/ipython-contrib/jupyter_contrib_nbextensions">Jupyter contrib extensions</a> package:</p></li>
+</ol>
+<p>If you have Anaconda:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge jupyter_contrib_nbextensions
+</pre></div>
+</div>
+<p>If you don’t have Anaconda:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m pip install --user jupyter_contrib_nbextensions
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Install in Jupyter:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter contrib nbextension install --user
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Enable extension:</p></li>
+</ol>
+<p>For being able to view table of contents while editing notebooks, install <code class="docutils literal notranslate"><span class="pre">toc2</span></code> extension:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter nbextension <span class="nb">enable</span> toc2/main
+</pre></div>
+</div>
+<p>For tocs to appear when in a document you will need to press a list button at the right-end of the toolbar.</p>
+<p>(since Jupman 0.8 custom injected tocs are disabled by default)</p>
+<ol class="arabic simple" start="4">
+<li><p>For a nice GUI to install extensions, install the <a class="reference external" href="https://github.com/Jupyter-contrib/jupyter_nbextensions_configurator">Jupyter Nbextensions configurator</a>:</p></li>
+</ol>
+<p>If you have Anaconda:</p>
+<p>From Anaconda Prompt:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge jupyter_nbextensions_configurator
+</pre></div>
+</div>
+<p>If you don’t have Anaconda:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m pip install --user jupyter_nbextensions_configurator
+</pre></div>
+</div>
+<p>After installing, enable it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter nbextensions_configurator <span class="nb">enable</span> --user
+</pre></div>
+</div>
+<p>and then start Jupyter, in file browser look for a <code class="docutils literal notranslate"><span class="pre">Nbextensions</span></code> tab</p>
+</section>
+</section>
+<section id="Configure">
+<h2>Configure<a class="headerlink" href="#Configure" title="Permalink to this headline"></a></h2>
+<ol class="arabic">
+<li><p>Edit <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/conf.py">conf.py</a> as needed, which is the configuration file for Sphinx. In particular, you <strong>MUST</strong> edit the sections marked with <strong>TODO</strong></p></li>
+<li><p>Try launching build:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 build.py
+</pre></div>
+</div>
+<p>For more info, see <a class="reference external" href="#Building-the-manual">related section</a></p>
+</li>
+<li><p>If everything works fine on your computer, push changes back to Github</p></li>
+<li><p>Go back to ReadTheDocs and try to run a build. Hopefully your project will become available on something like <em>my-project.readthedocs.org</em></p></li>
+<li><p>If you want to grade exams, see <a class="reference internal" href="exams-management.html"><span class="doc">Exams management</span></a> page.</p></li>
+</ol>
+<p>You should now be ready to create your notebooks by launching from the project root:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter notebook
+</pre></div>
+</div>
+<ol class="arabic">
+<li><p>If you wish your notebooks to appear in the generated manual, you have to add them in the <code class="docutils literal notranslate"><span class="pre">toc.rst</span></code> file.</p>
+<p><strong>NOTE</strong>: the page <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/toc-page.rst">toc-page.rst</a>, which is set to be the <code class="docutils literal notranslate"><span class="pre">master_doc</span></code> of Sphinx, will just load the actual Table of Contents which is in <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/toc.rst">toc.rst</a>. It looks a bit convoluted because when it comes to indexes Sphinx is not much reliable, <a class="reference external" href="https://github.com/DavidLeoni/jupman/issues/11">see this issue</a> . We strongly advise <em>not</em> to change these settings !</p>
+</li>
+<li><p>edit the home, which is in the <a class="reference external" href="https://github.com/DavidLeoni/jupman/blob/master/index.ipynb">index.ipynb</a> file</p></li>
+</ol>
+</section>
+<section id="Building-the-manual">
+<h2>Building the manual<a class="headerlink" href="#Building-the-manual" title="Permalink to this headline"></a></h2>
+<p><strong>For a quick build</strong> that only produces html:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 build.py -q
+</pre></div>
+</div>
+<p>Site will be created in <code class="docutils literal notranslate"><span class="pre">_build/</span></code> folder.</p>
+<p>For help:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 build.py -h
+</pre></div>
+</div>
+<p><strong>To build everything</strong> (html + pdf + epub), go to the console and from the root directory run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 build.py
+</pre></div>
+</div>
+<p><strong>NOTE: to generate PDFs you will need to install Latex environment</strong></p>
+</section>
+<section id="Publish">
+<h2>Publish<a class="headerlink" href="#Publish" title="Permalink to this headline"></a></h2>
+<p>Just push to master and Github Actions / ReadTheDocs will do the rest, for example, for jupman is available at addresses:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jupman.readthedocs.io/en/latest/">https://jupman.readthedocs.io/en/latest/</a></p></li>
+<li><p><a class="reference external" href="https://davidleoni.github.io/jupman/en/latest/">https://davidleoni.github.io/jupman/en/latest/</a></p></li>
+</ul>
+<p><strong>IMPORTANT: ReadTheDocs WILL *NOT* execute Jupyter notebooks because of</strong> <a class="reference external" href="https://github.com/DavidLeoni/softpython/issues/2">this bug</a></p>
+</section>
+<section id="Further-steps">
+<h2>Further steps<a class="headerlink" href="#Further-steps" title="Permalink to this headline"></a></h2>
+<p>See <a class="reference internal" href="editing.html"><span class="doc">Editing worksheets</span></a>, <a class="reference internal" href="customize.html"><span class="doc">Customize</span></a> and if needed <a class="reference internal" href="exams-management.html"><span class="doc">Exams management</span></a> pages</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Jupman" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="editing.html" class="btn btn-neutral float-right" title="Editing worksheets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright # 2020 - 2022, People That Write a Lot.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125857337-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-125857337-3', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>
