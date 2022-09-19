@@ -6,6 +6,24 @@ Jupman: A template for online manuals made with Jupyter notebooks.
 [jupman.softpython.org](https://jupman.softpython.org)
 
 
+## September 19th, 2022 - 3.5.6
+
+Added:
+- Softpython theme eye candy #122
+- logo, favicon #123
+- explicilty stated all dependencies in requirements-buils.txt, added create_env script #82
+- improved manual/*
+
+Fixed:
+- relative paths in cell outputs for zips #119
+- now using relative js and css imports in jupman.init  #117
+- Python Tutor not showing in cloned cells #126 (changed stable ids #107)
+- Python Tutor sets wrongly displaying with grey header  #125
+
+Removed:
+- `_private/README.md`
+
+
 ## August 11th, 2022 - 3.5.4
 
 - Python Tutor:
