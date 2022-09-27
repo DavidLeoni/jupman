@@ -25,8 +25,11 @@ from arghandler import subcmd
 from jupman_tools import info
 from jupman_tools import fatal
 from jupman_tools import warn
+from jupman_tools import JupmanContext, JupmanConfig
 
 import logging
+
+
 
 
 class JupmanExam:
@@ -37,7 +40,7 @@ class JupmanExam:
         """                
         self.date_ymd = date_ymd
         self.date = jmt.parse_date(date_ymd)
-        self.date_human = self.date.strftime('%a %d, %b %Y')
+        self.date_human = jmt.date_to_human(date_ymd, conf.language)
     
 jm = conf.jm
 
@@ -52,8 +55,13 @@ def CD(new_dir):
         os.chdir(prevdir)
         info(f"Restored working dir.")
 
+def get_exam_student_folder(ld):
+    jmt.parse_date(ld)
+    return '%s-%s-FIRSTNAME-LASTNAME-ID' % (jm.filename,ld)    
+
+
 def get_target_student(ld):    
-    return '_private/%s/student-zip/%s/'  % (ld, jm.get_exam_student_folder(ld))
+    return '_private/%s/student-zip/%s/'  % (ld, get_exam_student_folder(ld))
 
 def get_exam_text_filename(ld, extension):
     return 'exam-%s.%s' % (ld, extension)
@@ -87,12 +95,24 @@ def init(parser, context,args):
         
     if os.path.exists(pubeld):
         fatal("PUBLIC EXAM ALREADY EXISTS: " + pubeld)
-
+    
     
     shutil.copytree("_templates/exam", 
                     eld_admin,
                     ignore=shutil.ignore_patterns('exam-yyyy-mm-dd.ipynb'))
     
+    template_source = '_templates/exam/solutions/exam-yyyy-mm-dd.ipynb'    
+    with open(template_source, "r", encoding='utf8') as sourcef:
+        s = sourcef.read()    
+        if '_JM_' in s:
+            logging.warn("_JM_ tags are deprecated since 3.6! Please upgrade to _JUPMAN_ style tags")
+            jmt.expand_JM(template_source, 
+                        exam_ipynb,
+                        ld,
+                        conf)
+        else:
+            with open(exam_ipynb, 'w', encoding='utf8') as destf:
+                destf.write(s)
 
     os.rename('%s/jupman-yyyy-mm-dd-grades.ods' % eld_admin,
               "%s/%s-%s-grades.ods" % (eld_admin, conf.jm.filename, ld))
@@ -120,7 +140,7 @@ def package(parser,context,args):
     vs = vars(parser.parse_args(args))
     ld = jmt.parse_date_str(vs['date'])
     
-    jm.exam = JupmanExam(ld)
+    
     
     zip_site = vs['site']
     zip_server = vs['server']
@@ -133,6 +153,9 @@ def package(parser,context,args):
     target_student_zip = "%s/server/%s-%s-exam" % (eld_admin,jm.filename,ld) # without '.zip'
     target_server_zip = "%s/%s-%s-server" % (eld_admin, jm.filename,ld) # without '.zip'
 
+
+    jcxt = JupmanContext(conf, eld_notebook, False)    
+    jcxt.jpre_exam = JupmanExam(ld)
 
     if not os.path.exists(jm.build):
         fatal("%s WAS NOT BUILT !" % jm.build)
@@ -168,7 +191,7 @@ def package(parser,context,args):
     info("Copying exercises to " + str(target_student))
     
     
-    jm.copy_code(eld_solutions, target_student, copy_solutions=False)
+    jmt.copy_code(jcxt, eld_solutions, target_student, copy_solutions=False)
 
     
     info("Building pdf ..")
@@ -206,11 +229,12 @@ def package(parser,context,args):
         if fname.startswith('_private/'):
             return fname[len('_private/YYYY-MM-DD/student-zip/'):]
         else:
-            return '/%s/%s' % (jm.get_exam_student_folder(ld), fname)
+            return '/%s/%s' % (get_exam_student_folder(ld), fname)
             
-    deglobbed_common_files, deglobbed_common_files_patterns = jm._common_files_maps(target_student_zip)
+    deglobbed_common_files, deglobbed_common_files_patterns = jmt._common_files_maps(jcxt, target_student_zip)
     
-    jm.zip_paths([target_student] + deglobbed_common_files,
+    jmt.zip_paths(jcxt, 
+                  [target_student] + deglobbed_common_files,
                   target_student_zip,  
                   patterns=deglobbed_common_files_patterns,
                   remap=remap)

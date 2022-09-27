@@ -3,6 +3,7 @@ import logging
 logging.captureWarnings(True)  
 
 import pprint
+import collections.abc
 from enum import Enum
 import re
 import os
@@ -14,8 +15,75 @@ import datetime
 import collections
 import zipfile
 import shutil
+import itertools
+from typing import List  # needed instead of list  with python < 3.9
+from typing import Tuple # needed instead of tuple with python < 3.9
+from typing import Iterable # in python < 3.9 this one is subscriptable, while collections.abc.Iterable is not.
+    
 import nbconvert
+from typing import Union
+import pathspec
 from pylatexenc.latexencode import unicode_to_latex
+from babel.dates import format_date
+from subprocess import check_output
+import nbsphinx
+import nbformat
+
+
+class JupmanFormatter(logging.Formatter):
+
+    def format(self, record):
+        if record.levelno == logging.INFO:
+            self._style._fmt = "jupman: %(message)s"
+        elif record.levelno in [logging.DEBUG, logging.WARNING, logging.CRITICAL]:
+            self._style._fmt = "jupman %(levelname)-8s [%(filename)s:%(lineno)s]: %(message)s "        
+        return super().format(record)
+
+
+logger = logging.getLogger('jupman')
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.DEBUG)
+console_handler.setFormatter(JupmanFormatter())
+logger.addHandler(console_handler)
+
+# I know I shouldn't be doing this but apparently logging is so incredibly fucked up..
+_log_level = os.environ.get('JUPMAN_LOG_LEVEL')
+if _log_level:
+    logging.getLogger().setLevel(_log_level)
+    logger.debug('This is a debug message')
+    logger.info(f'Setting logger level to {_log_level}')
+
+def fatal(msg, ex=None):
+    """ Prints error and exits (halts program execution immediatly)
+    """
+    if ex == None:
+        exMsg = ""
+    else:
+        exMsg = " \n  %s" % repr(ex)
+    logger.critical("\n\n    FATAL ERROR! %s%s\n\n" % (msg,exMsg))
+    exit(1)
+
+def error(msg, ex=None):
+    """ Prints error and reraises exception (printing is useful as sphinx puts exception errors in a separate log)
+    """
+    if ex == None:
+        exMsg = ""
+        the_ex = Exception(msg)
+    else:
+        exMsg = " \n  %s" % repr(ex)
+        the_ex = ex 
+    logger.error("\n\n    FATAL ERROR! %s%s\n\n" % (msg,exMsg))
+    raise the_ex
+    
+def info(msg=""):
+    logger.info(msg)    
+
+def warn(msg, ex=None):
+    logger.warning(msg)    
+
+   
+debug = logger.debug
+
 
 class _Mocker:
     
@@ -36,18 +104,39 @@ class _Mocker:
 @since 3.6
 """
 _JUPMAN_ = _Mocker('_JUPMAN_')
+
+""" Placeholder only to be used when there might be some ambiguity for the parser
+
+i.e by writing  _JUPMAN_.a.b._END_.c.d it will substitute _JUPMAN_.a.b._END_ with _JUPMAN_.a.b
+
+ONLY to be used to prevent python from complaining about syntax / non-existing objects
+@since 3.6
+"""
+_END_ = _Mocker('_END_')
         
 
+PREAMBLE_MARKED = ('CURRENT',)    
+PREAMBLE_IGNORED = ('img/', '_static/')    
+
+
 class JupmanError(Exception):
+    pass
+
+class JupmanNotFoundError(JupmanError):
     pass
 
 class JupmanPreprocessorError(JupmanError):
     pass
 
+class JupmanEmptyChapterError(JupmanPreprocessorError):
+    pass
 
+
+class JupmanUnsupportedError(JupmanError):
+    pass
 
 EXPR_PREFIX = '_JUPMAN_'
-EXPR_PATTERN = re.compile(r'(_JUPMAN_(\.[a-zA-Z]\w*)+(\((\w|,|\s)*\))?)')
+EXPR_PATTERN = re.compile(r'(_JUPMAN_(\.[a-zA-Z][\w]*)+((\((\w|,|\s)*\))|\._END_)?)')
 
 
 def obj_to_repr(obj) -> str:
@@ -65,7 +154,6 @@ class Jupman:
         warn("Jupman class is DEPRECATED since 3.6, use JupmanConfig instead")
         return JupmanConfig()
     
-
     
 class JupmanConfig:
     """ Holds Jupman-specific configuration for Sphinx build
@@ -91,6 +179,11 @@ class JupmanConfig:
                             
                             '_static/js/pytutor-embed.bundle.min.js.zip' ]
         """ Common files for exercise and exams as paths. Paths are intended relative to the project root. Globs like /**/* are allowed."""
+
+        
+        self.repo_browse_url = ''
+        """ The repositoty url prefix for browsing files, i.e. 'https://github.com/DavidLeoni/jupman/blob/master/'
+        """
 
         self.chapter_patterns =  ['*/']
         self.chapter_exclude_patterns =  ['[^_]*/','exams/', 'project/']
@@ -122,6 +215,8 @@ class JupmanConfig:
         """
 
         self.zip_ignored = ['__pycache__', '**.ipynb_checkpoints', '.pyc', '.cache', '.pytest_cache', '.vscode',]
+        """ Paths given here are intended relative to each zip own root, not project root.
+        """
 
         self.formats = ["html", "epub", "latex"]
 
@@ -151,7 +246,7 @@ class JupmanConfig:
         self.purge_input = "jupman-purge-input"
         self.purge_output = "jupman-purge-output"
         
-
+        
 
         self.raise_exc_code = "raise Exception('TODO IMPLEMENT ME !')"
         """ WARNING: this string can end end up in a .ipynb json, so it must be a valid JSON string  ! Be careful with the double quotes and \n  !!
@@ -185,19 +280,139 @@ class JupmanConfig:
             @since 3.2
         """
         
+        self.html_index_links = """
+<!-- HTML download links -->
+<p>
+ DOWNLOAD: &nbsp;&nbsp; <a href="https://jupman.softpython.org/en/latest/jupman.pdf" target="_blank">PDF</a>
+           &nbsp;&nbsp; <a href="https://jupman.softpython.org/en/latest/jupman.epub" target="_blank"> EPUB </a>
+           &nbsp;&nbsp; <a href="https://github.com/DavidLeoni/jupman/archive/gh-pages.zip" target="_blank"> HTML </a>
+           &nbsp;&nbsp; <a href="https://github.com/DavidLeoni/jupman" target="_blank"> Github </a>
+</p>           
+<br/>
+"""
         
-        self.ctx_filepath = ''
-        """ Don't set it, will be overwritten when preprocessing
+        self.latex_index_fix_start = r"""
+% Latex fixes, DO NOT DELETE THIS !!!!
 
-            @since 3.6
-        """
+% need to demote chapters to sections because sphinx promotes them *just in the home* :-/
+% https://tex.stackexchange.com/questions/161259/macro-for-promoting-sections-to-chapters
+% for alternatives, see https://texfaq.org/FAQ-patch
+
+\let\truechapter\chapter
+\let\truesection\section
+\let\truesubsection\subsection
+\let\truesubsubsection\subsubsection
+\let\truethesection\thesection
+
+\let\chapter\truesection
+\let\section\truesubsection
+% suspend number printing , according to   https://tex.stackexchange.com/a/80114
+\renewcommand\thesection{}
+
+\truesection{About}
+"""
+
+        self.latex_index_fix_overview = r"""
+% Latex: fix for book structure
+
+\let\thesection\truethesection
+\truechapter{Overview}    
+"""    
         
-        self.ctx_website = False
-        """ Don't set it, will be overwritten when preprocessing
+        self.latex_index_fix_end = r"""
+% Latex: Restores all the previous substitutions 
+% DO NOT DELETE THIS !!!!
+ 
+\let\chapter\truechapter
+\let\section\truesection
+\let\subsection\truesubsection
+\let\subsubsection\truesubsubsection        
+"""        
+        
 
+    
+    def tutorial_preamble(self,
+                          jcxt,
+                          marked: Iterable[str] = PREAMBLE_MARKED, 
+                          ignored: Iterable[str] = PREAMBLE_IGNORED) -> str:
+        """ 
+            zip_name example:  prj-foldername.zip
+            
+            marked: list of files to show highlighted (files subfolders cannot be marked), first one is 
+                    the one the user should open first special value 'CURRENT' represents current 
+                    notebook destination (jcxt.jpre_dest_filepath)            
+            ignored: ignored paths, supports glob
+            
+            TODO what about renamed zips like projects/project1/ -> prj-myproject1.zip  ?
+            
             @since 3.6
         """        
+        from pathlib import Path
+        
+        relpath = os.path.relpath(os.path.abspath(jcxt.jpre_dest_filepath))
+        relfolder_name = Path(relpath).parts[-2]                
+        
+        debug(f'relpath: {relpath}')
+        debug(f'relfolder_name: {relfolder_name}')
+        debug(f'jcxt.jpre_dest_filepath: {jcxt.jpre_dest_filepath}')
+        
+        # should already exist during nbsphinx parsing
+        zip_filepath = f"{jcxt.jm.generated}/{relfolder_name}.zip"        
+         
+        
+        files = []
+        for tup in _make_preamble_filelist(jcxt, zip_filepath, marked=marked, ignored=ignored):
+            if len(tup) == 3:
+                if tup[2] != '*':  # bold
+                    raise JupmanPreprocessorError(f"Invalid marker symbol {tup[2]} found in tuple: {tup}")
+                s = '    '*tup[0] + f"<strong>{tup[1]}</strong>"
+            elif len(tup) == 2:
+                s = '    '*tup[0] + tup[1]
+            else:
+                raise JupmanPreprocessorError(f"Invalid tuple length {len(tup)} for tuple: {tup}")
+            files.append(s)
+            
+        files_str = '\n'.join(files)
+        
+        zip_web_rel_filepath = os.path.relpath(f"{jcxt.jm.generated}/{relfolder_name}.zip",
+                                               os.path.abspath(jcxt.jpre_dest_filepath))
+        
+        browse_online_link = f"{jcxt.jm.repo_browse_url}{jcxt.jpre_dest_filepath}"
+        
+        return f"""
 
+<a id="jupman-zip-download" href="{zip_web_rel_filepath}" target="_blank" title="Download exercises and solutions"> 
+<img src="_static/img/jupman/download-zip.svg" alt="Download exercises and solutions">
+</a>
+
+<a id="jupman-zip-browse" href="{browse_online_link}" target="_blank" title="Browse files online"> 
+<img src="_static/img/jupman/browse.svg" alt="Browse files online">
+</a>
+
+- unzip exercises in a folder, you should get something like this: 
+
+
+<pre class="jupman-zip-list highlight">
+{files_str}
+</pre>
+
+
+<div class="alert alert-warning">
+
+**WARNING**: to correctly visualize the notebook, it MUST be in an unzipped folder !
+</div>
+
+
+- Run Jupyter application: a browser should open, showing a file list: navigate the list and open the notebook `TODO` (NOT the -sol, contains solutions!)
+- Go on reading that notebook, some cells will invite you to write code into them. Shortcut keys:
+
+    - to execute Python code inside a Jupyter cell, press `Control + Enter`
+    - to execute Python code inside a Jupyter cell AND select next cell, press `Shift + Enter`
+    - to execute Python code inside a Jupyter cell AND a create a new cell aftwerwards, press `Alt + Enter`
+    
+- If the notebooks looks stuck, try to select `Kernel -> Restart`
+            
+"""        
         
     def  __repr__(self):
         return obj_to_repr(self)
@@ -291,11 +506,10 @@ class JupmanContext:
     def make_empty():
         return JupmanContext({}, '', False) 
       
-    def __init__(self, sphinx_config, filepath: str, website: bool):    
+    def __init__(self, sphinx_config, source_filepath: str, website: bool):    
                 
         self.jm = JupmanConfig()
-      
-        import collections.abc
+              
         
         if not sphinx_config:
             pass
@@ -312,7 +526,8 @@ class JupmanContext:
             raise ValueError(f'Unrecognized input type while creating {self.__class__.__name__}: {type(sphinx_config)}')
                 
                 
-        self.jpre_filepath = filepath
+        self.jpre_source_filepath = source_filepath
+        self.jpre_dest_filepath = source_filepath  # sometimes dest might differ from source, es generated exercises
         self.jpre_website = website
                 
         
@@ -327,55 +542,7 @@ class JupmanContext:
         return obj_to_str(self)
         
 
-class JupmanFormatter(logging.Formatter):
 
-    def format(self, record):
-        if record.levelno == logging.INFO:
-            self._style._fmt = "  %(message)s"
-        else:
-            self._style._fmt = "\n\n  %(levelname)s: %(message)s"
-        return super().format(record)
-
-
-logger = logging.getLogger('jupman')
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.DEBUG)
-console_handler.setFormatter(JupmanFormatter())
-logger.addHandler(console_handler)
-
-
-
-def fatal(msg, ex=None):
-    """ Prints error and exits (halts program execution immediatly)
-    """
-    if ex == None:
-        exMsg = ""
-    else:
-        exMsg = " \n  %s" % repr(ex)
-    logger.critical("\n\n    FATAL ERROR! %s%s\n\n" % (msg,exMsg))
-    exit(1)
-
-def error(msg, ex=None):
-    """ Prints error and reraises exception (printing is useful as sphinx puts exception errors in a separate log)
-    """
-    if ex == None:
-        exMsg = ""
-        the_ex = Exception(msg)
-    else:
-        exMsg = " \n  %s" % repr(ex)
-        the_ex = ex 
-    logger.error("\n\n    FATAL ERROR! %s%s\n\n" % (msg,exMsg))
-    raise the_ex
-    
-def info(msg=""):
-    logger.info("  %s" % msg)    
-
-def warn(msg, ex=None):
-    logger.warning("\n\n   WARNING: %s" % msg)    
-
-def debug(msg=""):
-    logger.debug("  DEBUG=%s" % msg)        
-    
 def parse_date(ld):
     try:
         return datetime.datetime.strptime( str(ld), "%Y-%m-%d")
@@ -389,7 +556,30 @@ def parse_date_str(ld) -> str:
     """
     return str(parse_date(ld)).replace(' 00:00:00','')
     
-
+def date_to_human(ld: Union[datetime.date, str], locale : str, formatter : str ='') -> str:
+    """ Short human readable dates
+    
+        Default: something good for displaying exams in a toc, like   Wed 3, Apr 2007        
+    """    
+    
+    if not formatter:
+        fmt = "EEE d, MMM yyyy"
+    else:
+        fmt = formatter
+    
+    if isinstance(ld, str):
+        d = parse_date(ld)
+    else:
+        d = ld
+    
+    intermediate = format_date(d, fmt, locale=locale)
+    if fmt == "EEE d, MMM yyyy":
+        # makes sure we get capital
+        # who cares about silly grammar nuances https://stackoverflow.com/questions/18864957/capitalize-months-name-in-es-locale        
+        return ', '.join([el.capitalize() for el in intermediate.split(', ')])
+    else:
+        return intermediate
+    
     
 def super_doc_dir():
     return os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -398,8 +588,7 @@ def detect_release():
     """ Return a release string, calling git to find tags.
         If unsuccessful return 'dev'.
     """
-    try:
-        from subprocess import check_output
+    try:        
         release = check_output(['git', 'describe', '--tags', '--always'])
         release = release.decode().strip()        
         if not '.' in release:
@@ -423,7 +612,7 @@ def get_version(release):
 def expand_JM(source, target, exam_date, conf):
     """ @deprecated since 3.6
     """
-    warn("expand_JM is deprecated! Please upgrade jupman.")
+    warn("expand_JM is deprecated! Please upgrade jupman to >= 3.6")
     
     d = parse_date(exam_date)
     sourcef = open(source, "r")
@@ -443,8 +632,6 @@ def expand_JM(source, target, exam_date, conf):
     destf = open(target, 'w')    
     destf.write(s)
 
-
-    
 
 
 
@@ -480,6 +667,19 @@ class FileKinds(Enum):
     CHALLENGE_SOLUTION = 5
 
     @staticmethod
+    def prefix(fname, supp_ext):
+        """ @since 3.6
+        """
+        for ext in supp_ext:
+            if fname.endswith(f".{ext}"):
+                sep = FileKinds.sep(ext)
+                ft = FileKinds.detect(fname)
+                if ft == FileKinds.SOLUTION:                    
+                    return fname.rstrip(f"{sep}sol.{ext}")
+                elif ft == FileKinds.CHALLENGE_SOLUTION:
+                    return fname.rstrip(f"{sep}sol.{ext}")
+
+    @staticmethod
     def sep(ext):
         if ext == 'py':
             return '_'
@@ -494,8 +694,18 @@ class FileKinds(Enum):
         return False
     
     @staticmethod
-    def detect(fname):
-        """ TODO can't detect EXERCISE 
+    def parse(fname : str):
+        """ Returns a tuple like (type, prefix, file end, extension)
+        
+            Example 
+            
+            >>> FileKinds.parse('footbal-eurocup-chal-sol.ipynb')
+            (FileKinds.CHALLENGE_SOLUTION, 'footbal-eurocup', '-chal-sol', 'ipynb')
+            
+            TODO EXERCISE / CHALLENGE are detected as OTHER
+            https://github.com/DavidLeoni/jupman/issues/130
+            
+            @since 3.6
         """
         l = fname.split(".")
         if len(l) > 0:
@@ -503,14 +713,26 @@ class FileKinds(Enum):
         else:
             ext = ''
         sp = FileKinds.sep(ext)
-        if fname.endswith('%schal%ssol.%s' % (sp, sp, ext)):
-            return FileKinds.CHALLENGE_SOLUTION
-        elif fname.endswith('%ssol.%s' % (FileKinds.sep(ext), ext)):
-            return FileKinds.SOLUTION            
-        elif fname.endswith("_test.py") :
-            return FileKinds.TEST        
-        else:
-            return FileKinds.OTHER
+        chal_sol_end  = f'{sp}chal{sp}sol.{ext}'
+        chal_end  = f'{sp}chal.{ext}'
+        sol_end = f'{sp}sol.{ext}'
+        test_end = "_test.py"
+        if fname.endswith(chal_sol_end):
+            return (FileKinds.CHALLENGE_SOLUTION, fname.split(chal_sol_end)[0], chal_sol_end[:-len(f'.{ext}')], ext)
+        if fname.endswith(chal_end):
+            #TODO could be exercise ??
+            return (FileKinds.OTHER, fname.split(chal_end)[0], chal_end[:-len(f'.{ext}')], ext)
+        elif fname.endswith(sol_end):
+            return (FileKinds.SOLUTION, fname.split(sol_end)[0], sol_end[:-len(f'.{ext}')], ext)
+        elif fname.endswith(test_end) :            
+            return (FileKinds.TEST, fname.split(test_end)[0], test_end[:-len(f'.{ext}')], ext)
+        else:            
+            return (FileKinds.OTHER, fname.split(f'.{ext}')[0], '', ext)
+    
+    
+    @staticmethod
+    def detect(fname : str):
+        return FileKinds.parse(fname)[0]
 
     @staticmethod
     def check_ext(fname, supp_ext):
@@ -563,16 +785,18 @@ def uproot(path):
         >>>  '../../'
         >>> uproot('_static')
         >>>  '../'
+        
+        TODO: review behaviour an non-existing paths, seems inconsistent.
     """
     if not path:
         raise ValueError('Invalid filepath=%s' % path)
 
     ret = os.path.relpath(os.path.abspath(os.getcwd()),
-                              os.path.abspath(path))
+                          os.path.abspath(path))
     if os.path.isfile(path) and ret.endswith('..'):
         ret = ret[:-2]
     if ret.endswith('..'):
-        ret = ret + '/'
+        ret = f"{ret}/"
     return ret
 
 
@@ -696,31 +920,33 @@ def single_tag_pattern(tag):
     return re.compile(s, flags=re.DOTALL)
 
 
-def init(jm, sphinx_config=None, debug_level=logging.INFO):
+def init(jm, sphinx_config=None) -> JupmanContext:
     """Initializes the system, does patching, etc
 
         Should be called in conf.py at the beginning of setup() 
     
         @since 3.2
     """
-    logging.getLogger().setLevel(debug_level)    
-
+            
+    
     if not sphinx_config:
         raise ValueError("globals() not passed to jmt.init call, please add it!")        
     
     #TODO a check would be nice but I'm lazy
     #if not sphinx_config.jm:
     #    raise ValueError("jm variable not present in sphinx config, please define it!")    
-
-    jcxt = JupmanContext(sphinx_config, '', False)
-
-    info("release: %s" % jcxt.release)
+    
 
     if os.environ.get('GOOGLE_ANALYTICS'):
-        info("Found GOOGLE_ANALYTICS environment variable")
-        jcxt.html_theme_options['analytics_id'] = os.environ.get('GOOGLE_ANALYTICS')        
+        info("Found GOOGLE_ANALYTICS environment variable")                
+        sphinx_config.html_theme_options['analytics_id'] = os.environ.get('GOOGLE_ANALYTICS')
     else:
         info('No GOOGLE_ANALYTICS environment variable was found, skipping it')
+    
+
+    jcxt = JupmanContext(sphinx_config, '', False)
+    
+    info("release: %s" % jcxt.release)
     
     # hooks into ExecutePreprocessor.preprocess to execute our own filters.
     # Method as in https://github.com/spatialaudio/nbsphinx/issues/305#issuecomment-506748814
@@ -733,8 +959,7 @@ def init(jm, sphinx_config=None, debug_level=logging.INFO):
             nb, resources = p.preprocess(nb, resources=resources)
 
         return nbsphinx_from_notebook_node(self, nb, resources=resources, **kwargs)        
-    
-    import nbsphinx
+        
     nbsphinx_from_notebook_node = nbsphinx.Exporter.from_notebook_node                
     
     nbsphinx.Exporter.from_notebook_node = _from_notebook_node
@@ -788,7 +1013,7 @@ class JupmanPreprocessor(nbconvert.preprocessors.Preprocessor):
         source_abs_fn = os.path.join(resources['metadata']['path'], partial_fn + '.ipynb')     
         
         #TODO don't know if copy is strictly necessary, thinking about multithreading            
-        njcxt = JupmanContext(self.jcxt, source_abs_fn, True)
+        njcxt = JupmanContext(self.jcxt, source_abs_fn, True)        
         
         if _is_to_preprocess(njcxt, nb):
             relpath = os.path.relpath(source_abs_fn, os.path.abspath(os.getcwd()))
@@ -798,8 +1023,9 @@ class JupmanPreprocessor(nbconvert.preprocessors.Preprocessor):
                 validate_tags(njcxt, source_abs_fn)
             except Exception as ex:
                 logger.warning("Failed Jupman tags validation! %s", ex)
-                       
-            return _sol_nb_to_ex(njcxt, nb), resources
+                                   
+            _sol_nb_to_ex(njcxt, nb)
+            return nb, resources
         else:
             return nb, resources
 
@@ -898,9 +1124,13 @@ def replace_templates(jcxt : JupmanContext, text : str) -> str:
             obj = jcxt
             fields = m.group(0).split('.')
             
+            
             for field in fields[1:]:
                 pfield = field[:-2] if field.endswith('()') else field                
-                    
+                
+                if pfield == '_END_':
+                    break
+                
                 if not hasattr(obj, pfield):                    
                     raise JupmanPreprocessorError(f"Attribute {pfield} not found in expression", m.group(0))
                                                 
@@ -922,7 +1152,7 @@ def replace_templates(jcxt : JupmanContext, text : str) -> str:
                     try:
                         obj = obj(jcxt)
                     except Exception as ex:
-                        raise JupmanPreprocessorError(f"Couldn't execute function {pfield} in expression. Reason: {str(ex)}", m.group(0))                 
+                        raise JupmanPreprocessorError(f"Couldn't execute function {pfield} in expression. Reason: {str(ex)}", m.group(0))                                 
                 elif '(' in field: #TODO handle blanks
                     raise JupmanPreprocessorError(f"To call a function you must put exactly () at the end with no spaces, function calling with parameters is not supported yet")
                     
@@ -938,8 +1168,8 @@ def replace_templates(jcxt : JupmanContext, text : str) -> str:
     ret = re.sub(EXPR_PATTERN, f, text)        
         
     if len(problems) > 0:
-        warn("FOUND _JUPMAN_ templates which couldn't be expanded!")
-        warn("               file: %s" % jcxt.jpre_filepath)            
+        warn("Found _JUPMAN_ templates which couldn't be expanded!")
+        warn("               file: %s" % jcxt.jpre_source_filepath)            
         warn("\n                 ".join([str(p) for p in problems]))
         warn("")                
         
@@ -953,8 +1183,7 @@ def replace_ipynb_templates(jcxt : JupmanContext, nb_node):
     """    
     
    
-    debug(f"Replacing templates in {jcxt.jpre_filepath}")
-    debug(jcxt)
+    debug(f"Replacing templates in {jcxt.jpre_dest_filepath}")    
 
     for cell in nb_node.cells:
             
@@ -996,8 +1225,7 @@ def _purge_tags(jcxt : JupmanConfig, text : str) -> str:
     return ret
 
 
-def is_zip_ignored(jcxt : JupmanContext, fname):
-    import pathspec
+def is_zip_ignored(jcxt : JupmanContext, fname):    
     spec = pathspec.PathSpec.from_lines('gitwildmatch', jcxt.jm.zip_ignored)
     return spec.match_file(fname)
             
@@ -1013,10 +1241,6 @@ def get_exercise_folders(jcxt : JupmanContext):
             if r in ret:
                 ret.remove(r)
     return ret
-
-def get_exam_student_folder(jcxt : JupmanContext, ld):
-    parse_date(ld)
-    return '%s-%s-FIRSTNAME-LASTNAME-ID' % (jcxt.jm.filename,ld)    
 
 
 def is_code_sol(jcxt : JupmanContext, solution_text):
@@ -1058,8 +1282,8 @@ def sol_to_ex_code(jcxt : JupmanContext, solution_text, parse_directives=True):
                 
     ret = re.sub(jcxt.jm.write_solution_here, r'\1\2\n\n', ret)
     
-    if jcxt.jpre_filepath:
-        ret = replace_py_rel(ret, jcxt.jpre_filepath)
+    if jcxt.jpre_source_filepath:
+        ret = replace_py_rel(ret, jcxt.jpre_source_filepath)
         
     return ret            
 
@@ -1068,7 +1292,7 @@ def validate_tags(jcxt : JupmanContext, fname : str) -> int:
     """
     ret = 0
     if fname.endswith('.ipynb'):
-        import nbformat        
+        
         nb_node = nbformat.read(fname, nbformat.NO_CONVERT)        
         for cell in nb_node.cells:            
             if cell.cell_type == "code":    
@@ -1121,7 +1345,7 @@ def validate_markdown_tags(jcxt : JupmanContext, text : str, fname : str) -> int
 #TODO source_fn may be redundant
 def _copy_test(jcxt : JupmanContext,  source_fn : str, dest_fn : str):
     
-    source_abs_fn = jcxt.jpre_filepath
+    source_abs_fn = jcxt.jpre_source_filepath
     
     with open(source_abs_fn, encoding='utf-8') as source_f:        
         
@@ -1141,7 +1365,7 @@ def _copy_test(jcxt : JupmanContext,  source_fn : str, dest_fn : str):
 #TODO source_fn may be redundant
 def _copy_other(jcxt : JupmanContext, source_fn : str, dest_fn : str, new_root : str = ''):
     
-    source_abs_fn = jcxt.jpre_filepath
+    source_abs_fn = jcxt.jpre_source_filepath
     
     if source_abs_fn.endswith('.py') :
         with open(source_abs_fn, encoding='utf-8') as source_f:
@@ -1168,7 +1392,7 @@ def _copy_other(jcxt : JupmanContext, source_fn : str, dest_fn : str, new_root :
         with open(dest_fn, 'w', encoding='utf-8') as dest_f:
             dest_f.write(data)
     elif source_abs_fn.endswith('.ipynb') :
-        import nbformat
+        
         # note: for weird reasons nbformat does not like the sol_source_f 
         nb_node = nbformat.read(source_abs_fn, nbformat.NO_CONVERT)
         replace_ipynb_templates(jcxt, nb_node)
@@ -1182,7 +1406,7 @@ def _copy_other(jcxt : JupmanContext, source_fn : str, dest_fn : str, new_root :
 #TODO source_fn may be redundant                
 def _copy_sols(jcxt : JupmanContext, source_fn : str, dest_fn : str):
     
-    source_abs_fn = jcxt.jpre_filepath
+    source_abs_fn = jcxt.jpre_source_filepath
         
     if source_fn.endswith('.py'):
         
@@ -1200,7 +1424,7 @@ def _copy_sols(jcxt : JupmanContext, source_fn : str, dest_fn : str):
                 solution_dest_f.write(text)
     elif source_fn.endswith('.ipynb'):
         # py cells: strip jupman tags, fix rel urls
-        import nbformat
+        
         # note: for weird reasons nbformat does not like the sol_source_f 
         nb_node = nbformat.read(source_abs_fn, nbformat.NO_CONVERT)
         replace_ipynb_templates(jcxt, nb_node)
@@ -1223,8 +1447,8 @@ def _copy_sols(jcxt : JupmanContext, source_fn : str, dest_fn : str):
         
 
 def _sol_nb_to_ex(jcxt : JupmanContext, nb):
-    """ Takes a solution notebook object and modifies it to strip solutions            
-
+    """ Takes a solution notebook object and modifies it to strip solutions  
+        
         @since 3.2
     """    
     from nbformat.v4 import new_raw_cell
@@ -1266,8 +1490,8 @@ def _sol_nb_to_ex(jcxt : JupmanContext, nb):
 
     import copy
     
-    source_abs_fn = os.path.abspath(jcxt.jpre_filepath)
-    
+    source_abs_fn = os.path.abspath(jcxt.jpre_source_filepath)
+            
     replace_ipynb_templates(jcxt, nb)
     replace_ipynb_rel(nb, source_abs_fn, jcxt.jpre_website)    
     
@@ -1349,14 +1573,14 @@ def _sol_nb_to_ex(jcxt : JupmanContext, nb):
             nb.cells.append(cell)
 
         cell_counter += 1
-    return nb                    
+                    
 
 
 def _is_to_preprocess(jcxt : JupmanContext, nb):
     """
         @since 3.3
     """
-    source_abs_fn = jcxt.jpre_filepath
+    source_abs_fn = jcxt.jpre_source_filepath
     
     if source_abs_fn.endswith('.ipynb'):
         
@@ -1378,11 +1602,25 @@ def _is_to_preprocess(jcxt : JupmanContext, nb):
 
     
 
-def generate_exercise(jcxt : JupmanContext, dest_dir='./'):
+def generate_exercise(jcxt_or_src : Union[JupmanContext, str], dest_dir='./'):
     """ Given a relative filename, generates the corresponding exercise file in dest_dir
+    
+        NOTE: accepts union parameter only for compat with challenges < 3.6
     """
     
-    source_rel_fn = jcxt.jpre_filepath
+    if isinstance(jcxt_or_src, str):
+        import conf
+        jcxt = JupmanContext(conf, jcxt_or_src, False)        
+    elif isinstance(jcxt_or_src, JupmanContext):
+        jcxt = jcxt_or_src
+    else:
+        raise JupmanError(f"Unrecognized input type: {type(jcxt_or_src)}")
+        
+    
+    if jcxt.jpre_website:
+        raise JupmanPreprocessorError("Called generate_exercise with jpre_website = True, should only be called to create physical files!")
+    
+    source_rel_fn = jcxt.jpre_source_filepath
     
     if not FileKinds.is_supported_ext(source_rel_fn, jcxt.jm.distrib_ext):
         raise ValueError("Exercise generation from solution not supported for file type %s" % source_rel_fn)
@@ -1395,6 +1633,10 @@ def generate_exercise(jcxt : JupmanContext, dest_dir='./'):
     
     exercise_abs_fn = os.path.join(source_dir, exercise_fn)
     exercise_dest_fn = os.path.join(dest_dir , exercise_fn)
+
+
+    njcxt = JupmanContext(jcxt, source_abs_fn, False)    
+    njcxt.jpre_dest_filepath = exercise_dest_fn
 
     info("  Generating %s" % exercise_dest_fn)
 
@@ -1410,21 +1652,16 @@ def generate_exercise(jcxt : JupmanContext, dest_dir='./'):
         with open(exercise_dest_fn, 'w') as exercise_dest_f:
             
             if source_abs_fn.endswith('.ipynb'):
-                
-                import nbformat
+                                
                 
                 # note: for weird reasons nbformat does not like the sol_source_f 
-                nb_node = nbformat.read(source_abs_fn, nbformat.NO_CONVERT)
-                #TODO probably we don't need the recreation
-                njcxt = JupmanContext(jcxt, source_abs_fn, False)
+                nb_node = nbformat.read(source_abs_fn, nbformat.NO_CONVERT)                    
                 _sol_nb_to_ex(njcxt, nb_node)
                         
                 nbformat.write(nb_node, exercise_dest_f)
             
             
-            elif source_abs_fn.endswith('.py'):                       
-                njcxt = JupmanContext(jcxt, source_abs_fn, False)
-                #TODO probably we don't need the recreation
+            elif source_abs_fn.endswith('.py'):                                                       
                 exercise_text = sol_to_ex_code(njcxt, sol_source_f.read())
                 #debug("FORMATTED TEXT=\n%s" % exercise_text)
                 exercise_dest_f.write(exercise_text)                    
@@ -1459,8 +1696,7 @@ def copy_code(jcxt : JupmanContext, source_dir, dest_dir, copy_solutions=False):
 
                         pass
                     elif fileKind == FileKinds.SOLUTION:
-                        if copy_solutions:                 
-                            #TODO I guess website False is fine
+                        if copy_solutions:                                             
                             njcxt = JupmanContext(jcxt, source_abs_fn, False)
                             _copy_sols(njcxt,   
                                        source_fn, 
@@ -1473,8 +1709,7 @@ def copy_code(jcxt : JupmanContext, source_dir, dest_dir, copy_solutions=False):
                                               dest_dir=dest_subdir)
                                         
                             
-                    elif fileKind == FileKinds.TEST:     
-                        #TODO I guess website False is fine
+                    elif fileKind == FileKinds.TEST:                             
                         njcxt = JupmanContext(jcxt, source_abs_fn, False)
                         _copy_test(njcxt,
                                    source_fn, 
@@ -1485,10 +1720,18 @@ def copy_code(jcxt : JupmanContext, source_dir, dest_dir, copy_solutions=False):
                                     source_fn,
                                     dest_fn)
 
-def _common_files_maps(jcxt : JupmanContext, zip_name):
-    """        
+def _common_files_maps(jcxt : JupmanContext, zip_name : str) -> Tuple[List[str],List[str]]:
+    """ 
+        Returns a tuple with deglobbed common files and their patterns
+        
+        zip_name:  a zip name *without* the ending '.zip'
+        
         @since 3.2 Created in order to make exam.py work
     """
+    
+    if zip_name.endswith('zip'):
+        raise JupmanError(f'zip_name must not end with .zip, found instead: {zip_name}')
+    
     deglobbed_common_files = []
     deglobbed_common_files_patterns = []
     for common_path in jcxt.jm.chapter_files:                
@@ -1500,10 +1743,11 @@ def _common_files_maps(jcxt : JupmanContext, zip_name):
 
 def zip_folder(jcxt : JupmanContext, source_folder, renamer=None):
     """ Takes source folder and creates a zip with processed files
-
+                    
         renamer: (optional) function which takes source folder names 
-                    and gives the corresponding zip name to generate
-
+                 and gives the corresponding zip name to generate
+                 WITHOUT the .zip extension
+                    
     """
     if source_folder.startswith('..'):
         fatal("BAD FOLDER TO ZIP ! STARTS WITH '..'=%s" % source_folder)
@@ -1513,8 +1757,10 @@ def zip_folder(jcxt : JupmanContext, source_folder, renamer=None):
     build_jupman = os.path.join(jcxt.jm.build, 'jupman')
     if renamer:
         zip_name = renamer(source_folder)
+        if zip_name.endswith('.zip'):
+            raise JupmanError(f"renamer function shouldn't produce names ending with .zip, got instead {zip_name}")        
     else:
-        zip_name = os.path.basename(os.path.normpath(source_folder))
+        zip_name = os.path.basename(os.path.normpath(source_folder))        
 
     build_folder = os.path.join(build_jupman, zip_name)
     if not os.path.exists(jcxt.jm.generated):
@@ -1540,8 +1786,8 @@ def zip_folders(jcxt : JupmanContext, selector, renamer=None):
 
         selector: a glob pattern 
         renamer: (optional) function which takes source folder names 
-                    and gives the corresponding zip name to generate
-                    WITHOUT the .zip extension
+                 and gives the corresponding zip name to generate
+                 WITHOUT the .zip extension
     """
     source_folders =  glob.glob(selector)
     
@@ -1694,4 +1940,244 @@ def zip_paths(jcxt : JupmanContext, rel_paths, zip_path, patterns=(), remap=None
     archive.close()
         
     info("Wrote %s.zip" % zip_path)
+    
+    
+#lower to heavier
+_chapter_files_weight = [r'(?<!-sol)\.ipynb$', 
+                         r'-sol\.ipynb$', 
+                         r'-chal\.ipynb$', 
+                         r'(?<!(_sol))(?<!(_test))\.py$', 
+                         r'.*_test\.py$', 
+                         r'.*_sol\.py$']
+"""
+@since 3.6
+"""
 
+def _compare_chapter_files(a : str, b : str) -> int:
+    """
+    
+    Returns:
+    
+        a > b : 1
+        a == b: 0
+        a < b: -1 
+    
+    according to example ordering in _make_preamble_filelist
+    
+    @since 3.6                    
+    """    
+    
+    if a == b:
+        return 0
+        
+    ws = _chapter_files_weight
+    wa = len(ws)
+    wb = len(ws)    
+    
+    #if a.endswith('.ipynb') and b.endswith(('.ipynb'):
+    kind_a, prefix_a, ending_a, ext_a = FileKinds.parse(a)
+    kind_b, prefix_b, ending_b, ext_b = FileKinds.parse(b)
+        
+    def scomp(ma,mb):
+        if ma > mb:
+            return 1
+        elif ma == mb:
+            return 0
+        else:
+            return -1
+    
+    def impcomp(e1, e2, r):
+        
+        if ext_a == e1:
+            if ext_b == e1:
+                if prefix_a == prefix_b:
+                    if kind_a == FileKinds.SOLUTION:                    
+                        return 1  # always at the bottom
+                    elif kind_a == FileKinds.TEST:
+                        if kind_b == FileKinds.SOLUTION:
+                            return -1
+                        else:
+                            return 1                
+                    else:
+                        return -1
+                else:                
+                    return scomp(prefix_a, prefix_b)
+            elif ext_b == e2:
+                return r
+            else:
+                return -1
+        else:
+            return None
+    
+    ret = impcomp('ipynb', 'py', -1)
+    if ret != None:
+        return ret
+    else:
+        ret = impcomp('py', 'ipynb', 1)
+        if ret != None:
+            return ret
+        elif ext_b == 'py' or ext_b == 'ipynb':
+            return 1
+        else:
+            return scomp(a, b)   
+    
+    
+    
+def _make_preamble_filelist(jcxt, 
+                            zip_filepath : str,                             
+                            marked : Iterable[str] = PREAMBLE_MARKED,
+                            ignored : Iterable[str] = PREAMBLE_IGNORED) -> List[str]:
+    """ 
+    
+    Given an existing zip file path, returns a list of files to show in tutorials.                
+                
+    marked: list of files to show highlighted (files subfolders cannot be marked), first one is 
+            the one the user should open first). Special value 'CURRENT' represents 
+            current notebook destination (jcxt.jpre_dest_filepath)
+    ignored: ignored paths, supports glob
+    
+    Example (indentations are just visual aid)
+           
+       [(0, example-chapter)
+            (1, examples1)            <--- directories first
+                (2, people.csv)
+                
+            (1, examples2)            <--- alphabetically sorted
+                (2, jobs.csv)
+                (2, salary.csv)                
+                
+            (1, lab.ipynb),           <--- first notebooks 
+            (1, lab_sol.ipynb),      
+            (1, work.ipynb, *),       <--- manually marked notebooks
+            (1, work_sol.ipynb),        
+            (1, lists.py),            <--- then .py          
+            (1, lists_sol.py)           
+            (1, lists_test.py),         
+            (1, trees.py),                      
+            (1, trees_sol.py)           
+            (1, trees_test.py),                                              
+            (1, data1.csv, *),        <--- then other main files like data  
+            (1, data2.csv),                                                             
+            (1, jupman.py)]           <--- finally jm.chapter_files         
+        
+                        
+    Note: it would be better to determine a zip content by looking at the source folder,      
+    but as of 3.6 it's not worth the effort, see  https://github.com/DavidLeoni/jupman/issues/115        
+    
+    @since 3.6                    
+    """
+    
+    debug(f'Reading {zip_filepath }')
+    
+    if not zip_filepath.endswith('.zip'):
+        raise JupmanPreprocessorError(f"Provided zip filepath must end with .zip, found instead: {zip_filepath}")
+    
+    if not os.path.isfile(zip_filepath):
+        raise JupmanNotFoundError(f"Provided zip filepath doesn't exist: {zip_filepath}")
+    
+    root_folder = os.path.basename(zip_filepath)[:-4]
+    debug(f"root_folder: {root_folder}")
+    if not root_folder:
+        raise JupmanPreprocessorError("root_folder empty, something went wrong!")
+    
+    dest_filename = os.path.basename(jcxt.jpre_dest_filepath)
+    debug(f"dest_filename: {dest_filename}")                
+    
+    if not dest_filename.endswith('.ipynb'):
+        raise JupmanPreprocessorError(f"Expected a .ipynb file as jcxt.jpre_dest_filepath, found instead {jcxt.jpre_dest_filepath}")
+        
+    with zipfile.ZipFile(zip_filepath) as zf:        
+        zdp = f"{root_folder}/{dest_filename}"
+        if zdp  not in zf.namelist():
+            raise JupmanNotFoundError(f"Couldn't find :\n {zdp} in zip:\n{zip_filepath}")
+        
+    from pathlib import Path
+    shrinked_zip_files = []
+    with zipfile.ZipFile(zip_filepath) as zf:        
+        for filepath in zf.namelist():
+            p  = Path(filepath)               
+            if len(p.parts) <= 1:
+                raise JupmanPreprocessorError(f"Files in a chapter zip should always be in a subfolder, found instead {filepath}")
+            
+            if root_folder != p.parts[0]:
+                raise JupmanPreprocessorError(f"Files in a chapter zip should always be in a subfolder named as the zip, found instead {filepath}")
+            shrinked_zip_files.append(os.path.join(*p.parts[1:]))
+    
+    marked_set = set()                   
+    for tf in marked:        
+                
+        if tf == 'CURRENT':
+            #NOTE: this is supposed to be in the chapter folder at level 1            
+            el = dest_filename
+        else: 
+            el = tf
+                
+        if el not in shrinked_zip_files: 
+            raise JupmanNotFoundError(f"Couldn't find provided marked file: {el}")
+        if len(Path(el).parts) > 2:
+            raise JupmanUnsupportedError(f"Marked files can only have 1 depth level, found instead: {el}")
+
+        marked_set.add(el)
+    
+
+    dirs = []
+                                
+    filtered_set = set()
+    nested_set = set()
+    main_set = set()
+    last_set = set()
+            
+    for dest_fn in sorted(shrinked_zip_files):
+        
+        if not is_zip_ignored(jcxt, dest_fn):            
+            spec = pathspec.PathSpec.from_lines('gitwildmatch', ignored)
+            if not spec.match_file(dest_fn):                                
+                found = False                            
+                fileKind = FileKinds.detect(dest_fn)
+                
+                if dest_fn not in filtered_set:
+                    filtered_set.add(dest_fn)
+                    if len(Path(dest_fn).parts) > 1:
+                        nested_set.add(dest_fn)
+                    elif pathspec.PathSpec.from_lines('gitwildmatch', jcxt.jm.chapter_files).match_file(dest_fn):
+                        last_set.add(dest_fn)
+                    else:
+                        main_set.add(dest_fn)
+
+
+    ret = [(0, root_folder)]
+    
+    prev_path = ()
+    
+    def augment_ret(j, folders_path):
+        for k in range(j, len(folders_path)):
+            if fp in marked_set:
+                ret.append( (k+1, folders_path[k], '*') )
+            else:
+                ret.append( (k+1, folders_path[k]) )
+                            
+    for fp in sorted(nested_set):     
+        p = Path(fp)
+        folders_path = p.parts[:-1]
+        
+        if folders_path != prev_path:
+            j = 0
+            scan = True
+            while j < len(folders_path) and scan:
+                if j < len(prev_path):
+                    if folders_path[j] != prev_path[j]:
+                        augment_ret(j,folders_path)                            
+                        scan = False
+                else:
+                    augment_ret(j,folders_path)
+                    scan = False
+                j += 1            
+            prev_path = folders_path             
+        
+        ret.append( (len(folders_path)+1, p.parts[-1]) )
+
+    from functools import cmp_to_key
+    ret.extend( ((1,fp, '*') if fp in marked_set else (1,fp) for fp in sorted(main_set, key=cmp_to_key(_compare_chapter_files))) )
+    ret.extend( ((1,fp, '*') if fp in marked_set else (1,fp) for fp in sorted(last_set, key=cmp_to_key(_compare_chapter_files))) )
+    
+    return ret

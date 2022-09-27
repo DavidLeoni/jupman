@@ -19,14 +19,18 @@ trap '[[ $BASH_COMMAND != echo* ]] && echo $BASH_COMMAND' DEBUG
 
 
 python3 exam.py init 2000-12-31
+echo 'Suffixing exam notebook with -sol.pynb  ...'
+mv _private/2000-12-31/solutions/exam-2000-12-31.ipynb   _private/2000-12-31/solutions/exam-2000-12-31-sol.ipynb
 python3 exam.py package --site --server 2000-12-31
 
 echo
 echo "------- Simulating some shipped exams..."
 mkdir -p _private/2000-12-31/shipped/john-doe-112233
-cp _templates/exam/solutions/*.py _private/2000-12-31/shipped/john-doe-112233
+cp _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/*.py    _private/2000-12-31/shipped/john-doe-112233
+cp _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/*.ipynb _private/2000-12-31/shipped/john-doe-112233
 mkdir -p _private/2000-12-31/shipped/jane-doe-445566
-cp _templates/exam/solutions/*.py _private/2000-12-31/shipped/jane-doe-445566
+cp _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/*.py _private/2000-12-31/shipped/jane-doe-445566
+cp _private/2000-12-31/student-zip/jupman-2000-12-31-FIRSTNAME-LASTNAME-ID/*.ipynb _private/2000-12-31/shipped/jane-doe-445566
 echo "------- Done with shipped exams simulation, time to grade ..."
 echo
 

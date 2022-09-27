@@ -21,12 +21,12 @@ import re
 
 ###################   TODO EDIT AS NEEDED !!  ####################
 
-jm = jmt.Jupman()
+jm = jmt.JupmanConfig()
 
 # TODO CHANGE
 jm.subtitle = "A template manager for online books made with Jupyter notebooks and NBSphinx doc generator""" 
 jm.course = "Applied Pythonics" # TODO CHANGE
-jm.degree = "Nuclear Templates Engineering" # TODO CHANGE
+jm.degree = "Tuplonium Engineering" # TODO CHANGE
 author = 'People That Write a Lot' # TODO CHANGE
 # TODO FIRST YEAR
 copyright = '# 2020 - %s, %s' % (datetime.datetime.now().year, author)
@@ -37,6 +37,8 @@ copyright = '# 2020 - %s, %s' % (datetime.datetime.now().year, author)
 #####     (like i.e. jupman.readthedocs.org)
 
 jm.filename = 'jupman'   # The filename without the extension
+
+jm.repo_browse_url = 'https://github.com/DavidLeoni/jupman/blob/master/'
 
 # common files for exercise and exams as paths. Paths are intended relative to the project root. Globs like /**/* are allowed.
 
@@ -202,7 +204,7 @@ version  = jmt.get_version(release)
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 
 # -- Options for HTML output ----------------------------------------------
@@ -297,7 +299,7 @@ latex_elements = {
 \newunicodechar{✓}{\checkmark}    
 
     ''',
-    'maketitle': jm.latex_maketitle(html_baseurl),
+    'maketitle': jmt.latex_maketitle(jmt.JupmanContext(globals(), '', False), html_baseurl),
 }
 
 
@@ -442,16 +444,19 @@ pdf_fit_background_mode = 'scale'
 
 def setup(app):        
     import logging
-    jmt.init(jm, globals(), debug_level=logging.DEBUG)
+    jctx = jmt.init(jm, globals())
 
     app.add_config_value(   'recommonmark_config', {
                                 'auto_toc_tree_section': 'Contents',
                                 'enable_eval_rst':True
                             }, True)
     app.add_transform(AutoStructify)
+    
     for folder in jm.get_exercise_folders():
-        jm.zip_folder(folder)
-    jm.zip_folders('exams/*/solutions', 
+        jmt.zip_folder(jctx, folder)
+
+    jmt.zip_folders(jctx, 
+                    'exams/*/solutions', 
                     lambda x:  '%s-%s-exam' % (jm.filename, x.split('/')[-2]))
     # Build Project
     def remap(x):
@@ -462,7 +467,8 @@ def setup(app):
         else:
             return x
 
-    jm.zip_paths(['project', 'requirements.txt'], 
+    jmt.zip_paths(jctx, 
+                  ['project', 'requirements.txt'], 
                   '_static/generated/project-template',
                   remap=remap)    
 

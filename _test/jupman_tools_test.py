@@ -8,7 +8,7 @@ import jupman_tools as jmt
 from hypothesis import given
 from pprint import pprint
 from hypothesis.strategies import text
-from jupman_tools import ignore_spaces, tag_regex, JupmanConfig, SphinxConfig, JupmanContext
+from jupman_tools import ignore_spaces, tag_regex, JupmanConfig, SphinxConfig, JupmanContext, JupmanError, JupmanNotFoundError, FileKinds, JupmanPreprocessorError, JupmanEmptyChapterError, JupmanUnsupportedError
 import pytest 
 import re
 from sphinx.application import Sphinx
@@ -19,6 +19,8 @@ import filecmp
 import shutil
 import nbsphinx
 import inspect
+from jupman_tools import debug    
+from pprint import pformat
 
 from common_test import * 
 import datetime
@@ -47,6 +49,13 @@ def test_parse_date_str():
         jmt.parse_date_str('2000-31-12')
 
 
+def test_date_to_human():
+    assert jmt.date_to_human('2000-12-31', 'en') == 'Sun 31, Dec 2000'
+    assert jmt.date_to_human('2000-12-31', 'it') == 'Dom 31, Dic 2000'
+    assert jmt.date_to_human(jmt.parse_date('2000-12-31'), 'en') == 'Sun 31, Dec 2000'
+    assert jmt.date_to_human(jmt.parse_date('2000-12-31'), 'it') == 'Dom 31, Dic 2000'
+
+
 def test_jupman_constructor():
     jm = JupmanConfig()
     # only testing the vital attrs
@@ -69,12 +78,20 @@ class MockSphinx:
 def test_uproot():
     assert jmt.uproot('jupman.py') == ''
     assert jmt.uproot('_test/') == '../'
-    assert jmt.uproot('_test/test-chapter/data/pop.csv') == '../../../'
+    assert jmt.uproot('_static/img/cc-by.png') == '../../'    
+    assert jmt.uproot('_test/test-chapter/population.csv') == '../../'
     # this is supposed to be a directory
-    assert jmt.uproot('_test/non-existing') == '../../'
+    
     assert jmt.uproot('_static/img') == '../../'
-    assert jmt.uproot('_static/img/cc-by.png') == '../../'
-    assert jmt.uproot('_static/img/non-existing') == '../../../'
+    
+    # TODO review behaviour an non-existing paths
+    assert jmt.uproot('_test/non-existing') == '../../'    
+    #assert jmt.uproot('_static/img/non-existing1') == '../../../'
+    #assert jmt.uproot('_static/img/non-existing1/') == '../../../'
+    #assert jmt.uproot('_static/img/non-existing1/non-existing2') == '../../../'
+    #assert jmt.uproot('_static/img/non-existing1/non-existing2/') == '../../../'
+    
+    
 
 def test_replace_sysrel():
 
@@ -256,7 +273,7 @@ def test_replace_html_rel():
 def subtest_copy_chapter_replacements(dest_dir):
     
     replacements_fn = os.path.join(dest_dir, 'replacements.ipynb')
-    jcxt = JupmanContext(make_sphinx_config(), replacements_fn, True)
+    jcxt = JupmanContext(make_sphinx_config(), replacements_fn, False)
     
     assert os.path.isfile(replacements_fn)
 
@@ -292,34 +309,40 @@ def subtest_copy_chapter_replacements(dest_dir):
     
     assert '<a target="_blank" href="https://jupman.softpython.org">a link</a>' in nb_repl.cells[15].source
 
-    assert 'replacements.ipynb' in nb_repl.cells[16].source
+    assert nb_repl.cells[16].source.count('replacements.ipynb') == 2
     assert jcxt.jm.manual in nb_repl.cells[16].source
     assert jcxt.author in nb_repl.cells[16].source
         
-    assert 'replacements.ipynb' in nb_repl.cells[17].source
+    assert nb_repl.cells[17].source.count('replacements.ipynb') == 2
     assert jcxt.jm.manual in nb_repl.cells[17].source
     assert nb_repl.cells[17].source.count(jcxt.author) == 2
         
-    assert 'replacements.ipynb' in nb_repl.cells[18].source
+    assert nb_repl.cells[18].source.count('replacements.ipynb') == 2
     assert jcxt.jm.manual in nb_repl.cells[18].source
     assert jcxt.author in nb_repl.cells[18].source
             
-    assert 'replacements.ipynb' in nb_repl.cells[19].source
+    assert nb_repl.cells[19].source.count('replacements.ipynb') == 2
     assert jcxt.jm.manual in nb_repl.cells[19].source
     assert jcxt.author in nb_repl.cells[19].source
 
 
 def subtest_copy_chapter_py_files(dest_dir):
 
-    py_fn = os.path.join(dest_dir, 'file.py')
+    py_fn = os.path.join(dest_dir, 'script.py')
+    jcxt = JupmanContext(make_sphinx_config(), py_fn, False)
     assert os.path.isfile(py_fn)
 
     with open(py_fn, encoding='utf-8') as py_f:
         py_code = py_f.read()
         assert '# Python\nimport jupman' in py_code
         assert '#jupman-raise' in py_code
+        assert py_code.count('script.py') == 2
+        assert jcxt.jm.manual in py_code
+        assert jcxt.author in py_code        
+        
 
     test_fn = os.path.join(dest_dir, 'some_test.py')
+    jcxt = JupmanContext(make_sphinx_config(), test_fn, False)
     assert os.path.isfile(test_fn)
 
     with open(test_fn, encoding='utf-8') as test_f:
@@ -327,8 +350,12 @@ def subtest_copy_chapter_py_files(dest_dir):
         assert 'some_sol' not in test_code
         assert '# Python\nimport some\nimport jupman' in test_code
         assert '#jupman-raise' in test_code
+        assert test_code.count('some_test.py') == 2
+        assert jcxt.jm.manual in test_code
+        assert jcxt.author in test_code        
 
     sol_fn = os.path.join(dest_dir, 'some_sol.py')
+    jcxt = JupmanContext(make_sphinx_config(), sol_fn, False)
     assert os.path.isfile(sol_fn)
 
     with open(sol_fn, encoding='utf-8') as py_sol_f:
@@ -339,7 +366,10 @@ def subtest_copy_chapter_py_files(dest_dir):
         assert '#jupman-purge' not in sol_code
         assert 'stripped!' in sol_code
         assert 'purged!' not in sol_code        
-        assert "# work!\n\nprint('hi')" in sol_code
+        assert "# work!\n\nprint('hi')" in sol_code        
+        assert sol_code.count('some_sol.py') == 2
+        assert jcxt.jm.manual in sol_code
+        assert jcxt.author in sol_code
 
     ex_fn = os.path.join(dest_dir, 'some.py')
     assert os.path.isfile(ex_fn)
@@ -349,11 +379,17 @@ def subtest_copy_chapter_py_files(dest_dir):
         assert '# Python\nimport jupman' in py_ex_code
         assert '#jupman-raise' not in py_ex_code
         assert '# work!\nraise' in py_ex_code
+        assert 'some_sol.py' in py_ex_code
+        assert 'some.py' in py_ex_code
+        assert jcxt.jm.manual in py_ex_code
+        assert jcxt.author in py_ex_code        
     
 
 def subtest_copy_chapter_exercises(dest_dir):
 
     nb_ex_fn = os.path.join(dest_dir, 'nb.ipynb')
+    jcxt = JupmanContext(make_sphinx_config(), nb_ex_fn, False)
+    
     assert os.path.isfile(nb_ex_fn)
 
     nb_ex = nbformat.read(nb_ex_fn, nbformat.NO_CONVERT)
@@ -385,11 +421,33 @@ def subtest_copy_chapter_exercises(dest_dir):
     assert nb_ex.cells[13].source == ''    
     assert nb_ex.cells[13].outputs == []
     assert nb_ex.cells[13].metadata['nbsphinx'] == 'hidden'    
+    
+    assert 'nb.ipynb' in nb_ex.cells[14].source
+    assert 'nb-sol.ipynb' in nb_ex.cells[14].source
+    assert jcxt.jm.manual in nb_ex.cells[14].source
+    assert jcxt.author in nb_ex.cells[14].source
+        
+    assert 'nb.ipynb' in nb_ex.cells[15].source
+    assert 'nb-sol.ipynb' in nb_ex.cells[15].source
+    assert jcxt.jm.manual in nb_ex.cells[15].source
+    assert nb_ex.cells[15].source.count(jcxt.author) == 2
+        
+    assert 'nb.ipynb' in nb_ex.cells[16].source
+    assert 'nb-sol.ipynb' in nb_ex.cells[16].source
+    assert jcxt.jm.manual in nb_ex.cells[16].source
+    assert jcxt.author in nb_ex.cells[16].source
+            
+    assert 'nb.ipynb' in nb_ex.cells[17].source
+    assert 'nb-sol.ipynb' in nb_ex.cells[17].source
+    assert jcxt.jm.manual in nb_ex.cells[17].source
+    assert jcxt.author in nb_ex.cells[17].source    
 
 
 def subtest_copy_chapter_solution(dest_dir):
-
+    
     nb_sol_fn = os.path.join(dest_dir, 'nb-sol.ipynb')
+    jcxt = JupmanContext(make_sphinx_config(), nb_sol_fn, False)
+    
     nb_sol = nbformat.read(nb_sol_fn, nbformat.NO_CONVERT) 
     assert 'stripped!' in nb_sol.cells[8].source   # jupman-strip  strips everything inside exercises
     assert '#jupman-strip' not in nb_sol.cells[8].source   
@@ -413,6 +471,23 @@ def subtest_copy_chapter_solution(dest_dir):
     assert nb_sol.cells[13].source == ''    
     assert nb_sol.cells[13].outputs == []
     assert nb_sol.cells[13].metadata['nbsphinx'] == 'hidden'
+    
+    assert nb_sol.cells[14].source.count('nb-sol.ipynb') == 2
+    assert jcxt.jm.manual in nb_sol.cells[14].source
+    assert jcxt.author in nb_sol.cells[14].source
+        
+    assert nb_sol.cells[15].source.count('nb-sol.ipynb') == 2
+    assert jcxt.jm.manual in nb_sol.cells[15].source
+    assert nb_sol.cells[15].source.count(jcxt.author) == 2
+        
+    assert nb_sol.cells[16].source.count('nb-sol.ipynb') == 2
+    assert jcxt.jm.manual in nb_sol.cells[16].source
+    assert jcxt.author in nb_sol.cells[16].source
+            
+    assert nb_sol.cells[17].source.count('nb-sol.ipynb') == 2
+    assert jcxt.jm.manual in nb_sol.cells[17].source
+    assert jcxt.author in nb_sol.cells[17].source    
+    
 
 def subtest_copy_chapter_solution_web(dest_dir): 
 
@@ -438,6 +513,14 @@ def subtest_copy_chapter_solution_web(dest_dir):
         assert 'purged!13' not in cell.source
         if getattr(cell, 'outputs', None):
             assert 'purged!13' not in cell.outputs[0]['text']
+            
+        if '16 -' in cell.source:            
+            assert cell.source.count('nb-sol.ipynb') == 2
+        if '17 -' in cell.source:            
+            assert cell.source.count('nb-sol.ipynb') == 2
+        
+        #TODO preamble stuff        
+            
     assert stripped8 == 1
     assert stripped10 == 1
 
@@ -459,10 +542,10 @@ def subtest_copy_chapter_challenge(dest_dir):
         assert 'from my_chal import *' in py_chal_test_code
 
     
-    nb_chal_ex_fn = os.path.join(dest_dir, 'nb-chal.ipynb')    
+    nb_chal_ex_fn = os.path.join(dest_dir, 'nb2-chal.ipynb')    
     jcxt = JupmanContext(make_sphinx_config(), os.path.abspath(nb_chal_ex_fn), True)
     assert os.path.isfile(nb_chal_ex_fn)
-    nb_chal_sol_fn = os.path.join(dest_dir, 'nb-chal-sol.ipynb')
+    nb_chal_sol_fn = os.path.join(dest_dir, 'nb2-chal-sol.ipynb')
     assert not os.path.isfile(nb_chal_sol_fn)
 
     nb_chal_ex = nbformat.read(nb_chal_ex_fn, nbformat.NO_CONVERT)
@@ -712,23 +795,73 @@ def test_preprocessor_normal():
     
     assert 'stay!' in nb_orig.cells[10].source            
     
+def test_FileKinds_parse():
+    """ @since 3.6
+    """
+    
+    # TODO can't detect exercise
+    assert FileKinds.parse('my_tutorial.py') == (FileKinds.OTHER, 'my_tutorial', '', 'py')
+    
+    assert FileKinds.parse('my_tutorial_sol.py') == (FileKinds.SOLUTION, 'my_tutorial', '_sol', 'py')
+    assert FileKinds.parse('my_tutorial_chal_sol.py') == (FileKinds.CHALLENGE_SOLUTION, 'my_tutorial', '_chal_sol', 'py')
+    
+    # TODO can't detect challenge
+    assert FileKinds.parse('my_tutorial_chal.py') == (FileKinds.OTHER, 'my_tutorial', '_chal', 'py')
+    assert FileKinds.parse('my_tutorial_test.py') == (FileKinds.TEST, 'my_tutorial', '_test', 'py')
+    
+    #TODO can't detect exercise
+    assert FileKinds.parse('my-tutorial.ipynb') == (FileKinds.OTHER, 'my-tutorial', '', 'ipynb')
+    
+    assert FileKinds.parse('my-tutorial-sol.ipynb') == (FileKinds.SOLUTION, 'my-tutorial', '-sol', 'ipynb')
+    assert FileKinds.parse('my-tutorial-chal-sol.ipynb') == (FileKinds.CHALLENGE_SOLUTION, 'my-tutorial', '-chal-sol','ipynb')
+    
+    # TODO can't detect challenge
+    assert FileKinds.parse('my-tutorial-chal.ipynb') == (FileKinds.OTHER, 'my-tutorial', '-chal','ipynb')
+    
+    #as of 3.6 we don't support notebooks tests
+    assert FileKinds.parse('my-tutorial-test.ipynb') == (FileKinds.OTHER, 'my-tutorial-test', '', 'ipynb')
+    
+    assert FileKinds.parse('some-data.csv') == (FileKinds.OTHER, 'some-data', '','csv')
+    
+    
+    assert FileKinds.parse('my_tutorial_sol.py') == (FileKinds.SOLUTION, 'my_tutorial', '_sol', 'py')
+    assert FileKinds.parse('my_tutorial_chal_sol.py') == (FileKinds.CHALLENGE_SOLUTION, 'my_tutorial', '_chal_sol', 'py')    
+
+def test_FileKinds_detect():
+    """ @since 3.6
+    """
+    #TODO a parametric test linked to parse would be much better
+    assert FileKinds.detect('my_tutorial_sol.py') == FileKinds.SOLUTION
+    assert FileKinds.detect('my_tutorial_chal_sol.py') == FileKinds.CHALLENGE_SOLUTION
+
+
 def test_expr_matcher():    
+    """ @since 3.6
+    """
 
     P = jmt.EXPR_PATTERN
-    assert P.match("_JUPMAN_.a").group(0) == "_JUPMAN_.a"    
+    assert P.match("_JUPMAN_.a").group(0) == "_JUPMAN_.a"
+    assert P.match("_JUPMAN_._a") == None    
+    # currently not supporting fields that start with _ so we can have _END_, but with a better regex this test may fail
+    assert P.match("_JUPMAN_.a._b").group(0) == "_JUPMAN_.a"    
     assert P.match("_JUPMAN_.") == None    
     assert P.match("_JUPMAN_") == None    
     assert P.match("_JUPMAN_.a.b").group(0) == "_JUPMAN_.a.b"
     assert P.match("_JUPMAN_.ab.b").group(0) == "_JUPMAN_.ab.b"
-    assert P.match("_JUPMAN_.a.bc").group(0) == "_JUPMAN_.a.bc"
+    assert P.match("_JUPMAN_.a.bc").group(0) == "_JUPMAN_.a.bc"    
     assert P.match("_JUPMAN_.7a") == None
     assert P.match("_JUPMAN_.a7").group(0) == "_JUPMAN_.a7"    
+    assert P.match("_JUPMAN_.a._END_.b").group(0) == "_JUPMAN_.a._END_"
+    assert P.match("_JUPMAN_.a.b._END_").group(0) == "_JUPMAN_.a.b._END_"    
+    assert P.match("_JUPMAN_.a.b._END_.cd").group(0) == "_JUPMAN_.a.b._END_"        
     assert P.match("_JUPMAN_.f()").group(0) == "_JUPMAN_.f()"    
     assert P.match("_JUPMAN_.c.ga()").group(0) == "_JUPMAN_.c.ga()"        
     assert P.match("_JUPMAN_.f(3)").group(0) == "_JUPMAN_.f(3)"
     assert P.match("_JUPMAN_.f(2,5,1)").group(0) == "_JUPMAN_.f(2,5,1)"      
     # chaining is not supported, maybe it should refuse/warn but we don't care
-    assert P.match("_JUPMAN_.f().g()").group(0) == "_JUPMAN_.f()"  
+    assert P.match("_JUPMAN_.f().g()").group(0) == "_JUPMAN_.f()"
+    assert P.match("_JUPMAN_.f()._END_.g()").group(0) == "_JUPMAN_.f()"
+    assert P.match("_JUPMAN_.f()._END_.g()").group(0) == "_JUPMAN_.f()"  
     
     
     assert [m.group(0) for m in P.finditer("  _JUPMAN_.a CIAO_JUPMAN_.b.c HELLO ")] == ["_JUPMAN_.a", "_JUPMAN_.b.c"]
@@ -739,15 +872,17 @@ def test_expr_matcher():
     assert [m.group(0) for m in P.finditer("_JUPMAN_.a\n_JUPMAN_.b")] == ["_JUPMAN_.a", "_JUPMAN_.b"]
     assert [m.group(0) for m in P.finditer("_JUPMAN_.a]_JUPMAN_.b")] == ["_JUPMAN_.a", "_JUPMAN_.b"]
     assert [m.group(0) for m in P.finditer("_JUPMAN_.a)_JUPMAN_.b")] == ["_JUPMAN_.a", "_JUPMAN_.b"]
-    assert [m.group(0) for m in P.finditer("_JUPMAN_.a\"_JUPMAN_.b")] == ["_JUPMAN_.a", "_JUPMAN_.b"]
-    # a non-character separator is always necessary, in future if we improve the regex this test may fail 
+    assert [m.group(0) for m in P.finditer("_JUPMAN_.a\"_JUPMAN_.b")] == ["_JUPMAN_.a", "_JUPMAN_.b"]    
     assert [m.group(0) for m in P.finditer("  _JUPMAN_.aZ_JUPMAN_.b")] == ["_JUPMAN_.aZ_JUPMAN_.b"]
+    assert [m.group(0) for m in P.finditer("  _JUPMAN_.a._END__JUPMAN_.b")] == ["_JUPMAN_.a._END_","_JUPMAN_.b"]    
     assert [m.group(0) for m in P.finditer("  _JUPMAN_.a()_JUPMAN_.b")] == ["_JUPMAN_.a()", "_JUPMAN_.b"]
-    assert [m.group(0) for m in P.finditer("  _JUPMAN_.a()Z_JUPMAN_.b")] == ["_JUPMAN_.a()", "_JUPMAN_.b"]
+    assert [m.group(0) for m in P.finditer("  _JUPMAN_.a()Z_JUPMAN_.b")] == ["_JUPMAN_.a()", "_JUPMAN_.b"]            
     
     
     
 def test_replace_templates():
+    """ @since 3.6
+    """
     
     class C:
         pass
@@ -778,6 +913,14 @@ def test_replace_templates():
     assert jmt.replace_templates(jcxt, "_JUPMAN_.7a") == "_JUPMAN_.7a"
     jcxt = mkcxt();  jcxt.a7 = 4
     assert jmt.replace_templates(jcxt, "_JUPMAN_.a7") == "4"    
+    
+    jcxt = mkcxt();  jcxt.a = 'x'
+    assert jmt.replace_templates(jcxt, "_JUPMAN_.a._END_.b") == "x.b"
+    jcxt = mkcxt();  jcxt.a = C(); jcxt.a.b = 'x'
+    assert jmt.replace_templates(jcxt, "_JUPMAN_.a.b._END_") == "x"
+    jcxt = mkcxt();  jcxt.a = C(); jcxt.a.b = 'x'
+    assert jmt.replace_templates(jcxt, "_JUPMAN_.a.b._END_.cd") == "x.cd"    
+    
     jcxt = mkcxt();  jcxt.f = lambda xjc: "hi"  
     assert jmt.replace_templates(jcxt, "_JUPMAN_.f()") == "hi"    
     jcxt = mkcxt();  jcxt.c = C(); jcxt.c.ga = lambda xjc: "hello"   
@@ -791,3 +934,452 @@ def test_replace_templates():
     assert jmt.replace_templates(jcxt, "_JUPMAN_.f().g()") == "hi.g()"  
         
      
+def test_common_files_maps():
+    """ @since 3.6
+    """
+            
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test_chapter/nb-sol.ipynb', True)        
+    
+    with pytest.raises(JupmanError):
+        rel_paths, patterns = jmt._common_files_maps(jcxt, 'prova.zip')
+    
+    jcxt.jm.chapter_files.append(r'_test/test-chapter/**/*pic?.png')
+    
+    rel_paths, patterns = jmt._common_files_maps(jcxt, 'prova')
+    
+    print(rel_paths)
+    print(patterns)
+    
+    assert 'jupman.py' in  rel_paths
+    assert '_test/test-chapter/img/pic1.png' in rel_paths
+    assert '_test/test-chapter/img/more/pic2.png' in rel_paths
+    assert ('^(jupman.py)$', 'prova/jupman.py') in  patterns
+    assert ('^(_test/test-chapter/img/pic1.png)$', 'prova/_test/test-chapter/img/pic1.png') in patterns
+    assert ('^(_test/test-chapter/img/more/pic2.png)$', 'prova/_test/test-chapter/img/more/pic2.png') in patterns
+    assert ('^(_test/test-chapter/img/more/pic3.png)$', 'prova/_test/test-chapter/img/more/pic3.png') in patterns           
+    
+     
+def test_make_preamble_filelist_chap2_one_marked_file():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/chap2-only-one/a.ipynb', True) 
+    jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
+    jmt.zip_folder(jcxt, '_test/chap2-only-one', lambda x : 'chap2-only-one')
+        
+    lst = jmt._make_preamble_filelist(jcxt, 
+                                      f"{jcxt.jm.generated}/chap2-only-one.zip",
+                                      ['a.ipynb'])
+    
+    assert lst == [(0, 'chap2-only-one'), 
+                        (1,'a.ipynb', '*'),
+                        (1,'jupman.py')]
+
+
+def test_make_preamble_filelist_chap2_unspecified_marked_files():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/chap2-only-one/a.ipynb', True) 
+    jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
+    jmt.zip_folder(jcxt, '_test/chap2-only-one', lambda x : 'chap2-only-one')
+        
+    lst = jmt._make_preamble_filelist(jcxt, 
+                                      f"{jcxt.jm.generated}/chap2-only-one.zip")
+    
+    assert lst == [(0, 'chap2-only-one'), 
+                        (1,'a.ipynb', '*'),
+                        (1,'jupman.py')]
+
+
+def test_make_preamble_filelist_chap2_no_marked_files():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/chap2-only-one/a.ipynb', True) 
+    jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
+    jmt.zip_folder(jcxt, '_test/chap2-only-one', lambda x : 'chap2-only-one')
+        
+    lst = jmt._make_preamble_filelist(jcxt, 
+                                      f"{jcxt.jm.generated}/chap2-only-one.zip",
+                                      [])
+    
+    assert lst == [(0, 'chap2-only-one'), 
+                        (1,'a.ipynb'),
+                        (1,'jupman.py')]
+    
+def test_make_preamble_filelist_chap2_non_existing_dest_file():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/chap2-only-one/WHAT666.ipynb', True) 
+    jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
+    jmt.zip_folder(jcxt, '_test/chap2-only-one', lambda x : 'chap2-only-one')
+
+    with pytest.raises(JupmanNotFoundError):        
+        lst = jmt._make_preamble_filelist(jcxt,  f"{jcxt.jm.generated}/chap2-only-one.zip")
+    
+
+     
+def test_make_preamble_filelist_chap2_no_ignored_ipynb():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/chap2-only-one/a.ipynb', True) 
+    jcxt.jm.chapter_files = ['jupman.py', '_static/js/jupman.js', '_static/img/cc-by.png' ]
+    jmt.zip_folder(jcxt, '_test/chap2-only-one', lambda x : 'chap2-only-one')
+        
+    lst = jmt._make_preamble_filelist(jcxt, 
+                                      f"{jcxt.jm.generated}/chap2-only-one.zip",
+                                      ignored=[])
+    
+    assert lst == [(0, 'chap2-only-one'), 
+                        (1, '_static'), 
+                            (2, 'img'),
+                                (3, 'cc-by.png'),
+                            (2, 'js'), 
+                                (3, 'jupman.js'), 
+                        (1,'a.ipynb', '*'),
+                        (1,'jupman.py')]
+
+def test_make_preamble_filelist_chap3_non_existing_dest_file():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/chap3-empty/a.ipynb', True) 
+    jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
+    jmt.zip_folder(jcxt, '_test/chap3-empty', lambda x : 'chap3-empty')
+        
+    with pytest.raises(JupmanNotFoundError):
+        lst = jmt._make_preamble_filelist(jcxt, 
+                                        f"{jcxt.jm.generated}/chap3-empty.zip")
+    
+
+
+def test_make_preamble_filelist_chap3_non_existing_dest_non_existing_marked_file():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/chap3-empty/a.ipynb', True) 
+    jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
+    jmt.zip_folder(jcxt, '_test/chap3-empty', lambda x : 'chap3-empty')
+        
+    with pytest.raises(JupmanNotFoundError):
+        lst = jmt._make_preamble_filelist(jcxt, 
+                                        f"{jcxt.jm.generated}/chap3-empty.zip",
+                                        ['b.ipynb'])
+    
+         
+def test_make_preamble_filelist_chap3_no_ignored_ipynb():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/chap3-empty/a.ipynb', True) 
+    jcxt.jm.chapter_files = ['jupman.py', '_static/js/jupman.js', '_static/img/cc-by.png' ]
+    jmt.zip_folder(jcxt, '_test/chap3-empty', lambda x : 'chap3-empty')
+        
+    with pytest.raises(JupmanNotFoundError):
+        lst = jmt._make_preamble_filelist(jcxt, 
+                                        f"{jcxt.jm.generated}/chap3-empty.zip",
+                                        [],
+                                        [])    
+
+def test_compare_chapter_files():        
+    """ 
+        TODO more characters, parametrize
+        @since 3.6
+    """
+    cfw = jmt._chapter_files_weight
+    
+    assert re.search(cfw[0], 'peppo.ipynb')
+    assert not re.search(cfw[0], 'peppo-sol.ipynb')    
+        
+    assert jmt._compare_chapter_files('a.py', 'a.py') == 0    
+    assert jmt._compare_chapter_files('a.py', 'a_sol.py') == -1
+    assert jmt._compare_chapter_files('a.py', 'a_test.py') == -1
+    assert jmt._compare_chapter_files('a.py', 'a.ipynb') == 1
+    assert jmt._compare_chapter_files('a.py', 'a') == -1    
+    assert jmt._compare_chapter_files('a_test.py', 'a.py') == 1
+    assert jmt._compare_chapter_files('a_test.py', 'a_test.py') == 0    
+    assert jmt._compare_chapter_files('a_test.py', 'a_sol.py') == -1
+    assert jmt._compare_chapter_files('a_test.py', 'a_test.ipynb') == 1
+    assert jmt._compare_chapter_files('a_test.py', 'a') == -1
+    assert jmt._compare_chapter_files('a_sol.py', 'a.py') == 1
+    assert jmt._compare_chapter_files('a_sol.py', 'a_test.py') == 1
+    assert jmt._compare_chapter_files('a_sol.py', 'a_sol.py') == 0
+    assert jmt._compare_chapter_files('a_sol.py', 'a_sol.ipynb') == 1
+    assert jmt._compare_chapter_files('a_sol.py', 'a') == -1  
+    
+    assert jmt._compare_chapter_files('a.ipynb', 'a.py') == -1
+    assert jmt._compare_chapter_files('a.ipynb', 'a_sol.py') == -1
+    assert jmt._compare_chapter_files('a.ipynb', 'a_test.py') == -1
+    assert jmt._compare_chapter_files('a.ipynb', 'a.ipynb') == 0
+    assert jmt._compare_chapter_files('a.ipynb', 'a') == -1    
+    assert jmt._compare_chapter_files('a-test.ipynb', 'a.py') == -1
+    assert jmt._compare_chapter_files('a_test.ipynb', 'a_test.py') == -1
+    assert jmt._compare_chapter_files('a-test.ipynb', 'a_sol.py') == -1
+    assert jmt._compare_chapter_files('a-test.ipynb', 'a-test.ipynb') == 0
+    assert jmt._compare_chapter_files('a-test.ipynb', 'a') == -1
+    assert jmt._compare_chapter_files('a-sol.ipynb', 'a.py') == -1
+    assert jmt._compare_chapter_files('a-sol.ipynb', 'a_test.py') == -1
+    assert jmt._compare_chapter_files('a_sol.ipynb', 'a_sol.py') == -1
+    assert jmt._compare_chapter_files('a-sol.ipynb', 'a-sol.ipynb') == 0
+    assert jmt._compare_chapter_files('a-sol.ipynb', 'a') == -1  
+
+    assert jmt._compare_chapter_files('a', 'a.py') == 1
+    assert jmt._compare_chapter_files('a', 'a_sol.py') == 1
+    assert jmt._compare_chapter_files('a', 'a_test.py') == 1
+    assert jmt._compare_chapter_files('a', 'a.ipynb') == 1
+    assert jmt._compare_chapter_files('a', 'a') == 0    
+    assert jmt._compare_chapter_files('a-test', 'a.py') == 1
+    assert jmt._compare_chapter_files('a_test', 'a_test.py') == 1
+    assert jmt._compare_chapter_files('a-test', 'a_sol.py') == 1
+    assert jmt._compare_chapter_files('a-test', 'a-test.ipynb') == 1
+    assert jmt._compare_chapter_files('a-test', 'a') == 1
+    assert jmt._compare_chapter_files('a-sol', 'a.py') == 1
+    assert jmt._compare_chapter_files('a-sol', 'a_test.py') == 1
+    assert jmt._compare_chapter_files('a_sol', 'a_sol.py') == 1
+    assert jmt._compare_chapter_files('a-sol', 'a-sol.ipynb') == 1
+    assert jmt._compare_chapter_files('a-sol', 'a') == 1
+
+    
+    assert jmt._compare_chapter_files('a', 'a') == 0
+    assert jmt._compare_chapter_files('a', 'b') == -1
+    assert jmt._compare_chapter_files('b', 'a') == 1
+
+
+
+
+
+def test_make_preamble_filelist_test_chapter_two_marked_files():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True)  
+    jcxt.jpre_dest_filepath = '_test/test-chapter/nb.ipynb'
+    jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
+    jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
+    
+    lst = jmt._make_preamble_filelist(jcxt, 
+                                      f"{jcxt.jm.generated}/test-chapter.zip",                                      
+                                      marked = ['nb.ipynb', 'population.csv'])
+    
+    assert lst == [(0, 'test-chapter'),                         
+                        (1, 'extra'),                            
+                            (2, 'nested'),
+                                (3, 'other.csv'),
+                                (3, 'something.txt'),                                
+                            (2, 'whatever.pdf'),
+                        (1, 'force-preprocess.ipynb'),
+                        (1, 'nb.ipynb', '*'),                        
+                        (1, 'nb-sol.ipynb'),
+                        (1, 'nb2-chal.ipynb'),
+                        (1, 'replacements.ipynb'),
+                        (1, 'my_chal.py'),
+                        (1, 'my_chal_test.py'),
+                        (1, 'script.py'),
+                        (1, 'some.py'),                        
+                        (1, 'some_test.py'),
+                        (1, 'some_sol.py'),
+                        (1, 'population.csv', '*'),
+                        (1,'jupman.py') ]
+    
+
+def test_make_preamble_filelist_test_chapter_marked_non_dest():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True)  
+    jcxt.jpre_dest_filepath = '_test/test-chapter/nb.ipynb'
+    jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
+    jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
+    
+    lst = jmt._make_preamble_filelist(jcxt, 
+                                      f"{jcxt.jm.generated}/test-chapter.zip",                                      
+                                      marked = ['replacements.ipynb'])
+ 
+    assert lst == [(0, 'test-chapter'),                         
+                        (1, 'extra'),                            
+                            (2, 'nested'),
+                                (3, 'other.csv'),
+                                (3, 'something.txt'),                                
+                            (2, 'whatever.pdf'),
+                        (1, 'force-preprocess.ipynb'),
+                        (1, 'nb.ipynb'),                        
+                        (1, 'nb-sol.ipynb'),
+                        (1, 'nb2-chal.ipynb'),
+                        (1, 'replacements.ipynb', '*'),
+                        (1, 'my_chal.py'),
+                        (1, 'my_chal_test.py'),
+                        (1, 'script.py'),
+                        (1, 'some.py'),                        
+                        (1, 'some_test.py'),
+                        (1, 'some_sol.py'),
+                        (1, 'population.csv'),
+                        (1, 'jupman.py') ]    
+    
+def test_make_preamble_filelist_test_chapter_marked_chal():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb2-chal-sol.ipynb', True)  
+    jcxt.jpre_dest_filepath = '_test/test-chapter/nb2-chal.ipynb'
+    jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
+    jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
+    
+    lst = jmt._make_preamble_filelist(jcxt, 
+                                      f"{jcxt.jm.generated}/test-chapter.zip")
+
+    assert lst == [(0, 'test-chapter'),                         
+                        (1, 'extra'),                            
+                            (2, 'nested'),
+                                (3, 'other.csv'),
+                                (3, 'something.txt'),                                
+                            (2, 'whatever.pdf'),
+                        (1, 'force-preprocess.ipynb'),
+                        (1, 'nb.ipynb'),
+                        (1, 'nb-sol.ipynb'),
+                        (1, 'nb2-chal.ipynb', '*'),
+                        (1, 'replacements.ipynb'),
+                        (1, 'my_chal.py'),
+                        (1, 'my_chal_test.py'),
+                        (1, 'script.py'),
+                        (1, 'some.py'),                        
+                        (1, 'some_test.py'),
+                        (1, 'some_sol.py'),
+                        (1, 'population.csv'),
+                        (1, 'jupman.py') ]      
+    
+def test_make_preamble_filelist_test_chapter_marked_nested():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True)  
+    jcxt.jpre_dest_filepath = '_test/test-chapter/nb.ipynb'
+    jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
+    jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
+    
+    with pytest.raises(JupmanUnsupportedError):
+        lst = jmt._make_preamble_filelist(jcxt, 
+                                        f"{jcxt.jm.generated}/test-chapter.zip",                                      
+                                        marked = ['extra/nested/something.txt'])
+    
+    
+def test_make_preamble_filelist_test_chapter_no_ignored():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True)  
+    jcxt.jpre_dest_filepath = '_test/test-chapter/nb.ipynb'
+    jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
+    jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
+    
+    lst = jmt._make_preamble_filelist(jcxt, 
+                                      f"{jcxt.jm.generated}/test-chapter.zip",                                      
+                                      ignored = [])
+    
+    assert lst == [(0, 'test-chapter'),    
+                        (1, '_static'),
+                            (2, 'img'),
+                                (3, 'cc-by.png'),
+                        (1, 'extra'),                            
+                            (2, 'nested'),
+                                (3, 'other.csv'),
+                                (3, 'something.txt'),                                
+                            (2, 'whatever.pdf'),
+                        (1, 'img'),
+                            (2, 'more'),
+                                (3, 'pic2.png'),
+                                (3, 'pic3.png'),
+                            (2, 'pic1.png') ,                           
+                        (1, 'force-preprocess.ipynb'),
+                        (1, 'nb.ipynb', '*'),                        
+                        (1, 'nb-sol.ipynb'),
+                        (1, 'nb2-chal.ipynb'),
+                        (1, 'replacements.ipynb'),
+                        (1, 'my_chal.py'),
+                        (1, 'my_chal_test.py'),
+                        (1, 'script.py'),
+                        (1, 'some.py'),                        
+                        (1, 'some_test.py'),
+                        (1, 'some_sol.py'),
+                        (1, 'population.csv'),
+                        (1, 'jupman.py')]
+    
+def test_make_preamble_filelist_test_chapter_no_marked_files():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True)    
+    jcxt.jpre_dest_filepath = '_test/test-chapter/nb.ipynb'
+    jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
+    jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
+    
+    lst = jmt._make_preamble_filelist(jcxt, 
+                                      f"{jcxt.jm.generated}/test-chapter.zip",                                      
+                                      marked = [])    
+       
+    assert lst == [(0, 'test-chapter'),                         
+                        (1, 'extra'),                            
+                            (2, 'nested'),
+                                (3, 'other.csv'),
+                                (3, 'something.txt'),                                
+                            (2, 'whatever.pdf'),
+                        (1, 'force-preprocess.ipynb'),
+                        (1, 'nb.ipynb'),                        
+                        (1, 'nb-sol.ipynb'),
+                        (1, 'nb2-chal.ipynb'),
+                        (1, 'replacements.ipynb'),
+                        (1, 'my_chal.py'),
+                        (1, 'my_chal_test.py'),
+                        (1, 'script.py'),
+                        (1, 'some.py'),                        
+                        (1, 'some_test.py'),
+                        (1, 'some_sol.py'),
+                        (1, 'population.csv'),
+                        (1, 'jupman.py')]
+
+def test_make_preamble_filelist_test_chapter_unspecified_marked_files():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True)    
+    jcxt.jpre_dest_filepath = '_test/test-chapter/nb.ipynb'
+    jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
+    jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
+    
+    lst = jmt._make_preamble_filelist(jcxt, 
+                                      f"{jcxt.jm.generated}/test-chapter.zip")
+    
+    assert lst == [(0, 'test-chapter'),                         
+                        (1, 'extra'),                            
+                            (2, 'nested'),
+                                (3, 'other.csv'),
+                                (3, 'something.txt'),                                
+                            (2, 'whatever.pdf'),
+                        (1, 'force-preprocess.ipynb'),
+                        (1, 'nb.ipynb', '*'),
+                        (1, 'nb-sol.ipynb'),
+                        (1, 'nb2-chal.ipynb'),
+                        (1, 'replacements.ipynb'),
+                        (1, 'my_chal.py'),
+                        (1, 'my_chal_test.py'),
+                        (1, 'script.py'),
+                        (1, 'some.py'),                        
+                        (1, 'some_test.py'),
+                        (1, 'some_sol.py'),
+                        (1, 'population.csv'),
+                        (1, 'jupman.py') ]
+
+
+def test_make_preamble_filelist_test_chapter_non_existing_dest_file():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb666-sol.ipynb', True)    
+    jcxt.jpre_dest_filepath = '_test/test-chapter/nb666.ipynb'    
+    jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
+    jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
+    
+    with pytest.raises(JupmanNotFoundError):
+        lst = jmt._make_preamble_filelist(jcxt, 
+                                          f"{jcxt.jm.generated}/test-chapter.zip")
+
+
+def test_tutorial_preamble_ipynb():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True)    
+    jcxt.jpre_dest_filepath = '_test/test-chapter/nb.ipynb'
+    jcxt.jm.repo_browse_url = 'https://github.com/DavidLeoni/jupman/blob/master/'
+    jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
+    jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
+    
+    s = jcxt.jm.tutorial_preamble(jcxt)
+    
+    debug(s)
+    #assert '' in s
