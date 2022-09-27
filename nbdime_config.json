@@ -1,0 +1,17 @@
+{
+  "NbDiff": {    
+    "details" : false,
+    "outputs" : false    
+  },
+  
+  "NbDiffDriver": {
+    "details" : false,
+    "outputs" : false
+  },
+
+  "Extension": {    
+    "details" : false,
+    "outputs" : false        
+  }
+  
+}
