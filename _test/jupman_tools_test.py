@@ -93,7 +93,7 @@ def test_uproot():
     
     
 
-def test_replace_sysrel():
+def test_replace_pyrel():
 
     assert jmt.replace_py_rel("""import sys
 sys.do_something()""", 'python-example').strip() ==  """import sys
@@ -253,22 +253,45 @@ def test_make_stripped_cell_id():
     assert jmt.make_stripped_cell_id('a'*60) == 'a'*(60-len('-stripped')) + '-stripped'
 
 
-def test_replace_html_rel():
+
+
+@pytest.mark.parametrize("replacer_fun", [jmt.replace_html_rel, jmt.replace_md_rel])
+def test_replace_rel(replacer_fun):
     """ @since 3.5.4
     """
     
+    fp = '_test/jupman_tools_test.py'    
+    
+    
     # note inside it calls uproot, needs this to be run from project root
-    assert jmt.replace_html_rel('<a href="../_static/img/hello.png">', '_test/jupman_tools_test.py') \
+    assert replacer_fun('<a href="../_static/img/hello.png">', fp) \
            == '<a href="_static/img/hello.png">'
-    assert jmt.replace_html_rel('<a target="_blank" href="../_static/img/hello.png">', '_test/jupman_tools_test.py') \
+    assert replacer_fun('<a target="_blank" href="../_static/img/hello.png">', fp) \
            == '<a target="_blank" href="_static/img/hello.png">'       
-    assert jmt.replace_html_rel('<img src="../_static/img/hello.png">', '_test/jupman_tools_test.py') \
+    assert replacer_fun('<img src="../_static/img/hello.png">', fp) \
            == '<img src="_static/img/hello.png">'
-    assert jmt.replace_html_rel('<img alt="bla" src="../_static/img/hello.png">', '_test/jupman_tools_test.py') \
+    assert replacer_fun('<img alt="bla" src="../_static/img/hello.png">', fp) \
            == '<img alt="bla" src="_static/img/hello.png">'
        
-    assert jmt.replace_html_rel('A B <img alt="cc-by-1243" src="../_static/img/cc-by.png"> C D', '_test/jupman_tools_test.py') \
+    assert replacer_fun('A B <img alt="cc-by-1243" src="../_static/img/cc-by.png"> C D', fp) \
            == 'A B <img alt="cc-by-1243" src="_static/img/cc-by.png"> C D'
+
+    assert replacer_fun("""A <script   src="c.js" > </script>  B""", fp) == """A <script   src="c.js" > </script>  B"""    
+    assert replacer_fun("""A <script   src="../c.js" ></script>  B""", fp) == """A <script   src="c.js" ></script>  B"""
+    assert replacer_fun("""A <script   src="../c.js" defer="defer"></script>  B""", fp) \
+            == """A <script   src="c.js" defer="defer"></script>  B"""
+    assert replacer_fun("""A <script   src="../d/c.js" ></script>  B""", fp) == """A <script   src="d/c.js" ></script>  B"""
+    
+    assert replacer_fun("""A <style> @import "c.css"</style>  B""", fp) == """A <style> @import "c.css"</style>  B"""
+    assert replacer_fun("""A <style> @import "../c.css"</style>  B""", fp) == """A <style> @import "c.css"</style>  B"""
+    #multiple style imports are not supported, placed test to signal when we support them
+    assert replacer_fun("""A <style>\n  @import "../c.css";@import "../d.css"\n</style>  B""", fp)  \
+           != """A <style>\n  @import "c.css";@import "d.css"\n</style>  B"""
+
+    assert replacer_fun('A\n<style>\n@import ../_static/css/ab.css;\n</style>\nB', fp) \
+           == 'A\n<style>\n@import _static/css/ab.css;\n</style>\nB'            
+    
+
 
 def subtest_copy_chapter_replacements(dest_dir):
     
@@ -279,10 +302,11 @@ def subtest_copy_chapter_replacements(dest_dir):
 
     nb_repl = nbformat.read(replacements_fn, nbformat.NO_CONVERT)
 
+
     # markdown                             
     assert '[some link](index.ipynb)' in nb_repl.cells[1].source
     assert '![some link](_static/img/cc-by.png)' in nb_repl.cells[2].source
-    assert '[some link](data/pop.csv)' in nb_repl.cells[3].source
+    assert '[some link](data/pop.csv)' in nb_repl.cells[3].source    
 
     assert '<a href="index.ipynb" target="_blank">a link</a>' in nb_repl.cells[4].source
     
@@ -305,25 +329,32 @@ def subtest_copy_chapter_replacements(dest_dir):
     
     assert '<img alt="bla13" src="_static/img/cc-by.png">' in nb_repl.cells[13].source
     
-    assert '<a target="_blank" href="index.ipynb">a link</a>' in nb_repl.cells[14].source
+    assert '<a target="_blank" href="index.html">a link</a>' in nb_repl.cells[14].source
     
     assert '<a target="_blank" href="https://jupman.softpython.org">a link</a>' in nb_repl.cells[15].source
+    
+    assert  """<style>\n@import _static/css/ab.css;\n</style>""" in nb_repl.cells[16].source
 
-    assert nb_repl.cells[16].source.count('replacements.ipynb') == 2
-    assert jcxt.jm.manual in nb_repl.cells[16].source
-    assert jcxt.author in nb_repl.cells[16].source
+    assert '<style> @import "_static/css/cd.css" </style>' in  nb_repl.cells[16].source
         
-    assert nb_repl.cells[17].source.count('replacements.ipynb') == 2
-    assert jcxt.jm.manual in nb_repl.cells[17].source
-    assert nb_repl.cells[17].source.count(jcxt.author) == 2
-        
+    assert '<script src="static/js/ab.js" type="application/javascript"></script>' in nb_repl.cells[17].source 
+    assert '<script src="static/js/cd.js" type="application/javascript" defer="defer"> </script>' in nb_repl.cells[17].source         
+
     assert nb_repl.cells[18].source.count('replacements.ipynb') == 2
     assert jcxt.jm.manual in nb_repl.cells[18].source
     assert jcxt.author in nb_repl.cells[18].source
-            
+        
     assert nb_repl.cells[19].source.count('replacements.ipynb') == 2
     assert jcxt.jm.manual in nb_repl.cells[19].source
-    assert jcxt.author in nb_repl.cells[19].source
+    assert nb_repl.cells[19].source.count(jcxt.author) == 2
+        
+    assert nb_repl.cells[20].source.count('replacements.ipynb') == 2
+    assert jcxt.jm.manual in nb_repl.cells[20].source
+    assert jcxt.author in nb_repl.cells[20].source
+            
+    assert nb_repl.cells[21].source.count('replacements.ipynb') == 2
+    assert jcxt.jm.manual in nb_repl.cells[21].source
+    assert jcxt.author in nb_repl.cells[21].source       
 
 
 def subtest_copy_chapter_py_files(dest_dir):
@@ -394,7 +425,7 @@ def subtest_copy_chapter_exercises(dest_dir):
 
     nb_ex = nbformat.read(nb_ex_fn, nbformat.NO_CONVERT)
     
-    #pprint(nb_ex)
+    
     assert "# Notebook EXERCISES" in nb_ex.cells[0].source
     assert "#before\nraise" in nb_ex.cells[1].source
     assert nb_ex.cells[2].source == ""   # SOLUTION strips everything
@@ -409,7 +440,7 @@ def subtest_copy_chapter_exercises(dest_dir):
     assert nb_ex.cells[9].source == 'x = 9\n\n# after'  # jupman-purge everything inside exercises 
     assert '#jupman-strip' not in nb_ex.cells[10].source   
     assert '#jupman-purge' not in nb_ex.cells[10].source   
-    assert nb_ex.cells[11].source == ''
+    assert nb_ex.cells[11].source == ''    
     assert 'purged!11' in nb_ex.cells[11].outputs[0]['text']
     
     
@@ -417,30 +448,35 @@ def subtest_copy_chapter_exercises(dest_dir):
     assert '-output' not in nb_ex.cells[12].source
     assert 'purged!12' in nb_ex.cells[12].source
     assert nb_ex.cells[12].outputs == []
-    
+        
     assert nb_ex.cells[13].source == ''    
     assert nb_ex.cells[13].outputs == []
-    assert nb_ex.cells[13].metadata['nbsphinx'] == 'hidden'    
+    assert nb_ex.cells[13].metadata['nbsphinx'] == 'hidden'     
     
-    assert 'nb.ipynb' in nb_ex.cells[14].source
-    assert 'nb-sol.ipynb' in nb_ex.cells[14].source
-    assert jcxt.jm.manual in nb_ex.cells[14].source
-    assert jcxt.author in nb_ex.cells[14].source
-        
-    assert 'nb.ipynb' in nb_ex.cells[15].source
-    assert 'nb-sol.ipynb' in nb_ex.cells[15].source
-    assert jcxt.jm.manual in nb_ex.cells[15].source
-    assert nb_ex.cells[15].source.count(jcxt.author) == 2
-        
+    assert nb_ex.cells[14].source == """x = 14\nimport jupman"""
+    
+    assert '<script src=\"_static/js/pytutor-embed.bundle.min.js' in nb_ex.cells[15].outputs[0]['data']['text/html']
+    assert  '@import \"_static/css/jupman.css\"' in nb_ex.cells[15].outputs[0]['data']['text/html']
+                   
     assert 'nb.ipynb' in nb_ex.cells[16].source
     assert 'nb-sol.ipynb' in nb_ex.cells[16].source
     assert jcxt.jm.manual in nb_ex.cells[16].source
     assert jcxt.author in nb_ex.cells[16].source
-            
+        
     assert 'nb.ipynb' in nb_ex.cells[17].source
     assert 'nb-sol.ipynb' in nb_ex.cells[17].source
     assert jcxt.jm.manual in nb_ex.cells[17].source
-    assert jcxt.author in nb_ex.cells[17].source    
+    assert nb_ex.cells[17].source.count(jcxt.author) == 2
+        
+    assert 'nb.ipynb' in nb_ex.cells[18].source
+    assert 'nb-sol.ipynb' in nb_ex.cells[18].source
+    assert jcxt.jm.manual in nb_ex.cells[18].source
+    assert jcxt.author in nb_ex.cells[18].source
+            
+    assert 'nb.ipynb' in nb_ex.cells[19].source
+    assert 'nb-sol.ipynb' in nb_ex.cells[19].source
+    assert jcxt.jm.manual in nb_ex.cells[19].source
+    assert jcxt.author in nb_ex.cells[19].source    
 
 
 def subtest_copy_chapter_solution(dest_dir):
@@ -472,21 +508,24 @@ def subtest_copy_chapter_solution(dest_dir):
     assert nb_sol.cells[13].outputs == []
     assert nb_sol.cells[13].metadata['nbsphinx'] == 'hidden'
     
-    assert nb_sol.cells[14].source.count('nb-sol.ipynb') == 2
-    assert jcxt.jm.manual in nb_sol.cells[14].source
-    assert jcxt.author in nb_sol.cells[14].source
-        
-    assert nb_sol.cells[15].source.count('nb-sol.ipynb') == 2
-    assert jcxt.jm.manual in nb_sol.cells[15].source
-    assert nb_sol.cells[15].source.count(jcxt.author) == 2
-        
+    assert '<script src=\"_static/js/pytutor-embed.bundle.min.js' in nb_sol.cells[15].outputs[0]['data']['text/html']
+    assert  '@import \"_static/css/jupman.css\"' in nb_sol.cells[15].outputs[0]['data']['text/html']    
+    
     assert nb_sol.cells[16].source.count('nb-sol.ipynb') == 2
     assert jcxt.jm.manual in nb_sol.cells[16].source
     assert jcxt.author in nb_sol.cells[16].source
-            
+        
     assert nb_sol.cells[17].source.count('nb-sol.ipynb') == 2
     assert jcxt.jm.manual in nb_sol.cells[17].source
-    assert jcxt.author in nb_sol.cells[17].source    
+    assert nb_sol.cells[17].source.count(jcxt.author) == 2
+        
+    assert nb_sol.cells[18].source.count('nb-sol.ipynb') == 2
+    assert jcxt.jm.manual in nb_sol.cells[18].source
+    assert jcxt.author in nb_sol.cells[18].source
+            
+    assert nb_sol.cells[19].source.count('nb-sol.ipynb') == 2
+    assert jcxt.jm.manual in nb_sol.cells[19].source
+    assert jcxt.author in nb_sol.cells[19].source    
     
 
 def subtest_copy_chapter_solution_web(dest_dir): 
@@ -500,6 +539,10 @@ def subtest_copy_chapter_solution_web(dest_dir):
     
     stripped8 = 0
     stripped10 = 0
+    import_jupman = 0
+    pytutor_js = 0
+    jupman_css = 0
+    
     for cell in nb_sol_web.cells:
         if 'stripped!8' in cell.source:
             stripped8 += 1
@@ -509,20 +552,39 @@ def subtest_copy_chapter_solution_web(dest_dir):
         assert 'purged!10' not in cell.source
         assert 'purged!11' not in cell.source
         if getattr(cell, 'outputs', None):
-            assert 'purged!12' not in cell.outputs[0]['text']
+            if 'text' in cell.outputs[0]:
+                assert 'purged!12' not in cell.outputs[0]['text']
         assert 'purged!13' not in cell.source
         if getattr(cell, 'outputs', None):
-            assert 'purged!13' not in cell.outputs[0]['text']
-            
+            if 'text' in cell.outputs[0]:
+                assert 'purged!13' not in cell.outputs[0]['text']
+                
+        if cell.source == """x = 14\nimport jupman""":
+            import_jupman += 1
+        
+        #debug(f'HELLO*************')
+        if 'outputs' in cell and len(cell.outputs) > 0 and  'data' in cell.outputs[0]:
+            #debug(f'BELLO*************\n{cell.outputs[0]}')
+            if '<script src="../../_static/js/pytutor-embed.bundle.min.js' in cell.outputs[0]['data']['text/html']:
+                pytutor_js += 1
+                
+        if 'outputs' in cell and len(cell.outputs) > 0 and 'data' in cell.outputs[0]:                        
+            if '@import "../../_static/css/jupman.css"' in cell.outputs[0]['data']['text/html']:                
+                jupman_css += 1            
+
         if '16 -' in cell.source:            
             assert cell.source.count('nb-sol.ipynb') == 2
         if '17 -' in cell.source:            
             assert cell.source.count('nb-sol.ipynb') == 2
-        
-        #TODO preamble stuff        
-            
+
+        #TODO preamble stuff                       
+                
     assert stripped8 == 1
     assert stripped10 == 1
+    assert import_jupman == 1
+    assert pytutor_js == 1            
+    assert jupman_css == 1            
+    
 
 def subtest_copy_chapter_challenge(dest_dir):
     
@@ -635,8 +697,7 @@ def test_tag_regex():
 
 def test_write_solution_here():
     jm = make_jm()
-    p = re.compile(jm.write_solution_here)
-    #print(p)
+    p = re.compile(jm.write_solution_here)    
     assert p.match(" # write here a b\nc")
     assert p.match(" # write here a   b c \nc\n1d")    
     assert p.match('#  write  here\n')

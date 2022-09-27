@@ -318,7 +318,7 @@ $
         // fix for https://github.com/DavidLeoni/jupman/issues/71
         // should better do it serverside, but at least it works!
         console.log("Fixing home link ...");
-        var home = $('a.icon-home');
+        var home = $('.wy-side-nav-search > a');  // works both with and without logo
         
         if (home.length > 0){
             

@@ -21,6 +21,8 @@ Chapter examples
 
     python-example/python-example.ipynb
     jupyter-example/jupyter-example-sol.ipynb
+    jupyter-example/jupyter-js-sol.ipynb
+
     Mixed Jupyter and Python example <jup-and-py-example/jup-and-py-example-sol.ipynb>
     
     toc-bigdocs.rst
@@ -48,5 +50,5 @@ Tests
     :maxdepth: 2
     :glob:
 
-    Jupman tests <manual/tests.ipynb>
-    Python Tutor tests <manual/tests-pytutor.ipynb>
+    manual/tests.ipynb
+    manual/tests-pytutor.ipynb

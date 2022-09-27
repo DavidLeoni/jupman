@@ -1,9 +1,29 @@
 
 # Changelog
 
-Jupman Jupyter Manager 
+Jupman: A template for online manuals made with Jupyter notebooks.
 
 [jupman.softpython.org](https://jupman.softpython.org)
+
+
+## September 19th, 2022 - 3.5.6
+
+Added:
+- Softpython theme eye candy #122
+    - softpython-theme-textures.css with manually embedded base64 images
+    - jupman-alert-principle in jupman-web.css as backbone for commandments
+- logo, favicon #123
+- explicilty stated all dependencies in requirements-buils.txt, added create_env script #82
+- improved manual/*
+
+Fixed:
+- relative paths in cell outputs for zips #119
+- now using relative js and css imports in jupman.init  #117
+- Python Tutor not showing in cloned cells #126 (changed stable ids #107)
+- Python Tutor sets wrongly displaying with grey header  #125
+
+Removed:
+- `_private/README.md`
 
 
 ## August 11th, 2022 - 3.5.4
@@ -19,7 +39,7 @@ Jupman Jupyter Manager
 - Fixed relative html a, img with attributes in markdown not working in zip: #113
 
 
-# June 4th 2022 - 3.5
+## June 4th 2022 - 3.5
 
 - generated html can be really used offline #96, also fixes wrong math symbols with local build #3
 - automated testing on github actions #99

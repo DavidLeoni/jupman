@@ -155,8 +155,6 @@ exclude_patterns.extend(jm.zip_ignored)
 # Default language for syntax highlighting in reST and Markdown cells
 highlight_language = 'none'
 
-# Don't add .txt suffix to source files (available for Sphinx >= 1.5):
-html_sourcelink_suffix = ''
 
 # Execute notebooks before conversion: 'always', 'never', 'auto' (default)
 nbsphinx_execute = 'never'   
@@ -209,10 +207,18 @@ language = 'en'
 
 # -- Options for HTML output ----------------------------------------------
 
+
 html_title = project # + ' version ' + release
 
 # canonical url for documentation, since sphinx 1.8
 html_baseurl = 'https://jupman.softpython.org/en/latest/'
+
+# Don't add .txt suffix to source files (available for Sphinx >= 1.5):
+html_sourcelink_suffix = ''
+
+
+html_logo = '_static/img/jupman/jupman.svg'
+html_favicon = '_static/img/jupman/favicon.ico'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
@@ -229,7 +235,8 @@ html_theme_options = {
     # fix for https://github.com/DavidLeoni/jupman/issues/38
     'collapse_navigation': False,
     # needed for big docs  https://github.com/DavidLeoni/jupman/issues/77
-    'navigation_depth': 5 
+    'navigation_depth': 5,    
+    'logo_only': True,
 }
 
 # NOTE: in order to have complete collapsible menu, 
@@ -255,7 +262,7 @@ html_js_files = [
 html_css_files = [
     'css/jupman.css',      # shared among jupyter and website
     'css/jupman-web.css',  # only on website
-    #'css/softpython-theme.css',  #uncomment to activate    
+    #'css/softpython-theme.css',  'css/softpython-theme-textures.css',  #uncomment to activate    
 ]
 
 # -- Options for HTMLHelp output ------------------------------------------
