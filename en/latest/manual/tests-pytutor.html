@@ -859,6 +859,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#Alignment-test-1">Alignment test 1</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Alignment-test-2">Alignment test 2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Cloned-cell-test">Cloned cell test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Don't-nest-data-structures">Don’t nest data structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Force-nested-data-structures">Force nested data structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Function-pointers">Function pointers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Errors---Code-after-pytut">Errors - Code after pytut</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Errors---pytut-double-call">Errors - pytut double call</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Errors---Nothing-to-show">Errors - Nothing to show</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Spaces-in-attributes">Spaces in attributes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Alternative:-HTML-magics">Alternative: HTML magics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Alternative:-NBTutor">Alternative: NBTutor</a></li>
 </ul>
@@ -1240,6 +1247,7 @@ div.rendered_html tbody tr:hover {
         // NOTE: id without #
 
         addVisualizerToPage(trace, 'jm-86eb181480346332c72244039406f9a0-4',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
                                          'visualizerIdOverride':'viz-jm-86eb181480346332c72244039406f9a0-4'})
 
 
@@ -1317,6 +1325,7 @@ NameError: name &#39;w&#39; is not defined
         // NOTE: id without #
 
         addVisualizerToPage(trace, 'jm-9e3b324a5fd4bb62d93772404e88cfbc-6',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
                                          'visualizerIdOverride':'viz-jm-9e3b324a5fd4bb62d93772404e88cfbc-6'})
 
 
@@ -1392,7 +1401,7 @@ NameError: name &#39;w&#39; is not defined
     </style>
 
     <script id="json-jm-236020c005455cf1250e42f61883ab8b-7" type="application/json" >
-        {"code": " \nword = \"wonder\"\nlst = [9,7,8]\nt = (6,2,4,3)\nmixed_set = {3,'b','e',9, 'm', 'n'}\nnumbers_set = {3,4,9}\nchar_set = {'r','a','h'}\nd = {'a' : 8,\n     'b' : 4,\n     'c' : 5}\n\nempty_str = \"\"\nempty_tuple = ()\nempty_set = set()\nempty_dict = {}\n\n#import numpy  # not supported!\n\ndef f(par):\n    print(par)\n\nclass C:\n    def hello():\n        print('ciao')\n        \n    def __init__(self, name, age):\n        self.name = name\n        self.age = age        \n\nm = C.hello\ng = f\n                \nc = C('blah',30)", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 3, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder"}, "ordered_globals": ["word"], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 4, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1]}, "ordered_globals": ["word", "lst"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8]}, "stdout": ""}, {"line": 5, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2]}, "ordered_globals": ["word", "lst", "t"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3]}, "stdout": ""}, {"line": 6, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3]}, "ordered_globals": ["word", "lst", "t", "mixed_set"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"]}, "stdout": ""}, {"line": 7, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4]}, "stdout": ""}, {"line": 8, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"]}, "stdout": ""}, {"line": 9, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"]}, "stdout": ""}, {"line": 10, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"]}, "stdout": ""}, {"line": 12, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]]}, "stdout": ""}, {"line": 13, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": ""}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]]}, "stdout": ""}, {"line": 14, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"]}, "stdout": ""}, {"line": 15, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"]}, "stdout": ""}, {"line": 19, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"]}, "stdout": ""}, {"line": 22, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null]}, "stdout": ""}, {"line": 30, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10], "C": ["REF", 11]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f", "C"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null], "11": ["CLASS", "C", [], ["__init__", ["REF", 12]], ["hello", ["REF", 13]]], "12": ["FUNCTION", "__init__(self, name, age)", null], "13": ["FUNCTION", "hello()", null]}, "stdout": ""}, {"line": 31, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10], "C": ["REF", 11], "m": ["REF", 13]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f", "C", "m"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null], "11": ["CLASS", "C", [], ["__init__", ["REF", 12]], ["hello", ["REF", 13]]], "12": ["FUNCTION", "__init__(self, name, age)", null], "13": ["FUNCTION", "hello()", null]}, "stdout": ""}, {"line": 33, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10], "C": ["REF", 11], "m": ["REF", 13], "g": ["REF", 10]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f", "C", "m", "g"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null], "11": ["CLASS", "C", [], ["__init__", ["REF", 12]], ["hello", ["REF", 13]]], "12": ["FUNCTION", "__init__(self, name, age)", null], "13": ["FUNCTION", "hello()", null]}, "stdout": ""}, {"line": 26, "event": "call", "func_name": "__init__", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10], "C": ["REF", 11], "m": ["REF", 13], "g": ["REF", 10]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f", "C", "m", "g"], "stack_to_render": [{"func_name": "__init__", "is_parent": false, "frame_id": 1, "parent_frame_id_list": [], "encoded_locals": {"self": ["REF", 14], "name": "blah", "age": 30}, "ordered_varnames": ["self", "name", "age"], "is_zombie": false, "is_highlighted": true, "unique_hash": "__init___f1"}], "heap": {"14": ["INSTANCE", "C"], "1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null], "11": ["CLASS", "C", [], ["__init__", ["REF", 12]], ["hello", ["REF", 13]]], "12": ["FUNCTION", "__init__(self, name, age)", null], "13": ["FUNCTION", "hello()", null]}, "stdout": ""}, {"line": 27, "event": "step_line", "func_name": "__init__", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10], "C": ["REF", 11], "m": ["REF", 13], "g": ["REF", 10]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f", "C", "m", "g"], "stack_to_render": [{"func_name": "__init__", "is_parent": false, "frame_id": 1, "parent_frame_id_list": [], "encoded_locals": {"self": ["REF", 14], "name": "blah", "age": 30}, "ordered_varnames": ["self", "name", "age"], "is_zombie": false, "is_highlighted": true, "unique_hash": "__init___f1"}], "heap": {"14": ["INSTANCE", "C"], "1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null], "11": ["CLASS", "C", [], ["__init__", ["REF", 12]], ["hello", ["REF", 13]]], "12": ["FUNCTION", "__init__(self, name, age)", null], "13": ["FUNCTION", "hello()", null]}, "stdout": ""}, {"line": 28, "event": "step_line", "func_name": "__init__", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10], "C": ["REF", 11], "m": ["REF", 13], "g": ["REF", 10]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f", "C", "m", "g"], "stack_to_render": [{"func_name": "__init__", "is_parent": false, "frame_id": 1, "parent_frame_id_list": [], "encoded_locals": {"self": ["REF", 14], "name": "blah", "age": 30}, "ordered_varnames": ["self", "name", "age"], "is_zombie": false, "is_highlighted": true, "unique_hash": "__init___f1"}], "heap": {"14": ["INSTANCE", "C", ["name", "blah"]], "1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null], "11": ["CLASS", "C", [], ["__init__", ["REF", 12]], ["hello", ["REF", 13]]], "12": ["FUNCTION", "__init__(self, name, age)", null], "13": ["FUNCTION", "hello()", null]}, "stdout": ""}, {"line": 28, "event": "return", "func_name": "__init__", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10], "C": ["REF", 11], "m": ["REF", 13], "g": ["REF", 10]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f", "C", "m", "g"], "stack_to_render": [{"func_name": "__init__", "is_parent": false, "frame_id": 1, "parent_frame_id_list": [], "encoded_locals": {"self": ["REF", 14], "name": "blah", "age": 30, "__return__": null}, "ordered_varnames": ["self", "name", "age", "__return__"], "is_zombie": false, "is_highlighted": true, "unique_hash": "__init___f1"}], "heap": {"14": ["INSTANCE", "C", ["age", 30], ["name", "blah"]], "1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null], "11": ["CLASS", "C", [], ["__init__", ["REF", 12]], ["hello", ["REF", 13]]], "12": ["FUNCTION", "__init__(self, name, age)", null], "13": ["FUNCTION", "hello()", null]}, "stdout": ""}, {"line": 33, "event": "return", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10], "C": ["REF", 11], "m": ["REF", 13], "g": ["REF", 10], "c": ["REF", 14]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f", "C", "m", "g", "c"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "m", 3, "e", 9, "n", "b"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null], "11": ["CLASS", "C", [], ["__init__", ["REF", 12]], ["hello", ["REF", 13]]], "12": ["FUNCTION", "__init__(self, name, age)", null], "13": ["FUNCTION", "hello()", null], "14": ["INSTANCE", "C", ["age", 30], ["name", "blah"]]}, "stdout": ""}]}
+        {"code": " \nword = \"wonder\"\nlst = [9,7,8]\nt = (6,2,4,3)\nmixed_set = {3,'b','e',9, 'm', 'n'}\nnumbers_set = {3,4,9}\nchar_set = {'r','a','h'}\nd = {'a' : 8,\n     'b' : 4,\n     'c' : 5}\n\nempty_str = \"\"\nempty_tuple = ()\nempty_set = set()\nempty_dict = {}\n\n#import numpy  # not supported!\n\ndef f(par):\n    print(par)\n\nclass C:\n    def hello():\n        print('ciao')\n        \n    def __init__(self, name, age):\n        self.name = name\n        self.age = age        \n\nm = C.hello\ng = f\n                \nc = C('blah',30)", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 3, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder"}, "ordered_globals": ["word"], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 4, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1]}, "ordered_globals": ["word", "lst"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8]}, "stdout": ""}, {"line": 5, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2]}, "ordered_globals": ["word", "lst", "t"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3]}, "stdout": ""}, {"line": 6, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3]}, "ordered_globals": ["word", "lst", "t", "mixed_set"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"]}, "stdout": ""}, {"line": 7, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4]}, "stdout": ""}, {"line": 8, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"]}, "stdout": ""}, {"line": 9, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"]}, "stdout": ""}, {"line": 10, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"]}, "stdout": ""}, {"line": 12, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]]}, "stdout": ""}, {"line": 13, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": ""}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]]}, "stdout": ""}, {"line": 14, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"]}, "stdout": ""}, {"line": 15, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"]}, "stdout": ""}, {"line": 19, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"]}, "stdout": ""}, {"line": 22, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null]}, "stdout": ""}, {"line": 30, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10], "C": ["REF", 11]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f", "C"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null], "11": ["CLASS", "C", [], ["__init__", ["REF", 12]], ["hello", ["REF", 13]]], "12": ["FUNCTION", "__init__(self, name, age)", null], "13": ["FUNCTION", "hello()", null]}, "stdout": ""}, {"line": 31, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10], "C": ["REF", 11], "m": ["REF", 13]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f", "C", "m"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null], "11": ["CLASS", "C", [], ["__init__", ["REF", 12]], ["hello", ["REF", 13]]], "12": ["FUNCTION", "__init__(self, name, age)", null], "13": ["FUNCTION", "hello()", null]}, "stdout": ""}, {"line": 33, "event": "step_line", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10], "C": ["REF", 11], "m": ["REF", 13], "g": ["REF", 10]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f", "C", "m", "g"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null], "11": ["CLASS", "C", [], ["__init__", ["REF", 12]], ["hello", ["REF", 13]]], "12": ["FUNCTION", "__init__(self, name, age)", null], "13": ["FUNCTION", "hello()", null]}, "stdout": ""}, {"line": 26, "event": "call", "func_name": "__init__", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10], "C": ["REF", 11], "m": ["REF", 13], "g": ["REF", 10]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f", "C", "m", "g"], "stack_to_render": [{"func_name": "__init__", "is_parent": false, "frame_id": 1, "parent_frame_id_list": [], "encoded_locals": {"self": ["REF", 14], "name": "blah", "age": 30}, "ordered_varnames": ["self", "name", "age"], "is_zombie": false, "is_highlighted": true, "unique_hash": "__init___f1"}], "heap": {"14": ["INSTANCE", "C"], "1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null], "11": ["CLASS", "C", [], ["__init__", ["REF", 12]], ["hello", ["REF", 13]]], "12": ["FUNCTION", "__init__(self, name, age)", null], "13": ["FUNCTION", "hello()", null]}, "stdout": ""}, {"line": 27, "event": "step_line", "func_name": "__init__", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10], "C": ["REF", 11], "m": ["REF", 13], "g": ["REF", 10]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f", "C", "m", "g"], "stack_to_render": [{"func_name": "__init__", "is_parent": false, "frame_id": 1, "parent_frame_id_list": [], "encoded_locals": {"self": ["REF", 14], "name": "blah", "age": 30}, "ordered_varnames": ["self", "name", "age"], "is_zombie": false, "is_highlighted": true, "unique_hash": "__init___f1"}], "heap": {"14": ["INSTANCE", "C"], "1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null], "11": ["CLASS", "C", [], ["__init__", ["REF", 12]], ["hello", ["REF", 13]]], "12": ["FUNCTION", "__init__(self, name, age)", null], "13": ["FUNCTION", "hello()", null]}, "stdout": ""}, {"line": 28, "event": "step_line", "func_name": "__init__", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10], "C": ["REF", 11], "m": ["REF", 13], "g": ["REF", 10]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f", "C", "m", "g"], "stack_to_render": [{"func_name": "__init__", "is_parent": false, "frame_id": 1, "parent_frame_id_list": [], "encoded_locals": {"self": ["REF", 14], "name": "blah", "age": 30}, "ordered_varnames": ["self", "name", "age"], "is_zombie": false, "is_highlighted": true, "unique_hash": "__init___f1"}], "heap": {"14": ["INSTANCE", "C", ["name", "blah"]], "1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null], "11": ["CLASS", "C", [], ["__init__", ["REF", 12]], ["hello", ["REF", 13]]], "12": ["FUNCTION", "__init__(self, name, age)", null], "13": ["FUNCTION", "hello()", null]}, "stdout": ""}, {"line": 28, "event": "return", "func_name": "__init__", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10], "C": ["REF", 11], "m": ["REF", 13], "g": ["REF", 10]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f", "C", "m", "g"], "stack_to_render": [{"func_name": "__init__", "is_parent": false, "frame_id": 1, "parent_frame_id_list": [], "encoded_locals": {"self": ["REF", 14], "name": "blah", "age": 30, "__return__": null}, "ordered_varnames": ["self", "name", "age", "__return__"], "is_zombie": false, "is_highlighted": true, "unique_hash": "__init___f1"}], "heap": {"14": ["INSTANCE", "C", ["age", 30], ["name", "blah"]], "1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null], "11": ["CLASS", "C", [], ["__init__", ["REF", 12]], ["hello", ["REF", 13]]], "12": ["FUNCTION", "__init__(self, name, age)", null], "13": ["FUNCTION", "hello()", null]}, "stdout": ""}, {"line": 33, "event": "return", "func_name": "<module>", "globals": {"word": "wonder", "lst": ["REF", 1], "t": ["REF", 2], "mixed_set": ["REF", 3], "numbers_set": ["REF", 4], "char_set": ["REF", 5], "d": ["REF", 6], "empty_str": "", "empty_tuple": ["REF", 7], "empty_set": ["REF", 8], "empty_dict": ["REF", 9], "f": ["REF", 10], "C": ["REF", 11], "m": ["REF", 13], "g": ["REF", 10], "c": ["REF", 14]}, "ordered_globals": ["word", "lst", "t", "mixed_set", "numbers_set", "char_set", "d", "empty_str", "empty_tuple", "empty_set", "empty_dict", "f", "C", "m", "g", "c"], "stack_to_render": [], "heap": {"1": ["LIST", 9, 7, 8], "2": ["TUPLE", 6, 2, 4, 3], "3": ["SET", "b", 3, "e", 9, "n", "m"], "4": ["SET", 9, 3, 4], "5": ["SET", "h", "r", "a"], "6": ["DICT", ["a", 8], ["b", 4], ["c", 5]], "7": ["TUPLE"], "8": ["SET"], "9": ["DICT"], "10": ["FUNCTION", "f(par)", null], "11": ["CLASS", "C", [], ["__init__", ["REF", 12]], ["hello", ["REF", 13]]], "12": ["FUNCTION", "__init__(self, name, age)", null], "13": ["FUNCTION", "hello()", null], "14": ["INSTANCE", "C", ["age", 30], ["name", "blah"]]}, "stdout": ""}]}
     </script>
     <div id="jm-236020c005455cf1250e42f61883ab8b-7" class="pytutorVisualizer"> </div>
 
@@ -1405,6 +1414,7 @@ NameError: name &#39;w&#39; is not defined
         // NOTE: id without #
 
         addVisualizerToPage(trace, 'jm-236020c005455cf1250e42f61883ab8b-7',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
                                          'visualizerIdOverride':'viz-jm-236020c005455cf1250e42f61883ab8b-7'})
 
 
@@ -1462,6 +1472,7 @@ NameError: name &#39;w&#39; is not defined
         // NOTE: id without #
 
         addVisualizerToPage(trace, 'jm-d1041d6f3f6be6478df1e49767a12795-8',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
                                          'visualizerIdOverride':'viz-jm-d1041d6f3f6be6478df1e49767a12795-8'})
 
 
@@ -1528,6 +1539,7 @@ NameError: name &#39;w&#39; is not defined
         // NOTE: id without #
 
         addVisualizerToPage(trace, 'jm-9e3b324a5fd4bb62d93772404e88cfbc-9',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
                                          'visualizerIdOverride':'viz-jm-9e3b324a5fd4bb62d93772404e88cfbc-9'})
 
 
@@ -1595,6 +1607,7 @@ NameError: name &#39;w&#39; is not defined
         // NOTE: id without #
 
         addVisualizerToPage(trace, 'jm-55aa8dd1c6c0fdbad4653303ee4ca922-10',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
                                          'visualizerIdOverride':'viz-jm-55aa8dd1c6c0fdbad4653303ee4ca922-10'})
 
 
@@ -1663,6 +1676,7 @@ NameError: name &#39;w&#39; is not defined
         // NOTE: id without #
 
         addVisualizerToPage(trace, 'jm-96480223e88e12699e2bc38b466a2788-11',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
                                          'visualizerIdOverride':'viz-jm-96480223e88e12699e2bc38b466a2788-11'})
 
 
@@ -1721,6 +1735,7 @@ NameError: name &#39;w&#39; is not defined
         // NOTE: id without #
 
         addVisualizerToPage(trace, 'jm-d69c26ac1624e6b5ec2ccaa4b7e34c7f-12',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
                                          'visualizerIdOverride':'viz-jm-d69c26ac1624e6b5ec2ccaa4b7e34c7f-12'})
 
 
@@ -1786,6 +1801,7 @@ hello
         // NOTE: id without #
 
         addVisualizerToPage(trace, 'jm-c4db48ce1265b9a07eaf2bd9bfd7a869-13',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
                                          'visualizerIdOverride':'viz-jm-c4db48ce1265b9a07eaf2bd9bfd7a869-13'})
 
 
@@ -1850,6 +1866,7 @@ hello
         // NOTE: id without #
 
         addVisualizerToPage(trace, 'jm-3912771b529650087106ed455c4bcc95-14',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
                                          'visualizerIdOverride':'viz-jm-3912771b529650087106ed455c4bcc95-14'})
 
 
@@ -1946,6 +1963,7 @@ zam
         // NOTE: id without #
 
         addVisualizerToPage(trace, 'jm-21d38f567136cbbd9a2b4851a963dae4-15',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
                                          'visualizerIdOverride':'viz-jm-21d38f567136cbbd9a2b4851a963dae4-15'})
 
 
@@ -2002,6 +2020,7 @@ zam
         // NOTE: id without #
 
         addVisualizerToPage(trace, 'jm-b6f2c76287cc0374def07a0f8ae7f517-16',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
                                          'visualizerIdOverride':'viz-jm-b6f2c76287cc0374def07a0f8ae7f517-16'})
 
 
@@ -2055,7 +2074,332 @@ zam
         // NOTE: id without #
 
         addVisualizerToPage(trace, 'jm-b6f2c76287cc0374def07a0f8ae7f517-17',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
                                          'visualizerIdOverride':'viz-jm-b6f2c76287cc0374def07a0f8ae7f517-17'})
+
+
+        // set overflow for pytuts - need to do in python as css
+        // does not allow parent selection
+        var pytuts = $('.pytutorVisualizer')
+        pytuts.closest('div.output_html.rendered_html.output_result')
+                .css('overflow-x', 'visible')
+
+        //pytuts.closest('div.output_html.rendered_html.output_result')
+        //      .css('background-color','red')
+
+    })()
+    </script>
+
+
+<div style="text-align:center; font-size:0.9em"> <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> visualization</div></div>
+</div>
+</section>
+<section id="Don't-nest-data-structures">
+<h2>Don’t nest data structures<a class="headerlink" href="#Don't-nest-data-structures" title="Permalink to this headline"></a></h2>
+<p>By default data structures shouldn’t be displayed as nested (which is the actual default on Python Tutor site). Test for <a class="reference external" href="https://github.com/DavidLeoni/jupman/issues/132">this issue</a></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">listA</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">&#39;Keep&#39;</span><span class="p">,</span> <span class="s1">&#39;an&#39;</span><span class="p">],</span>
+          <span class="p">[</span><span class="s1">&#39;eye&#39;</span><span class="p">,</span> <span class="s1">&#39;on&#39;</span><span class="p">],</span>
+          <span class="p">[</span><span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;arrow&#39;</span><span class="p">,</span> <span class="s1">&#39;tips&#39;</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="n">listB</span> <span class="o">=</span> <span class="n">listA</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">jupman</span><span class="o">.</span><span class="n">pytut</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+    <script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
+
+    <style>
+    @import "../_static/css/jupman.css";
+    </style>
+
+    <script id="json-jm-79f3b21de5179bcdf20e985ef3cc5b11-18" type="application/json" >
+        {"code": " \nlistA = [ ['Keep', 'an'], \n          ['eye', 'on'],\n          ['the', 'arrow', 'tips']\n]\n\nlistB = listA.copy()", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 3, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 4, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 7, "event": "step_line", "func_name": "<module>", "globals": {"listA": ["REF", 1]}, "ordered_globals": ["listA"], "stack_to_render": [], "heap": {"1": ["LIST", ["REF", 2], ["REF", 3], ["REF", 4]], "2": ["LIST", "Keep", "an"], "3": ["LIST", "eye", "on"], "4": ["LIST", "the", "arrow", "tips"]}, "stdout": ""}, {"line": 7, "event": "return", "func_name": "<module>", "globals": {"listA": ["REF", 1], "listB": ["REF", 5]}, "ordered_globals": ["listA", "listB"], "stack_to_render": [], "heap": {"1": ["LIST", ["REF", 2], ["REF", 3], ["REF", 4]], "2": ["LIST", "Keep", "an"], "3": ["LIST", "eye", "on"], "4": ["LIST", "the", "arrow", "tips"], "5": ["LIST", ["REF", 2], ["REF", 3], ["REF", 4]]}, "stdout": ""}]}
+    </script>
+    <div id="jm-79f3b21de5179bcdf20e985ef3cc5b11-18" class="pytutorVisualizer"> </div>
+
+    <script>
+
+    (function(){
+        console.log("jupman.py embedded javascript: adding Python tutor visualizer...")
+
+        var trace = JSON.parse(document.getElementById('json-jm-79f3b21de5179bcdf20e985ef3cc5b11-18').innerHTML);
+        // NOTE: id without #
+
+        addVisualizerToPage(trace, 'jm-79f3b21de5179bcdf20e985ef3cc5b11-18',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
+                                         'visualizerIdOverride':'viz-jm-79f3b21de5179bcdf20e985ef3cc5b11-18'})
+
+
+        // set overflow for pytuts - need to do in python as css
+        // does not allow parent selection
+        var pytuts = $('.pytutorVisualizer')
+        pytuts.closest('div.output_html.rendered_html.output_result')
+                .css('overflow-x', 'visible')
+
+        //pytuts.closest('div.output_html.rendered_html.output_result')
+        //      .css('background-color','red')
+
+    })()
+    </script>
+
+
+<div style="text-align:center; font-size:0.9em"> <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> visualization</div></div>
+</div>
+</section>
+<section id="Force-nested-data-structures">
+<h2>Force nested data structures<a class="headerlink" href="#Force-nested-data-structures" title="Permalink to this headline"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">listA</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="s1">&#39;Keep&#39;</span><span class="p">,</span> <span class="s1">&#39;an&#39;</span><span class="p">],</span>
+          <span class="p">[</span><span class="s1">&#39;eye&#39;</span><span class="p">,</span> <span class="s1">&#39;on&#39;</span><span class="p">],</span>
+          <span class="p">[</span><span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;arrow&#39;</span><span class="p">,</span> <span class="s1">&#39;tips&#39;</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="n">listB</span> <span class="o">=</span> <span class="n">listA</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">jupman</span><span class="o">.</span><span class="n">pytut</span><span class="p">(</span><span class="n">disableHeapNesting</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+    <script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
+
+    <style>
+    @import "../_static/css/jupman.css";
+    </style>
+
+    <script id="json-jm-7aa18bc69420a4dba904d58cb9e5ca15-19" type="application/json" >
+        {"code": " \nlistA = [ ['Keep', 'an'], \n          ['eye', 'on'],\n          ['the', 'arrow', 'tips']\n]\n\nlistB = listA.copy()", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 3, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 4, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 7, "event": "step_line", "func_name": "<module>", "globals": {"listA": ["REF", 1]}, "ordered_globals": ["listA"], "stack_to_render": [], "heap": {"1": ["LIST", ["REF", 2], ["REF", 3], ["REF", 4]], "2": ["LIST", "Keep", "an"], "3": ["LIST", "eye", "on"], "4": ["LIST", "the", "arrow", "tips"]}, "stdout": ""}, {"line": 7, "event": "return", "func_name": "<module>", "globals": {"listA": ["REF", 1], "listB": ["REF", 5]}, "ordered_globals": ["listA", "listB"], "stack_to_render": [], "heap": {"1": ["LIST", ["REF", 2], ["REF", 3], ["REF", 4]], "2": ["LIST", "Keep", "an"], "3": ["LIST", "eye", "on"], "4": ["LIST", "the", "arrow", "tips"], "5": ["LIST", ["REF", 2], ["REF", 3], ["REF", 4]]}, "stdout": ""}]}
+    </script>
+    <div id="jm-7aa18bc69420a4dba904d58cb9e5ca15-19" class="pytutorVisualizer"> </div>
+
+    <script>
+
+    (function(){
+        console.log("jupman.py embedded javascript: adding Python tutor visualizer...")
+
+        var trace = JSON.parse(document.getElementById('json-jm-7aa18bc69420a4dba904d58cb9e5ca15-19').innerHTML);
+        // NOTE: id without #
+
+        addVisualizerToPage(trace, 'jm-7aa18bc69420a4dba904d58cb9e5ca15-19',{'embeddedMode' : false,
+                                         'disableHeapNesting': false,
+                                         'visualizerIdOverride':'viz-jm-7aa18bc69420a4dba904d58cb9e5ca15-19'})
+
+
+        // set overflow for pytuts - need to do in python as css
+        // does not allow parent selection
+        var pytuts = $('.pytutorVisualizer')
+        pytuts.closest('div.output_html.rendered_html.output_result')
+                .css('overflow-x', 'visible')
+
+        //pytuts.closest('div.output_html.rendered_html.output_result')
+        //      .css('background-color','red')
+
+    })()
+    </script>
+
+
+<div style="text-align:center; font-size:0.9em"> <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> visualization</div></div>
+</div>
+</section>
+<section id="Function-pointers">
+<h2>Function pointers<a class="headerlink" href="#Function-pointers" title="Permalink to this headline"></a></h2>
+<p>Containers should always contain links to functions, not inlined names</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">g</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span>
+
+<span class="n">fs</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">,</span><span class="n">g</span><span class="p">]</span>
+
+<span class="n">jupman</span><span class="o">.</span><span class="n">pytut</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+    <script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
+
+    <style>
+    @import "../_static/css/jupman.css";
+    </style>
+
+    <script id="json-jm-fe49032ba88dadf5dec22b7537642670-20" type="application/json" >
+        {"code": " \ndef f():\n    print('hello')\n\ndef g():\n    print('world')\n\nfs = [f,g]", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 5, "event": "step_line", "func_name": "<module>", "globals": {"f": ["REF", 1]}, "ordered_globals": ["f"], "stack_to_render": [], "heap": {"1": ["FUNCTION", "f()", null]}, "stdout": ""}, {"line": 8, "event": "step_line", "func_name": "<module>", "globals": {"f": ["REF", 1], "g": ["REF", 2]}, "ordered_globals": ["f", "g"], "stack_to_render": [], "heap": {"1": ["FUNCTION", "f()", null], "2": ["FUNCTION", "g()", null]}, "stdout": ""}, {"line": 8, "event": "return", "func_name": "<module>", "globals": {"f": ["REF", 1], "g": ["REF", 2], "fs": ["REF", 3]}, "ordered_globals": ["f", "g", "fs"], "stack_to_render": [], "heap": {"1": ["FUNCTION", "f()", null], "2": ["FUNCTION", "g()", null], "3": ["LIST", ["REF", 1], ["REF", 2]]}, "stdout": ""}]}
+    </script>
+    <div id="jm-fe49032ba88dadf5dec22b7537642670-20" class="pytutorVisualizer"> </div>
+
+    <script>
+
+    (function(){
+        console.log("jupman.py embedded javascript: adding Python tutor visualizer...")
+
+        var trace = JSON.parse(document.getElementById('json-jm-fe49032ba88dadf5dec22b7537642670-20').innerHTML);
+        // NOTE: id without #
+
+        addVisualizerToPage(trace, 'jm-fe49032ba88dadf5dec22b7537642670-20',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
+                                         'visualizerIdOverride':'viz-jm-fe49032ba88dadf5dec22b7537642670-20'})
+
+
+        // set overflow for pytuts - need to do in python as css
+        // does not allow parent selection
+        var pytuts = $('.pytutorVisualizer')
+        pytuts.closest('div.output_html.rendered_html.output_result')
+                .css('overflow-x', 'visible')
+
+        //pytuts.closest('div.output_html.rendered_html.output_result')
+        //      .css('background-color','red')
+
+    })()
+    </script>
+
+
+<div style="text-align:center; font-size:0.9em"> <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> visualization</div></div>
+</div>
+</section>
+<section id="Errors---Code-after-pytut">
+<h2>Errors - Code after pytut<a class="headerlink" href="#Errors---Code-after-pytut" title="Permalink to this headline"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">jupman</span><span class="o">.</span><span class="n">pytut</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ciao&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ERROR: the call to jupman.pytut() must be the last in the cell, instead, found this code afterwards:
+
+
+print(&#34;ciao&#34;)
+ciao
+</pre></div></div>
+</div>
+</section>
+<section id="Errors---pytut-double-call">
+<h2>Errors - pytut double call<a class="headerlink" href="#Errors---pytut-double-call" title="Permalink to this headline"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">jupman</span><span class="o">.</span><span class="n">pytut</span><span class="p">()</span>
+
+<span class="n">jupman</span><span class="o">.</span><span class="n">pytut</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ERROR: There should only be one call to jupman.pytut(), found 2 instead
+ERROR: There should only be one call to jupman.pytut(), found 2 instead
+</pre></div></div>
+</div>
+</section>
+<section id="Errors---Nothing-to-show">
+<h2>Errors - Nothing to show<a class="headerlink" href="#Errors---Nothing-to-show" title="Permalink to this headline"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jupman</span><span class="o">.</span><span class="n">pytut</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+        Nothing to show ! You have to put ALL the code IN THE SAME cell as pytut()
+                          right before its call.
+
+        Example:
+
+            x = 5
+            y = x + 3
+            jupman.pytut()
+
+</pre></div></div>
+</div>
+</section>
+<section id="Spaces-in-attributes">
+<h2>Spaces in attributes<a class="headerlink" href="#Spaces-in-attributes" title="Permalink to this headline"></a></h2>
+<p>Check spaces don’t affect <code class="docutils literal notranslate"><span class="pre">jupman.pytut()</span></code> call strip</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">la</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">]]</span>
+
+<span class="n">jupman</span><span class="o">.</span><span class="n">pytut</span><span class="p">(</span>  <span class="n">disableHeapNesting</span>   <span class="o">=</span> <span class="kc">False</span>  <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+    <script src="../_static/js/pytutor-embed.bundle.min.js" type="application/javascript"></script>
+
+    <style>
+    @import "../_static/css/jupman.css";
+    </style>
+
+    <script id="json-jm-c4e6b8dd8472efb8125be965f35f9b0e-24" type="application/json" >
+        {"code": " \nla = [['a','b'], ['c','d']]", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 2, "event": "return", "func_name": "<module>", "globals": {"la": ["REF", 1]}, "ordered_globals": ["la"], "stack_to_render": [], "heap": {"1": ["LIST", ["REF", 2], ["REF", 3]], "2": ["LIST", "a", "b"], "3": ["LIST", "c", "d"]}, "stdout": ""}]}
+    </script>
+    <div id="jm-c4e6b8dd8472efb8125be965f35f9b0e-24" class="pytutorVisualizer"> </div>
+
+    <script>
+
+    (function(){
+        console.log("jupman.py embedded javascript: adding Python tutor visualizer...")
+
+        var trace = JSON.parse(document.getElementById('json-jm-c4e6b8dd8472efb8125be965f35f9b0e-24').innerHTML);
+        // NOTE: id without #
+
+        addVisualizerToPage(trace, 'jm-c4e6b8dd8472efb8125be965f35f9b0e-24',{'embeddedMode' : false,
+                                         'disableHeapNesting': false,
+                                         'visualizerIdOverride':'viz-jm-c4e6b8dd8472efb8125be965f35f9b0e-24'})
 
 
         // set overflow for pytuts - need to do in python as css
@@ -2080,7 +2424,7 @@ zam
 <p>HTML should be available both in notebook and website - of course, requires an internet connection.</p>
 <p>Beware: you need the HTTP<strong>S</strong> !</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%HTML</span>
@@ -2105,7 +2449,7 @@ zam
 <p>To show Python Tutor in notebooks, there is already a jupyter extension called <a class="reference external" href="https://github.com/lgpage/nbtutor">NBTutor</a> , afterwards you can use magic <code class="docutils literal notranslate"><span class="pre">%%nbtutor</span></code> to show the interpreter.</p>
 <p>Unfortunately, it doesn’t show in the generated HTML :-/</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">reload_ext</span> nbtutor
@@ -2113,7 +2457,7 @@ zam
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">nbtutor</span>
@@ -2137,7 +2481,7 @@ ciao
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
