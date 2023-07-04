@@ -814,6 +814,15 @@
 <li class="toctree-l4"><a class="reference internal" href="#A-small-table">A small table</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#An-extra-large-table">An extra large table</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#A-table-with-extra-large-text">A table with extra large text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#A-table-with-links">A table with links</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#Leggere-caratteri">Leggere caratteri</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#Sostituire-caratteri">Sostituire caratteri</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#Operatore-in">Operatore in</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#Opera-in">Opera in</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#Operaz-in">Operaz <code class="docutils literal notranslate"><span class="pre">in</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#Operatore-inxyz">Operatore inxyz</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#Lists">Lists</a></li>
@@ -1537,6 +1546,7 @@ Who does **not** writes tests, falls into _Debugging Hell_!
 </section>
 <section id="A-table-with-extra-large-text">
 <h3>A table with extra large text<a class="headerlink" href="#A-table-with-extra-large-text" title="Permalink to this headline"></a></h3>
+<p>Note with default style text overflows, we fix this in themes</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 23%" />
@@ -1561,6 +1571,316 @@ while.</p></td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="A-table-with-links">
+<h3>A table with links<a class="headerlink" href="#A-table-with-links" title="Permalink to this headline"></a></h3>
+<p>Some of these links in markdown tables may show ill-formatted in HTML output</p>
+<p>Test for <a class="reference external" href="https://github.com/DavidLeoni/jupman/issues/137">issue 137</a></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 26%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operatore</p></th>
+<th class="head"><p>Sintassi</p></th>
+<th class="head"><p>Risultato</p></th>
+<th class="head"><p>Significato</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>lunghezza</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">len</span></code>(str)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>Ritorna la lunghezza della stringa</p></td>
+</tr>
+<tr class="row-odd"><td><p><a href="#id17"><span class="problematic" id="id18">`indice &lt;#Leggere-caratteri
+&gt;`__</span></a></p></td>
+<td><p>str<code class="docutils literal notranslate"><span class="pre">[</span></code>int<code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Legge il carattere all’indice specificato</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="#Sostituire-caratteri">concatenazione</a></p></td>
+<td><p>str1 <code class="docutils literal notranslate"><span class="pre">+</span></code> str2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Concatena due stringhe</p></td>
+</tr>
+<tr class="row-odd"><td><p><a href="#id1"><span class="problematic" id="id2">`</span></a>inclusione &lt;#Operatore-in&gt;
+<a href="#id3"><span class="problematic" id="id4">`</span></a>__</p></td>
+<td><p>str1 <code class="docutils literal notranslate"><span class="pre">in</span></code> str2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p>Controlla se la stringa è presente in
+un’altra stringa</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operatore</p></th>
+<th class="head"><p>Sintassi</p></th>
+<th class="head"><p>Risultato</p></th>
+<th class="head"><p>Significato</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>lunghezza</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">len</span></code>(str)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>Ritorna la lunghezza della stringa</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="#Leggere-caratteri">indice</a></p></td>
+<td><p>str<code class="docutils literal notranslate"><span class="pre">[</span></code>int<code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Legge il carattere all’indice specificato</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="#Sostituire-caratteri">concatenazione</a></p></td>
+<td><p>str1 <code class="docutils literal notranslate"><span class="pre">+</span></code> str2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Concatena due stringhe</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 26%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operatore</p></th>
+<th class="head"><p>Sintassi</p></th>
+<th class="head"><p>Risultato</p></th>
+<th class="head"><p>Significato</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a href="#id5"><span class="problematic" id="id6">`</span></a>inclusione &lt;#Operatore-in&gt;
+<a href="#id7"><span class="problematic" id="id8">`</span></a>__</p></td>
+<td><p>str1 <code class="docutils literal notranslate"><span class="pre">in</span></code> str2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p>Controlla se la stringa è presente in
+un’altra stringa</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 26%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operatore</p></th>
+<th class="head"><p>Sintassi</p></th>
+<th class="head"><p>Risultato</p></th>
+<th class="head"><p>Significato</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a href="#id9"><span class="problematic" id="id10">`</span></a>inclusione &lt;#Operatore-in&gt;
+<a href="#id11"><span class="problematic" id="id12">`</span></a>__</p></td>
+<td><p>str1 <code class="docutils literal notranslate"><span class="pre">inabc</span></code> str2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p>Controlla se la stringa è presente in
+un’altra stringa</p></td>
+</tr>
+</tbody>
+</table>
+<p>with <code class="docutils literal notranslate"><span class="pre">#Operatore-inxyz</span></code> link and <code class="docutils literal notranslate"><span class="pre">inabc</span></code> operator:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 26%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operatore</p></th>
+<th class="head"><p>Sintassi</p></th>
+<th class="head"><p>Risultato</p></th>
+<th class="head"><p>Significato</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="#Operatore-inxyz">inclusione</a></p></td>
+<td><p>str1 <code class="docutils literal notranslate"><span class="pre">inabc</span></code> str2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p>Controlla se la stringa è presente in
+un’altra stringa</p></td>
+</tr>
+</tbody>
+</table>
+<p>with <code class="docutils literal notranslate"><span class="pre">#Operatore-inxyz</span></code> link and <code class="docutils literal notranslate"><span class="pre">in</span></code> operator:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 26%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operatore</p></th>
+<th class="head"><p>Sintassi</p></th>
+<th class="head"><p>Risultato</p></th>
+<th class="head"><p>Significato</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="#Operatore-inxyz">inclusione</a></p></td>
+<td><p>str1 <code class="docutils literal notranslate"><span class="pre">in</span></code> str2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p>Controlla se la stringa è presente in
+un’altra stringa</p></td>
+</tr>
+</tbody>
+</table>
+<p>with <code class="docutils literal notranslate"><span class="pre">#Operatore-in</span></code> (with end space) link and <code class="docutils literal notranslate"><span class="pre">in</span></code> operator:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 26%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operatore</p></th>
+<th class="head"><p>Sintassi</p></th>
+<th class="head"><p>Risultato</p></th>
+<th class="head"><p>Significato</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a href="#id13"><span class="problematic" id="id14">`</span></a>inclusione &lt;#Operatore-in&gt;
+<a href="#id15"><span class="problematic" id="id16">`</span></a>__</p></td>
+<td><p>str1 <code class="docutils literal notranslate"><span class="pre">in</span></code> str2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p>Controlla se la stringa è presente in
+un’altra stringa</p></td>
+</tr>
+</tbody>
+</table>
+<p>with <code class="docutils literal notranslate"><span class="pre">#Opera-in</span></code></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 26%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operatore</p></th>
+<th class="head"><p>Sintassi</p></th>
+<th class="head"><p>Risultato</p></th>
+<th class="head"><p>Significato</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="#Opera-in">inclusione</a></p></td>
+<td><p>str1 <code class="docutils literal notranslate"><span class="pre">in</span></code> str2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p>Controlla se la stringa è presente in
+un’altra stringa</p></td>
+</tr>
+</tbody>
+</table>
+<p>with <code class="docutils literal notranslate"><span class="pre">#Operaz-in</span></code> (with target in quotes)</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 26%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operatore</p></th>
+<th class="head"><p>Sintassi</p></th>
+<th class="head"><p>Risultato</p></th>
+<th class="head"><p>Significato</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="#Operaz-in">inclusione</a></p></td>
+<td><p>str1 <code class="docutils literal notranslate"><span class="pre">in</span></code> str2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p>Controlla se la stringa è presente in
+un’altra stringa</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Workaround with ``&lt;a&gt;`` tags</strong></p>
+<p>… doesn’t work :-(</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 26%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operatore</p></th>
+<th class="head"><p>Sintassi</p></th>
+<th class="head"><p>Risultato</p></th>
+<th class="head"><p>Significato</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>lunghezza</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">len</span></code>(str)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>Ritorna la lunghezza della stringa</p></td>
+</tr>
+<tr class="row-odd"><td><p>indice</p></td>
+<td><p>str<code class="docutils literal notranslate"><span class="pre">[</span></code>int<code class="docutils literal notranslate"><span class="pre">]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Legge il carattere all’indice specificato</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="#Sostituire-caratteri">concatenazione</a></p></td>
+<td><p>str1 <code class="docutils literal notranslate"><span class="pre">+</span></code> str2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Concatena due stringhe</p></td>
+</tr>
+<tr class="row-odd"><td><p>inclusione</p></td>
+<td><p>str1 <code class="docutils literal notranslate"><span class="pre">in</span></code> str2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p>Controlla se la stringa è presente in
+un’altra stringa</p></td>
+</tr>
+</tbody>
+</table>
+<section id="Leggere-caratteri">
+<h4>Leggere caratteri<a class="headerlink" href="#Leggere-caratteri" title="Permalink to this headline"></a></h4>
+<p>bla bla</p>
+</section>
+<section id="Sostituire-caratteri">
+<h4>Sostituire caratteri<a class="headerlink" href="#Sostituire-caratteri" title="Permalink to this headline"></a></h4>
+<p>bla bla</p>
+</section>
+<section id="Operatore-in">
+<h4>Operatore in<a class="headerlink" href="#Operatore-in" title="Permalink to this headline"></a></h4>
+<p>bla bla</p>
+</section>
+<section id="Opera-in">
+<h4>Opera in<a class="headerlink" href="#Opera-in" title="Permalink to this headline"></a></h4>
+<p>bla bla</p>
+</section>
+<section id="Operaz-in">
+<h4>Operaz <code class="docutils literal notranslate"><span class="pre">in</span></code><a class="headerlink" href="#Operaz-in" title="Permalink to this headline"></a></h4>
+<p>bla bla</p>
+</section>
+<section id="Operatore-inxyz">
+<h4>Operatore inxyz<a class="headerlink" href="#Operatore-inxyz" title="Permalink to this headline"></a></h4>
+<p>bla bla</p>
+</section>
 </section>
 </section>
 <section id="Lists">
@@ -2115,7 +2435,7 @@ long output ... 149
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright # 2020 - 2022, People That Write a Lot.</p>
+    <p>&#169; Copyright # 2020 - 2023, People That Write a Lot.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
