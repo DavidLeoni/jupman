@@ -97,6 +97,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#Hiding-cells">Hiding cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Info-boxes">Info boxes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Utilities">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Launch-unit-tests">Launch unit tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Python-Tutor">Python Tutor</a></li>
@@ -745,7 +746,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../toc.html#templates">Templates</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../changelog.html#september-19th-2022-3-5-6">September 19th, 2022 - 3.5.6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#july-9th-2023-3-5-7">July 9th, 2023 - 3.5.7</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../changelog.html#august-11th-2022-3-5-4">August 11th, 2022 - 3.5.4</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../changelog.html#june-4th-2022-3-5">June 4th 2022 - 3.5</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../changelog.html#april-28th-2022-3-4">April 28th 2022 - 3.4</a></li>
@@ -1509,6 +1510,27 @@ def f():
 <p>A way to hide cells (like for example the <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">jupman</span></code> code) is by clicking <code class="docutils literal notranslate"><span class="pre">View-&gt;Cell</span> <span class="pre">toolbar</span> <span class="pre">-&gt;</span> <span class="pre">Edit</span> <span class="pre">metadata</span></code> and adding <code class="docutils literal notranslate"><span class="pre">&quot;nbsphinx&quot;:</span> <span class="pre">&quot;hidden&quot;</span></code> to the JSON (see also original <a class="reference external" href="https://nbsphinx.readthedocs.io/en/0.2.14/hidden-cells.html#Hidden-Cells">NBSphinx docs</a> and <a class="reference internal" href="tests.html#Togglable-cells"><span class="std std-ref">Togglable cells in Jupman tests</span></a> ).</p>
 <p><strong>NOTE 1</strong>: As of NBSphinx 2.17, it is not possible to hide only cell text but not the output.</p>
 </section>
+<section id="Info-boxes">
+<h2>Info boxes<a class="headerlink" href="#Info-boxes" title="Permalink to this headline"></a></h2>
+<p>Supported boxes are inherited from NBSphinx with <code class="docutils literal notranslate"><span class="pre">div</span></code> classes <code class="docutils literal notranslate"><span class="pre">&quot;alert</span> <span class="pre">alert-info&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;alert</span> <span class="pre">alert-warning&quot;</span></code></p>
+<p>See <a class="reference external" href="http://127.0.0.1:8888/notebooks/jupman/jupman-3.5.1/manual/tests.ipynb#Info/Warning-Boxes">Rendering tests</a> for examples.</p>
+<p>Plus we add <code class="docutils literal notranslate"><span class="pre">jupman-alert-principle</span></code>: some alerts to be often reminded can be preceded with an empty <code class="docutils literal notranslate"><span class="pre">div</span></code> having class <code class="docutils literal notranslate"><span class="pre">jupman-alert-principle</span></code> followed by a regular alert box, so they will display as you want on the website and as fallback boxes in the pdf (did this way as we can’t add classes nor other attributes, tried also <code class="docutils literal notranslate"><span class="pre">data-jupman</span></code> html attributes with no success)</p>
+<p><strong>NOTE</strong>: default colors are indicative and minimal on purpose, for a better view see <a class="reference external" href="https://jupman.softpython.org/themed/manual/tests.html#jupman-alert-principle">softpython themed version</a></p>
+<p><strong>Recommended approach</strong>: The typical principle alert should be brief and may have a link to more substantial text, with a short line under it. If you need more explicative text, put it outside:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;jupman-alert-principle&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-info&quot;</span><span class="p">&gt;</span>
+
+[IV PRINCIPLE](https://jupman.softpython.org/principles.html#V-PRINCIPLE): **You shall write tests!**
+
+Who does **not** writes tests, falls into _Debugging Hell_!
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<div class="jupman-alert-principle"></div><div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><a class="reference external" href="https://jupman.softpython.org/principles.html#IV-PRINCIPLE">IV PRINCIPLE</a>: <strong>You shall write tests!</strong></p>
+<p>Who does <strong>not</strong> writes tests, falls into <em>Debugging Hell</em>!</p>
+</div>
+</section>
 <section id="Utilities">
 <h2>Utilities<a class="headerlink" href="#Utilities" title="Permalink to this headline"></a></h2>
 <p><strong>NOTE</strong>: not mandatory, it’s mostly intended to tweak notebooks downloaded locally. Should be avoided in notebooks meant for students, as it’s more likely it will mess their configurations - also, they might copy the notebooks without knowing they contain the custom js and use weird extensions which could generate conflicts (such as double toc)</p>
@@ -1573,19 +1595,22 @@ def f():
     @import "../_static/css/jupman.css";
     </style>
 
-    <script id="json-jm-bd043a0e3fa82bc4882c4f23fa7f36ad" type="application/json" >
+    <script id="json-jm-bd043a0e3fa82bc4882c4f23fa7f36ad-4" type="application/json" >
         {"code": " \nx = [5,8,4]\ny= {3:9}\nz = [x]", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 3, "event": "step_line", "func_name": "<module>", "globals": {"x": ["REF", 1]}, "ordered_globals": ["x"], "stack_to_render": [], "heap": {"1": ["LIST", 5, 8, 4]}, "stdout": ""}, {"line": 4, "event": "step_line", "func_name": "<module>", "globals": {"x": ["REF", 1], "y": ["REF", 2]}, "ordered_globals": ["x", "y"], "stack_to_render": [], "heap": {"1": ["LIST", 5, 8, 4], "2": ["DICT", [3, 9]]}, "stdout": ""}, {"line": 4, "event": "return", "func_name": "<module>", "globals": {"x": ["REF", 1], "y": ["REF", 2], "z": ["REF", 3]}, "ordered_globals": ["x", "y", "z"], "stack_to_render": [], "heap": {"1": ["LIST", 5, 8, 4], "2": ["DICT", [3, 9]], "3": ["LIST", ["REF", 1]]}, "stdout": ""}]}
     </script>
-    <div id="jm-bd043a0e3fa82bc4882c4f23fa7f36ad" class="pytutorVisualizer"> </div>
+    <div id="jm-bd043a0e3fa82bc4882c4f23fa7f36ad-4" class="pytutorVisualizer"> </div>
 
     <script>
+
     (function(){
+        console.log("jupman.py embedded javascript: adding Python tutor visualizer...")
 
-        var trace = JSON.parse(document.getElementById('json-jm-bd043a0e3fa82bc4882c4f23fa7f36ad').innerHTML);
-        // NOTE 1: id without #
+        var trace = JSON.parse(document.getElementById('json-jm-bd043a0e3fa82bc4882c4f23fa7f36ad-4').innerHTML);
+        // NOTE: id without #
 
-        addVisualizerToPage(trace, 'jm-bd043a0e3fa82bc4882c4f23fa7f36ad',{'embeddedMode' : false,
-                                         'visualizerIdOverride':'viz-jm-bd043a0e3fa82bc4882c4f23fa7f36ad'})
+        addVisualizerToPage(trace, 'jm-bd043a0e3fa82bc4882c4f23fa7f36ad-4',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
+                                         'visualizerIdOverride':'viz-jm-bd043a0e3fa82bc4882c4f23fa7f36ad-4'})
 
 
         // set overflow for pytuts - need to do in python as css
@@ -1601,7 +1626,7 @@ def f():
     </script>
 
 
-<div style="text-align:center; font-size:0.9em"> Visualization provided by <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> </div></div>
+<div style="text-align:center; font-size:0.9em"> <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> visualization</div></div>
 </div>
 <p>Beware of variables which were initialized in previous cells, they won’t be available in Python Tutor and you will get an error:</p>
 <div class="nbinput nblast docutils container">
@@ -1646,19 +1671,22 @@ NameError: name &#39;w&#39; is not defined
     @import "../_static/css/jupman.css";
     </style>
 
-    <script id="json-jm-9e3b324a5fd4bb62d93772404e88cfbc" type="application/json" >
+    <script id="json-jm-9e3b324a5fd4bb62d93772404e88cfbc-6" type="application/json" >
         {"code": " \nx =  w + 5", "trace": [{"line": 2, "event": "step_line", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": ""}, {"line": 2, "event": "exception", "func_name": "<module>", "globals": {}, "ordered_globals": [], "stack_to_render": [], "heap": {}, "stdout": "", "exception_msg": "NameError: name 'w' is not defined"}]}
     </script>
-    <div id="jm-9e3b324a5fd4bb62d93772404e88cfbc" class="pytutorVisualizer"> </div>
+    <div id="jm-9e3b324a5fd4bb62d93772404e88cfbc-6" class="pytutorVisualizer"> </div>
 
     <script>
+
     (function(){
+        console.log("jupman.py embedded javascript: adding Python tutor visualizer...")
 
-        var trace = JSON.parse(document.getElementById('json-jm-9e3b324a5fd4bb62d93772404e88cfbc').innerHTML);
-        // NOTE 1: id without #
+        var trace = JSON.parse(document.getElementById('json-jm-9e3b324a5fd4bb62d93772404e88cfbc-6').innerHTML);
+        // NOTE: id without #
 
-        addVisualizerToPage(trace, 'jm-9e3b324a5fd4bb62d93772404e88cfbc',{'embeddedMode' : false,
-                                         'visualizerIdOverride':'viz-jm-9e3b324a5fd4bb62d93772404e88cfbc'})
+        addVisualizerToPage(trace, 'jm-9e3b324a5fd4bb62d93772404e88cfbc-6',{'embeddedMode' : false,
+                                         'disableHeapNesting': true,
+                                         'visualizerIdOverride':'viz-jm-9e3b324a5fd4bb62d93772404e88cfbc-6'})
 
 
         // set overflow for pytuts - need to do in python as css
@@ -1674,7 +1702,7 @@ NameError: name &#39;w&#39; is not defined
     </script>
 
 
-<div style="text-align:center; font-size:0.9em"> Visualization provided by <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> </div></div>
+<div style="text-align:center; font-size:0.9em"> <a href="https://pythontutor.com/visualize.html#mode=edit" target="_blank">Python Tutor</a> visualization</div></div>
 </div>
 </section>
 <section id="Pandas">
@@ -1843,7 +1871,7 @@ NameError: name &#39;w&#39; is not defined
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/manual_editing_36_0.png" src="../_images/manual_editing_36_0.png" />
+<img alt="../_images/manual_editing_39_0.png" src="../_images/manual_editing_39_0.png" />
 </div>
 </div>
 </section>

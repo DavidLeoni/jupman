@@ -97,6 +97,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="editing.html#Hiding-cells">Hiding cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editing.html#Info-boxes">Info boxes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="editing.html#Utilities">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="editing.html#Launch-unit-tests">Launch unit tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="editing.html#Python-Tutor">Python Tutor</a></li>
@@ -745,7 +746,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../toc.html#templates">Templates</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../changelog.html#september-19th-2022-3-5-6">September 19th, 2022 - 3.5.6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#july-9th-2023-3-5-7">July 9th, 2023 - 3.5.7</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../changelog.html#august-11th-2022-3-5-4">August 11th, 2022 - 3.5.4</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../changelog.html#june-4th-2022-3-5">June 4th 2022 - 3.5</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../changelog.html#april-28th-2022-3-4">April 28th 2022 - 3.4</a></li>
@@ -1291,8 +1292,15 @@ cat wiz.txt
 </section>
 <section id="Info/Warning-Boxes">
 <h2>Info/Warning Boxes<a class="headerlink" href="#Info/Warning-Boxes" title="Permalink to this headline"></a></h2>
+<p>Inherited from NBSphinx:</p>
 <p>Until there is an info/warning extension for Markdown/CommonMark, such boxes can be created by using HTML</p>
-<div><p>elements like this:</p>
+<div><p>elements like the following</p>
+<p>For this to work reliably, you should obey the following guidelines:</p>
+<ul class="simple">
+<li><p>The class attribute has to be either <code class="docutils literal notranslate"><span class="pre">&quot;alert</span> <span class="pre">alert-info&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;alert</span> <span class="pre">alert-warning&quot;</span></code>, other values will not be converted correctly.</p></li>
+<li><p>No further attributes are allowed.</p></li>
+<li><p>For compatibility with CommonMark, you should add an empty line between the <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> start tag and the beginning of the content.</p></li>
+</ul>
 <div class="admonition note">
 <p><strong>Note:</strong> This is an info, mixed bold!</p>
 </div>
@@ -1345,15 +1353,8 @@ cat wiz.txt
 <p class="admonition-title fa fa-exclamation-circle"><strong>This is a long warn, plain title!</strong></p>
 <p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.</p>
 </div>
-<p>For this to work reliably, you should obey the following guidelines:</p>
-<ul class="simple">
-<li><p>The class attribute has to be either <code class="docutils literal notranslate"><span class="pre">&quot;alert</span> <span class="pre">alert-info&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;alert</span> <span class="pre">alert-warning&quot;</span></code>, other values will not be converted correctly.</p></li>
-<li><p>No further attributes are allowed.</p></li>
-<li><p>For compatibility with CommonMark, you should add an empty line between the <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> start tag and the beginning of the content.</p></li>
-</ul>
 <section id="jupman-alert-principle">
 <h3>jupman-alert-principle<a class="headerlink" href="#jupman-alert-principle" title="Permalink to this headline"></a></h3>
-<p>Some alerts to be often reminded can be preceded with an empty div having class <code class="docutils literal notranslate"><span class="pre">jupman-alert-principle</span></code> followed by a regular alert box, so they will display as you want on the website and as fallback boxes in the pdf (did this way as we can’t add classes nor other attributes, tried also <code class="docutils literal notranslate"><span class="pre">data-jupman</span></code> html attributes with no success)</p>
 <p><strong>NOTE</strong>: default colors are indicative and minimal on purpose, for a better view see <a class="reference external" href="https://jupman.softpython.org/themed/manual/tests.html#jupman-alert-principle">softpython themed version</a></p>
 <p><strong>Recommended approach</strong>: The typical principle alert should be brief and may have a link to more substantial text, with a short line under it. If you need more explicative text, put it outside:</p>
 <div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;jupman-alert-principle&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
