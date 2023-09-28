@@ -412,6 +412,12 @@ class JupmanConfig:
     
 - If the notebooks looks stuck, try to select `Kernel -> Restart`
             
+If you are a Mac user, substitute above keys with these ones:
+
+* Ctrl -> Command `⌘`
+* Shift -> Shift `⇧`
+* Alt -> Option `⌥`            
+            
 """        
         
     def  __repr__(self):
