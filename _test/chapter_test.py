@@ -2,13 +2,14 @@ import sys
 sys.path.append('../')
 sys.path.append('.')  # good lord, without this debugging in VSCode doesn't work
 
-#keep it first so we don't get depreation warnings
+#keep it first so we don't get deprecation warnings
 import jupman_tools as jmt
 import os
 import nbformat
 from jupman_tools import JupmanContext
 from common_test import clean, make_jupman_context, make_sphinx_config, tconf
 import pytest 
+from jupman_tools import debug
 
 
 
@@ -264,9 +265,9 @@ def test_copy_chapter_solution(dest_dir):
     assert jcxt.author in nb_sol.cells[19].source    
     
 
-def test_copy_chapter_solution_web(dest_dir): 
+def test_chapter_solution_web(): 
 
-    nb_sol_fn = os.path.join(dest_dir, 'nb-sol.ipynb')
+    nb_sol_fn = os.path.join('_test/test-chapter', 'nb-sol.ipynb')
     nb_sol_web = nbformat.read(nb_sol_fn, nbformat.NO_CONVERT)
 
     jcxt = JupmanContext(make_sphinx_config(), os.path.abspath(nb_sol_fn), True)
@@ -298,9 +299,9 @@ def test_copy_chapter_solution_web(dest_dir):
         if cell.source == """x = 14\nimport jupman""":
             import_jupman += 1
         
-        #debug(f'HELLO*************')
+        debug(f'HELLO*************')
         if 'outputs' in cell and len(cell.outputs) > 0 and  'data' in cell.outputs[0]:
-            #debug(f'BELLO*************\n{cell.outputs[0]}')
+            debug(f'BELLO*************\n{cell.outputs[0]}')
             if '<script src="../../_static/js/pytutor-embed.bundle.min.js' in cell.outputs[0]['data']['text/html']:
                 pytutor_js += 1
                 
