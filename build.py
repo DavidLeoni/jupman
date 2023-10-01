@@ -98,6 +98,10 @@ def run_sphinx(manuals, formats):
     if os.path.isdir(jupman_out):
         jt.delete_tree(jupman_out, '_build')
     
+    static_generated = '_static/generated'
+    if os.path.isdir(static_generated):
+        jt.delete_tree(static_generated, '_static/generated')    
+    
     for manual in manuals: 
         for fmt in formats:
 
