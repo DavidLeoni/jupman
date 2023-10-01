@@ -330,7 +330,37 @@ class JupmanConfig:
 """        
         
 
-    
+    def tutorial_downloads(self, jcxt):
+        """
+        @since 3.6
+        """
+        
+        from pathlib import Path
+        
+        relpath = os.path.relpath(os.path.abspath(jcxt.jpre_dest_filepath))
+        relfolder_name = Path(relpath).parts[-2]                
+        
+        debug(f'relpath: {relpath}')
+        debug(f'relfolder_name: {relfolder_name}')
+        debug(f'jcxt.jpre_dest_filepath: {jcxt.jpre_dest_filepath}')
+        
+        # should already exist during nbsphinx parsing
+        zip_filepath = f"{jcxt.jm.generated}/{relfolder_name}.zip"  
+        
+        zip_web_rel_filepath = os.path.relpath(f"{jcxt.jm.generated}/{relfolder_name}.zip",
+                                               os.path.abspath(jcxt.jpre_dest_filepath))
+        
+        browse_online_link = f"{jcxt.jm.repo_browse_url}{jcxt.jpre_dest_filepath}"
+        
+        return f"""
+<a id="jupman-zip-download" href="{zip_web_rel_filepath}" target="_blank" title="Download exercises and solutions"> 
+<img src="_static/img/jupman/download-zip.svg" alt="Download exercises and solutions">
+</a>
+
+<a id="jupman-zip-browse" href="{browse_online_link}" target="_blank" title="Browse files online"> 
+<img src="_static/img/jupman/browse.svg" alt="Browse files online">
+</a>    
+"""
     def tutorial_preamble(self,
                           jcxt,
                           marked: Iterable[str] = PREAMBLE_MARKED, 
@@ -374,20 +404,7 @@ class JupmanConfig:
             
         files_str = '\n'.join(files)
         
-        zip_web_rel_filepath = os.path.relpath(f"{jcxt.jm.generated}/{relfolder_name}.zip",
-                                               os.path.abspath(jcxt.jpre_dest_filepath))
-        
-        browse_online_link = f"{jcxt.jm.repo_browse_url}{jcxt.jpre_dest_filepath}"
-        
         return f"""
-
-<a id="jupman-zip-download" href="{zip_web_rel_filepath}" target="_blank" title="Download exercises and solutions"> 
-<img src="_static/img/jupman/download-zip.svg" alt="Download exercises and solutions">
-</a>
-
-<a id="jupman-zip-browse" href="{browse_online_link}" target="_blank" title="Browse files online"> 
-<img src="_static/img/jupman/browse.svg" alt="Browse files online">
-</a>
 
 - unzip exercises in a folder, you should get something like this: 
 
