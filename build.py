@@ -116,41 +116,45 @@ def run_sphinx(manuals, formats):
             # sphinx-build -b  html doc _build/student/html 
 
             try:
-                cmd = (sphinxcmd + " -T -j 4 -b " + fmt + " . " + relout + " " + tinfo['args'] )
+                cmd = (sphinxcmd + " -T  -b " + fmt + " . " + relout + " " + tinfo['args'] )
                 res = run(cmd)
                     
 
                 if fmt == 'html':
-
+                    index_path = f"{relout}/index.html"
                     print("Fixing links to PDFs and EPUBs ... ") # Because of this crap: http://stackoverflow.com/a/23855541
-
-                    with open(relout + '/index.html', "r+") as f:
-                        data = f.read()
-
-                        data = data.replace('_JM_{download}', 'Download ')
-                        
-#<a href="http://readthedocs.org/projects/jupman/downloads/pdf/latest/" target="_blank">PDF</a>
-                        print(formats)
-                        data = data.replace('_JM_{html}', '&ensp;<a target="_blank" href="/downloads/htmlzip/latest/">HTML</a>')
-
-                        if 'pdf' in formats:
-                            data = data.replace('_JM_{pdf}', '&ensp;<a target="_blank" href="/downloads/pdf/latest/">PDF</a>')
-                        elif 'latex' in formats:
-                            print("TODO LATEX !")
-                        else:
-                            data = data.replace('_JM_{pdf}', '')
-
-                        if 'epub' in formats:
-                            data = data.replace('_JM_{epub}', '&ensp;<a target="_blank" href="/downloads/epub/latest/">EPUB</a>')
-                        else:
-                            data = data.replace('_JM_{epub}', '')
-
-
-                        print("Putting code documentation links ...")
-
-                        f.seek(0)
-                        f.write(data)                    
                     
+                    if not os.path.exists(index_path):
+                        print(f'.... No {index_path} found, skipping')
+                    else:
+                        with open(index_path, "r+") as f:
+                            data = f.read()
+
+                            data = data.replace('_JM_{download}', 'Download ')
+                            
+    #<a href="http://readthedocs.org/projects/jupman/downloads/pdf/latest/" target="_blank">PDF</a>
+                            print(formats)
+                            data = data.replace('_JM_{html}', '&ensp;<a target="_blank" href="/downloads/htmlzip/latest/">HTML</a>')
+
+                            if 'pdf' in formats:
+                                data = data.replace('_JM_{pdf}', '&ensp;<a target="_blank" href="/downloads/pdf/latest/">PDF</a>')
+                            elif 'latex' in formats:
+                                print("TODO LATEX !")
+                            else:
+                                data = data.replace('_JM_{pdf}', '')
+
+                            if 'epub' in formats:
+                                data = data.replace('_JM_{epub}', '&ensp;<a target="_blank" href="/downloads/epub/latest/">EPUB</a>')
+                            else:
+                                data = data.replace('_JM_{epub}', '')
+
+
+                            print("Putting code documentation links ...")
+
+                            f.seek(0)
+                            f.write(data)                    
+                    
+                 
 
                 elif fmt == 'latex':                  
                     run('latexmk -r latexmkrc -pdf -f -dvi- -ps- -jobname=' + jm.filename + ' -interaction=nonstopmode', cwd=relout)

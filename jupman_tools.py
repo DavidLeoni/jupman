@@ -7,6 +7,7 @@ import collections.abc
 from enum import Enum
 import re
 import os
+import pathlib
 import inspect
 import types
 import glob
@@ -26,6 +27,7 @@ import pathspec
 from pylatexenc.latexencode import unicode_to_latex
 from babel.dates import format_date
 from subprocess import check_output
+import sphinx
 import nbsphinx
 import nbformat
 
@@ -185,7 +187,10 @@ class JupmanConfig:
         """ The repositoty url prefix for browsing files, i.e. 'https://github.com/DavidLeoni/jupman/blob/master/'
         """
 
-        self.chapter_patterns =  ['*/']
+        self._chapter_patterns =  ['*/']
+        """ Note: Since 3.6 chapter_patterns is read-only
+        """
+        
         self.chapter_exclude_patterns =  ['[^_]*/','exams/', 'project/']
 
         self.ipynb_show_solution = "Show solution"
@@ -214,8 +219,12 @@ class JupmanConfig:
                  the markdown cell it is contained in.
         """
 
-        self.zip_ignored = ['__pycache__', '**.ipynb_checkpoints', '.pyc', '.cache', '.pytest_cache', '.vscode',]
-        """ Paths given here are intended relative to each zip own root, not project root.
+        self.zip_ignored = []
+        """ 
+        Since 3.6: Paths given here are intended relative to project root, 
+                   and behave like sphinx_exclude_patterns
+        
+        BEFORE 3.6: Paths given here were only intended relative to each zip own root.
         """
 
         self.formats = ["html", "epub", "latex"]
@@ -361,6 +370,26 @@ class JupmanConfig:
 <img src="_static/img/jupman/browse.svg" alt="Browse files online">
 </a>    
 """
+
+    @property
+    def chapter_patterns(self):
+        """ @deprecated since 3.6
+        """
+        
+        warn("chapter_patterns is DEPRECATED since 3.6")
+        return self._chapter_patterns
+
+    @chapter_patterns.setter
+    def chapter_patterns(self, obj : str):
+        """ @deprecated since 3.6
+        """
+        
+        warn("setting chapter_patterns is DEPRECATED since 3.6, ")
+        
+        if obj != ['*/']:
+            raise ValueError(f"Since jupman 3.6, chapter_patterns should always be ['*/']  Found instead: {obj}")
+
+
     def tutorial_preamble(self,
                           jcxt,
                           marked: Iterable[str] = PREAMBLE_MARKED, 
@@ -490,7 +519,6 @@ If you are a Mac user, substitute above keys with these ones:
         return zip_paths(jcxt, rel_paths, zip_path, patterns, remap)
         
 
-
 class SphinxConfig:
     """ For now a place holder, in the future we may substitute with proper original sphinx config
 
@@ -527,9 +555,9 @@ class JupmanContext:
       
     @staticmethod
     def make_empty():
-        return JupmanContext({}, '', False) 
+        return JupmanContext({}, '', False, '') 
       
-    def __init__(self, sphinx_config, source_filepath: str, website: bool):    
+    def __init__(self, sphinx_config, source_filepath: str, website: bool, subroot : str):    
                 
         self.jm = JupmanConfig()
               
@@ -547,12 +575,41 @@ class JupmanContext:
                 self.__dict__[k] = v
         else:            
             raise ValueError(f'Unrecognized input type while creating {self.__class__.__name__}: {type(sphinx_config)}')
-                
-                
+        
+        # Typically I wouldn't want to mess with sphinx attributes but I need these in many places: 
+        if "exclude_patterns" not in self.__dict__:
+            self.exclude_patterns = []
+        if "include_patterns" not in self.__dict__:
+            self.include_patterns = ['**']
+        
+        
         self.jpre_source_filepath = source_filepath
-        self.jpre_dest_filepath = source_filepath  # sometimes dest might differ from source, es generated exercises
+        
+        self.jpre_dest_filepath = source_filepath  
+        """ sometimes dest might differ from source, es generated exercises 
+        """
+        
+        if subroot.startswith('..'):
+            raise JupmanError(f"paths beginning with .. are not supported fur subroot, found instead: {subroot}")
+        if subroot and not subroot.endswith('/'):
+            subroot = subroot + '/'
+            
+        self.jpre_subroot = subroot
+        """
+        When source is in a different position, like i.e. in _build/jupman/ and it needs to be zipped
+        @since 3.6
+        """
+        
         self.jpre_website = website
-                
+        
+        self._sphinx_discovery_cache = {}  
+        """ Needed as discovery is very slow. When we have a proper Sphinx plugin we can remove it.
+            
+            Keys have the format INCLUDE-...-EXCLUDE-...
+            
+            @since 3.6
+        """
+        
         
     def __repr__(self):
         """ @since 3.6
@@ -943,6 +1000,79 @@ def single_tag_pattern(tag):
     return re.compile(s, flags=re.DOTALL)
 
 
+
+
+    
+    
+def init_exclude_patterns(jm : JupmanConfig, 
+                          sphinx_exclude_patterns : list, 
+                          gitignore_path : str ='.gitignore'):
+    """ Initializes sphinx_exclude_patterns with stuff from .gitignore
+    
+        As fallback when no .gitignore is found, uses some defaults for python
+        
+        NOTE:
+        .gitignore folder rules: (https://git-scm.com/docs/gitignore):
+        
+            - separator at the end: only matches directories, 
+              otherwise: match both files and directories
+          
+            - separator at the beginning *OR MIDDLE* (or both):
+              pattern is relative to the directory level of .gitignore itself
+              otherwise: also matches at any level below the .gitignore level
+        
+        
+        @since 3.6
+    """
+
+    # Exclude build directory and Jupyter backup files:
+    
+    sphinx_exclude_patterns.extend(['.git', '.gitattributes', '.gitignore'])  # oddly sphinx doesn't seem to exclude it by defualt
+   
+    if not os.path.exists(gitignore_path):
+        info(f"{gitignore_path} not found, loading default exclude patterns")
+        sphinx_exclude_patterns.extend( [ jm.build,
+                                          jm.generated,
+                                          "_private",
+                                          "**-chal-sol.*",
+                                          "**_chal_sol.*",
+                                          #"_templates/exam-server", #3.6 old, doesn't even exists
+                                        ])
+        return
+    
+    info(f"Loading {gitignore_path}   ...")
+    
+    #rules = _parse_gitignore(gitignore_path)
+    import igittigitt
+    parser = igittigitt.IgnoreParser()
+    base_dir = os.path.dirname(gitignore_path) + "/"
+    debug(f"BASE_DIR: {base_dir}")
+    parser.parse_rule_file(gitignore_path, base_dir=base_dir)
+    # Apparently igittigitt insists prepending the base_dir...
+    glob_strings = []
+    for ir in parser.rules:
+        #glob_strings.append(ir.pattern_glob)
+    
+        to_add = ir.pattern_glob[len(base_dir):]
+        if to_add.startswith('/'):
+            to_add = to_add[1:]
+            
+        glob_strings.append(to_add)
+            
+        #fix for sphinx **/folder not matching a folder in root
+        if to_add.startswith('**/'): 
+            glob_strings.append(to_add[3:])
+        
+    if len(parser.negation_rules) > 0:
+        raise JupmanUnsupportedError(f"Negated rules from gitignore are not currently supported anymore in Jupman 3.6!\n    Found these:   {[ir.pattern_original for ir in parser.negation_rules]}\n  while parsing:   {gitignore_path}")
+    
+    debug(f"GLOB STRINGS: {glob_strings}")
+    
+    
+    
+    sphinx_exclude_patterns.extend(glob_strings)
+
+
 def init(jm, sphinx_config=None) -> JupmanContext:
     """Initializes the system, does patching, etc
 
@@ -955,6 +1085,8 @@ def init(jm, sphinx_config=None) -> JupmanContext:
     if not sphinx_config:
         raise ValueError("globals() not passed to jmt.init call, please add it!")        
     
+    
+    
     #TODO a check would be nice but I'm lazy
     #if not sphinx_config.jm:
     #    raise ValueError("jm variable not present in sphinx config, please define it!")    
@@ -966,8 +1098,8 @@ def init(jm, sphinx_config=None) -> JupmanContext:
     else:
         info('No GOOGLE_ANALYTICS environment variable was found, skipping it')
     
-
-    jcxt = JupmanContext(sphinx_config, '', False)
+    
+    jcxt = JupmanContext(sphinx_config, '', False, '')
     
     info("release: %s" % jcxt.release)
     
@@ -1036,7 +1168,7 @@ class JupmanPreprocessor(nbconvert.preprocessors.Preprocessor):
         source_abs_fn = os.path.join(resources['metadata']['path'], partial_fn + '.ipynb')     
         
         #TODO don't know if copy is strictly necessary, thinking about multithreading            
-        njcxt = JupmanContext(self.jcxt, source_abs_fn, True)        
+        njcxt = JupmanContext(self.jcxt, source_abs_fn, True, '')        
         
         if _is_to_preprocess(njcxt, nb):
             relpath = os.path.relpath(source_abs_fn, os.path.abspath(os.getcwd()))
@@ -1264,28 +1396,139 @@ def _purge_tags(jcxt : JupmanConfig, text : str) -> str:
     return ret
 
 
-def is_zip_ignored(jcxt : JupmanContext, fname):    
-    spec = pathspec.PathSpec.from_lines('gitwildmatch', jcxt.jm.zip_ignored)
-    return spec.match_file(fname)
+def is_zip_ignored(jcxt : JupmanContext, rel_path): 
+    """ 
+        rel_path: a path relative to project root (must *not* begin with /)
+    """
+    #if len(_sphinx_cxt_filter(jcxt, [rel_path], jcxt.exclude_patterns + jcxt.jm.zip_ignored)) == 0:
+    #    return True
+    
+    if rel_path.startswith('/'):
+        raise JupmanError(f"Expected a relative path not beginning with /, found instead {rel_path}")
+    
             
-
-def get_exercise_folders(jcxt : JupmanContext):
+    include = [jcxt.jpre_subroot + p for p in jcxt.include_patterns]
+    exclude = [jcxt.jpre_subroot + p for p in (jcxt.exclude_patterns + jcxt.jm.zip_ignored)]
+    
+    return len(_sphinx_filter([rel_path], jcxt._sphinx_discovery_cache, include, exclude)) == 0
+    
+    #spec = pathspec.PathSpec.from_lines('gitwildmatch', jcxt.jm.zip_ignored)
+    #return spec.match_file(fname)
+    
+def get_exercise_folders(jcxt : JupmanContext) -> list:
     ret = []
     for p in jcxt.jm.chapter_patterns:
         for r in glob.glob(p):
-            if r not in ret:
+            if r not in ret: 
                 ret.append(r)
     for p in jcxt.jm.chapter_exclude_patterns:
         for r in glob.glob(p):
             if r in ret:
                 ret.remove(r)
+    debug(f'************ 1 {ret}')
+    ret = _sphinx_cxt_filter(jcxt, ret)
+    debug(f'************ 2 {ret}')
     return ret
 
+def _sphinx_filter(paths: list,
+                   cache : dict,
+                   sphinx_include_patterns = ("**",), 
+                   sphinx_exclude_patterns = (),
+                   ) -> list:
+    """
+    Returns a NEW list with filtered paths
+    
+    Rough, to be substituted by actual sphinx filter
+    @since 3.6
+    """
+    
+    #TODO CHECK sphinx 'Project.discover' function 
+    #     https://github.com/sphinx-doc/sphinx/blob/ea9c61fb38453e8a4798bcb4c5c9ab2972af03ba/sphinx/project.py#L46
+    
+    
+    incl = sphinx_include_patterns
+    excl = sphinx_exclude_patterns + sphinx.project.EXCLUDE_PATHS
+    
+    
+    key = f'INCLUDE-{incl}"-EXCLUDE-{excl}'
+
+    if key in cache:
+        #debug("Retrieving sphinx discovery files from cache..")
+        filtered_existing_paths = cache[key]
+    else:
+        debug("Sphinx discovery files not found in cache, building it..")
+        cache[key] = list(sphinx.util.matching.get_matching_files('',
+                                                                    incl,
+                                                                    excl))
+        filtered_existing_paths = cache[key]
+
+    
+    ret = []
+    for p in paths:
+        if os.path.isfile(p) and p in filtered_existing_paths:
+            
+            ret.append(p)
+        elif os.path.isdir(p):
+            for fp in filtered_existing_paths:
+                
+                contained = True
+                p_parts = pathlib.Path(p).parts
+                fp_parts =  pathlib.Path(fp).parts
+                for i in range( min(len(p_parts), len(fp_parts)) ): 
+                    if p_parts[i] != fp_parts[i]:
+                        contained = False
+                        break
+                if contained:
+                    ret.append(p)
+                    break
+    return ret
+    
+    """ TODO REMOVE ATTEMPTS
+    #sphinx whitelist
+    if not sphinx_include_patterns:
+        ret = list(paths)
+    else:
+        ret = []
+        for r in paths:
+            keep = False
+            
+            for p in sphinx_include_patterns:
+                debug(f'*********** {glob.glob(p)}')
+                debug(f'**** r= {r}')
+                for el in glob.glob(p):
+                    if el.startswith(r):
+                        keep = True
+            if keep:
+                ret.append(r)
+                
+    #sphinx blacklist (takes precedence over whitelist)
+    if sphinx_exclude_patterns:
+        for p in sphinx_exclude_patterns:
+            for r in glob.glob(p):
+                if r in ret:
+                    ret.remove(r)      
+    return ret
+    """
+
+def _sphinx_cxt_filter(jcxt: JupmanContext, paths: list) -> list:
+    """
+    Returns a NEW list with filtered paths
+    
+    Rough, to be substituted by actual sphinx filter
+    @since 3.6
+    """
+    
+    sphinx_include_patterns = getattr(jcxt, 'include_patterns', None)    
+    sphinx_exclude_patterns = getattr(jcxt, 'exclude_patterns', None)
+    return _sphinx_filter(paths, 
+                          jcxt._sphinx_discovery_cache,
+                          sphinx_include_patterns, 
+                          sphinx_exclude_patterns)
 
 def is_code_sol(jcxt : JupmanContext, solution_text):
     """ Returns True if a cell contains any elements to be stripped in a solution           
     """
-    njcxt = JupmanContext(jcxt, '', jcxt.jpre_website)    
+    njcxt = JupmanContext(jcxt, '', jcxt.jpre_website, jcxt.jpre_subroot)    
     return sol_to_ex_code(njcxt, solution_text, parse_directives=False).strip() != solution_text.strip()
 
 
@@ -1294,7 +1537,7 @@ def is_to_strip(jcxt : JupmanContext, solution_text):
 
         @since 3.3
     """
-    njcxt = JupmanContext(jcxt, '', jcxt.jpre_website)    
+    njcxt = JupmanContext(jcxt, '', jcxt.jpre_website, jcxt.jpre_subroot)    
     return sol_to_ex_code(njcxt, solution_text, parse_directives=True).strip() != solution_text.strip()
     
 
@@ -1649,7 +1892,7 @@ def generate_exercise(jcxt_or_src : Union[JupmanContext, str], dest_dir='./'):
     
     if isinstance(jcxt_or_src, str):
         import conf
-        jcxt = JupmanContext(conf, jcxt_or_src, False)        
+        jcxt = JupmanContext(conf, jcxt_or_src, False, '')        
     elif isinstance(jcxt_or_src, JupmanContext):
         jcxt = jcxt_or_src
     else:
@@ -1674,7 +1917,7 @@ def generate_exercise(jcxt_or_src : Union[JupmanContext, str], dest_dir='./'):
     exercise_dest_fn = os.path.join(dest_dir , exercise_fn)
 
 
-    njcxt = JupmanContext(jcxt, source_abs_fn, False)    
+    njcxt = JupmanContext(jcxt, source_abs_fn, False, jcxt.jpre_subroot)    
     njcxt.jpre_dest_filepath = exercise_dest_fn
 
     info("  Generating %s" % exercise_dest_fn)
@@ -1708,6 +1951,13 @@ def generate_exercise(jcxt_or_src : Union[JupmanContext, str], dest_dir='./'):
                 raise ValueError("Don't know how to translate solution to exercise for source file %s" % source_abs_fn)
 
 def copy_code(jcxt : JupmanContext, source_dir, dest_dir, copy_solutions=False):
+    """ Copies and transforms files from source_dir to dest_dir.
+    
+        Notice files outside source_dir like /_static/* aren't copied (zip_folder takes care of that)
+    
+        TODO 'copy' name is misleading
+        
+    """
             
     info("Copying code %s \n    from  %s \n    to    %s" % ('and solutions' if copy_solutions else '', source_dir, dest_dir))
 
@@ -1717,51 +1967,52 @@ def copy_code(jcxt : JupmanContext, source_dir, dest_dir, copy_solutions=False):
         compath = os.path.commonpath([dirpath, source_dir])
         dest_subdir = os.path.join(dest_dir, dirpath[len(compath)+1:])
                         
-        if not is_zip_ignored(jcxt, dest_subdir):
-            if not os.path.isdir(dest_subdir) :
-                info("Creating dir %s" % dest_subdir)
-                os.makedirs(dest_subdir)
-                    
-            for source_fn in filenames:                    
-                if not is_zip_ignored(jcxt, source_fn):
-                    
-                    source_abs_fn = os.path.join(dirpath,source_fn)
-                    dest_fn = os.path.join(dest_subdir , source_fn)                           
-                    fileKind = FileKinds.detect(source_fn)
-                    
-                    if fileKind == FileKinds.CHALLENGE_SOLUTION:
-                        # challenge solutions are supposed to be generated 
-                        # manually inside the jupyter notebook
+        #if not is_zip_ignored(jcxt, dest_subdir):   # 3.6: seems quite useless 
+            
+        if not os.path.isdir(dest_subdir) :
+            info("Creating dir %s" % dest_subdir)
+            os.makedirs(dest_subdir)
 
-                        pass
-                    elif fileKind == FileKinds.SOLUTION:
-                        if copy_solutions:                                             
-                            njcxt = JupmanContext(jcxt, source_abs_fn, False)
-                            _copy_sols(njcxt,   
-                                       source_fn, 
-                                       dest_fn)
+        for source_fn in filenames:         
+            
+            source_rel_fn = os.path.join(dirpath,source_fn)
+            dest_fn = os.path.join(dest_subdir , source_fn)                   
+            fileKind = FileKinds.detect(source_fn)
+                
+            if not is_zip_ignored(jcxt, source_rel_fn):
+                
+                if fileKind == FileKinds.CHALLENGE_SOLUTION:
+                    # challenge solutions are supposed to be generated 
+                    # manually inside the jupyter notebook
+                    pass
+                elif fileKind == FileKinds.SOLUTION:
+                    if copy_solutions:                                             
+                        njcxt = JupmanContext(jcxt, source_rel_fn, False, jcxt.jpre_subroot)
+                        _copy_sols(njcxt,   
+                                source_fn, 
+                                dest_fn)
+                    
+                    if FileKinds.is_supported_ext(  source_fn,
+                                                    jcxt.jm.distrib_ext):
+                        njcxt = JupmanContext(jcxt, source_rel_fn, False, jcxt.jpre_subroot)                            
+                        generate_exercise(njcxt,                                               
+                                            dest_dir=dest_subdir)
+                                    
                         
-                        if FileKinds.is_supported_ext(  source_fn,
-                                                        jcxt.jm.distrib_ext):
-                            njcxt = JupmanContext(jcxt, source_abs_fn, False)                            
-                            generate_exercise(njcxt,                                               
-                                              dest_dir=dest_subdir)
-                                        
-                            
-                    elif fileKind == FileKinds.TEST:                             
-                        njcxt = JupmanContext(jcxt, source_abs_fn, False)
-                        _copy_test(njcxt,
-                                   source_fn, 
-                                   dest_fn)
-                    else:  # EXERCISE and OTHER
-                        njcxt = JupmanContext(jcxt, source_abs_fn, False)
-                        _copy_other(njcxt,
-                                    source_fn,
-                                    dest_fn)
+                elif fileKind == FileKinds.TEST:                             
+                    njcxt = JupmanContext(jcxt, source_rel_fn, False, jcxt.jpre_subroot)
+                    _copy_test(njcxt,
+                                source_fn, 
+                                dest_fn)
+                else:  # EXERCISE and OTHER
+                    njcxt = JupmanContext(jcxt, source_rel_fn, False, jcxt.jpre_subroot)
+                    _copy_other(njcxt,
+                                source_fn,
+                                dest_fn)
 
 def _common_files_maps(jcxt : JupmanContext, zip_name : str) -> Tuple[List[str],List[str]]:
     """ 
-        Returns a tuple with deglobbed common files and their patterns
+        Returns a tuple with deglobbed common files (like /_static/) and their patterns
         
         zip_name:  a zip name *without* the ending '.zip'
         
@@ -1793,6 +2044,10 @@ def zip_folder(jcxt : JupmanContext, source_folder, renamer=None):
     if len(source_folder.strip()) == 0:
         fatal("BAD FOLDER TO ZIP ! BLANK STRING")
 
+    if _sphinx_cxt_filter(jcxt, [source_folder]) == []:
+        debug(f"\n\n*************  source_folder {source_folder} is filtered by sphinx.")
+        return
+
     build_jupman = os.path.join(jcxt.jm.build, 'jupman')
     if renamer:
         zip_name = renamer(source_folder)
@@ -1804,8 +2059,12 @@ def zip_folder(jcxt : JupmanContext, source_folder, renamer=None):
     build_folder = os.path.join(build_jupman, zip_name)
     if not os.path.exists(jcxt.jm.generated):
         os.makedirs(jcxt.jm.generated)
+
     if os.path.exists(build_folder):
         delete_tree(build_folder, '_build')
+
+    with open(os.path.join(jcxt.jm.generated, 'WARNING.txt'), 'w', encoding='utf-8', newline='') as f_generated_readme:
+            f_generated_readme.write("### WARNING:\n This folder content is generated during build, DO *NOT* put files here as they may get overwritten !")
 
     copy_code(jcxt, source_folder, build_folder, copy_solutions=True)
 
@@ -1813,7 +2072,11 @@ def zip_folder(jcxt : JupmanContext, source_folder, renamer=None):
     
     info("zip_name = %s" % zip_name)            
     zip_path = os.path.join(jcxt.jm.generated, zip_name)
-    zip_paths(jcxt, 
+    njcxt = JupmanContext(jcxt, 
+                          jcxt.jpre_source_filepath,
+                          jcxt.jpre_website, 
+                          build_jupman )
+    zip_paths(njcxt, 
               deglobbed_common_files + [build_folder], 
               zip_path,
               patterns = deglobbed_common_files_patterns + [("^(%s)" % build_jupman,"")])
@@ -1905,10 +2168,9 @@ def zip_paths(jcxt : JupmanContext, rel_paths, zip_path, patterns=(), remap=None
         
     """
     
-    
     if zip_path.endswith('.zip'):
         raise ValueError("zip_path must not end with .zip ! Found instead: %s" % zip_path)
-
+    
     for rel_path in rel_paths:
         abs_path = os.path.join(super_doc_dir() , rel_path)
 
@@ -1959,7 +2221,10 @@ def zip_paths(jcxt : JupmanContext, rel_paths, zip_path, patterns=(), remap=None
                     #compresslevel=9, # python 3.7+
                 )                
             
-
+    zip_dir = os.path.dirname(zip_path)
+    if not os.path.exists(zip_dir):
+        os.makedirs(zip_dir)
+    
     archive = zipfile.ZipFile(zip_path + '.zip', "w")                
     
     for rel_path in sorted(rel_paths):
@@ -1970,7 +2235,7 @@ def zip_paths(jcxt : JupmanContext, rel_paths, zip_path, patterns=(), remap=None
                 filenames = glob.glob(dirNamePrefix)                    
                 for fname in sorted(filenames):
                     if os.path.isfile(fname):
-                        write_file(fname)
+                        write_file(fname, )
         elif os.path.isfile(rel_path):
             info('Writing %s' % rel_path)
             write_file(rel_path)
@@ -2168,6 +2433,7 @@ def _make_preamble_filelist(jcxt,
             
     for dest_fn in sorted(shrinked_zip_files):
         
+        #TODO MESSY GITIGNORE STUFF, CHECK IT!
         if not is_zip_ignored(jcxt, dest_fn):            
             spec = pathspec.PathSpec.from_lines('gitwildmatch', ignored)
             if not spec.match_file(dest_fn):                                

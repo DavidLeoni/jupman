@@ -22,7 +22,7 @@ import inspect
 from jupman_tools import debug    
 from pprint import pformat
 
-from common_test import clean, make_jupman_context, make_sphinx_config, make_jm, make_nb_resources,  tconf
+from common_test import clean, make_jupman_context, make_sphinx_config, make_jcxt_gitignore_non_existing, make_jcxt_gitignored, make_jcxt_zip_ignored, make_jm, make_nb_resources,  tconf
 import datetime
 
 
@@ -63,16 +63,6 @@ def test_jupman_constructor():
     #NOTE: putting '/' at the end causes exclude_patterns to not work !
     assert jm.build == '_build' 
     assert jm.generated == '_static/generated'
-
-class MockSphinx:
-    def add_config_value(self, a,b,c):
-        pass
-    def add_transform(self, a):
-        pass
-    def add_javascript(self, a):
-        pass
-    def add_stylesheet(self, a):
-        pass
 
 
 def test_uproot():
@@ -118,15 +108,295 @@ import jupman
 sys.do_something()"""
 
 
-def test_is_zip_ignored():
-    jcxt = make_jupman_context()    
-    assert jmt.is_zip_ignored(jcxt, '.ipynb_checkpoints')
-    assert jmt.is_zip_ignored(jcxt, 'prova/.ipynb_checkpoints')
-    assert jmt.is_zip_ignored(jcxt, 'prova/__pycache__')
-    assert not jmt.is_zip_ignored(jcxt, 'good')
-    assert not jmt.is_zip_ignored(jcxt, 'very/good')
+
+def test_is_zip_ignored_non_existing_file():
+    """ Since 3.6 non existing files are considered as zip_ignored
+    
+        @since 3.6
+    """
+    jcxt = make_jupman_context()
+    assert jmt.is_zip_ignored(jcxt, 'flying.pig')
     
 
+def test_is_zip_ignored_default():
+    """ @since 3.6
+    """
+            
+    jcxt = make_jupman_context()
+ 
+    assert os.path.isfile('index.ipynb')
+    assert not jmt.is_zip_ignored(jcxt, 'index.ipynb')
+    
+    assert os.path.isfile('manual/editing.ipynb')
+    assert not jmt.is_zip_ignored(jcxt, 'manual/editing.ipynb')
+
+
+
+    
+    
+def test_is_zip_ignored_big_files():
+    """
+        @since 3.6
+    """
+    
+    jcxt = make_jcxt_zip_ignored()
+    assert jmt.is_zip_ignored(jcxt, '_test/zip1-complete/big-dataset.csv')
+    assert jmt.is_zip_ignored(jcxt, '_test/zip1-complete/big-output.csv')
+    assert jmt.is_zip_ignored(jcxt, '_test/zip1-complete/big-expected-output.csv')
+    assert jmt.is_zip_ignored(jcxt, '_test/zip1-complete/vid/big-video.mp4')
+    
+    assert not jmt.is_zip_ignored(jcxt, '_test/zip1-complete/small-dataset.csv')
+
+
+def test_is_zip_ignored_relative_paths():
+    """
+        @since 3.6
+    """
+
+    p = '_test/filtering/'
+    assert os.path.isfile(p + 'c.t')
+    assert os.path.isfile(p + 's/c.t')
+        
+    jcxt = make_jcxt_zip_ignored()
+    jcxt.jm.zip_ignored.append('**/c.t')
+
+    assert jmt.is_zip_ignored(jcxt, p + 'c.t')
+    assert jmt.is_zip_ignored(jcxt, p + 's/c.t')
+    assert not jmt.is_zip_ignored(jcxt, p + 'd.t')
+    
+    
+def test_is_zip_ignored_absolute_paths():
+    """
+        @since 3.6
+    """
+    p = '_test/filtering/'
+    assert os.path.isfile(p + 'c.t')
+    assert os.path.isfile(p + 's/c.t')
+    
+    
+    jcxt = make_jcxt_zip_ignored()
+    jcxt.jm.zip_ignored.append(p + 'c.t')
+    
+    assert jmt.is_zip_ignored(jcxt, p + 'c.t')
+    assert not jmt.is_zip_ignored(jcxt, p + 's/c.t')
+    
+def test_sphinx_get_matching_files():
+    """ @since 3.6
+    """
+    import sphinx
+    jcxt = make_jcxt_gitignored()
+    
+    filtered_existing_paths = list(sphinx.util.matching.get_matching_files('',
+                                   ['**'],
+                                   jcxt.exclude_patterns + sphinx.project.EXCLUDE_PATHS))
+    for p in filtered_existing_paths:
+        assert not p.startswith('_private')
+
+def test_sphinx_filter_root_files():
+    """ @since 3.6
+    """
+    assert jmt._sphinx_filter([], {}, ['**'], []) == []
+    assert jmt._sphinx_filter(['README.md'], {}, ['**'], []) == ['README.md']
+    assert jmt._sphinx_filter(['README.md'], {}, ['README.md'], []) == ['README.md']
+    assert jmt._sphinx_filter(['README.md'], {}, ['**'], ['README.md']) == []   
+
+def test_sphinx_filter_sub_folders():
+    """ @since 3.6
+    """
+    #note: exclude/include work by looking at actual files
+    
+    j = '_test/zip1-complete/j-sol.ipynb'
+    n = '_test/test-chapter/nb-sol.ipynb'
+    
+    assert os.path.isfile(j)
+    assert os.path.isfile(n)
+    
+    assert jmt._sphinx_filter(  [j, n],
+                                {},
+                                ['**'], 
+                                ['_test/test-chapter'], 
+                             ) == [j]  
+
+    
+    assert jmt._sphinx_filter( [j, n],
+                               {},
+                               ['_test/test-chapter/**'], 
+                               []) == [n]    
+    
+
+def test_sphinx_filter_2ast_slash():
+    """ Differently from git, Sphinx DOES *NOT* match **/folder with a folder in root
+        
+        @since 3.6
+    """    
+    
+    nb = '_test/test-chapter/nb-sol.ipynb'
+    
+    assert jmt._sphinx_filter(  [nb],
+                                {},
+                                ['**'], 
+                                ['**/_test/test-chapter'], 
+                             ) == [nb]    
+    assert jmt._sphinx_filter(  [nb],
+                                {},
+                                ['**'], 
+                                ['/**/_test/test-chapter'], 
+                             ) == [nb]
+ 
+temp_path = None
+temp_file_number = 0
+def sf(text,paths,incl,excl):
+    """ 
+    Creates a 123.gitignore temporary file filled with provided text 
+    and return the sphinx filtered files
+    @since 3.6
+    """
+    global temp_file_number
+    
+    jcxt = make_jupman_context()
+    p = temp_path / f"t{temp_file_number}.gitignore"
+    p.write_text(text)
+    temp_file_number += 1
+    jmt.init_exclude_patterns(jcxt.jm, excl, p)
+    return jmt._sphinx_filter(paths,{},incl,excl) 
+
+ 
+def test_sphinx_filter_edge_cases(tmp_path):
+    """
+        @since 3.6
+    """
+    global temp_path # silly pytest workaround
+    temp_path = tmp_path
+    
+    b = "_test/filtering"
+    bi = f"{b}/**"
+    x = f"{b}/x"
+    y = f"{b}/y"
+    ct = f"{b}/c.t"
+    dt = f"{b}/d.t"
+    et = f"{b}/s/e.t"
+    ft = f"{b}/s/f.t"
+    ALL = [f"{b}/**"]
+    
+    
+    assert sf(f"", [f"{b}/x"],[f"{b}/x"],[f"{b}/x"]) == []  # sphinx excl has prio over incl
+    assert sf(f"", [f"{b}/x"],ALL,[f"{b}/x"]) == []  # excl has prio over incl
+    assert sf(f"", [],[f"{b}/x"],[]) == []  
+    assert sf(f"", [f"{b}/x"],[f"{b}/x"],[]) == [f"{b}/x"]
+    assert sf(f"", [f"{b}/c.t"],ALL,[f"*.t"]) == [f"{b}/c.t"]  # *.t in sphinx looks only in root
+    assert sf(f"", [f"{b}/c.t"],ALL,[f"**.t"]) == []  
+    assert sf(f"", [f"{b}/c.t"],ALL,[f"**/*.t"]) == []
+    assert sf(f"", [f"{b}/x"],ALL,[]) == [f"{b}/x"]
+    
+    
+def test_sphinx_filter_exclude_patterns_negated(tmp_path):
+    """ igittigitt 2.1.2 doesn't support negated patterns,
+        so in jupman 3.6 we just drop support for them.
+        
+        @since 3.6
+    """
+    global temp_path # silly pytest workaround
+    temp_path = tmp_path
+    b = "_test/filtering"
+    
+    gt  = f"""
+    *.t
+    !{b}/c.t
+    """
+    with pytest.raises(JupmanUnsupportedError):
+        sf(gt, [f"{b}/c.t"], ['**'], []) 
+        
+    #assert sf(gt, [f"{b}/c.t"], ['**'], []) == [f"{b}/c.t"] 
+
+def test_sphinx_filter_non_empty_folder(tmp_path):
+    """ Non-empty folders should be detected in filters 
+        @since 3.6
+    """
+    global temp_path # silly pytest workaround
+    temp_path = tmp_path
+    b = "_test/filtering"
+    
+    assert f"{b}/s" in sf(f"", [f"{b}/s"], ['**'], [])  
+    
+    
+    
+def test_sphinx_filter_empty_folder(tmp_path):
+    """ Currently empty folders are not detected in filters 
+        which is actually NOT desirable but we can live with it
+        @since 3.6
+    """
+    global temp_path # silly pytest workaround
+    temp_path = tmp_path
+    b = "_test/filtering"
+    ALL = [f"{b}/**"]
+    
+    assert f"{b}/empty" not in sf(f"", [f"{b}/empty"], ['**'], [])  
+    
+def test_sphinx_filter_file_dot_asterisk(tmp_path):
+    """@since 3.6
+    """
+    global temp_path # silly pytest workaround
+    temp_path = tmp_path
+    b = "_test/filtering"
+    ALL = [f"{b}/**"]
+    
+    assert sf(f"{b}/x",     [f"{b}/x"],ALL,[])   == []     
+    assert sf(f"{b}/c.t",   [f"{b}/c.t"],ALL,[]) == [] 
+    assert sf(f"{b}/x.*",   [f"{b}/x"],ALL,[])   == [f"{b}/x"]  
+    assert sf(f"{b}/c.t.*", [f"{b}/c.t"],ALL,[]) == [f"{b}/c.t"]  
+
+def test_sphinx_filter_file_2ast_ast_dot(tmp_path):    
+    """@since 3.6
+    """
+    global temp_path # silly pytest workaround
+    temp_path = tmp_path
+    b = "_test/filtering"
+    ALL = [f"{b}/**"]
+    
+    assert f"{b}/c.t" not in sf("**/*.t", [f"{b}/c.t"],ALL,[])
+    
+    
+def test_sphinx_filter_dir_slash(tmp_path):    
+    """@since 3.6
+    """
+    global temp_path # silly pytest workaround
+    temp_path = tmp_path
+    b = "_test/filtering"
+    ALL = [f"{b}/**"]
+    
+    
+    # NOTE: these two weren't working as igittgitt 2.1.2 only provides **/_test **/_test/**/* 
+    #       as a workaround I tweked igittgitt call to also a '_test' with '**/' discarded
+    assert sf("_test",              ["_test/filtering/c.t"],ALL,[]) == []
+    assert sf("_test/",             ["_test/filtering/c.t"],ALL,[]) == []
+    
+    assert sf("_test/*",            ["_test/filtering/c.t"],ALL,[]) == []  
+    assert sf("_test/**",           ["_test/filtering/c.t"],ALL,[]) == [] 
+    assert sf("/_test",             ["_test/filtering/c.t"],ALL,[]) == []
+    assert sf("_test/filtering",    ["_test/filtering/c.t"],ALL,[]) == []
+    assert sf("_test/filtering/",   ["_test/filtering/c.t"],ALL,[]) == []
+    assert sf("_test/filtering/s",  ["_test/filtering/c.t"],ALL,[]) == ["_test/filtering/c.t"]
+    assert sf("_test/filtering/s/", ["_test/filtering/c.t"],ALL,[]) == ["_test/filtering/c.t"]
+    
+    
+def test_sphinx_filter_init_from_jupman_gitignore():
+    """ Defaults present in .gitignore that gets expanded when imported
+        @since 3.6
+    """
+
+    jcxt = make_jcxt_gitignored()
+    
+    assert '_build' in jcxt.exclude_patterns
+    assert '**/build' in jcxt.exclude_patterns # test only this expansion as I'm lazy
+    assert '__pycache__' in jcxt.exclude_patterns 
+    assert '.ipynb_checkpoints' in jcxt.exclude_patterns
+    assert '*.pyc' in jcxt.exclude_patterns
+    assert '.cache' in jcxt.exclude_patterns
+    assert '.pytest_cache' in jcxt.exclude_patterns
+    assert '.vscode' in jcxt.exclude_patterns
+
+
+    
 def test_is_code_sol_to_strip():
     
     jcxt = make_jupman_context()
@@ -297,36 +567,6 @@ def test_replace_rel(replacer_fun):
     
 
 
-def test_setup(tconf):
-        
-    mockapp = MockSphinx()
-        
-    tconf.setup(mockapp)
-    # if so tests run smoothly also on non-jupman projects
-    if os.path.exists('jupyter-example'):
-        assert os.path.isfile(os.path.join(tconf.jm.generated, 'jupyter-example.zip'))        
-    if os.path.exists('python-example'):
-        assert os.path.isfile(os.path.join(tconf.jm.generated, 'python-example.zip'))
-    if os.path.exists('jup-and-py-example'):
-        assert os.path.isfile(os.path.join(tconf.jm.generated, 'jup-and-py-example.zip'))
-    if os.path.exists('challenge-example'):
-        assert os.path.isfile(os.path.join(tconf.jm.generated, 'challenge-example.zip'))
-
-    # test reproducible build zips  https://github.com/DavidLeoni/jupman/issues/60
-        
-    if os.path.exists('jup-and-py-example'):
-            
-        zpath1 = os.path.join(tconf.jm.generated, 'jup-and-py-example.zip')     
-        
-                        
-        zpath2 = os.path.join(tconf.test_tmp, 'jup-and-py-example.zip')
-        
-        
-        shutil.copyfile(zpath1, zpath2)        
-        time.sleep(2)
-        tconf.setup(mockapp)
-                    
-        assert filecmp.cmp(zpath1, zpath2, shallow=False)
                 
 
 def TODO_test_reproducible_build_html():
@@ -658,7 +898,7 @@ def test_common_files_maps():
     """ @since 3.6
     """
             
-    jcxt = JupmanContext(make_sphinx_config(), '_test/test_chapter/nb-sol.ipynb', True)        
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test_chapter/nb-sol.ipynb', True, '')        
     
     with pytest.raises(JupmanError):
         rel_paths, patterns = jmt._common_files_maps(jcxt, 'prova.zip')
@@ -677,5 +917,67 @@ def test_common_files_maps():
     assert ('^(_test/test-chapter/img/pic1.png)$', 'prova/_test/test-chapter/img/pic1.png') in patterns
     assert ('^(_test/test-chapter/img/more/pic2.png)$', 'prova/_test/test-chapter/img/more/pic2.png') in patterns
     assert ('^(_test/test-chapter/img/more/pic3.png)$', 'prova/_test/test-chapter/img/more/pic3.png') in patterns           
+  
+  
+
+
+def test_zip_folder_test_chapter():
+    """ @since 3.6
+    """
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True, '')    
+    jcxt.jpre_dest_filepath = '_test/test-chapter/nb.ipynb'
+   
+    jcxt.jm.chapter_files = ['jupman.py', 
+                        'my_lib.py', 
+                        '_static/img/cc-by.png', 
+                        '_static/js/jupman.js',  
+                        '_static/css/jupman.css',                     
+                        '_static/js/toc.js',
+                        '_static/js/pytutor-embed.bundle.min.js']    
+        
+    jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
     
-     
+    zip_filepath = f"{jcxt.jm.generated}/test-chapter.zip"
+    
+    from pathlib import Path
+    shrinked_zip_files = []
+    import zipfile
+    with zipfile.ZipFile(zip_filepath) as zf:        
+        filepaths = zf.namelist()
+        print(filepaths)
+        
+    
+        common  = ['test-chapter/' + cf for cf in jcxt.jm.chapter_files]
+        local = [
+            'test-chapter/force-preprocess.ipynb', 
+            'test-chapter/my_chal.py', 
+            'test-chapter/my_chal_test.py', 
+            'test-chapter/nb-sol.ipynb', 
+            'test-chapter/nb.ipynb', 
+            'test-chapter/nb2-chal.ipynb', 
+            'test-chapter/population.csv', 
+            'test-chapter/replacements.ipynb', 
+            'test-chapter/script.py', 
+            'test-chapter/some.py', 
+            'test-chapter/some_sol.py', 
+            'test-chapter/some_test.py', 
+            'test-chapter/extra/whatever.pdf', 
+            'test-chapter/extra/nested/other.csv', 
+            'test-chapter/extra/nested/something.txt', 
+            'test-chapter/img/pic1.png', 
+            'test-chapter/img/more/pic2.png', 
+            'test-chapter/img/more/pic3.png'
+        ]
+        
+        for p in common:
+            assert p in filepaths
+
+        for p in local:
+            assert p in filepaths
+
+        cl = common + local
+        for p in filepaths:
+            assert p in cl
+    
+    
+    

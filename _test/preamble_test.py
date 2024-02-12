@@ -82,7 +82,7 @@ def test_compare_chapter_files():
 def test_make_preamble_filelist_chap2_one_marked_file():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/chap2-only-one/a.ipynb', True) 
+    jcxt = JupmanContext(make_sphinx_config(), '_test/chap2-only-one/a.ipynb', True, '') 
     jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
     jmt.zip_folder(jcxt, '_test/chap2-only-one', lambda x : 'chap2-only-one')
         
@@ -98,7 +98,7 @@ def test_make_preamble_filelist_chap2_one_marked_file():
 def test_make_preamble_filelist_chap2_unspecified_marked_files():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/chap2-only-one/a.ipynb', True) 
+    jcxt = JupmanContext(make_sphinx_config(), '_test/chap2-only-one/a.ipynb', True, '') 
     jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
     jmt.zip_folder(jcxt, '_test/chap2-only-one', lambda x : 'chap2-only-one')
         
@@ -113,7 +113,7 @@ def test_make_preamble_filelist_chap2_unspecified_marked_files():
 def test_make_preamble_filelist_chap2_no_marked_files():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/chap2-only-one/a.ipynb', True) 
+    jcxt = JupmanContext(make_sphinx_config(), '_test/chap2-only-one/a.ipynb', True, '') 
     jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
     jmt.zip_folder(jcxt, '_test/chap2-only-one', lambda x : 'chap2-only-one')
         
@@ -128,7 +128,7 @@ def test_make_preamble_filelist_chap2_no_marked_files():
 def test_make_preamble_filelist_chap2_non_existing_dest_file():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/chap2-only-one/WHAT666.ipynb', True) 
+    jcxt = JupmanContext(make_sphinx_config(), '_test/chap2-only-one/WHAT666.ipynb', True, '') 
     jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
     jmt.zip_folder(jcxt, '_test/chap2-only-one', lambda x : 'chap2-only-one')
 
@@ -140,7 +140,7 @@ def test_make_preamble_filelist_chap2_non_existing_dest_file():
 def test_make_preamble_filelist_chap2_no_ignored_ipynb():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/chap2-only-one/a.ipynb', True) 
+    jcxt = JupmanContext(make_sphinx_config(), '_test/chap2-only-one/a.ipynb', True, '') 
     jcxt.jm.chapter_files = ['jupman.py', '_static/js/jupman.js', '_static/img/cc-by.png' ]
     jmt.zip_folder(jcxt, '_test/chap2-only-one', lambda x : 'chap2-only-one')
         
@@ -160,7 +160,7 @@ def test_make_preamble_filelist_chap2_no_ignored_ipynb():
 def test_make_preamble_filelist_chap3_non_existing_dest_file():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/chap3-empty/a.ipynb', True) 
+    jcxt = JupmanContext(make_sphinx_config(), '_test/chap3-empty/a.ipynb', True, '') 
     jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
     jmt.zip_folder(jcxt, '_test/chap3-empty', lambda x : 'chap3-empty')
         
@@ -173,7 +173,7 @@ def test_make_preamble_filelist_chap3_non_existing_dest_file():
 def test_make_preamble_filelist_chap3_non_existing_dest_non_existing_marked_file():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/chap3-empty/a.ipynb', True) 
+    jcxt = JupmanContext(make_sphinx_config(), '_test/chap3-empty/a.ipynb', True, '') 
     jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
     jmt.zip_folder(jcxt, '_test/chap3-empty', lambda x : 'chap3-empty')
         
@@ -186,7 +186,7 @@ def test_make_preamble_filelist_chap3_non_existing_dest_non_existing_marked_file
 def test_make_preamble_filelist_chap3_no_ignored_ipynb():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/chap3-empty/a.ipynb', True) 
+    jcxt = JupmanContext(make_sphinx_config(), '_test/chap3-empty/a.ipynb', True, '') 
     jcxt.jm.chapter_files = ['jupman.py', '_static/js/jupman.js', '_static/img/cc-by.png' ]
     jmt.zip_folder(jcxt, '_test/chap3-empty', lambda x : 'chap3-empty')
         
@@ -201,7 +201,7 @@ def test_make_preamble_filelist_chap3_no_ignored_ipynb():
 def test_make_preamble_filelist_test_chapter_two_marked_files():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True)  
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True, '')  
     jcxt.jpre_dest_filepath = '_test/test-chapter/nb.ipynb'
     jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
     jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
@@ -234,7 +234,7 @@ def test_make_preamble_filelist_test_chapter_two_marked_files():
 def test_make_preamble_filelist_test_chapter_marked_non_dest():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True)  
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True, '')  
     jcxt.jpre_dest_filepath = '_test/test-chapter/nb.ipynb'
     jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
     jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
@@ -266,7 +266,7 @@ def test_make_preamble_filelist_test_chapter_marked_non_dest():
 def test_make_preamble_filelist_test_chapter_marked_chal():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb2-chal-sol.ipynb', True)  
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb2-chal-sol.ipynb', True, '')  
     jcxt.jpre_dest_filepath = '_test/test-chapter/nb2-chal.ipynb'
     jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
     jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
@@ -297,7 +297,7 @@ def test_make_preamble_filelist_test_chapter_marked_chal():
 def test_make_preamble_filelist_test_chapter_marked_nested():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True)  
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True, '')  
     jcxt.jpre_dest_filepath = '_test/test-chapter/nb.ipynb'
     jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
     jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
@@ -311,7 +311,7 @@ def test_make_preamble_filelist_test_chapter_marked_nested():
 def test_make_preamble_filelist_test_chapter_no_ignored():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True)  
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True, '')  
     jcxt.jpre_dest_filepath = '_test/test-chapter/nb.ipynb'
     jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
     jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
@@ -351,7 +351,7 @@ def test_make_preamble_filelist_test_chapter_no_ignored():
 def test_make_preamble_filelist_test_chapter_no_marked_files():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True)    
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True, '')    
     jcxt.jpre_dest_filepath = '_test/test-chapter/nb.ipynb'
     jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
     jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
@@ -383,7 +383,7 @@ def test_make_preamble_filelist_test_chapter_no_marked_files():
 def test_make_preamble_filelist_test_chapter_unspecified_marked_files():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True)    
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True, '')    
     jcxt.jpre_dest_filepath = '_test/test-chapter/nb.ipynb'
     jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
     jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
@@ -415,7 +415,7 @@ def test_make_preamble_filelist_test_chapter_unspecified_marked_files():
 def test_make_preamble_filelist_test_chapter_non_existing_dest_file():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb666-sol.ipynb', True)    
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb666-sol.ipynb', True, '')    
     jcxt.jpre_dest_filepath = '_test/test-chapter/nb666.ipynb'    
     jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']
     jmt.zip_folder(jcxt, '_test/test-chapter', lambda x : 'test-chapter')
@@ -428,7 +428,7 @@ def test_make_preamble_filelist_test_chapter_non_existing_dest_file():
 def test_tutorial_preamble_ipynb():
     """ @since 3.6
     """
-    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True)    
+    jcxt = JupmanContext(make_sphinx_config(), '_test/test-chapter/nb-sol.ipynb', True, '')    
     jcxt.jpre_dest_filepath = '_test/test-chapter/nb.ipynb'
     jcxt.jm.repo_browse_url = 'https://github.com/DavidLeoni/jupman/blob/master/'
     jcxt.jm.chapter_files = ['jupman.py', '_static/img/cc-by.png']

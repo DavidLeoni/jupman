@@ -33,7 +33,7 @@ def dest_dir():
 def test_copy_chapter_replacements(dest_dir):
     
     replacements_fn = os.path.join(dest_dir, 'replacements.ipynb')
-    jcxt = JupmanContext(make_sphinx_config(), replacements_fn, False)
+    jcxt = JupmanContext(make_sphinx_config(), replacements_fn, False, '')
     
     assert os.path.isfile(replacements_fn)
 
@@ -97,7 +97,7 @@ def test_copy_chapter_replacements(dest_dir):
 def test_copy_chapter_py_files(dest_dir):
 
     py_fn = os.path.join(dest_dir, 'script.py')
-    jcxt = JupmanContext(make_sphinx_config(), py_fn, False)
+    jcxt = JupmanContext(make_sphinx_config(), py_fn, False, '')
     assert os.path.isfile(py_fn)
 
     with open(py_fn, encoding='utf-8') as py_f:
@@ -110,7 +110,7 @@ def test_copy_chapter_py_files(dest_dir):
         
 
     test_fn = os.path.join(dest_dir, 'some_test.py')
-    jcxt = JupmanContext(make_sphinx_config(), test_fn, False)
+    jcxt = JupmanContext(make_sphinx_config(), test_fn, False, '')
     assert os.path.isfile(test_fn)
 
     with open(test_fn, encoding='utf-8') as test_f:
@@ -123,7 +123,7 @@ def test_copy_chapter_py_files(dest_dir):
         assert jcxt.author in test_code        
 
     sol_fn = os.path.join(dest_dir, 'some_sol.py')
-    jcxt = JupmanContext(make_sphinx_config(), sol_fn, False)
+    jcxt = JupmanContext(make_sphinx_config(), sol_fn, False, '')
     assert os.path.isfile(sol_fn)
 
     with open(sol_fn, encoding='utf-8') as py_sol_f:
@@ -156,7 +156,7 @@ def test_copy_chapter_py_files(dest_dir):
 def test_copy_chapter_exercises(dest_dir):
 
     nb_ex_fn = os.path.join(dest_dir, 'nb.ipynb')
-    jcxt = JupmanContext(make_sphinx_config(), nb_ex_fn, False)
+    jcxt = JupmanContext(make_sphinx_config(), nb_ex_fn, False, '')
     
     assert os.path.isfile(nb_ex_fn)
 
@@ -219,7 +219,7 @@ def test_copy_chapter_exercises(dest_dir):
 def test_copy_chapter_solution(dest_dir):
     
     nb_sol_fn = os.path.join(dest_dir, 'nb-sol.ipynb')
-    jcxt = JupmanContext(make_sphinx_config(), nb_sol_fn, False)
+    jcxt = JupmanContext(make_sphinx_config(), nb_sol_fn, False, '')
     
     nb_sol = nbformat.read(nb_sol_fn, nbformat.NO_CONVERT) 
     assert 'stripped!' in nb_sol.cells[8].source   # jupman-strip  strips everything inside exercises
@@ -270,7 +270,7 @@ def test_chapter_solution_web():
     nb_sol_fn = os.path.join('_test/test-chapter', 'nb-sol.ipynb')
     nb_sol_web = nbformat.read(nb_sol_fn, nbformat.NO_CONVERT)
 
-    jcxt = JupmanContext(make_sphinx_config(), os.path.abspath(nb_sol_fn), True)
+    jcxt = JupmanContext(make_sphinx_config(), os.path.abspath(nb_sol_fn), True, '')
 
     jmt._sol_nb_to_ex(jcxt, nb_sol_web)
     
@@ -299,9 +299,8 @@ def test_chapter_solution_web():
         if cell.source == """x = 14\nimport jupman""":
             import_jupman += 1
         
-        debug(f'HELLO*************')
+        
         if 'outputs' in cell and len(cell.outputs) > 0 and  'data' in cell.outputs[0]:
-            debug(f'BELLO*************\n{cell.outputs[0]}')
             if '<script src="../../_static/js/pytutor-embed.bundle.min.js' in cell.outputs[0]['data']['text/html']:
                 pytutor_js += 1
                 
@@ -341,7 +340,7 @@ def test_copy_chapter_challenge(dest_dir):
 
     
     nb_chal_ex_fn = os.path.join(dest_dir, 'nb2-chal.ipynb')    
-    jcxt = JupmanContext(make_sphinx_config(), os.path.abspath(nb_chal_ex_fn), True)
+    jcxt = JupmanContext(make_sphinx_config(), os.path.abspath(nb_chal_ex_fn), True, '')
     assert os.path.isfile(nb_chal_ex_fn)
     nb_chal_sol_fn = os.path.join(dest_dir, 'nb2-chal-sol.ipynb')
     assert not os.path.isfile(nb_chal_sol_fn)

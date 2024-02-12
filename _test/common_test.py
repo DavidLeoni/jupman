@@ -41,14 +41,41 @@ def make_sphinx_config() -> dict:
     sc = {}
     sc['author'] = 'People That Write a Lot'
     sc['jm'] = make_jm()
+    #sc['include_patterns'] = ['**']
+    #sc['exclude_patterns'] = []
     return sc
 
 
 def make_jupman_context() -> JupmanContext:
     sc = make_sphinx_config()
-    return JupmanContext(sc, '_private/test', False)
-    
+    return JupmanContext(sc, '_private/test', False, '')
+  
+def make_jcxt_gitignore_non_existing():
+    """
+        @since 3.6
+    """
+    jcxt = make_jupman_context()
 
+    jmt.init_exclude_patterns(jcxt.jm, jcxt.exclude_patterns, gitignore_path='flying-pig.gitignore')
+    return jcxt
+
+def make_jcxt_gitignored():
+    """
+        @since 3.6
+    """
+    jcxt = make_jupman_context()
+    jmt.init_exclude_patterns(jcxt.jm, jcxt.exclude_patterns)
+    return jcxt
+
+def make_jcxt_zip_ignored():
+    """
+        @since 3.6
+    """
+    jcxt = make_jcxt_gitignored()
+    jcxt.jm.zip_ignored.extend(['**/big-*'])
+    return jcxt
+  
+  
 @pytest.fixture
 def tconf():
     clean()

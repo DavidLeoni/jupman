@@ -50,7 +50,6 @@ jm.chapter_files = ['jupman.py', 'my_lib.py', '_static/img/cc-by.png',
                     
                     '_static/js/pytutor-embed.bundle.min.js',]
 
-jm.chapter_patterns =  ['*/']
 jm.chapter_exclude_patterns =  ['[^_]*/','exams/', 'project/']
 
 # words used in ipynb files - you might want to translate these in your language. 
@@ -79,7 +78,6 @@ jm.solution = jmt.tag_regex("# SOLUTION")
 jm.markdown_answer = jmt.tag_regex('**ANSWER**:')
 #################################################################
 
-jm.zip_ignored = ['__pycache__', '**.ipynb_checkpoints', '.pyc', '.cache', '.pytest_cache', '.vscode']
 
 jm.formats = ["html", "epub", "latex"]
 
@@ -139,18 +137,17 @@ nbsphinx_requirejs_path = "js/require.min.js"
 nbsphinx_requirejs_options = { }
 
 
-# Exclude build directory and Jupyter backup files:
-exclude_patterns = [jm.build,
-                    jm.generated,
-                    "**-chal-sol.*",
-                    "_templates/exam-server",
-                     "_private",
-                     "_test",                     
-                     'README.md', 
-                     'readme.md']
+#sphinx blacklist - since jupman 3.6, put here only stuff which is not already gitignored
+#sphinx 'exclude_patterns' take priority over 'include_patterns'
+exclude_patterns = ['README.md', 
+                    'readme.md']
 
-exclude_patterns.extend(jm.zip_ignored)
+#3.6 - temporary call before proper initialization
+jmt.init_exclude_patterns(jm, exclude_patterns)
 
+# sphinx whitelist - currently we use it ONLY for debugging!
+# (do not include toc.rst, index.ipynb as they will bring in all stuff)
+#include_patterns=["toc-page.rst", "jupyter-example/*"]
 
 # Default language for syntax highlighting in reST and Markdown cells
 highlight_language = 'none'
@@ -306,7 +303,7 @@ latex_elements = {
 \newunicodechar{✓}{\checkmark}    
 
     ''',
-    'maketitle': jmt.latex_maketitle(jmt.JupmanContext(globals(), '', False), html_baseurl),
+    'maketitle': jmt.latex_maketitle(jmt.JupmanContext(globals(), '', False, ''), html_baseurl),
 }
 
 
@@ -451,6 +448,7 @@ pdf_fit_background_mode = 'scale'
 
 def setup(app):        
     import logging
+    
     jctx = jmt.init(jm, globals())
 
     app.add_config_value(   'recommonmark_config', {
@@ -459,7 +457,12 @@ def setup(app):
                             }, True)
     app.add_transform(AutoStructify)
     
-    for folder in jm.get_exercise_folders():
+    
+    from jupman_tools import debug
+    
+    #debug(f"\n\n***********   CHAPTER FOLDERS: {jmt.get_exercise_folders(jctx)}")
+    for folder in jmt.get_exercise_folders(jctx):
+        #debug(f"\n\n***********   FOLDER: {folder}")
         jmt.zip_folder(jctx, folder)
 
     jmt.zip_folders(jctx, 
